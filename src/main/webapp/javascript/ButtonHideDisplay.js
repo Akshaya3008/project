@@ -3,14 +3,14 @@
 					        var $edit = $("#editBtn").hide();
 					        var $del = $("#deleteBtn").hide();
 					        var $view = $("#btn-view").hide();
-					        var $pdf = $(".btn-secondary").hide();
+					        var $Ipdf = $("#Invoice_pdf").hide();
 					        
 
 					          $(document).on('change','.TableClass input:checkbox',function () {
 						  		    if($('.TableClass input:checkbox:checked').length > 1 ){
 						  		    	$('#editBtn').hide();
 						  		    	$('#btn-view').hide();
-						  		    	$(".btn-secondary").hide();
+						  		    	$("#Invoice_pdf").hide();
 						  		    	 $('#deleteBtn').show();
 						  		    	
 						  		    }
@@ -19,14 +19,14 @@
 						  		    	$('#deleteBtn').hide();
 						  		    	$('#editBtn').hide();
 						  		    	$('#btn-view').hide();
-						  		    	$(".btn-secondary").hide();
+						  		    	$("#Invoice_pdf").hide();
 						  		    	
 						  		    }
 						  		    else  {
 						  		    	$('#editBtn').show();
 						  		    	 $('#deleteBtn').show();
 						  		    	$('#btn-view').show();
-						  		    	$(".btn-secondary").hide();
+						  		    	$("#Invoice_pdf").show();
 						  		    	
 						  		    }
 				  		   
