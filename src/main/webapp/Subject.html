@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Subject</title>
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="jquery/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
@@ -16,8 +16,9 @@
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
+<script src="jquery/jquery.validate.min.js"></script>
+
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="javascript/Subject.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <script type="text/javascript" src="javascript/ButtonHideDisplay.js"></script>
@@ -405,7 +406,7 @@ table.table .avatar {
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"
-							 id="cancelBtn" value="Cancel"> <input type="submit"
+							 id="cancelBtn" value="Cancel" onclick="location.reload()"> <input type="submit"
 							class="btn btn-success" value="Save"
 							style="color: aliceblue">
 					</div>

@@ -52,9 +52,10 @@ public class StandardResource {
 	public Response addStandard(@FormParam("stdname") String stdname,@FormParam("stdamt") String stdamt,
 			@FormParam("sub") String sub,@FormParam("branchData") String branchData){
 		StandardController controller=new StandardController();
+		int i;
 		try{
 			String[] commaSeperated=Util.commaSeperatedString(branchData);
-			for(int i=0;i<commaSeperated.length;i++)
+			for(i=0;i<commaSeperated.length;i++)
 			{
 				String[] colanSeperated=Util.colanSeperatedString(commaSeperated[i]);
 				Standard std=new Standard();
@@ -64,7 +65,9 @@ public class StandardResource {
 				std.setBranch(colanSeperated[0]);
 				controller.addStandard(std);
 			}
-			return Util.generateResponse(Status.ACCEPTED, "New Standard Successfully Created.").build();
+			if(i==commaSeperated.length){
+				return Util.generateResponse(Status.ACCEPTED, "New Standard Successfully Created.").build();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,9 +99,10 @@ public class StandardResource {
 	public Response EditStandard(@FormParam("stdname") String stdname,@FormParam("stdamt") String stdamt,
 			@FormParam("sub") String sub,@FormParam("branchData") String branchData,@FormParam("id") Long id){
 		StandardController controller=new StandardController();
+		int i;
 		try{
 			String[] commaSeperated=Util.commaSeperatedString(branchData);
-			for(int i=0;i<commaSeperated.length;i++)
+			for(i=0;i<commaSeperated.length;i++)
 			{
 				String[] colanSeperated=Util.colanSeperatedString(commaSeperated[i]);
 				Standard std=new Standard();
@@ -109,7 +113,9 @@ public class StandardResource {
 				std.setBranch(colanSeperated[0]);
 				controller.EditStandard(std);
 			}
+			if(i==commaSeperated.length){
 			return Util.generateResponse(Status.ACCEPTED, "Standard Successfully Updated.").build();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -14,8 +14,6 @@ $(document).ready(function(){
 		}, "No space please and don't leave it empty");
 	
 	$('form[id="standardForm"]').validate({
-		
-		
 		  rules: {
 		    
 			  stdtname: {
@@ -48,10 +46,6 @@ $(document).ready(function(){
 $('#multiple-checkboxes').multiselect({
         includeSelectAllOption: true,
 });
-$('#multiple-subject-selected').multiselect({
-    includeSelectAllOption: true,
-});
- 
 $("#stdamt").focusout(function(){
 	var stdamt=document.getElementById("stdamt").value;
 	$(".Amount").val(stdamt);
@@ -72,7 +66,6 @@ $("#deleteBtn").click(function() {
 	  $('table .cbCheck').each(function(i, chk) {
 		  if (chk.checked==true) {
 			  requestid=$(this).val(); 
-			  alert(requestid); 
 			  var branch=table.rows({selected :true}).column(2).data()[i];
 			  var standard=table.rows({selected :true}).column(1).data()[i]; 
 			  var stdamt=table.rows({selected :true}).column(3).data()[i]; 
@@ -82,12 +75,6 @@ $("#deleteBtn").click(function() {
   }); });
  
 });
-/*
- * function markSubject(html){ var html=html.split(","); var htmlCode=new
- * Array(); for(var i=1;i<html.length;i++){ htmlCode.push('<option
- * value="'+html[i]+'" selected>'+html[i]+'</option>'); }
- * $("#multiple-subject-selected").append(htmlCode); }
- */
 function getAllStandardData() {
 	function callback(responseData, textStatus, request) {
 		var table = $("#stdtable").DataTable();
@@ -114,12 +101,6 @@ function getAllStandardData() {
 	}
 
 	function errorCallback(responseData, textStatus, request) {
-
-  /*
-	 * var message=responseData.responseJSON.message;
-	 * showNotification("error",message);
-	 */
- 
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 	}
@@ -132,49 +113,47 @@ return false;
 }
 
 function loadBranch() {
-function callback(responseData, textStatus, request) {
-var table = document.getElementById("BranchTable");
+	function callback(responseData, textStatus, request) {
+		var table = document.getElementById("BranchTable");
 
-for(var i in responseData){
-var rowCount = table.rows.length;
-       var row = table.insertRow(rowCount);
-       if(requestid!=0){
-    	   alert("here");
-    	   if(responseData[i].Branch==loadBranchData[0]){
-    		   var cell1 = row.insertCell(0);
-    	       cell1.innerHTML = '<div class="checkbox-custom checkbox-default checkbox-inline styled" style="margin-top: 0px;"> <input type="checkbox" id="select1" class="stdcheck" checked> </div>';
+		for(var i in responseData){
+			var rowCount = table.rows.length;
+			var row = table.insertRow(rowCount);
+			if(requestid!=0){
+				if(responseData[i].Branch==loadBranchData[0]){
+					var cell1 = row.insertCell(0);
+					cell1.innerHTML = '<div class="checkbox-custom checkbox-default checkbox-inline styled" style="margin-top: 0px;"> <input type="checkbox" id="select1" class="stdcheck" checked> </div>';
 
-    	       var cell2 = row.insertCell(1);
-    	       cell2.innerHTML = responseData[i].Branch;
+					var cell2 = row.insertCell(1);
+					cell2.innerHTML = responseData[i].Branch;
 
-    	       var cell3 = row.insertCell(2);
-    	       cell3.innerHTML = '<input type="text" id="Amount" name="Amount" class="form-control Amount" value="'+loadBranchData[1]+'" readonly></td>';
-           }else{
-        	   var cell1 = row.insertCell(0);
-               cell1.innerHTML = '<div class="checkbox-custom checkbox-default checkbox-inline styled" style="margin-top: 0px;"> <input type="checkbox" id="select1" class="stdcheck" > </div>';
+					var cell3 = row.insertCell(2);
+					cell3.innerHTML = '<input type="text" id="Amount" name="Amount" class="form-control Amount" value="'+loadBranchData[1]+'" readonly></td>';
+				}else{
+					var cell1 = row.insertCell(0);
+					cell1.innerHTML = '<div class="checkbox-custom checkbox-default checkbox-inline styled" style="margin-top: 0px;"> <input type="checkbox" id="select1" class="stdcheck" > </div>';
 
-               var cell2 = row.insertCell(1);
-               cell2.innerHTML = responseData[i].Branch;
+					var cell2 = row.insertCell(1);
+					cell2.innerHTML = responseData[i].Branch;
 
-               var cell3 = row.insertCell(2);
-               cell3.innerHTML = '<input type="text" id="Amount" name="Amount" class="form-control Amount" value="0" readonly></td>';
-           }  
-       }
-       else{
-       var cell1 = row.insertCell(0);
-       cell1.innerHTML = '<div class="checkbox-custom checkbox-default checkbox-inline styled" style="margin-top: 0px;"> <input type="checkbox" id="select1" class="stdcheck" > </div>';
+					var cell3 = row.insertCell(2);
+					cell3.innerHTML = '<input type="text" id="Amount" name="Amount" class="form-control Amount" value="0" readonly></td>';
+				}  
+			}
+			else{
+				var cell1 = row.insertCell(0);
+				cell1.innerHTML = '<div class="checkbox-custom checkbox-default checkbox-inline styled" style="margin-top: 0px;"> <input type="checkbox" id="select1" class="stdcheck" > </div>';
 
-       var cell2 = row.insertCell(1);
-       cell2.innerHTML = responseData[i].Branch;
+				var cell2 = row.insertCell(1);
+				cell2.innerHTML = responseData[i].Branch;
 
-       var cell3 = row.insertCell(2);
-       cell3.innerHTML = '<input type="text" id="Amount" name="Amount" class="form-control Amount" value="0" readonly></td>';
-       }
-    }
-}
+				var cell3 = row.insertCell(2);
+				cell3.innerHTML = '<input type="text" id="Amount" name="Amount" class="form-control Amount" value="0" readonly></td>';
+			}
+		}
+	}
 
 	function errorCallback(responseData, textStatus, request) {
-
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 	}
@@ -203,7 +182,6 @@ function loadSubject(){
 }
 
 	var httpMethod = "GET";
-// var formData = ''
 	var relativeUrl = "/Subject/FetchAllSubject?branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl,null, callback,
 			errorCallback);
@@ -211,14 +189,12 @@ function loadSubject(){
 }
 
 function getStandardData(){
-// read subject multi select ddo data
 	var selected="subjects";
 	for (var option of document.getElementById('multiple-checkboxes').options) {
 		if (option.selected) {
 			selected+="|"+option.value;
 		}
 	}
-// read branch table data
 	var table = document.getElementById("BranchTable");
 	var rowCount = $('#BranchTable tr').length;
 	var fees=new Array();
@@ -235,7 +211,7 @@ function getStandardData(){
 function addStandard(branchData,subject){
 	function callback(responseData, textStatus, request){
 		for ( var i in responseData) {
-			var mes=responseData.responseJSON.message;
+			var mes=responseData.message;
 			showNotification("success",mes);
 		}
 	}
@@ -243,7 +219,6 @@ function addStandard(branchData,subject){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 	}
-	
 	var httpMethod = "POST";
 	var formData ;
 	var relativeUrl;
@@ -259,11 +234,9 @@ function addStandard(branchData,subject){
 }
 function deleteStandard(id){
 	function callback(responseData, textStatus, request){
-			var mes=responseData.responseJSON.message;
+			var mes=responseData.message;
 			showNotification("success",mes);
 	}
-
-
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);

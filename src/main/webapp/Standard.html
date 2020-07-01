@@ -6,26 +6,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Standard</title>
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="jquery/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+<script src="jquery/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="css/bootstrap-multiselect.css">
 	
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="jquery/jquery.validate.min.js"></script>
+
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script> 
 <script type="text/javascript" src="javascript/standard.js"></script>
 <script type="text/javascript" src="javascript/ButtonHideDisplay.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <script type="text/javascript" src="core/noty.js"></script>
-
 
 <link rel="stylesheet" type="text/css" href="css/noty.css" />
 <link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
@@ -440,7 +440,7 @@ table.table .avatar {
 								});
 					</script>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn" value="Cancel"> 
+						<input type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn" value="Cancel" onclick="location.reload()"> 
 						<input type="submit" id="saveBtn" class="btn btn-success" value="Save">
 					</div>
 				</form>

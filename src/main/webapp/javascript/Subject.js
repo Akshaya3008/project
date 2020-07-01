@@ -1,7 +1,9 @@
 var mes;
 var requestid=0;
+var table;
 $(document).ready(function(){
 	validateLogin();
+	table=$("#subjecttable").DataTable();
 	SubjectList();
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		  return this.optional(element) || /^[a-z]+$/i.test(value);
@@ -36,20 +38,12 @@ $(document).ready(function(){
 			  
 		  }
 	});
-	
-	$('#subjecttable').DataTable({
-		"pageLength" : 40
-	});
-	
 	var checkbox = $('table tbody input[type="checkbox"]');
 	checkbox.click(function() {
 		if (!this.checked) {
 			$("#selectAll").prop("checked", false);
 		}
 	});
-	/*$("#subject").submit(function(){
-		createSubject();	
-	});*/
 	$("#editBtn").click(function(e){
 		var table = $('#subjecttable').DataTable();
 		$('table .cbCheck').each(function(i, chk) {
@@ -79,7 +73,7 @@ $(document).ready(function(){
 
 function createSubject(){
 	function callback(responseData,textStatus,request){
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 		clearModal();
 	}
@@ -91,7 +85,6 @@ function createSubject(){
 	var httpMethod = "POST";
 	var formData;
 	var relativeUrl;
-	alert(requestid);
 	if(requestid==0){
 	var formData=$("#subjectForm").serialize()+"&branch="+branchSession;
 	var relativeUrl = "/Subject/NewSubject";
@@ -108,8 +101,6 @@ function createSubject(){
 
 function SubjectList(){
 	function callback(responseData, textStatus, request){
-		var table = $("#subjecttable").DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var chck = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'+responseData[i].id+'"><label for="checkbox1"></label></span>';
@@ -119,11 +110,8 @@ function SubjectList(){
 			
 			table.row.add(
 					[created_date,subject,timeline,chck]).draw();
-		}
-		
+		}	
 	}
-	
-
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
@@ -131,7 +119,6 @@ function SubjectList(){
 	}
 	
 	var httpMethod = "GET";
-	//var formData = ''
 	var relativeUrl = "/Subject/FetchAllSubject?branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl,null, callback,
 			errorCallback);
@@ -140,14 +127,13 @@ function SubjectList(){
 function deleteSubject(id) {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 	}
-	alert(id);
 	var httpMethod = "DELETE";
 	var relativeUrl = "/Subject/deleteSubject?id="+id+"&branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,errorCallback);
