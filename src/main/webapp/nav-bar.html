@@ -1,3 +1,25 @@
+<script>
+$(document).ready(function(){
+	validateLogin();
+	fetchAllBranch();
+	if(emp_type=="Organizatoin Level Employee"){
+		document.getElementById("branch").disabled=false;
+	}
+	$("#logout").click(function(){
+		logout();
+	})
+$('.dropdown-submenu a.dropdown-submenu-toggle').on("click", function(e){
+    $('.dropdown-submenu ul').removeAttr('style');
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+});
+// Clear Submenu Dropdowns on hidden event
+$('#bs-navbar-collapse-1').on('hidden.bs.dropdown', function () {
+  $('.navbar-nav .dropdown-submenu ul.dropdown-menu').removeAttr('style');
+});
+});
+</script>
 <style>
     .navbar{
         border-radius: 0px;
@@ -150,7 +172,7 @@ class="glyphicon glyphicon-user" id="user"></span></a>
 <li><a href="#ChangebranchModal" data-toggle="modal" data-target="#ChangebranchModal"  class="dropdown-submenu-toggle">Change Branch</a>
 </li>
 
-<li><a href="login.html">Logout</a></li>
+<li><a id="logout">Logout</a></li>
 </ul>
 </li>
 </ul>
@@ -167,13 +189,12 @@ class="glyphicon glyphicon-user" id="user"></span></a>
 						<h4 class="modal-title">Change Branch</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">
-						<div class="form-group">
+					<div class="modal-body" >
+						<div class="form-group" >
 							<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon">Change Branch</span>
-							<select name="lead_source" class="form-control" id="lead" required>
-								<option value="test">VC KIDS</option>
-								<option value="pamplete">VC VASAI</option>
+							<span class="input-group-addon" >Change Branch</span>
+							<select name="branch" class="form-control branch" id="branch" disabled>
+
 							</select>
 						</div>
 						</div>
@@ -186,23 +207,7 @@ class="glyphicon glyphicon-user" id="user"></span></a>
 			</div>
 		</div>
 	</div>
-</ul>
-</div>
-</div>
-</div>
-</div>
 <!-- </div>-->
 </nav>
 
-<script>
-$('.dropdown-submenu a.dropdown-submenu-toggle').on("click", function(e){
-    $('.dropdown-submenu ul').removeAttr('style');
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-});
-// Clear Submenu Dropdowns on hidden event
-$('#bs-navbar-collapse-1').on('hidden.bs.dropdown', function () {
-  $('.navbar-nav .dropdown-submenu ul.dropdown-menu').removeAttr('style');
-});
-    </script>
+

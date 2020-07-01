@@ -3,12 +3,15 @@
  */
 function validateLogin() {
 	var token=sessionStorage.getItem("token");
-	if (token === undefined || token.trim() == "") {
+	if (token === undefined || token.trim() == "" || token == "null") {
 		window.location.href = "login.html";
 	} 
 }
 
 function logout() {
-	$.session.clear();
-	window.location.replace("../login.html");
+	sessionStorage.removeItem("token");
+	sessionStorage.removeItem("branch");
+	sessionStorage.removeItem("user");
+	sessionStorage.removeItem("emp_type");
+	window.location.href="login.html";
 }

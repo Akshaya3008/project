@@ -36,8 +36,8 @@ function attemptLogin(){
 		var name = responseData.name;
 		if(role!="")
 			{
-			window.location.href="dashboard.html";
 			sessionStorage.setItem("user",name);
+			window.location.href="dashboard.html";
 			}
 		else
 			{
