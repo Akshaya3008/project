@@ -1,12 +1,14 @@
 var mes;
 var requestid=0;
+var table;
 $(document).ready(function(){
 	validateLogin()
+	table=$('#academictable').DataTable();
 	FetchAllAcademic();
 	 $("#aca_year").keypress(function (e) {
 	     //if the letter is not digit then display error and don't type anything
 		 if (e.which != 8 && e.which != 0 && String.fromCharCode(e.which) != '-' && (e.which < 48 || e.which > 57))
- {
+		 {
 	        //display error message
 	        $("#errmsg").html("Digits Only").show().fadeOut("slow");
 	               return false;
@@ -47,80 +49,52 @@ $(document).ready(function(){
     }, " must contain only letters or digits");
 	
 	$('form[id="academicYearForm"]').validate({
-		
-		
-		  rules: {
-		    
+		rules: {
 			aca_year: {
 		        required: true,
 		        minlength:6,
-		        maxlength:8
-		        
-		     /*   noSpace: true*/
-		       
-		        
-		        
+		        maxlength:8       
 			},
 			aca_start: {
 		        required: true,
 		        date:true,
-		       minDate: true
-		      
+		       minDate: true  
 			},
 			aca_end: {
 		        required: true,
 		        date:true,
-	/*	       maxDate: true,*/
-		        greaterThan:"#aca_start"
-		       
-		        
+		        greaterThan:"#aca_start"  
 			},
-			
 			prefix_id_card: {
 		        required: true,
-		        alphanum:true
-		  
-		        
+		        alphanum:true      
 			},
 			id_card: {
 		        required: true,
 		        digits: true,
 		        maxlength: 2,
 		        range: [1, 60]
-		        
 			},
 			prefix_invoice: {
 		        required: true,
 		        alphanum:true
-		        
-		      
-		        
 			},
 			invoice: {
 		        required: true,
 		        digits: true,
 		        maxlength: 2,
 		        range: [1, 60]
-		      
-		        
 			},
 			prefix_regno: {
 		        required: true,
 		        alphanum:true
-		   
-		        
-		        
 			},
 			regno: {
 		        required: true,
 		        digits: true,
 		        maxlength:2,
-		        range: [1, 60]
-		        
+		        range: [1, 60]  
 			},
-			
-			
-		
 		  },
 		  messages: {
 			aca_year: {
@@ -134,8 +108,6 @@ $(document).ready(function(){
 				required:'End date is required',		
 				/*maxDate:'End date should be greater than start date'*/
 			},
-			
-		
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
@@ -143,15 +115,6 @@ $(document).ready(function(){
 			  
 		  }
 	});
-	
-	
-	$('#academictable').DataTable({
-		"pageLength" : 40
-	});
-
-	/*$("#academicYear").submit(function(){
-		InsertYear();
-	});*/
 	$("#editBtn").click(function(e){
 		$("input:checkbox[name=type]:checked").each(function() {
 			requestid=$(this).val();
@@ -176,7 +139,7 @@ $(document).ready(function(){
 function InsertYear(){
 	
 	function callback(responseData, textStatus, request){
-		var msg = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success",mes);
 		clearModel();
 		
@@ -205,8 +168,6 @@ function InsertYear(){
 
 function FetchAllAcademic() {
 	function callback(responseData, textStatus, request) {
-		var table = $('#academictable').DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var academicyear = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'+responseData[i].id+'"><label for="checkbox1"></label></span>';
@@ -216,15 +177,12 @@ function FetchAllAcademic() {
 			var year = responseData[i].aca_year;
 			table.row.add([ created_date, year, start, end, academicyear]).draw();
 		}
-		
-		
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 		
 	}
-	//var formData = $("#academicYear").serialize();
 	var httpMethod = "GET";
 	var relativeUrl = "/AcademicYear/AcademicList?branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
@@ -244,12 +202,12 @@ function loadAcadData(id,e)
 		document.getElementById("invoice").value=responseData.invoice;
 		document.getElementById("prefix_regno").value=responseData.reg_prefix;
 		document.getElementById("regno").value=responseData.registration;
+		e.preventDefault();
 		$('#academicModal').modal({
 		        show: true, 
 		        backdrop: 'static',
 		        keyboard: true
 		     })
-		e.preventDefault();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
@@ -277,7 +235,7 @@ function clearModel(){
 }
 function deleteAcadYear(idarray){
 	function callback(responseData, textStatus, request){
-		var msg = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success",mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
