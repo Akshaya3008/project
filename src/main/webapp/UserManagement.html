@@ -6,25 +6,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>User Management</title>
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- <script src="jquery/bootstrap.min.js"></script>  -->
+<script src="jquery/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script type="text/javascript" src="core/noty.js"></script>
-<link rel="stylesheet" type="text/css" href="css/noty.css" />
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/um.css">
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="jquery/jquery.validate.min.js"></script>
 
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script type="text/javascript" src="javascript/UserMgmt.js"></script>
 <script type="text/javascript" src="javascript/ButtonHideDisplay.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
+<script type="text/javascript" src="core/noty.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/noty.css" />
+
 <link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 
 
@@ -433,7 +434,7 @@ background: #53b700 !important;
 											<label class="control-label col-md-4"> User Type </label>
 											<div class="col-md-8">
 												<div class="input-group" style="width: 100%;">
-													<select class="form-control" id="emp_type" name="emp_type" disabled tabindex="-1" aria-hidden="true">
+													<select class="form-control" id="emp_type" name="emp_type" tabindex="-1" aria-hidden="true" disabled>
 														<option value="Organizatoin Level Employee">Organizatoin Level User</option>
 														<option value="Branch Level Employee">Branch Level User</option>
 													</select>
@@ -446,7 +447,7 @@ background: #53b700 !important;
 											</label>
 											<div class="col-md-8">
 												<div class="input-group" style="width: 100%;">
-													<select class="form-control branch" id="ebranch" name="branch" disabled tabindex="-1" aria-hidden="true">														
+													<select class="form-control branch" id="ebranch" name="branch" tabindex="-1" aria-hidden="true" disabled>														
 													</select>
 												</div>
 											</div>
@@ -458,7 +459,7 @@ background: #53b700 !important;
 											<div class="col-md-8">
 												<div class="input-group" style="width: 100%;">
 													<select class="form-control" id="role" name="role">
-														<option value="">Select Role Name</option>
+														<option >Select Role Name</option>
 													</select>
 												</div>
 											</div>
@@ -469,7 +470,7 @@ background: #53b700 !important;
 											<div class="col-md-8">
 												<div class="input-group">
 													<select class="form-control" id="enq_taken" name="emp_name">
-													<option value="">Select Employee Name</option> 
+													<option >Select Employee Name</option> 
 													</select>
 													<span class="input-group-btn">
 														<button class="btn btn-primary" id="add-btn" type="button" data-toggle="modal" data-target="#addEmployeeModal">

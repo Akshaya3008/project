@@ -158,7 +158,7 @@ public class UserResource {
 		user.setPassword(password);
 		try {
 			controller.EditEmployeeAccount(user);
-			return Util.generateErrorResponse(Status.BAD_REQUEST, "User Account Successfully Updated.").build();
+			return Util.generateResponse(Status.ACCEPTED, "User Account Successfully Updated.").build();
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -175,7 +175,7 @@ public class UserResource {
 		UserController controller=new UserController();
 		try {
 			controller.DeactivateEmployeeAccount(id);
-			return Util.generateErrorResponse(Status.BAD_REQUEST, "User Account Deactivated.").build();
+			return Util.generateResponse(Status.ACCEPTED, "User Account Deactivated.").build();
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

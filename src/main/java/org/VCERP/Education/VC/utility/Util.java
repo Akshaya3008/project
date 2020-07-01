@@ -18,11 +18,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
+import org.VCERP.Education.VC.resource.UserResource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.mysql.jdbc.Statement;
 
 public class Util {
-	
+	private static final Logger logger = LogManager.getLogger(Util.class.getName());
 	public static Connection getDBConnection() {
 		 Connection conn = null;
 		 try {
@@ -30,6 +33,7 @@ public class Util {
 		 Class.forName("com.mysql.jdbc.Driver").newInstance();
 		 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vc_db?autoReconnect=true&useSSL=false","root","");
 		 } catch (Exception ex) {
+			 logger.error(ex);
 			 System.out.println(ex);
 		 ex.printStackTrace();
 		 }

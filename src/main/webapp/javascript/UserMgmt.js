@@ -1,7 +1,9 @@
 var mes;
 requestid = 0;
+var table;
 $(document).ready(function() {
 	validateLogin();
+	table=$("#UserMgmt_table").DataTable();;
 	checkUserLevel();
 	fetchAllBranch();
 	fetchAllRole();
@@ -11,7 +13,9 @@ $(document).ready(function() {
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		return this.optional(element) || /^[a-z]+$/i.test(value);
 	}, "Please enter letters only");
-
+	 jQuery.validator.addMethod("noSpace", function(value, element) { 
+		  return value.indexOf(" ") < 0 && value != ""; 
+		}, "No space please and don't leave it empty");
 	jQuery.validator.addMethod("futureDate", function(value, element) {
 		 var now = new Date();
 		 now.setHours(0,0,0,0);
@@ -68,7 +72,7 @@ $(document).ready(function() {
 
 		},
 		submitHandler : function(form) {
-			event.preventDefault();
+			//event.preventDefault();
 			createEmployeeAccount();
 		}
 	});
@@ -78,11 +82,12 @@ $(document).ready(function() {
 
 			emp_name : {
 				required : true,
-				lettersonly : true
-
+				//lettersonly : true
 			},
 			emp_unq_code : {
 				required : true,
+				digits: true,
+				noSpace : true
 			},
 
 			email : {
@@ -121,15 +126,10 @@ $(document).ready(function() {
 				dob:'Date of birth cannot be a future date'
 		},
 		submitHandler : function(form) {
-			event.preventDefault();
+			//event.preventDefault();
 			AddEmployee();
 		}
 	});
-
-	$('#UserMgmt_table').DataTable({
-		"pageLength" : 40
-	});
-
 	var checkbox = $('table tbody input[type="checkbox"]');
 	checkbox.click(function() {
 		if (!this.checked) {
@@ -146,8 +146,8 @@ $(document).ready(function() {
 		});
 	});
 
-	$("#deletBtn").click(function(e) {
-		event.preventDefault();
+	$("#deletBtn").click(function() {
+		//event.preventDefault();
 		$("table .cbCheck").each(function(i, chk) {
 			if (chk.checked) {
 				requestid = $(this).val();
@@ -173,8 +173,6 @@ $(document).ready(function() {
 
 function EmployeeList() {
 	function callback(responseData, textStatus, request) {
-		var table = $("#UserMgmt_table").DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var chck = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'
@@ -209,11 +207,12 @@ function AddEmployee() {
 	document.getElementById("employee_type").disabled = false;
 	document.getElementById("emp_branch").disabled = false;
 	function callback(responseData, textStatus, request) {
-
-		 var message=responseData.responseJSON.message;
-		 showNotification("success", mes);
+		 var message=responseData.message;
+		 showNotification("success", message);
 		document.getElementById('emp_type').disabled = true;
 		document.getElementById('branch').disabled = true;
+		document.getElementById("emp_branch").disabled=true;
+		location.reload();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		  var mes=responseData.responseJSON.message;
@@ -234,11 +233,13 @@ function createEmployeeAccount() {
 	document.getElementById("ebranch").disabled = false;
 	function callback(responseData, textStatus, request) {
 
-		message=responseData.responseJSON.message;
-		showNotification("success",mes);
+		message=responseData.message;
+		showNotification("success",message);
 		document.getElementById('emp_type').disabled = true;
 		document.getElementById('branch').disabled = true;
+		document.getElementById("emp_branch").disabled=true;
 		clearModal();
+		location.reload();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		  message=responseData.responseJSON.message;
@@ -287,9 +288,10 @@ function clearModal() {
 
 function deactivateUserAccount() {
 	function callback(responseData, textStatus, request) {
-		  var mes=responseData.responseJSON.message;
+		  var mes=responseData.message;
 		  showNotification("success",mes);
 		  requestid = 0;
+		  location.reload();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		  var mes=responseData.responseJSON.message;
@@ -338,12 +340,14 @@ function checkUserLevel(){
 	if(emp_type=="Organizatoin Level Employee"){
 		document.getElementById("emp_type").disabled=false;
 		document.getElementById("ebranch").disabled=false;
+		document.getElementById("emp_branch").disabled=false;
 		$("#emp_type").val(emp_type);
 	}else{
-		document.getElementById("emp_type").disabled=true;
-		document.getElementById("ebranch").disabled=true;
 		$("#emp_type").val(emp_type);
 		$(".branch").val(branchSession);
+		document.getElementById("emp_type").disabled=true;
+		document.getElementById("ebranch").disabled=true;
+		document.getElementById("emp_branch").disabled=true;
 	}
 }
 function fetchAllRole(){
