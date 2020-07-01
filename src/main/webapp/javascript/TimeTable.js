@@ -3,7 +3,20 @@ var date;
 var htmlCode = new Array();
 var lecturers = new Array();
 var all_time_slot=new Array();
+var table;
 $(document).ready(function() {
+	validateLogin();
+	table=	$("#timetable_table").DataTable();
+	TimeTableList();
+	getAcademicYear();
+	getAllStandard();
+	getAllDivision();
+	getSubject();
+	fetchAllBranch();
+	load_TT_Title();
+	loadTime();
+	loadLecturer();
+	$("#branch").val(branchSession);
 	 jQuery.validator.addMethod("noSpace", function(value, element) { 
 		  return value.indexOf(" ") < 0 && value != ""; 
 		}, "No space please and don't leave it empty");
@@ -26,13 +39,13 @@ $(document).ready(function() {
 			  },
 			  title:{
 				  required:true,
-				  noSpace:true
+				  //noSpace:true
 			  },
 			  
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
-			 
+			  getTimeTableDetails();
 		  }
 		  });
 	$('form[id="time_slot_new"]').validate({
@@ -54,23 +67,10 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
-			 
+			  InsertTimeSlot();
 		  }
 	});
-	validateLogin();
-	TimeTableList();
-	getAcademicYear();
-	getAllStandard();
-	getAllDivision();
-	getSubject();
-	fetchAllBranch();
-	load_TT_Title();
-	loadTime();
-	loadLecturer();
-	$("#branch").val(branchSession);
-	$("#timetable_table").DataTable({
-		"pageLength" : 40
-	});
+	
 	$('#multi_tt_title').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
@@ -99,14 +99,8 @@ $(document).ready(function() {
 		var slot = start + "-" + end;
 		document.getElementById('time_slot').value = slot;
 	});
-	$('#time_slot_new').submit(function(e) {
-		e.preventDefault();
-		 InsertTimeSlot();
-	});
-	$('#addBtn').click(function() {
-		getTimeTableDetails();
-	});
-	$('#editBtn').click(function(e) {
+
+	$('#editBtn').click(function() {
 		removeTableRow();
 		var created_date,title;
 		var table = $("#timetable_table").DataTable();
@@ -117,7 +111,7 @@ $(document).ready(function() {
 				  title=table.rows({selected :true}).column(1).data()[i]; 
 			  }
 		  });
-		  e.preventDefault();
+		 // e.preventDefault();
 		  loadTimeTable(created_date,title);
 	});
 	$('#deleteBtn').click(function(e) {
@@ -154,9 +148,8 @@ function getTimeTableDetails() {
 }
 function InsertTimeTable(tt_details) {
 	function callback(responseData, textStatus, request) {
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success", mes);
-
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -175,7 +168,6 @@ function InsertTimeTable(tt_details) {
 		+ "&branch=" + branchSession;
 		relativeUrl = "/TimeTable/EditTimeTable";
 	}
-	alert(formData);
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
@@ -214,7 +206,7 @@ function TimeTableList() {
 
 function InsertTimeSlot() {
 	function callback(responseData, textStatus, request) {
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success", mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -253,6 +245,8 @@ function loadTimeTable(created_date,title){
 			$(table.rows.item(j + 1).cells[3]).find('select').val(responseData[i].status);
 			j=j+1;
 		}
+		$("#datatable-view").css("display", "none");
+		$("#datatable-view-2").css("display", "block");
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -267,7 +261,7 @@ function loadTimeTable(created_date,title){
 }
 function deleteTimeTable(created_date,title){
 	function callback(responseData, textStatus, request) {
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success", mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -284,7 +278,6 @@ function deleteTimeTable(created_date,title){
 function removeTableRow(){
 	var table = document.getElementById("tt");
 	var rowCount = table.rows.length;
-	alert(rowCount);
 	var i = 2;
 	while (rowCount > i) {
 		document.getElementById("tt").deleteRow(rowCount - 1);
@@ -315,6 +308,7 @@ function load_TT_Title(){
 }
 function tt_report(){
 	document.getElementById("branch").disabled=false;
+	var branch=document.getElementById("branch").value;
 	var tt_title=new Array()
 	for (var option of document.getElementById('multi_tt_title').options) {
 		if (option.selected) {
@@ -322,7 +316,6 @@ function tt_report(){
 		}
 	}
 	function callback(responseData, textStatus, request) {
-		document.getElementById("branch").disabled=true;
 		var table = $("#timetable_report").DataTable();
 		table.rows().remove().draw();
 
@@ -362,8 +355,7 @@ function tt_report(){
 			}
 				table.row.add([ time, mon, tue, wed, thu, fri,sat,sun ])
 				.draw();
-			
-		}
+		}document.getElementById("branch").disabled=true;
 
 	}
 
@@ -372,9 +364,9 @@ function tt_report(){
 		showNotification("error", mes);
 
 	}
-
+	
 	var httpMethod = "POST";
-	var formData=$("#getTimeTableData").serialize()+"&tt_title="+tt_title;
+	var formData=$("#getTimeTableData").serialize()+"&tt_title="+tt_title+"&branch="+branch;
 	var relativeUrl = "/TimeTable/TimeTableReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
