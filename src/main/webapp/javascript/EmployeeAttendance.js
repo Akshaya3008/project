@@ -1,6 +1,10 @@
 var mes;
 var attendance;
+var table;
 $(document).ready(function() {
+	validateLogin();
+	table=$("#EmpAttendance_table").DataTable();
+	attendanceList();
 	jQuery.validator.addMethod("greaterThan", 
 			function(value, element, params) {
 
@@ -31,12 +35,10 @@ $(document).ready(function() {
 		rules:{
 			from_date:{
 				required:true,
-				futureDate:true,
 				lessThan:"#to_date"
 			},
 			to_date:{
 				required:true,
-				futureDate:true,
 				greaterThan:"#from_date"
 			},
 		},
@@ -51,15 +53,9 @@ $(document).ready(function() {
 			},
 		submitHandler:function(form){
 			  event.preventDefault();
-			  
+			  getEmployeeAttendanceStat();
 		  }
 	});
-	validateLogin();
-	attendanceList();
-	$('#EmpAttendance_table').DataTable({
-		"pageLength" : 40
-	});
-
 	var checkbox = $('table tbody input[type="checkbox"]');
 	checkbox.click(function() {
 		if (!this.checked) {
@@ -71,9 +67,6 @@ $(document).ready(function() {
 			$("#selectAllAbsent").prop("checked", false);
 		}
 	});
-	$("#attendance_stat_form").submit(function(e){
-		getEmployeeAttendanceStat(e);
-	})
 	$("#btn-view").click(function(e){
 		var table = $("#EmpAttendance_stat_table").DataTable();
 		$("table .cbCheckAbs").each(function(i,chk){
@@ -91,10 +84,9 @@ function attendanceList() {
 	var today = new Date();
 	var time = today.getHours() + ":" + today.getMinutes();
 	function callback(responseData, textStatus, request) {
-		var table = $("#EmpAttendance_table").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
-			var present = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="P"><label for="checkbox1"></label></span>';
+			var present = '<span clas s="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="P"><label for="checkbox1"></label></span>';
 			var absent = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheckAbs" name="type" value="A"><label for="checkbox1"></label></span>';
 			var intime = '<input type="time" name="time" id="intime" class="time" value="'+time+'"/>';
 			var outtime = '<input type="time" name="time" id="outtime" class="time" value="'+time+'"/>';
@@ -151,8 +143,8 @@ function getAttendance() {
 }
 function saveAttendance(attendance) {
 	function callback(responseData, textStatus, request) {
-		  var message=responseData.responseJSON.message;
-		  showNotification("error",message);
+		  var message=responseData.message;
+		  showNotification("success",message);
 	}
 
 	function errorCallback(responseData, textStatus, request) {
@@ -165,20 +157,18 @@ function saveAttendance(attendance) {
 		Attendance : attendance,
 		branch : branchSession
 	}
-	console.log(formData);
 	var relativeUrl = "/Attendance/employeeAttendance";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
 
-function getEmployeeAttendanceStat(e) {
+function getEmployeeAttendanceStat() {
 	var srno=0;
 	function callback(responseData, textStatus, request) {
 		var table = $("#EmpAttendance_stat_table").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
-			e.preventDefault();
 			srno+=1;
 			var emp_name = responseData[i].emp_name;
 			var emp_code = responseData[i].emp_unq_code;
