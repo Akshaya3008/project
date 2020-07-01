@@ -18,17 +18,9 @@ $(document).ready(function() {
 		  },	
 		  submitHandler:function(form){
 			  event.preventDefault();  
-			  event.preventDefault();
 			  addFeesType();
 		  }
 	});
-/*	
-	$("#feestype").submit(function() {
-		// var token=sessionStorage.getItem("token");
-		// validateLogin(token);
-		//		 
-
-	});*/
 	$("#editBtn").click(function(e) {		 
 		var table = $('#feestypetable').DataTable();
 		$('table .cbCheck').each(function(i, chk) {
@@ -43,14 +35,13 @@ $(document).ready(function() {
 		clearModal()
 	});
 	$("#deleteBtn").click(function() {
+		var idarray=new Array();
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
-			var idarray=new Array();
 			idarray.push($(this).val());
-			deleteFeesType(idarray);
 			}
 		});
-		
+		deleteFeesType(idarray);
 	});
 
 });
@@ -58,7 +49,7 @@ $(document).ready(function() {
 function addFeesType() {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 		clearModal();
 	}
@@ -75,7 +66,6 @@ function addFeesType() {
 	}else{
 		formData =$('#feestypeForm').serialize()+"&id="+requestid+"&branch="+branchSession;
 		relativeUrl = "/feesType/EditFeesType";
-		alert(formData)
 	}
 		
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,errorCallback);
@@ -111,8 +101,9 @@ function getFeesType() {
 function deleteFeesType(id) {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
+		location.reload();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;

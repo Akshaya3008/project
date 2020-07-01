@@ -1,7 +1,9 @@
 var mes;
 requestid=0;
+var table;
 $(document).ready(function(){
 	validateLogin();
+	table=	$('#leadsourcetable').DataTable();
 	LeadSourceList();
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		return this.optional(element) || /^[a-z\s]+$/i.test(value);
@@ -23,11 +25,7 @@ $(document).ready(function(){
 		  }
 	});
 	
-	$('#leadsourcetable').DataTable({
-		"pageLength" : 40
-	});
 	$("#editBtn").click(function(e) {		 
-		var table = $('#leadsourcetable').DataTable();
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
@@ -37,13 +35,13 @@ $(document).ready(function(){
 		});
 	});
 	$("#deleteBtn").click(function() {
+		var idarray=new Array();
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
-			var idarray=new Array();
 			idarray.push($(this).val());
 			}
-			deleteSource(idarray);
 		});
+		deleteSource(idarray);
 	});
 	$("#cancelBtn").click(function() {
 		clearModal()
@@ -52,7 +50,7 @@ $(document).ready(function(){
 });
 function InsertLeadSource(){
 	function callback(responseData, textStatus, request){
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success",mes);
 		clearModal();
 		
@@ -79,8 +77,6 @@ function InsertLeadSource(){
 }
 function LeadSourceList(){
 	function callback(responseData, textStatus, request){
-		var table = $("#leadsourcetable").DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var chck = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'+responseData[i].id+'"><label for="checkbox1"></label></span>';
@@ -114,7 +110,7 @@ function loadSource(source,e){
 function deleteSource(id) {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);	
 	}
 	function errorCallback(responseData, textStatus, request) {

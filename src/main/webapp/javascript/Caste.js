@@ -8,9 +8,7 @@ $(document).ready(function() {
 		}, "Please enter letters only");
 	
 	$('form[id="caste-form"]').validate({
-		
 		  rules: {
-		    
 			  caste: {
 		        required: true,
 		        lettersonly: true
@@ -21,8 +19,6 @@ $(document).ready(function() {
 				required:'Please enter your caste',		
 				lettersonly:'Enter only letters'
 			},
-		
-		
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
@@ -42,13 +38,13 @@ $(document).ready(function() {
 		});
 	});
 	$("#deleteBtn").click(function() {
+		var idarray=new Array();
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
-			var idarray=new Array();
 			idarray.push($(this).val());
 			}
-			deleteCaste(idarray);
 		});
+		deleteCaste(idarray);
 	});
 	$("#cancelBtn").click(function() {
 		clearModal()
@@ -59,7 +55,7 @@ $(document).ready(function() {
 function addCaste() {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 		clearModal();
 	}
@@ -110,7 +106,7 @@ function getAllCaste() {
 function deleteCaste(id) {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);	
 	}
 	function errorCallback(responseData, textStatus, request) {
