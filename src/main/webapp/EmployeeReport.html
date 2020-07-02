@@ -3,12 +3,13 @@
 
 <head>
 <meta charset="ISO-8859-1">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="jquery/jquery-3.3.1.min.js"></script>
 <script src="jquery/bootstrap.min.js"></script>  
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
 <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="css/promote.css" type="text/css">
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
@@ -16,7 +17,7 @@
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
-<script src="assets/js/bootstrap-multiselect.js"></script>
+<script src="jquery/bootstrap-multiselect.js"></script>
 
 <script src="jquery/jquery.validate.min.js"></script>
 
@@ -30,6 +31,40 @@
 
 <title>Employee Report</title>
 <style>
+
+/*  accordian style */ 
+
+/* .accordion-container .content-entry i {
+		font-style: normal;	
+		color:#435d7d;
+}
+.accordion-container .content-entry #acc_sign:before {
+		content: "+ ";
+        font-size: 20px;
+         margin-left: 10px;
+}
+.accordion-container .content-entry.open #acc_sign:before {
+		content: "- ";
+        font-size: 20px;
+        margin-left: 10px;
+}
+.accordion-content{
+    display: none;
+}
+
+.content-entry .title-promote{
+    max-width: 100%;
+    width: 100%;
+    background: #eee;
+    min-height: 20px;
+    margin-bottom: 5px;
+    height: 50px;
+    line-height: 2.2;
+    
+} */
+
+/*  accordian style end */ 
+ 
 .table-wrapper {
 	background: #fff;
 	padding: 20px 25px;
@@ -341,7 +376,7 @@ table.table .avatar {
 					<div class="panel">
 						<div class="accordion-container" id="accordion">
 							<section class="content-entry">
-								<label class="title-promote"><i id="acc_sign"> <!--
+								<label class="accordian_title"><i id="acc_sign"> <!--
                                    <i class="fa fa-plus"></i>
                                    <i class="fa fa-minus"></i>--> Filter
 										Report

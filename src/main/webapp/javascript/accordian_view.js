@@ -19,10 +19,15 @@ $('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
-	$('#multi_employee').multiselect({
+/*	$('#multi_employee').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});*/
+	$('#multi_emp_design').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	
 	$('#multi_rec_status').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
