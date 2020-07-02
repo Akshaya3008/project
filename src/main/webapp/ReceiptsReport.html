@@ -53,9 +53,10 @@
 
 <script type="text/javascript" src="core/noty.js"></script>
 <link rel="stylesheet" type="text/css" href="css/noty.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 
 
-<title>Report</title>
+<title>Receipt Report</title>
 <style>
 .table-wrapper {
 	background: #fff;
@@ -192,14 +193,6 @@ table.table .avatar {
 	color: #666;
 }
 
-.pagination li.active a, .pagination li.active a.page-link {
-	background: #03A9F4;
-}
-
-.pagination li.active a:hover {
-	background: #0397d6;
-}
-
 .pagination li.disabled i {
 	color: #ccc;
 }
@@ -257,11 +250,6 @@ table.table .avatar {
 	transform: rotateZ(45deg);
 }
 
-.custom-checkbox input[type="checkbox"]:checked+label:before {
-	border-color: #03A9F4;
-	background: #03A9F4;
-}
-
 .custom-checkbox input[type="checkbox"]:checked+label:after {
 	border-color: #fff;
 }
@@ -312,6 +300,15 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
+/* only on reports */
+#btnDisplay{
+    margin-top: 0px ! important;
+
+}
+.input-group
+{
+ width:60% ! important;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -357,15 +354,8 @@ table.table .avatar {
 							<b>Receipts Report</b>
 						</h2>
 					</div>
-					<!-- <div class="col-sm-6">
-						<a href="" class="btn btn-success promote-b" id="promote_student"><i
-							class="material-icons">&#xE147;</i> <span>Promote</span> </a>
-						
-					</div> -->
 				</div>
-				<!-- row div close -->
 			</div>
-			<!-- table title div close -->
 			<section role="main" class="content-body">
 
 				
@@ -534,14 +524,17 @@ table.table .avatar {
 														</div>
 													</div>
 													
-													<div class="col-md-2">
-														<div class="pull-right">
-															<button type="button" id="btnDisplay"
-																data-style="zoom-in"
-																class="btn btn-warning margin-right-sm">
-																Display</button>
+													<div class="col-md-12">
+
+															<div class="pull-right">
+																<button id="btnDisplay"
+																	data-style="zoom-in"
+																	class="btn btn-warning margin-right-sm" >Display</button>
+																<button type="reset" id="btnClear" data-style="zoom-in"
+																	class="btn btn-light margin-right-sm">Clear</button>
+
+															</div>
 														</div>
-													</div>
 												</div>
 												</form>
 											</div>

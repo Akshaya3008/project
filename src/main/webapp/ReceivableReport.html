@@ -7,6 +7,7 @@
 	href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 <script src="jquery/jquery-3.3.1.min.js"></script>
+<script src="jquery/bootstrap.min.js"></script>  
 <script type="text/javascript" src="javascript/bootstrap.min.js"></script>
 <!-- <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
@@ -32,7 +33,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/sp-1.0.1/datatables.min.css" />
 
-
+<link rel="stylesheet" href="css/promote.css" type="text/css">
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
@@ -51,7 +52,9 @@
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <script type="text/javascript" src="core/jquerysession.js"></script>
 
-<title>Report</title>
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
+
+<title>Receivable Report</title>
 <style>
 
 
@@ -310,6 +313,14 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
+#btnDisplay{
+    margin-top: 0px ! important;
+
+}
+.input-group
+{
+ width:60% ! important;
+}
 </style>
 <!-- <script type="text/javascript">
 	$(document).ready(function() {
@@ -388,7 +399,7 @@ table.table .avatar {
 																class="titleYear">Academic Year</span> <span
 																class="text-danger" style="color:red">*</span>
 															</label>
-															<div class="input-group select" style="width: 100%;">
+															<div class="input-group select">
 																<select name="acad_year" id="studacad_year"
 																	class="form-control acad_year">
 
@@ -433,7 +444,7 @@ table.table .avatar {
 																class="titleYear">Admission Status</span> <span
 																class="text-danger" style="color:red">*</span>
 															</label>
-															<div class="input-group status" style="width: 100%;">
+															<div class="input-group status" >
 																<select id="multi_status_select" name="status[]"
 																	class="form-control" multiple="multiple" Required>
 																	<option>Active</option>
@@ -450,7 +461,7 @@ table.table .avatar {
 																class="titleYear">Standard</span> <span
 																class="text-danger" style="color:red">*</span>
 															</label>
-															<div class="input-group select" style="width: 100%;">
+															<div class="input-group select" >
 																<select name="standard" id="standard"
 																	class="form-control standard">
 
@@ -465,7 +476,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">Div</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group" >
 																<select id="multi_div" name="division[]"
 																	class="form-control division" multiple="multiple" Required>
 																	
@@ -478,7 +489,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">Student Name</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group" >
 																<select id="student" name="student_list"
 																	class="form-control student">
 																	<!-- <option value="null">Select Division</option> -->
@@ -491,7 +502,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">Course</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group">
 																<select id="multi_course" name="course"
 																	class="form-control fees" multiple="multiple" Required>
 																	
@@ -505,7 +516,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">Branch</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group">
 																<select id="branch" name="branch_list"
 																	class="form-control branch">
 																	
@@ -515,15 +526,14 @@ table.table .avatar {
 													</div>
 													
 													
-													<div class="col-md-2">
-														<div class="pull-right">
-															<button type="button" id="btnDisplay"
-																data-style="zoom-in"
-																class="btn btn-warning margin-right-sm">
-																Display</button>
-
-														</div>
-													</div>
+													<div class="row">
+											<div class="col-md-12">
+												<div class="pull-right">
+													<button id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" >Display</button>
+													<button type="reset" id="btnClear" data-style="zoom-in" class="btn btn-light margin-right-sm">Clear</button>
+												</div>
+											</div>												
+										</div>
 												</div>
 												
 												</form>

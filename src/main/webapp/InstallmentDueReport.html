@@ -36,14 +36,14 @@
  -->
 
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
-
+<link rel="stylesheet" href="css/promote.css" type="text/css">
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
 
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
-<script src="assets/js/bootstrap-multiselect.js"></script>
+<script src="jquery/bootstrap-multiselect.js"></script>
 
 <script
 	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
@@ -51,6 +51,7 @@
 <script src="javascript/InstallmentDueReport.js"></script>
 <script src="javascript/accordian_view.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 
 
 <title>Installment Due Fees Report</title>
@@ -190,14 +191,6 @@ table.table .avatar {
 	color: #666;
 }
 
-.pagination li.active a, .pagination li.active a.page-link {
-	background: #03A9F4;
-}
-
-.pagination li.active a:hover {
-	background: #0397d6;
-}
-
 .pagination li.disabled i {
 	color: #ccc;
 }
@@ -255,11 +248,6 @@ table.table .avatar {
 	transform: rotateZ(45deg);
 }
 
-.custom-checkbox input[type="checkbox"]:checked+label:before {
-	border-color: #03A9F4;
-	background: #03A9F4;
-}
-
 .custom-checkbox input[type="checkbox"]:checked+label:after {
 	border-color: #fff;
 }
@@ -309,6 +297,15 @@ table.table .avatar {
 
 .modal form label {
 	font-weight: normal;
+}
+/* only on reports */
+#btnDisplay{
+    margin-top: 0px ! important;
+
+}
+.input-group
+{
+ width:60% ! important;
 }
 </style>
 <script type="text/javascript">
@@ -530,18 +527,20 @@ table.table .avatar {
 														</div>
 
 													</div> -->
-
-
-
-
+													
 													<div class="col-md-3">
 														<div class="form-group">
-															<label>Student name</label> <input type="text"
-																class="form-control" id="stdname" name="stud_name"
-																required>
+															<label class="control-label"> <span
+																class="titleDiv">Student Name</span>
+															</label>
+															<div class="input-group" style="width: 100%">
+																<input type="text" class="form-control" id="stud_name"
+																	name="stud_name" required>
+															</div>
 														</div>
-
 													</div>
+
+
 
 													<!-- <div class="col-md-3">
 
@@ -574,7 +573,7 @@ table.table .avatar {
 															<div class="pull-right">
 																<input type="button" id="btnDisplay"
 																	data-style="zoom-in"
-																	class="btn btn-warning margin-right-sm" value="submit">
+																	class="btn btn-warning margin-right-sm" value="Display">
 																<button type="reset" id="btnClear" data-style="zoom-in"
 																	class="btn btn-light margin-right-sm">Clear</button>
 

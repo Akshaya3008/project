@@ -33,6 +33,7 @@
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
+	<link rel="stylesheet" href="css/promote.css" type="text/css">
 	
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
@@ -40,7 +41,7 @@
 
 
 <script src="core/popper.min.js"></script>
-<script src="assets/js/bootstrap-multiselect.js"></script>
+<script src="jquery/bootstrap-multiselect.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script src="javascript/accordian_view.js"></script>
@@ -48,6 +49,7 @@
 <script src="javascript/FeesReport.js"></script>
 
 <script type="text/javascript" src="core/jquerysession.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 
 <title>Fees Report</title>
 <style>
@@ -186,14 +188,6 @@ table.table .avatar {
 	color: #666;
 }
 
-.pagination li.active a, .pagination li.active a.page-link {
-	background: #03A9F4;
-}
-
-.pagination li.active a:hover {
-	background: #0397d6;
-}
-
 .pagination li.disabled i {
 	color: #ccc;
 }
@@ -251,11 +245,6 @@ table.table .avatar {
 	transform: rotateZ(45deg);
 }
 
-.custom-checkbox input[type="checkbox"]:checked+label:before {
-	border-color: #03A9F4;
-	background: #03A9F4;
-}
-
 .custom-checkbox input[type="checkbox"]:checked+label:after {
 	border-color: #fff;
 }
@@ -305,6 +294,15 @@ table.table .avatar {
 
 .modal form label {
 	font-weight: normal;
+}
+/* only on reports */
+#btnDisplay{
+    margin-top: 0px ! important;
+
+}
+.input-group
+{
+ width:60% ! important;
 }
 </style>
 <script type="text/javascript">
@@ -375,8 +373,8 @@ table.table .avatar {
 										<div class="panel">
 										<form id="FeesReportForm" method="post">
 											<div class="panel-body">
-											
-												<div class="form-group">
+											<!-- 
+												<div class="form-group"> -->
 													<div class="col-md-3">
 														<div class="form-group">
 															<label class="control-label"> <span
@@ -429,8 +427,8 @@ table.table .avatar {
 
 														</div>
 													</div>
-												</div>
-												<div class="fom-group">
+												<!-- </div> -->
+												<!-- <div class="fom-group"> -->
 													<div class="col-md-3">
 														<div class="form-group">
 															<label class="control-label"> <span
@@ -443,7 +441,7 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													</div>
+													<!-- </div> -->
 													<div class="col-md-3">
 														<div class="form-group">
 															<label class="control-label"> <span
@@ -517,26 +515,15 @@ table.table .avatar {
 													
 													
 													</div>
-													<div class="panel-footer" style="background:white;">
+													<div style="background:white;">
 													<div class="row">
-													
-														<div class="pull-right">
-															<button type="submit" id="btnDisplay"
-																data-style="zoom-in"
-																class="btn btn-warning margin-right-sm">
-																Display</button>
-
-														</div>
-													
-														<div class="pull-right">
-															<button type="button" id="btnClear"
-																data-style="zoom-in"
-																class="btn btn-default margin-right-sm">
-																Clear</button>
-
-														</div>
-													
-													</div>
+											<div class="col-md-12">
+												<div class="pull-right">
+													<button id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" >Display</button>
+													<button type="reset" id="btnClear" data-style="zoom-in" class="btn btn-light margin-right-sm">Clear</button>
+												</div>
+											</div>												
+										</div>
 												</div>
 												</form>
 											</div>

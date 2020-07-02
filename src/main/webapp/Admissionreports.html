@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
+<link rel="stylesheet" href="css/promote.css" type="text/css">
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
@@ -22,6 +23,7 @@
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script src="javascript/Admissionreports.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
+<script src="javascript/accordian_view.js"></script>
 <script type="text/javascript" src="core/noty.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/noty.css" />
@@ -271,6 +273,15 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
+/* only on reports */
+#btnDisplay{
+    margin-top: 0px ! important;
+
+}
+.input-group
+{
+ width:60% ! important;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -316,8 +327,8 @@ table.table .avatar {
 						</h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="" class="btn btn-success promote-b" id="promote_student"><i
-							class="material-icons">&#xE147;</i> <span>Promote</span> </a>
+					<!-- 	<a href="" class="btn btn-success promote-b" id="promote_student"><i
+							class="material-icons">&#xE147;</i> <span>Promote</span> </a> -->
 
 					</div>
 				</div>
@@ -328,7 +339,7 @@ table.table .avatar {
 					<div class="panel">
 						<div class="accordion-container" id="accordion">
 							<section class="content-entry">
-								<label class="title-promote"><i id="acc_sign"> <!--
+								<label class="accordian_title"><i id="acc_sign"> <!--
                                    <i class="fa fa-plus"></i>
                                    <i class="fa fa-minus"></i>--> Filter
 										Report
@@ -410,7 +421,7 @@ table.table .avatar {
 															class="course_title">Branch</span> <span
 															class="text-danger" style="color: red">*</span>
 														</label>
-														<div class="input-group" style="width: 60%">
+														<div class="input-group" style="width:60% ! important">
 															<select name="branch" id="branch" class="form-control branch"
 																disabled>
 

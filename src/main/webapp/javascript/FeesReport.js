@@ -56,11 +56,7 @@ $(document).ready(function() {
 	fetchAllBranch();
 	$(".branch").val(branchSession);
 	
-	$('#multi_status_select').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
-	$('#multi_standard_select').multiselect({
+	$('#multi_div').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
@@ -70,11 +66,17 @@ $(document).ready(function() {
 		enableFiltering : true
 	});
 	
-
-	$('#multi_div').multiselect({
+	$('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	$('#multi_standard_select').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+
+
+	
 	
 	
 	

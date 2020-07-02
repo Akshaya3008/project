@@ -28,6 +28,7 @@
 <script type="text/javascript" src="core/noty.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/noty.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 
 <title>Employee Report</title>
 <style>
@@ -199,15 +200,6 @@ table.table .avatar {
 .pagination li a:hover {
 	color: #666;
 }
-
-.pagination li.active a, .pagination li.active a.page-link {
-	background: #03A9F4;
-}
-
-.pagination li.active a:hover {
-	background: #0397d6;
-}
-
 .pagination li.disabled i {
 	color: #ccc;
 }
@@ -265,11 +257,6 @@ table.table .avatar {
 	transform: rotateZ(45deg);
 }
 
-.custom-checkbox input[type="checkbox"]:checked+label:before {
-	border-color: #03A9F4;
-	background: #03A9F4;
-}
-
 .custom-checkbox input[type="checkbox"]:checked+label:after {
 	border-color: #fff;
 }
@@ -320,6 +307,15 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
+/* only on reports */
+#btnDisplay{
+    margin-top: 0px ! important;
+
+}
+.input-group
+{
+ width:60% ! important;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -365,9 +361,8 @@ table.table .avatar {
 						</h2>
 					</div>
 				</div>
-				<!-- row div close -->
 			</div>
-			<!-- table title div close -->
+
 
 			<section role="main" class="content-body">
 

@@ -9,7 +9,12 @@ $(document).ready(function(){
 	$("#btnDisplay").click(function(){
 		ReceiptReport();
 	});
+	$('#multi_employee').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
 });
+
 
 function ReceiptReport(){
 	document.getElementById("branch").disabled=false;
