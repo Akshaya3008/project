@@ -1,7 +1,6 @@
 var standardData;
 var branchData;
 var requestid = 0;
-//var std = "";
 var db_std=new Array();
 $(document)
 		.ready(
@@ -19,6 +18,7 @@ $(document)
 							element) {
 						return value.indexOf(" ") < 0 && value != "";
 					}, "No space please and don't leave it empty");
+					
 					$('form[id="feespackage-form"]').validate({
 						rules : {
 							fees_pack : {
@@ -30,13 +30,6 @@ $(document)
 								 required:true,
 								 number:true
 								},
-							searchforstand1 : {
-								required : true,
-								noSpace:true
-							},
-							searchforstand2 : {
-								required : true
-							},
 							feestype : {
 								required : true
 							},
@@ -46,20 +39,29 @@ $(document)
 								noSpace : true
 							},
 							discount : {
-								required : true,
+								//required : true,
 								number : true,
 								noSpace : true
 							},
 							tax : {
-								required : true,
-								noSpace : true,
+								//noSpace : true,
 								digits:true
 							},
 
 						},
-
 						submitHandler : function(form) {
 							event.preventDefault();
+							standardData = new Array();
+							branchData = new Array();
+							$('#standard input:checked').each(function() {
+								var std = $(this).closest('tr').find('td:nth-child(2)').text();
+								standardData.push(std);
+								});
+							$('#branchTable input:checked').each(function() {
+								var branch = $(this).closest('tr').find('td:nth-child(2)').text();
+								branchData.push(branch);
+								});
+							addNewFeesPackage(standardData,branchData);
 						}
 					});
 
@@ -69,37 +71,20 @@ $(document)
 								|| /^[a-z\s]+$/i.test(value);
 					}, "Please enter letters only");
 
-					$('form[id="feestypeform"]').validate({
+					$('form[id="feestype-form"]').validate({
 						rules : {
-
 							feesType : {
 								required : true,
-								letterswithspace : true
+								letterswithspace : true,
+								noSpace : true
 							},
-
 						},
-
 						submitHandler : function(form) {
 							event.preventDefault();
-						
-
+							addFeesType();
 						}
 					});
 
-					$("#saveBtn").click(function() {
-						standardData = new Array();
-						branchData = new Array();
-						$('#standard input:checked').each(function() {
-							var std = $(this).closest('tr').find('td:nth-child(2)').text();
-							standardData.push(std);
-							});
-						$('#branchTable input:checked').each(function() {
-							var branch = $(this).closest('tr').find('td:nth-child(2)').text();
-							branchData.push(branch);
-							});
-						addNewFeesPackage(standardData,branchData);
-
-					});
 					$("#loadBranch").click(function() {
 							var stdarray = new Array();
 							var stdamt = 0;
@@ -110,7 +95,6 @@ $(document)
 									document.getElementById("total-amt").value = stdamt;
 									document.getElementById("grand-t").value = stdamt;
 									document.getElementById("inputDisabledAmt").value = stdamt;
-									alert(std);
 									loadBranch(std);
 							});
 					});
@@ -119,7 +103,6 @@ $(document)
 						$('table .cbCheck').each(function(i, chk) {
 							if (chk.checked) {
 								requestid = $(this).val();
-								alert(requestid);
 								var pack = table.rows({
 									selected : true
 								}).column(1).data()[i];
@@ -167,7 +150,7 @@ function addNewFeesPackage(standardData, branchData) {
 		var mes = responseData.message;
 		showNotification("success", mes);
 		document.getElementById("inputDisabledAmt").disabled = true;
-		location.reload(true);
+		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -182,15 +165,12 @@ function addNewFeesPackage(standardData, branchData) {
 				+ standardData + "&branchData=" + branchData + "&fees_details="
 				+ fees_details + "&createdby=" + user;
 		relativeUrl = "/FeesPackage/addNewFeesPackage";
-		alert("save")
 	} else {
 		formData = $("#feespackage-form").serialize() + "&standardData="
 				+ standardData + "&branchData=" + branchData + "&fees_details="
 				+ fees_details + "&createdby=" + user + "&id=" + requestid;
 		relativeUrl = "/FeesPackage/EditFeesPackage";
-		alert("Edit")
 	}
-	alert(formData);
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
@@ -351,7 +331,7 @@ function loadFeesPackageData(pack, branch) {
 
 function markStandard(std,db_std){
 	var pack_std=new Array();
-	std=std.split(",");
+	std=std.split("-");
 	
 	for(var i=0;i<std.length;i++){
 		pack_std.push(std[i]);	
@@ -390,7 +370,6 @@ function markStandard(std,db_std){
 	    }
 	    for(var i=0;i<diff.length;i++){
 	    	var standard=diff[i].split("|");
-	    	alert(standard)
 			var rowCount = table.rows.length;
 			var row = table.insertRow(rowCount);
 			var cell1 = row.insertCell(0);
@@ -404,7 +383,7 @@ function markStandard(std,db_std){
 }
 function addFeesType() {
 	function callback(responseData, textStatus, request) {
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success", mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -414,8 +393,7 @@ function addFeesType() {
 	var httpMethod = "POST";
 	var formData;
 	var relativeUrl;
-	formData = $('#feestypeform').serialize() + "&branch=" + branchSession;
-	alert(formData);
+	formData = $('#feestype-form').serialize() + "&branch=" + branchSession;
 	relativeUrl = "/feesType/addNewFeesType";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
@@ -423,7 +401,7 @@ function addFeesType() {
 }
 function deleteFeesPackage(id) {
 	function callback(responseData, textStatus, request) {
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success", mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -458,9 +436,9 @@ function clearModal() {
 		rowCount = rowCount - 1;
 	}
 	var table = document.getElementById("feestypetable");
-	var rowCount = table.rows.length - 1;
+	var rowCount = table.rows.length;
 	for (var j = 1; j < rowCount; j++) {
-		document.getElementById("feestypetable").deleteRow(rowCount);
+		document.getElementById("feestypetable").deleteRow(rowCount - 1 );
 		rowCount = rowCount - 1;
 	}
 	$(table.rows.item(1).cells[1]).find('input').val("");
@@ -469,26 +447,3 @@ function clearModal() {
 	document.getElementById('grand-t').value = "0";
 	requestid = 0;
 }
-/*function loadStandardForEdit(db_std,std){
-	var commonStd=new Array()
-	var stdData=new Array();
-	std=std.split("-");
-	for(var i=0;i<std.length;i++){
-		stdData.push(std[i]);
-	}
-    i = 0, 
-    j = 0;  
-	while (i < db_std.length && j < stdData.length) {
-	    while (db_std[i] < stdData[j]) {       
-	        ++i;                               
-	    }
-	    while (stdData[j] < db_std[i]) {       
-	        ++j;                               
-	    }
-	    if (db_std[i] === stdData[j]) { 
-	    	commonSTd.push(db_std[i]);
-	        ++i;                               
-	        ++j;
-	    }
-	}
-}*/

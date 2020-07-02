@@ -143,10 +143,11 @@ public class FeesPackageResource {
 	@FormParam("branchData") String branchData,@FormParam("fees_details") String fees_details
 	,@FormParam("createdby") String createdby,@FormParam("id") Long id)
 	{
+		String standard=standardData.replace(",", "-");
 		FeesPackage pack=new FeesPackage();
 		pack.setId(id);
 		pack.setFeesPackage(fees_pack);
-		pack.setStandard(standardData);
+		pack.setStandard(standard);
 		pack.setBranch(branchData);
 		pack.setTotal_amt(finalamt);
 		pack.setFees_details(fees_details);
@@ -165,14 +166,11 @@ public class FeesPackageResource {
 	@JWTTokenNeeded
 	@Path("/deleteFeesPackage")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteFeesPackage(@QueryParam("id") Long id,@QueryParam("branch") String branch)
+	public Response deleteFeesPackage(@QueryParam("id") String id)
 	{
-		FeesPackage pack=new FeesPackage();
-		pack.setId(id);
-		pack.setBranch(branch);
 		FeesPackageController controller=new FeesPackageController();
 		try{
-		controller.deleteFeesPackage(pack);
+		controller.deleteFeesPackage(id);
 		return Util.generateResponse(Status.ACCEPTED, "Course Package Successfully Deleted.").build();
 		}catch (Exception e) {
 			e.printStackTrace();
