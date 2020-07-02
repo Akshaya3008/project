@@ -6,42 +6,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
-import javax.annotation.PostConstruct;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
-import org.VCERP.Education.VC.resource.UserResource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mysql.jdbc.Statement;
-
 public class Util {
 	private static final Logger logger = LogManager.getLogger(Util.class.getName());
-	private static PropertiesCache sCache;
 	
-	private PropertiesCache cache=new PropertiesCache();
+	//private static PropertiesCache sCache;
+	/*
 	@PostConstruct
 	public void init() {
 		Util.sCache = cache;
 	}
-	
+	*/
 	public static Connection getDBConnection() {
 		 Connection conn = null;
-		 try {
-		
-		 Class.forName("com.mysql.jdbc.Driver").newInstance();
-		 String connectionUrl = "jdbc:mysql://localhost:3306/"+sCache.getParentDBName()+"?autoReconnect=true&useSSL=false";
-		 conn = DriverManager.getConnection(connectionUrl,sCache.getUserName(),sCache.getPassword());
+		 try { 
+			 Class.forName("com.mysql.jdbc.Driver").newInstance();
+			 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vc_db?autoReconnect=true&useSSL=false","root","");
 		 } catch (Exception ex) {
 			 logger.error(ex);
 			 System.out.println(ex);

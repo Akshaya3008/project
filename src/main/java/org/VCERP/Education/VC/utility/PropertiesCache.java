@@ -1,5 +1,6 @@
 package org.VCERP.Education.VC.utility;
 
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -12,7 +13,6 @@ public class PropertiesCache {
 	private String parentDBName;
 	private String userName;
 	private String password;
-
 
 	public String getParentDBName() {
 		return parentDBName;
