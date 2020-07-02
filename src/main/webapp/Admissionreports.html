@@ -1,29 +1,23 @@
 <html>
 <meta charset="ISO-8859-1">
-
 <head>
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="jquery/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
 
-<link href="assets/js/dataTables/dataTables.bootstrap.css"
-	rel="stylesheet" />
+<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
-<script src="assets/js/bootstrap-multiselect.js"></script>
+<script src="jquery/bootstrap-multiselect.js"></script>
 
-<script
-	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script src="javascript/Admissionreports.js"></script>
@@ -31,6 +25,7 @@
 <script type="text/javascript" src="core/noty.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/noty.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 
 <title>Admission Report</title>
 <style>
@@ -169,14 +164,6 @@ table.table .avatar {
 	color: #666;
 }
 
-.pagination li.active a, .pagination li.active a.page-link {
-	background: #03A9F4;
-}
-
-.pagination li.active a:hover {
-	background: #0397d6;
-}
-
 .pagination li.disabled i {
 	color: #ccc;
 }
@@ -232,11 +219,6 @@ table.table .avatar {
 	transform: inherit;
 	z-index: 3;
 	transform: rotateZ(45deg);
-}
-
-.custom-checkbox input[type="checkbox"]:checked+label:before {
-	border-color: #03A9F4;
-	background: #03A9F4;
 }
 
 .custom-checkbox input[type="checkbox"]:checked+label:after {
@@ -339,13 +321,9 @@ table.table .avatar {
 
 					</div>
 				</div>
-				<!-- row div close -->
 			</div>
-			<!-- table title div close -->
 
 			<section role="main" class="content-body">
-
-
 				<div id="content" class="content">
 					<div class="panel">
 						<div class="accordion-container" id="accordion">
@@ -368,7 +346,7 @@ table.table .avatar {
 																class="course_title">Admission from date</span> <span
 																class="text-danger" style="color: red">*</span>
 															</label>
-															<div class="input-group" style="width: 100%;">
+															<div class="input-group" style="width: 60%">
 																<input type="date" id="admission_from_date"
 																	name="from_date" class="form-control">
 															</div>
@@ -382,7 +360,7 @@ table.table .avatar {
 																class="course_title">Admission Till date</span> <span
 																class="text-danger" style="color: red">*</span>
 															</label>
-															<div class="input-group" style="width: 100%;">
+															<div class="input-group" style="width: 60%">
 																<input type="date" id="admission_till_date"
 																	name="to_date" class="form-control">
 															</div>
@@ -398,7 +376,7 @@ table.table .avatar {
 																class="titleYear">Academic Year</span> <span
 																class="text-danger" style="color: red">*</span>
 															</label>
-															<div class="input-group select" style="width: 100%;">
+															<div class="input-group select" style="width: 60%">
 																<select name="acad_year" id="acad_year"
 																	class="form-control acad_year">
 
@@ -413,7 +391,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">standard</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group" style="width: 60%">
 																<select id="multi_standard_select" name="standard"
 																	class="form-control standard" multiple="multiple"
 																	Required>
@@ -432,7 +410,7 @@ table.table .avatar {
 															class="course_title">Branch</span> <span
 															class="text-danger" style="color: red">*</span>
 														</label>
-														<div class="input-group" style="width: 100%;">
+														<div class="input-group" style="width: 60%">
 															<select name="branch" id="branch" class="form-control branch"
 																disabled>
 
@@ -445,7 +423,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">Admission taken by</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group" style="width: 60%">
 																<select id="multi_status_select" name="adm_taken_by"
 																	class="form-control enq_taken" multiple="multiple"
 																	Required>
@@ -460,7 +438,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">Course package</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group" style="width: 60%">
 																<select id="multi_course" class="form-control fees" name="package"
 																	multiple="multiple" Required>
 
@@ -474,7 +452,7 @@ table.table .avatar {
 															<label class="control-label"> <span
 																class="titleDiv">Division</span>
 															</label>
-															<div class="input-group" style="width: 100%">
+															<div class="input-group" style="width: 60%">
 																<select id="multi_div" class="form-control division" name="division"
 																	multiple="multiple" Required>
 
@@ -532,9 +510,7 @@ table.table .avatar {
 													<th>Admision date</th>
 													<th>Student name</th>
 													<th>Course package</th>
-													<!-- <th>Counsellor</th> -->
 													<th>Net total</th>
-													<!-- <th>Tax amount</th> -->
 													<th>Grand total</th>
 													<th>Payment</th>
 													<th>Balance</th>
@@ -542,32 +518,13 @@ table.table .avatar {
 											</thead>
 										</table>
 									</div>
-
 								</div>
-								<!-- </div> -->
-								<!--End Advanced Tables -->
 							</div>
 						</div>
-
 					</div>
-
-
 				</div>
-
-
-
-			</section>
-			<!--                next <panel>    </panel>-->
-			<section class="panel" id="promotion" style="display: none">
-
-				<div class="panel-body"></div>
-				<hr>
-
-
 			</section>
 		</div>
-		<!-- col-md-12 div -->
-		<!-- section role-main -->
 	</div>
 	<!-- table wrapper div close -->
 	<!--        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->

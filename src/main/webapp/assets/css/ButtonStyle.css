@@ -20,11 +20,7 @@
 }
 
 /* button css */
-/* #btnDisplay{
-	border-color:#435d7d !important;
-	background:  #435d7d !important;
-	color: white ! important
-} */
+
 
 .btn-success , .headerClass , #saveBtn {
 	color: white ! important;
@@ -33,8 +29,8 @@
 	
 }
 #cancelBtn:hover {
-background-color: #F44336;
-color:#fff !important;
+	background-color: #F44336;
+	color:#fff !important;
 }
 
 .btn-warning{
@@ -57,4 +53,15 @@ color:#fff !important;
 	border-color:  #435d7d !important;
 	background:  #435d7d !important;		
 }  */
-
+#btnDisplay
+{
+ 	border-color:  #435d7d !important;
+	background:  #435d7d !important;	
+	border-radius:0px !important;
+	color: white ! important;
+}
+#btnClear
+{
+ border-color:#c9c7bf;
+ border-radius:0px;
+}
