@@ -10,9 +10,9 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "prop")
 public class PropertiesCache {
 
-	private String parentDBName;
-	private String userName;
-	private String password;
+	public static String parentDBName;
+	public static String userName;
+	public static String password;
 
 	public String getParentDBName() {
 		return parentDBName;
