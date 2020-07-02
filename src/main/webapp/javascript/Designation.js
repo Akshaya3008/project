@@ -18,7 +18,6 @@ $(document).ready(function() {
 		  },	
 		  submitHandler:function(form){
 			  event.preventDefault();  
-			  event.preventDefault();
 			  createDesignation();
 		  }
 	});
@@ -38,9 +37,9 @@ $(document).ready(function() {
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
-			deleteDesignation(idarray);
 			}
 		});
+		deleteDesignation(idarray);
 		
 	});
 	
@@ -58,7 +57,7 @@ function createDesignation()
 	
 	function callback(responseData,textStatus,request){
 		
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 		clearModal();
 	}
@@ -91,16 +90,11 @@ function DesignationList(){
 		for ( var i in responseData) {
 			var chck = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'+responseData[i].id+'"><label for="checkbox1"></label></span>';
 			var designation = responseData[i].desg;
-			var created_date = responseData[i].created_date;
-			
-			
+			var created_date = responseData[i].created_date;	
 			table.row.add(
 					[created_date,designation,chck]).draw();
-		}
-		
+		}	
 	}
-	
-
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
@@ -108,7 +102,6 @@ function DesignationList(){
 	}
 	
 	var httpMethod = "GET";
-	//var formData = ''
 	var relativeUrl = "/Designation/FetchAllDesignation?branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl,null, callback,
 			errorCallback);
@@ -118,7 +111,7 @@ function DesignationList(){
 function deleteDesignation(id) {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 	}
 	function errorCallback(responseData, textStatus, request) {

@@ -28,12 +28,6 @@ $(document).ready(function(){
 			  InsertDivision();
 		  }
 	});
-	
-	$('#divisiontable').DataTable({
-		"pageLength" : 40
-	});
-	
-
 	$("#editBtn").click(function(e){
 		var table = $('#divisiontable').DataTable();
 		$('table .cbCheck').each(function(i, chk) {
@@ -45,13 +39,13 @@ $(document).ready(function(){
 		});
 	});
 	$("#deleteBtn").click(function() {
+		var idarray=new Array();
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
-			var idarray=new Array();
 			idarray.push($(this).val());
 			}
-			deleteDivision(idarray);
 		});
+		deleteDivision(idarray);
 	});
 	$("#cancelBtn").click(function(){
 		clearModal();
@@ -61,7 +55,7 @@ $(document).ready(function(){
 
 function InsertDivision(){
 	function callback(responseData, textStatus, request){
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success",mes);
 		clearModal();
 		
@@ -97,8 +91,7 @@ function FetchAllDiv(){
 			var date = responseData[i].created_date;
 			var division = responseData[i].division;
 			table.row.add([ date, division, div]).draw();
-		}
-		
+		}	
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
@@ -114,8 +107,8 @@ function FetchAllDiv(){
 function deleteDivision(id) {
 	function callback(responseData,textStatus,request)
 	{
-		var mes=responseData.responseJSON.message;
-		showNotification("error",mes);
+		var mes=responseData.message;
+		showNotification("success",mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;

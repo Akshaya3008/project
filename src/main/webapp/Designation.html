@@ -7,14 +7,15 @@
 <title>Designation</title>
 
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="jquery/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="jquery/jquery.validate.min.js"></script>
 
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script type="text/javascript" src="javascript/Designation.js"></script>
@@ -322,9 +323,8 @@ table.table .avatar {
 					<div class="col-sm-6" id="bb">
 						<a href="#designationModal" data-toggle="modal" data-target="#designationModal" class="btn btn-success" id="addBtn"> 
 						<i class="fa fa-plus"></i> <span>Add New</span></a> 
-						<a href="" data-toggle="modal" class="btn btn-warning" id="editBtn">
-						<i class="fa fa-plus"></i> <span>Edit</span></a>
-						<a href="" class="btn btn-danger" id="deleteBtn"  data-toggle="modal"><i class="fa fa-minus"></i> <span>Delete</span></a>
+						<a class="btn btn-warning" id="editBtn"><i class="fa fa-plus"></i> <span>Edit</span></a>
+						<a class="btn btn-danger" id="deleteBtn"  data-toggle="modal"><i class="fa fa-minus"></i> <span>Delete</span></a>
 						<a href="" class="btn btn-info" id="btn-view"> <i class="fa fa-eye"></i> <span>View</span></a>
 					</div>
 				</div>
@@ -371,7 +371,7 @@ table.table .avatar {
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn" value="Cancel"> 
+						<input type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn" value="Cancel" onclick="location.reload()"> 
 						<input type="submit" class="btn btn-success" value="Save" id="saveBtn">
 					</div>
 				</form>

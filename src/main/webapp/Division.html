@@ -7,11 +7,11 @@
 <title>Division</title>
 
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="jquery/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="jquery/jquery.validate.min.js"></script>
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
@@ -311,9 +311,8 @@ table.table .avatar {
 					<div class="col-sm-6">
 						<a href="#divisionModal" data-toggle="modal" data-target="#divisionModal" id="addBtn" class="btn btn-success">
 						<i class="fa fa-plus"></i> <span>Add New</span></a>
-						<a href="" data-toggle="modal"  class="btn btn-warning" id="editBtn">
-						<i class="fa fa-plus"></i> <span>Edit</span></a>
-						<a href="" class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="">
+						<a class="btn btn-warning" id="editBtn"><i class="fa fa-plus"></i> <span>Edit</span></a>
+						<a class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="">
 						<i class="fa fa-minus"></i> <span>Delete</span></a>
 					</div>
 				</div>
@@ -358,7 +357,7 @@ table.table .avatar {
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" id="cancelBtn" data-dismiss="modal" value="Cancel"> 
+						<input type="button" class="btn btn-default" id="cancelBtn" data-dismiss="modal" value="Cancel" onclick="location.reload()"> 
 						<input type="submit" class="btn btn-success" value="Save" id="saveBtn">
 					</div>
 				</form>

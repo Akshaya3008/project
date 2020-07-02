@@ -23,5 +23,18 @@ public class EmployeeController {
 		return dao.FetchEmployeeReport(employee,emp);
 	}
 
-	
+	public Employee getSepecificEmployeeDetails(Long id) {
+		EmployeeDAO dao=new EmployeeDAO();
+		return dao.getSepecificEmployeeDetails(id);
+	}
+
+	public void EditEmployee(Employee emp) {
+		EmployeeDAO dao=new EmployeeDAO();
+		dao.EditEmployee(emp);
+	}
+
+	public void deleteEmployee(String id) {
+		EmployeeDAO dao=new EmployeeDAO();
+		dao.deleteEmployee(id);
+	}
 }
