@@ -88,8 +88,9 @@ public class AdmissionResource {
 			admission.setEnq_no(Integer.parseInt(personal[18]));
 			admission.setBranch(branch);
 			String standard=getStandard(f_pack[0], branch);
-			String[] hyphenSeperatedStd=Util.commaSeperatedString(standard);
-			admission.setStandard(hyphenSeperatedStd[0]);
+			String[] hyphenSeperatedStd=Util.hyphenSeperatedString(standard);
+			int i=hyphenSeperatedStd.length-1;
+			admission.setStandard(hyphenSeperatedStd[i]);
 			admission.setFeesDetails(feestypeDetails);
 
 			String[] symbolSeperated = Util.symbolSeperatedString(newAmt);
@@ -475,7 +476,7 @@ public class AdmissionResource {
 			if(commaSepereatedStandard.length>1){
 			for(int i=0;i<commaSepereatedStandard.length;i++){
 				if(commaSepereatedStandard[i].matches(currentStandard)){
-					admission.setStandard(commaSepereatedStandard[i+1]);
+					admission.setStandard(commaSepereatedStandard[i-1]);
 					}
 				}
 			}else{

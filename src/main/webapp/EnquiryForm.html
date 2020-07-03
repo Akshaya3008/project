@@ -534,7 +534,7 @@ input[type='radio']:after {
 	<div id="feestypeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form id="feestype-form">
+				<form id="feestype-form" method="post">
 					<div class="modal-header headerClass">
 						<h4 class="modal-title">Add Fees Type</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -546,7 +546,7 @@ input[type='radio']:after {
 						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn" value="Cancel"> 
+						<input type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn" value="Cancel" onclick="location.reload()"> 
 						<input type="submit" class="btn btn-success" value="Save" id="saveBtn">
 					</div>
 				</form>

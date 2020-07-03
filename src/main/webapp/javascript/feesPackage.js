@@ -76,7 +76,7 @@ $(document)
 							feesType : {
 								required : true,
 								letterswithspace : true,
-								noSpace : true
+								//noSpace : true
 							},
 						},
 						submitHandler : function(form) {

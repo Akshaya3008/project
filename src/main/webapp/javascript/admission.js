@@ -17,94 +17,309 @@ $(document)
 					getAllDivision();
 					getCaste();
 					fetchAllBranch();
+					getAutoIncreamentedEnquiryNo();
+					getDesignation();
+					loadLeadSource();
 					loadBranchSpecificStandard();
 					$("#enq_taken").val(user);
 					$("#current_date").val(date);
 					$(".branch").val(branchSession);
 					CurrentAcadYear();
-					/*
-					 * jQuery.validator.addMethod("lettersonly", function(value,
-					 * element) { return this.optional(element) ||
-					 * /^[a-z\s]+$/i.test(value); }, "Only alphabetical
-					 * characters"); jQuery.validator.addMethod("noSpace",
-					 * function(value, element) { return value.indexOf(" ") < 0 &&
-					 * value != ""; }, "No space please and don't leave it
-					 * empty"); jQuery.validator.addMethod("futureDate",
-					 * function(value, element) { var now = new Date();
-					 * now.setHours(0, 0, 0, 0); var myDate = new Date(value);
-					 * return this.optional(element) || myDate < now; });
-					 * $('form[id="admission-form"]').validate({ rules : {
-					 * enq_stud : { required : true // lettersonly:true },
-					 * enq_taken : { required : true, noSpace : true },
-					 * stud_details : { required : true, noSpace : true }, fees : {
-					 * required : true }, ID_no : { required : true, noSpace :
-					 * true, // lettersonly:true }, reg_no : { required : true, //
-					 * number:true, noSpace : true }, invoice_no : { required :
-					 * true, // number:true, noSpace : true }, admission_date : {
-					 * futureDate : true, date : true, required : true },
-					 * join_date : { futureDate : true, date : true, required :
-					 * true }, amount : { required : true, number : true,
-					 * noSpace : true }, discount : { // required:true, number :
-					 * true, noSpace : true }, tax : { // required:true, number :
-					 * true, noSpace : true },
-					 *  }, messages : { admission_date : { futureDate : 'future
-					 * date not allowed' }, }, submitHandler : function(form) {
-					 * event.preventDefault();
-					 *  } }); // addstud validation
-					 * $('form[id="EnquiryForm"]').validate({ rules : { sname : {
-					 * required : true, lettersonly : true, noSpace : true },
-					 * lname : { required : true, lettersonly : true, noSpace :
-					 * true
-					 *  }, fname : { required : true, lettersonly : true,
-					 * noSpace : true }, mname : { required : true, lettersonly :
-					 * true, noSpace : true }, uid : { required : true, digits :
-					 * true, minlength : 10, maxlength : 10, }, dob : { required :
-					 * true, date : true, futureDate : true }, stud_cont : {
-					 * required : true, digits : true, minlength : 10, maxlength :
-					 * 10, noSpace : true }, father_cont : { required : true,
-					 * digits : true, minlength : 10, maxlength : 10, noSpace :
-					 * true }, mother_cont : { required : true, digits : true,
-					 * minlength : 10, maxlength : 10, noSpace : true }, addr : {
-					 * required : true }, pin : { required : true, digits :
-					 * true, minlength : 4, maxlength : 12, }, email : {
-					 * required : true, email : true }, w_app_no : { required :
-					 * true, digits : true, minlength : 10, maxlength : 10,
-					 * noSpace : true }, }, messages : { dob : { futureDate :
-					 * 'future date not allowed' }, },
-					 * 
-					 * submitHandler : function(form) { event.preventDefault();
-					 *  } }); // add_employee validation
-					 * $('form[id="addEmployee"]').validate({ rules : { emp_name : {
-					 * required : true, lettersonly : true, noSpace : true },
-					 * emp_unq_code : { required : true, digits : true }, email : {
-					 * required : true, email : true }, address : { required :
-					 * true }, contact : { required : true, digits : true,
-					 * minlength : 10, maxlength : 10, noSpace : true }, dob : {
-					 * required : true, date : true, futureDate : true },
-					 * join_date : { required : true, date : true }, design : {
-					 * required : true }, }, messages : { dob : { futureDate :
-					 * 'future date not allowed' }, }, submitHandler :
-					 * function(form) { event.preventDefault();
-					 *  } }); // feespackage validation
-					 * $('form[id="feespackage-modal-form"]').validate({ rules : {
-					 * fees_pack : { required : true }, searchforstand1 : {
-					 * required : true }, searchforstand2 : { required : true },
-					 * feestype : { required : true }, amount : { required :
-					 * true, number : true, noSpace : true }, discount : {
-					 * required : true, number : true, noSpace : true }, tax : {
-					 * required : true, noSpace : true }, },
-					 * 
-					 * submitHandler : function(form) { event.preventDefault();
-					 *  } }); // feestype validation
-					 * $('form[id="feestypeform"]').validate({ rules : {
-					 * 
-					 * feesTypeModal : { required : true, letterswithspace :
-					 * true },
-					 *  },
-					 * 
-					 * submitHandler : function(form) { event.preventDefault();
-					 *  } });
-					 */
+					
+					  jQuery.validator.addMethod("lettersonly", function(value,element) { 
+						  	return this.optional(element) ||/^[a-z\s]+$/i.test(value); 
+					  }, "Only alphabeticalcharacters"); 
+					  jQuery.validator.addMethod("noSpace",function(value, element){
+						  return value.indexOf(" ") < 0 &&value != ""; 
+						  },"No space please and don't leave it empty"); 
+					  jQuery.validator.addMethod("futureDate",function(value, element) {
+						  var now = new Date();
+						  now.setHours(0, 0, 0, 0); 
+						  var myDate = new Date(value);
+						  return this.optional(element) || myDate < now; 
+					  });
+					  $('form[id="admission-form"]').validate({ 
+						  rules : {
+							  enq_stud : { 
+								  required : true,
+								  number : true,
+								   //lettersonly:true 
+								  },
+							  enq_taken : {
+									  required : true,
+									  noSpace : true 
+							  },
+							  stud_details : { 
+								  required : true,
+								  // noSpace : true 
+							},
+							fees : {
+								required : true 
+							}, 
+							ID_no : { 
+								required : true, 
+								noSpace :true, 
+								// lettersonly:true 
+							}, 
+							reg_no : { 
+								required : true,
+								//number:true,
+								noSpace : true 
+							}, 
+							invoice_no : {
+								required :true, 
+								// number:true,
+								noSpace : true 
+							}, 
+							admission_date : {
+								futureDate : true,
+								date : true,
+								required : true 
+							},
+							join_date : { 
+								futureDate : true,
+								date : true, 
+								required :true 
+							},
+							amount : { 
+								required : true, 
+								number : true,
+								noSpace : true 
+							}, 
+							discount : { 
+								// required:true, 
+								number: true, 
+								noSpace : true 
+							}, 
+							tax : { 
+								// required:true,
+								number:true, 
+								noSpace : true 
+							},
+					   }, 
+					   messages : { 
+						   admission_date : { 
+							   futureDate : 'futuredate not allowed' 
+								   },
+						   },
+						   submitHandler : function(form) {
+							   event.preventDefault();
+								var status=compareInstallAmtAndReceivedAmt();
+								if(status==false){
+									if(request=="Save" || request=="Edit"){
+										StudentAdmission();	
+									}else{
+										promoteStudent();
+									}
+										
+								}
+						   	} 
+					}); 
+					  // addstud validation
+					  $('form[id="EnquiryForm"]').validate({
+						  rules: {
+						    sname: {
+						    	required:true,
+						    	lettersonly:true,
+						    	noSpace: true
+						    },
+						    lname: {
+						      required: true,
+						      lettersonly:true,
+						      noSpace: true
+						      
+						    },
+						    fname: {
+							      required: true,
+							      lettersonly:true,
+							      noSpace: true
+							},
+							mname: {
+							      required: true,
+							      lettersonly:true,
+							      noSpace: true
+							},
+							uid: {
+						        required: true,
+						        digits: true,
+						        minlength: 10,
+						        maxlength: 10,
+							},
+							dob:{
+								required:true,
+								date:true,
+								futureDate:true
+							},
+							stud_cont: {
+						        /*required: true,*/
+						        digits: true,
+						        minlength: 10,
+						        maxlength: 10,
+						      //  noSpace: true
+							},
+							father_cont: {
+						        required: true,
+						        digits: true,
+						        minlength: 10,
+						        maxlength: 10,
+						        noSpace: true
+							},
+							mother_cont: {
+						       // required: true,
+						        digits: true,
+						        minlength: 10,
+						        maxlength: 10,
+						       // noSpace: true
+							},
+							addr: {
+						        required: true
+							},
+							pin: {
+						        required: true,
+						        digits: true,
+						        minlength: 4,
+						        maxlength: 12,
+							},
+							email: {
+						      //  required: true,
+						        email: true
+							},
+							w_app_no: {
+						     //   required: true,
+						        digits: true,
+						        minlength: 10,
+						        maxlength: 10,
+						       // noSpace: true
+							},
+						  },
+						 messages: {
+							dob: {
+								futureDate:'DOB should not be a future date.'
+							},
+						 },
+						  submitHandler:function(form){
+							  event.preventDefault();
+							  AddNewEnquiryStudent();
+						  }
+					});
+					  
+					  // add_employee validation
+					  $('form[id="addEmployee"]').validate({
+						  rules: {
+							  emp_name: {
+						    	required:true,
+						    	lettersonly:true,
+						    	//noSpace: true
+						    },
+						    emp_unq_code: {
+						      required: true,
+						      digits:true
+						    },
+						    email: {
+						        required: true,
+						        email: true
+						    },
+						    address: {
+						        required: true
+							},
+							contact: {
+						        required: true,
+						        digits: true,
+						        minlength: 10,
+						        maxlength: 10,
+						        noSpace: true
+							},
+							dob:{
+								required:true,
+								date:true,
+								futureDate:true
+							},
+							join_date:{
+								required:true,
+								date:true
+							},
+							design:{
+								required:true
+							},
+						  },
+						  messages: {
+								dob: {
+									futureDate:'future date not allowed'
+								},
+							 },
+						  submitHandler:function(form){
+							 // event.preventDefault();
+							  AddEmployee();
+						  }
+					});
+					  // feespackage validation
+					  $('form[id="feespackage-modal-form"]').validate({
+							rules : {
+								fees_pack : {
+									required : true
+
+								},
+								inputDisabledAmt:
+									{
+									 required:true,
+									 number:true
+									},
+								feestype : {
+									required : true
+								},
+								amount : {
+									required : true,
+									number : true,
+									noSpace : true
+								},
+								discount : {
+									//required : true,
+									number : true,
+									noSpace : true
+								},
+								tax : {
+									//noSpace : true,
+									digits:true
+								},
+
+							},
+							submitHandler : function(form) {
+								event.preventDefault();
+								standardData = new Array();
+								branchData = new Array();
+								$('#standard input:checked').each(function() {
+									var std = $(this).closest('tr').find('td:nth-child(2)').text();
+									standardData.push(std);
+									});
+								$('#branchTable input:checked').each(function() {
+									var branch = $(this).closest('tr').find('td:nth-child(2)').text();
+									branchData.push(branch);
+									});
+								addNewFeesPackage(standardData,branchData);
+							}
+						});
+
+						jQuery.validator.addMethod("letterswithspace", function(
+								value, element) {
+							return this.optional(element)
+									|| /^[a-z\s]+$/i.test(value);
+						}, "Please enter letters only");
+
+						$('form[id="feestype-form"]').validate({
+							rules : {
+								feesType : {
+									required : true,
+									letterswithspace : true,
+									//noSpace : true
+								},
+							},
+							submitHandler : function(form) {
+								event.preventDefault();
+								addFeesType();
+							}
+						});
+
+					 
 					/*
 					 * $("#admission_date").change(function(){ alert("admission
 					 * date =
@@ -129,7 +344,6 @@ $(document)
 						request="Admission";
 						deletefeesTypeTableRow();
 						var id=sessionStorage.getItem("EnquiryAdmission");
-						alert(id);
 						SearchStudent(id);
 					}
 					$("#enq_stud").focusout(function() {
@@ -138,34 +352,26 @@ $(document)
 						event.preventDefault();
 						SearchStudent(id);
 					});
-					$("#admission-form").submit(function() {
+/*					$("#admission-form").submit(function() {
 						event.preventDefault();
-						var status=compareInstallAmtAndReceivedAmt();
-						if(status==false){
-							if(request=="Save" || request=="Edit"){
-								StudentAdmission();	
-							}else{
-								promoteStudent();
-							}
-								
-						}
-					});
-					$("#feestypeform").submit(function() {
+
+					});*/
+/*					$("#feestypeform").submit(function() {
 						event.preventDefault();
-						addFeesType();
-					});
-					$("#EnquiryForm").submit(function() {
+						
+					});*/
+/*					$("#EnquiryForm").submit(function() {
 						event.preventDefault();
 						AddNewEnquiryStudent();
-					});
-					$("#addEmployee").submit(function() {
+					});*/
+/*					$("#addEmployee").submit(function() {
 						event.preventDefault();
 						AddEmployee();
-					});
-					$("#feestype").submit(function() {
+					});*/
+/*					$("#feestype").submit(function() {
 						event.preventDefault();
 						addFeesType();
-					});
+					});*/
 					var select = document.getElementById('fees');
 					select.addEventListener('change', function() {
 						var feespack = select.value.split("|");
@@ -225,35 +431,18 @@ $(document)
 									function() {
 										var stdarray = new Array();
 										var stdamt = 0;
-										$('input:checked')
-												.each(
-														function() {
-															var std = $(this)
-																	.closest(
-																			'tr')
-																	.find(
-																			'td:nth-child(2)')
-																	.text();
-															stdamt = stdamt
-																	+ Number($(
-																			this)
-																			.closest(
-																					'tr')
-																			.find(
-																					'td:nth-child(3)')
-																			.text());
-															document
-																	.getElementById("amount").value = stdamt;
-															document
-																	.getElementById("total-amt").value = stdamt;
-															document
-																	.getElementById("grand-t").value = stdamt;
-															document
-																	.getElementById("inputDisabledAmt").value = stdamt;
-															loadBranch(std);
-														});
+										$('input:checked').each(function() {
+											var std = $(this).closest('tr').find('td:nth-child(2)').text();
+											stdamt = stdamt+ Number($(this).closest('tr').find('td:nth-child(3)').text());
+											document.getElementById("amount2").value = stdamt;
+											document.getElementById("total-amt2").value = stdamt;
+											document.getElementById("grand-t2").value = stdamt;
+											document.getElementById("inputDisabledAmt").value = stdamt;
+											loadBranch(std);
 									});
-					$("#feespackage-modal-form").submit(
+
+									});
+/*					$("#feespackage-modal-form").submit(
 							function() {
 								$('#standard input:checked').each(
 										function() {
@@ -272,7 +461,7 @@ $(document)
 											branchData.push(branch);
 										});
 								addNewFeesPackage(standardData, branchData);
-							});
+							});*/
 				});
 
 function compareInstallAmtAndReceivedAmt(){
@@ -301,6 +490,7 @@ function SearchStudent(id) {
 		var status = responseData.status;
 		var stud_details = id + " | " + name + " | " + contact + " | " + status;
 		document.getElementById('stud_details').value = stud_details;
+		$("#fees").val(responseData.fees_pack);
 		enqData = responseData.fname + ":" + responseData.lname + ":"
 				+ responseData.mname + ":" + responseData.uid + ":"
 				+ responseData.dob + ":" + responseData.gender + ":"
@@ -321,6 +511,8 @@ function SearchStudent(id) {
 			  admitted_fees_pack = responseData.fees_pack; 
 			  showNotification("error", "Student AlreadyAdmitteed For This Course.");
 			  document.getElementById("admission").disabled = true; 
+		  }else{
+			  document.getElementById("admission").disabled = false; 
 		  }
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -388,6 +580,7 @@ function StudentAdmission() {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		location.reload();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -409,12 +602,14 @@ function StudentAdmission() {
 				+ "&installment=" + installment + "&newAmt=" + newAmt;
 		relativeUrl = "/Admission/StudentAdmission";
 		}else{
-		/*	var any_install_status=checkAnyInstallmentPaid();
-			if(any_install_status==false){
-*/				formData = $('#admission-form').serialize()+"&branch="+branchSession ;
-				relativeUrl = "/Admission/EditStudentAdmission";
+		/*
+		 * var any_install_status=checkAnyInstallmentPaid();
+		 * if(any_install_status==false){
+		 */				
+			formData = $('#admission-form').serialize()+"&branch="+branchSession ;
+			relativeUrl = "/Admission/EditStudentAdmission";
 		}
-//	}
+// }
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 				errorCallback);
 	}
@@ -438,43 +633,33 @@ function checkInstallmentDate(installment, admission_date) {
 	return status;
 }
 
-/*function checkAnyInstallmentPaid(){
-	var table = document.getElementById("installment_table");
-	var rowCount = $('#installment_table tr').length;
-	var installment = "installment details";
-	var status=false;
-	for (var i = 1; i < rowCount - 1; i++) {
-		var date = $(table.rows.item(i).cells[0]).find('input').val();
-		var fees_title = $(table.rows.item(i).cells[1]).find('select').val();
-		var amt = $(table.rows.item(i).cells[2]).find('input').val();
-		var received = $(table.rows.item(i).cells[3]).find('input').val();
-		if(parseInt(received)!=0){
-			showNotification("error",
-			"Unable to Edit Installment Data.");
-			status=true;
-		}
-	}
-	return status;
-}
-*/function AddNewEnquiryStudent() {
+/*
+ * function checkAnyInstallmentPaid(){ var table =
+ * document.getElementById("installment_table"); var rowCount =
+ * $('#installment_table tr').length; var installment = "installment details";
+ * var status=false; for (var i = 1; i < rowCount - 1; i++) { var date =
+ * $(table.rows.item(i).cells[0]).find('input').val(); var fees_title =
+ * $(table.rows.item(i).cells[1]).find('select').val(); var amt =
+ * $(table.rows.item(i).cells[2]).find('input').val(); var received =
+ * $(table.rows.item(i).cells[3]).find('input').val();
+ * if(parseInt(received)!=0){ showNotification("error", "Unable to Edit
+ * Installment Data."); status=true; } } return status; }
+ */
+function AddNewEnquiryStudent() {
 	function callback(responseData, textStatus, request) {
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success", mes);
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message); alert(message);
-		 */
 	}
 	var formData = $('#EnquiryForm').serialize() + "&branch=" + branchSession;
 	var httpMethod = "POST";
 	var relativeUrl = "/Enquiry/EnquiryData";
 
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
@@ -487,49 +672,38 @@ function AddEmployee() {
 	function callback(responseData, textStatus, request) {
 		document.getElementById("emp_type").disabled = true;
 		document.getElementById("branch").disabled = true;
-		var mes = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success", mes);
-		// var message=responseData.response.JSON.message;
-		// alert(message);
-
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
-		showNotification("error", mes);
-		// var message=responseData.response.JSON.message;
-		// alert(message);
-	}
+		showNotification("error", mes);	}
 	var formData = $("#addEmployee").serialize() + "&emp_type=" + emp_type
 			+ "&branch=" + branch;
-	alert(formData);
 	var httpMethod = "POST";
 	var relativeUrl = "/Employee/NewEmployee";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
 function addFeesType() {
 	function callback(responseData, textStatus, request) {
-		$("#feestypeModal").hide();
-		// var mes=responseData.responseJSON.message;
-		// showNotification("success",mes);
+		//$("#feestypeModal").hide();
+		 var mes=responseData.message;
+		 showNotification("success",mes);
 	}
 	function errorCallback(responseData, textStatus, request) {
-		// var mes=responseData.responseJSON.message;
-		// showNotification("error",mes);
-		// var message=responseData.response.JSON.message;
-		// alert(message);
+		 var mes=responseData.responseJSON.message;
+		 showNotification("error",mes);
 	}
 	var httpMethod = "POST";
-	formData = $('#feestypeform').serialize() + "&branch=" + branchSession;
-	alert(formData);
+	formData = $('#feestype-form').serialize() + "&branch=" + branchSession;
 	relativeUrl = "/feesType/addNewFeesType";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
 function getFeesPackageDetails(pack) {
-	alert(pack);
 	function callback(responseData, textStatus, request) {
 		var packdetails = responseData.fees_details;
 		deletefeesTypeTableRow();
@@ -538,10 +712,8 @@ function getFeesPackageDetails(pack) {
 				+ responseData.total_amt);
 	}
 	function errorCallback(responseData, textStatus, request) {
-		// var mes=responseData.responseJSON.message;
-		// showNotification("error",mes);
-		// var message=responseData.response.JSON.message;
-		// alert(message);
+		 var mes=responseData.responseJSON.message;
+		 showNotification("error",mes);
 	}
 	var httpMethod = "POST";
 	var formData = {
@@ -631,7 +803,8 @@ function loadBranchSpecificStandard() {
 
 	}
 	function errorCallback(responseData, textStatus, request) {
-		console.log("not found");
+		 var mes=responseData.responseJSON.message;
+		 showNotification("error",mes);
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/FeesPackage/getBranchSpecificStandard?branch="
@@ -666,7 +839,8 @@ function loadBranch(std) {
 
 	}
 	function errorCallback(responseData, textStatus, request) {
-		console.log("not found");
+		 var mes=responseData.responseJSON.message;
+		 showNotification("error",mes);
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/FeesPackage/loadBranch?std=" + std;
@@ -688,12 +862,14 @@ function addNewFeesPackage(standardData, branchData) {
 	}
 	document.getElementById("inputDisabledAmt").disabled = false;
 	function callback(responseData, textStatus, request) {
-		console.log("save");
+		 var mes=responseData.message;
+		 showNotification("success",mes);
 		document.getElementById("inputDisabledAmt").disabled = true;
 		deleteRoWFeesPackage2();
 	}
 	function errorCallback(responseData, textStatus, request) {
-		console.log("not save");
+		 var mes=responseData.responseJSON.message;
+		 showNotification("error",mes);
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -701,8 +877,8 @@ function addNewFeesPackage(standardData, branchData) {
 	formData = $("#feespackage-modal-form").serialize() + "&standardData="
 			+ standardData + "&branchData=" + branchData + "&fees_details="
 			+ fees_details + "&createdby=" + user;
-	relativeUrl = "/FeesPackage/addNewFeesPackage";
 	alert(formData);
+	relativeUrl = "/FeesPackage/addNewFeesPackage";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
@@ -787,7 +963,6 @@ function CurrentAcadYear() {
 		$("#acad_year").val(responseData.aca_year);
 	}
 	function errorCallback(responseData, textStatus, request) {
-
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
 	}
@@ -799,7 +974,6 @@ function CurrentAcadYear() {
 }
 function loadPromoteData(){
 	var admissionData = sessionStorage.getItem("admissionPromoteData");
-	console.log(admissionData);
 	admissionData = admissionData.split(":");
 	$("#stud_details").val(
 			admissionData[0] + "|" + admissionData[1] + " " + admissionData[3]
@@ -889,5 +1063,37 @@ function promoteStudent(){
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 				errorCallback);
 	}
+	return false;
+}
+function loadLeadSource(){
+	function callback(responseData, textStatus, request){
+		for ( var i in responseData) {
+			var htmlCode = '<option value="' + responseData[i].source + '" >'
+			+ responseData[i].source + '</option>';
+			$('#lead').append(htmlCode);	
+		}	
+	}
+	function errorCallback(responseData, textStatus, request){
+		var mes=responseData.responseJSON.message;
+		showNotification("error",mes);	
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/LeadSource/LeadSourceList";
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl,null, callback,
+			errorCallback);
+	return false;
+}
+function getAutoIncreamentedEnquiryNo(){
+	function callback(responseData,textStatus,request)
+	{
+		document.getElementById("enq_no").value=responseData;
+	}
+	function errorCallback(responseData, textStatus, request) {
+		var mes=responseData.responseJSON.message;
+		showNotification("error",mes);
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/Enquiry/IncrementedEnqNo?branch="+branchSession;
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,errorCallback);
 	return false;
 }

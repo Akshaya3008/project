@@ -4,19 +4,20 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="jquery/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
 <link rel="stylesheet" href="css/admission-style.css" type="text/css">
 
 <link rel="stylesheet"
 	href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+<script src="jquery/jquery.validate.min.js"></script>
 
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"
 	rel="stylesheet" type="text/css" />
 
- <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
+<script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script type="text/javascript" src="javascript/admission.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <script type="text/javascript" src="core/noty.js"></script>
@@ -25,40 +26,39 @@
 <title>Admission</title>
 <style>
 
- /* required only for this page */
+/* required only for this page */
 .panel-heading {
- background-color:#435d7d ! important;
- border-color:#435d7d ! important;
- color: white ! important;
-} 
-#addrow
-{
- background-color:#435d7d ! important;
- border-color:#435d7d ! important;
- color: white ! important;
+	background-color: #435d7d ! important;
+	border-color: #435d7d ! important;
+	color: white ! important;
 }
- #admission 
- {
- background-color:#435d7d ! important;
- border-color:#435d7d ! important;
- color: white ! important ;
-}
- #cancel
- {
- background-color:#435d7d ! important;
- border-color:#435d7d ! important;
- color: white ! important;
-}
-#admission:hover
-{
-	background-color:#53b700 !important ;
-	border-color:#53b700 !important;
 
+#addrow {
+	background-color: #435d7d ! important;
+	border-color: #435d7d ! important;
+	color: white ! important;
 }
-#cancel:hover
-{
-	background-color:#d43f3a !important ;
-	border-color:#d43f3a !important;	
+
+#admission {
+	background-color: #435d7d ! important;
+	border-color: #435d7d ! important;
+	color: white ! important;
+}
+
+#cancel {
+	background-color: #435d7d ! important;
+	border-color: #435d7d ! important;
+	color: white ! important;
+}
+
+#admission:hover {
+	background-color: #53b700 !important;
+	border-color: #53b700 !important;
+}
+
+#cancel:hover {
+	background-color: #d43f3a !important;
+	border-color: #d43f3a !important;
 }
 </style>
 <script>
@@ -135,7 +135,7 @@
 								</label>
 								<div class="col-sm-7">
 									<input type="text" class="form-control" id="stud_details"
-										name="stud_details">
+										name="stud_details" readonly>
 								</div>
 
 
@@ -145,11 +145,10 @@
 								</label>
 								<div class="col-sm-7">
 									<div class="input-group">
-										<select name="adm_fees_pack" class="form-control fees_package" id="fees"
-											required>
+										<select name="adm_fees_pack" class="form-control fees_package"
+											id="fees" required>
 
-										</select>
-										<span class="input-group-addon" id="bhvk">
+										</select> <span class="input-group-addon" id="bhvk">
 											<button type="button" id="add-btn" data-toggle="modal"
 												data-target="#myFeesPackageModal"
 												style="background-color: transparent; border: none; font-size: 18px; color: blue; position: relative;">
@@ -344,7 +343,7 @@
 									</div>
 								</div>
 							</div>
-							<button class="btn btn-dark" id="addrow">Add new line</button>
+							<a class="btn btn-dark" id="addrow">Add new line</a>
 						</div>
 					</section>
 				</div>
@@ -476,8 +475,8 @@
 							</table>
 							<input type="submit" id="admission" class="btn btn-success"
 								value="Submit">
-							<button id="cancel" class="btn btn-success" onclick="clearSession()"
-							>Cancel</button>
+							<button id="cancel" class="btn btn-success"
+								onclick="clearSession()">Cancel</button>
 						</div>
 					</section>
 				</div>
@@ -541,7 +540,7 @@
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span> <input id="dob"
-								type="text" class="form-control" name="dob"
+								type="date" class="form-control" name="dob"
 								placeholder="Date of Birth" required>
 						</div>
 						<div style="margin-bottom: 25px" class="input-group">
@@ -574,8 +573,9 @@
 							<span class="input-group-addon">Caste</span>
 							<!--  <div class="form-group"> -->
 							<!--  <div class="select-list"> -->
-							<select name="category" id="category"class="form-control" required>
-								
+							<select name="category" id="category" class="form-control"
+								required>
+
 							</select>
 							<!--   </div> -->
 							<!--  </div> -->
@@ -675,7 +675,7 @@
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon">Enquiry ID</span> <input
 								id="enq_no" type="number" class="form-control" name="enq_no"
-								value="" placeholder="">
+								value="" placeholder="" readonly>
 						</div>
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon">Enquiry Taken By</span> <select
@@ -715,9 +715,6 @@
                             <div class="select-list"> -->
 							<select name="lead_source" class="form-control" id="lead"
 								required>
-								<option value="test">VICE TEST</option>
-								<option value="pamplete">PAMLETE</option>
-
 
 							</select>
 							<!--  </div>
@@ -735,8 +732,8 @@
 						<!-- panel body -->
 						<div class="modal-footer">
 							<input type="button" class="btn btn-default" data-dismiss="modal"
-								value="Cancel"> <input type="submit" id="enquiry"
-								class="btn btn-success" value="Add">
+								value="Cancel" onclick="location.reload()"> <input
+								type="submit" id="enquiry" class="btn btn-success" value="Add">
 						</div>
 					</form>
 				</div>
@@ -848,25 +845,16 @@
 						</div>
 						<div class="form-group">
 							<label>Designation <font color="red">*</font></label> <select
-								id="design" name="design" class="form-control" required>
-								<option value="emp-1">Admin Head</option>
-								<option value="emp-2">Admin Head and Finance</option>
-								<option value="emp-3">Administrator</option>
-								<option value="emp-4">Branch Co-ordinate</option>
-								<option value="emp-5">Clerk</option>
-								<option value="emp-6">Counsellor</option>
-								<option value="emp-7">Exam and Content Development</option>
-								<option value="emp-8">Principal</option>
-								<option value="emp-9">Staff</option>
-								<option value="emp-10">Supervisor</option>
-								<option value="emp-11">Teacher</option>
+								id="design" name="design" class="form-control designation"
+								required>
+
 							</select>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"
-							value="Cancel"> <input type="submit"
-							class="btn btn-success" value="Add">
+							value="Cancel" onclick="location.reload()"> <input
+							type="submit" class="btn btn-success" value="Add">
 					</div>
 				</form>
 			</div>
@@ -883,7 +871,7 @@
 	<div id="myFeesPackageModal" class="modal fade">
 		<div class="modal-dialog" id="dialog-size">
 			<div class="modal-content">
-				<form id="feespackage-modal-form">
+				<form id="feespackage-modal-form" method="post">
 					<div class="modal-header"
 						style="background-color: #34ba13; color: white">
 						<h4 class="modal-title">Add Fees package</h4>
@@ -894,7 +882,7 @@
 
 						<div class="form-group">
 							<label>Fees package <font color="red"> * </font>
-							</label> <input type="text" name="fees-pack" class="form-control"
+							</label> <input type="text" name="fees_pack" class="form-control"
 								id="fees-pack" required>
 						</div>
 						<!-- <div class="form-group">
@@ -921,15 +909,6 @@
 						<div class="form-group">
 
 							<!-- Actual search box -->
-							<div class="form-group has-search">
-								<div class="input-group">
-									<span class="input-group-addon"><i
-										class="fa fa-search form-control-feedback"></i></span> <input
-										type="text" class="form-control"
-										placeholder="Search for Standard">
-								</div>
-							</div>
-
 							<table class="table table-bordered" id="standard">
 								<thead>
 									<tr>
@@ -955,15 +934,6 @@
 							<br> BRANCH DETAILS <br> &nbsp;&nbsp;&nbsp;&nbsp;
 						</div>
 						<div class="form-group has-search">
-							<!--   <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>-->
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="fa fa-search form-control-feedback"></i></span> <input
-									type="text" class="form-control"
-									placeholder="Search for Standard">
-							</div>
-							<br>
-
 							<table class="table table-bordered" id="branchTable">
 								<thead>
 									<tr>
@@ -1006,7 +976,7 @@
 
 													</select> <span class="input-group-addon" id="bhvk">
 														<button type="button" id="add-btn" data-toggle="modal"
-															data-target="#addFeesTypeModal"
+															data-target="#feestypeModal"
 															style="background-color: transparent; border: none; font-size: 18px; color: blue; position: relative;">
 															+</button>
 													</span>
@@ -1016,7 +986,7 @@
 
 										<td>
 											<!--  Amount Field       --> <input type="number"
-											class="form-control amt" id="amount" value="" name="amount"
+											class="form-control amt" id="amount2" value="" name="amount"
 											placeholder="0.00">
 										</td>
 
@@ -1039,7 +1009,7 @@
 
 										<td>
 											<!--      Total field      --> <input type="text"
-											class="form-control totala" name="price" id="total-amt"
+											class="form-control totala" name="price" id="total-amt2"
 											value="" disabled>
 										</td>
 										<td>
@@ -1076,14 +1046,38 @@
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"
-							value="Cancel" id="cancel"> <input type="submit"
-							class="btn btn-success" value="Add">
+							value="Cancel" id="cancel" onclick="location.reload()"> <input
+							type="submit" class="btn btn-success" value="Add">
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-
+	<div id="feestypeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="feestype-form" method="post">
+					<div class="modal-header headerClass">
+						<h4 class="modal-title">Add Fees Type</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Fees Type/Inventory Item<font color="red">*</font></label>
+							<input type="text" class="form-control" id="feesType"
+								name="feesType" required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							id="cancelBtn" value="Cancel" onclick="location.reload()"> <input type="submit"
+							class="btn btn-success" value="Save" id="saveBtn">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<!-- <script type="text/javascript" src="javascript/jquery-1.8.3.min.js"
 		charset="UTF-8"></script>  -->
 	<!--  <script type="text/javascript" src="javascript/bootstrap.min.js"></script> -->
@@ -1144,7 +1138,7 @@
 		}
 		var html = '<tr><td><div class="form-group"><div class="input-group"><select name="feestype" class="form-control" id="feestype">'
 				+ htmlCode
-				+ '</select><span class="input-group-addon" id="bhvk"><button type="button" id="add-btn" data-toggle="modal" data-target="#addFeesTypeModal" style="background-color:transparent; border:none; font-size:18px; color:blue; position:relative;"> +</button></span></div></div></td><td><input type="number" class="form-control amt" id="amount" placeholder="0.00" ></td><td><input type="number" class="form-control discount" value="0"></td><td><div class="form-group"><select name="distype" class="form-control"><option value="INR">INR</option></select></div></td> <td><input type="text" class="form-control" placeholder="NONE" ></td><td> <input type="text" class="form-control totala" id="total-amt" disabled></td><td><div class="w3-padding w3-xlarge w3-teal"><button type="button" id="remove-row" class="remove-row"><i class="glyphicon glyphicon-trash"></i></button></div></td></tr>"';
+				+ '</select><span class="input-group-addon" id="bhvk"><button type="button" id="add-btn" data-toggle="modal" data-target="#feestypeModal" style="background-color:transparent; border:none; font-size:18px; color:blue; position:relative;"> +</button></span></div></div></td><td><input type="number" class="form-control amt" id="amount" placeholder="0.00" ></td><td><input type="number" class="form-control discount" value="0"></td><td><div class="form-group"><select name="distype" class="form-control"><option value="INR">INR</option></select></div></td> <td><input type="text" class="form-control" placeholder="NONE" ></td><td> <input type="text" class="form-control totala" id="total-amt" disabled></td><td><div class="w3-padding w3-xlarge w3-teal"><button type="button" id="remove-row" class="remove-row"><i class="glyphicon glyphicon-trash"></i></button></div></td></tr>"';
 		$("#feestypetable,#feestypetable2").on('change', '.amt,.discount',
 				function() {
 					alert("10");
@@ -1214,7 +1208,7 @@
 	<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  -->
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
-<!-- 	<script
+	<!-- 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="vendor/select2/select2.min.css"></script>
  -->

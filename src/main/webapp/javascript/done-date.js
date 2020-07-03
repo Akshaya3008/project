@@ -31,7 +31,6 @@ $(document)
 							fees=document.getElementById("fees").value;
 							fees=fees.split("|");
 							fees=fees[1];
-							console.log(fees);
 							}
 						//var output3=fees.split("|");
 
@@ -80,11 +79,9 @@ $(document)
 								
 				
 							var formatted_dt = dt.getFullYear()+'-' + ("0"+(dt.getMonth()+1)).slice(-2) + '-'+ ("0"+dt.getDate()).slice(-2);
-							//alert("formatted"+formatted_dt);
 							document.getElementsByClassName("display-date")[j - 1]
 									.setAttribute("value", formatted_dt);
-							alert(res+"check");
-							document.getElementsByClassName("f-row")[j].setAttribute("value", res);
+							document.getElementsByClassName("f-row")[j].setAttribute("value", res.toFixed(0));
 
 						}
 

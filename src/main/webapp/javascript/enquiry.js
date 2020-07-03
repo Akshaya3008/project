@@ -7,6 +7,7 @@ $(document).ready(function() {
 	getAutoIncreamentedEnquiryNo();
 	loadLeadSource();
 	FetchAllEmployee();
+	getFeesPackage();
 	getDesignation();
 	$("#branch").val(branchSession);
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
@@ -123,7 +124,7 @@ $(document).ready(function() {
 			  emp_name: {
 		    	required:true,
 		    	lettersonly:true,
-		    	noSpace: true
+		    	//noSpace: true
 		    },
 		    emp_unq_code: {
 		      required: true,
