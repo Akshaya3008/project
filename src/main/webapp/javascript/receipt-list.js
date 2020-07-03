@@ -1,8 +1,8 @@
 //receipt-list.js
-
+var table ;
 $(document).ready(function() {
-	showReceiptTable();
-	var table = $('#receipt_table').DataTable({
+	validateLogin();
+	table=$('#receipt_table').DataTable({
 		"pageLength" : 40,
 		dom: 'Bfrtip',
 	    buttons: [
@@ -24,13 +24,13 @@ $(document).ready(function() {
 		"padding": "6px 12px",
 		"margin-left": "10px"
 	});
-
+	showReceiptTable();
 
 	
 	var myArray = new Array();
 	$('#receipt_table tbody tr').on('click', '.cbCheck', function() {
 		
-		var table = $('#receipt_table').DataTable();
+		
 		if (this.checked == true) {
 			val = table.row(this.closest('tr')).data();
 			var rno = val[5];
@@ -41,10 +41,7 @@ $(document).ready(function() {
 });
 
 function showReceiptTable() {
-	var table;
 	function callback(responseData, textStatus, request) {
-		table = $("#receipt_table").DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var srno = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'
@@ -69,16 +66,15 @@ function showReceiptTable() {
 	}
 
 	function errorCallback(responseData, textStatus, request) {
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 */
-		alert("failed to load");
+		
+		  var message=responseData.responseJSON.message;
+		  showNotification("error",message);
+		 
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Receipt/FetchAllReceiptDetails?branch="+branchSession;
 
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
 }
@@ -99,52 +95,15 @@ function getVeiwReceiptData(rno, receiptno) {
 		}
 	}
 
-	function errorCallback(responseData, textStatus, request) {
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 */
-		alert("failed to load");
+	function errorCallback(responseData, textStatus, request) {	
+	      var message=responseData.responseJSON.message;
+		  showNotification("error",message);
+		 
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Receipt/getReceiptAdmissionData?id=" + rno
 			+ "&receiptno=" + receiptno;
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
 }
-/*function ReceiptData(myArray) {
-	function callback(responseData, textStatus, request) {
-		for ( var i in responseData) {
-			var stud_name = responseData[i].stud_name;
-			var receipt_no = responseData[i].receipt_no;
-			var received_by = responseData[i].received_by;
-			var total_amt = responseData[i].total_amt;
-			var received_amt = responseData[i].received_amt;
-			var pay_mode = responseData[i].pay_mode;
-			var admission = responseData[i].admission;
-			var invoice_no = admission.invoice_no;
-			var course = admission.adm_fees_pack;
-			var total_paid_fees = admission.paid_fees;
-			var remain_amt = admission.remain_fees;
-		}
-	}
-
-	function errorCallback(responseData, textStatus, request) {
-		
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 
-		alert("failed to load");
-	}
-	var httpMethod = "GET";
-	var formData=myArray;
-	console.log(formData);
-//	var relativeUrl = "/Receipt/getReceiptAdmissionData?id=" + rno
-//			+ "&receiptno=" + receiptno;
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
-			errorCallback);
-	return false;
-}
-
-*/

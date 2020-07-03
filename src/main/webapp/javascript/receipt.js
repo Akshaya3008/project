@@ -62,11 +62,12 @@ $(document).ready(function(){
 			
 		}
 	});
-	$("#cancel").focusout(function() {
-		window.location.href = "receipt-list.html";
+	$("#cancel").click(function() {
+		window.location.href = "ReceiptList.html";
 		removeInstallmentTableRow();
 		document.getElementById("InstallmentTable").style.display = "none";
 		clearModal();
+		location.reload();
 	});
 /*	$("#receipt").click(function() {
 		event.preventDefault();
