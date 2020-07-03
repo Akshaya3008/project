@@ -107,7 +107,7 @@ function Admission(id, req) {
 			window.location.href = "EnquiryForm.html";
 		}else{
 			sessionStorage.setItem("EnquiryAdmission", id);
-			window.location.href = "admission.html";
+			window.location.href = "Admission.html";
 		}
 		/* else {
 			var feespack = responseData.fees_pack;
