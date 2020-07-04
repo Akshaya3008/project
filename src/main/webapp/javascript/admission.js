@@ -41,7 +41,7 @@ $(document)
 					  $('form[id="admission-form"]').validate({ 
 						  rules : {
 							  enq_stud : { 
-								  required : true,
+								  //required : true,
 								  number : true,
 								   //lettersonly:true 
 								  },
@@ -955,7 +955,7 @@ function clearSession() {
 		sessionStorage.removeItem("EnquiryAdmission");
 	}
 	request="Save";
-	window.location.href = "admission-list.html";
+	window.location.href = "AdmissionList.html";
 }
 
 function CurrentAcadYear() {
@@ -975,12 +975,13 @@ function CurrentAcadYear() {
 function loadPromoteData(){
 	var admissionData = sessionStorage.getItem("admissionPromoteData");
 	admissionData = admissionData.split(":");
+	alert(admissionData[22])
 	$("#stud_details").val(
 			admissionData[0] + "|" + admissionData[1] + " " + admissionData[3]
 					+ " " + admissionData[2] + "|" + admissionData[11] + "|"
 					+ "Admitted");
 	$("#enq_taken").val(admissionData[18]);
-	$(".fees_package").val(admissionData[19] + "|" + admissionData[32]);
+	$("#fees").val(admissionData[19] + "|" + admissionData[28]);
 	$("#status").val(admissionData[20]);
 	$("#division").val(admissionData[23]);
 
@@ -1037,7 +1038,7 @@ function promoteStudent(){
 		var amt = $(table.rows.item(i).cells[2]).find('input').val();
 		var received = $(table.rows.item(i).cells[3]).find('input').val();
 		if(parseInt(received)<parseInt(amt)){
-			installment = installment + "," + date + "|" + fees_title + "|" + amt;
+			installment = installment + "," + date + "|" + fees_title + "|" + amt + "|" +received;
 		}
 	}
 	function callback(responseData, textStatus, request) {

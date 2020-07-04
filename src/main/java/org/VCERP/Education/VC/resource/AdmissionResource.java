@@ -158,6 +158,35 @@ public class AdmissionResource {
 			e.printStackTrace();
 		}
 	}
+	private void savePromoteInstallment(String[] commaSeperated, String branch,Admission admission) {
+		ArrayList<String> installDate = new ArrayList<>();
+		ArrayList<String> fees_title = new ArrayList<>();
+		ArrayList<Integer> amt = new ArrayList<>();
+		for (int i = 1; i < commaSeperated.length; i++) {
+			String a = commaSeperated[i];
+			String[] symbolSeperated = Util.symbolSeperatedString(a);
+			installDate.add(symbolSeperated[0]);
+			fees_title.add(symbolSeperated[1]);
+			int newamt=Integer.parseInt(symbolSeperated[2])-Integer.parseInt(symbolSeperated[3]);
+			amt.add(newamt);
+		}
+		AdmissionController controller = null;
+		Installment installment = null;
+		String stud_name=admission.getStudent_name()+" "+admission.getFname()+" "+admission.getMname();
+		try {
+			installment = new Installment();
+			installment.setRollno(admission.getRollno());
+			installment.setStud_name(stud_name);
+			installment.setTotal_fees(admission.getFees());
+			installment.setMonthly_pay(amt);
+			installment.setDue_date(installDate);
+			installment.setFees_title(fees_title);
+			controller = new AdmissionController();
+			controller.saveInstallment(installment, branch);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Path("/SearchStudent")
 	@GET
@@ -472,19 +501,19 @@ public class AdmissionResource {
 			
 			String standard=getStandard(pipeSeperatedFeesPack[0], colanSeperatedPersonalDetails[33]);
 			String currentStandard=colanSeperatedPersonalDetails[22];
-			String[] commaSepereatedStandard=Util.commaSeperatedString(standard);
-			if(commaSepereatedStandard.length>1){
-			for(int i=0;i<commaSepereatedStandard.length;i++){
-				if(commaSepereatedStandard[i].matches(currentStandard)){
-					admission.setStandard(commaSepereatedStandard[i-1]);
+			String[] hyphenSepereatedStandard=Util.hyphenSeperatedString(standard);
+			if(hyphenSepereatedStandard.length>1){
+			for(int i=0;i<hyphenSepereatedStandard.length;i++){
+				if(hyphenSepereatedStandard[i].matches(currentStandard)){
+					admission.setStandard(hyphenSepereatedStandard[i-1]);
 					}
 				}
 			}else{
-				admission.setStandard(commaSepereatedStandard[0]);
+				admission.setStandard(hyphenSepereatedStandard[0]);
 			}
 			String[] commaSeperatedInstallment = Util.commaSeperatedString(installment);
 			if (commaSeperatedInstallment.length > 1) {
-				saveInstallment(commaSeperatedInstallment, colanSeperatedPersonalDetails[33],admission);
+				savePromoteInstallment(commaSeperatedInstallment, colanSeperatedPersonalDetails[33],admission);
 			}
 			
 			controller = new AdmissionController();

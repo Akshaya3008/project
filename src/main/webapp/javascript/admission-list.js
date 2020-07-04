@@ -1,12 +1,13 @@
 var mes;
+var table;
 $(document).ready(function() {
-	showAdmissionTable();
-	$('#admission_table').DataTable({
+	validateLogin();
+/*	table=$('#admission_table').DataTable({
 		"pageLength" : 40,
 		"stateSave" : true,
 		dom : 'Bfrtip',
-	});
-	var table = $('#admission_table').DataTable({
+	});*/
+	table = $('#admission_table').DataTable({
 		buttons : [ {
 			extend : 'pdf',
 			className : 'btn btn-info glyphicon glyphicon-file pdf-b'
@@ -28,10 +29,8 @@ $(document).ready(function() {
 	});
 
 	table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
-
+	showAdmissionTable();
 	$('#admission_table tbody tr').on('click', '.cbCheck', function() {
-
-		var table = $('#admission_table').DataTable();
 		if (this.checked == true) {
 			val = table.row(this.closest('tr')).data();
 			var rno = val[4];
@@ -53,7 +52,7 @@ $(document).ready(function() {
 				getAdmissionPromoteData(id)
 			}
 		});
-		window.location.href = "admission.html";
+		window.location.href = "Admission.html";
 	});
 	$('#btn-view').click(function(e) {
 		$('table .cbCheck').each(function(i, chk) {
@@ -68,8 +67,6 @@ $(document).ready(function() {
 
 function showAdmissionTable() {
 	function callback(responseData, textStatus, request) {
-		var table = $("#admission_table").DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var srno = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'
@@ -105,12 +102,9 @@ function showAdmissionTable() {
 	}
 
 	function errorCallback(responseData, textStatus, request) {
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 */
-		var mes = responseData.responseJSON.message;
-		showNotification("error", mes);
+		
+		 var message=responseData.responseJSON.message;
+		 showNotification("error",message);
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/FetchAllAdmittedStudent?branch="
@@ -147,7 +141,7 @@ function getStudReceiptList(rno) {
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Receipt/getStudReceiptList?id=" + rno;
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
 }
@@ -202,7 +196,7 @@ function getAdmissionPromoteData(id) {
 		fees_title+":"+paid_fees;
 
 		sessionStorage.setItem("admissionPromoteData", admissionPromoteData);
-		window.location.href = "admission.html";
+		window.location.href = "Admission.html";
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -211,7 +205,7 @@ function getAdmissionPromoteData(id) {
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/getAdmissionDetailsOfSpecificStudent?id="
 			+ id + "&branch=" + branchSession;
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
 }
@@ -275,7 +269,7 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 		admissionData.push(responseData.standard);
 		admissionData.push(responseData.enq_no);
 		sessionStorage.setItem("admission", admissionData);
-		window.location.href = "admission.html";
+		window.location.href = "Admission.html";
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -284,7 +278,7 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/getAdmissionDetailsOfSpecificStudent?id="
 			+ id + "&branch=" + branchSession;
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
 }
@@ -392,7 +386,7 @@ function getInvoiceOfSpecificStudent(id, e) {
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/getAdmissionDetailsOfSpecificStudent?id="
 			+ id + "&branch=" + branchSession;
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
 }
@@ -429,7 +423,7 @@ function getStandardSubject(standard) {
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/standard/getAllStandard?branch=" + branchSession;
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return subject;
 }
