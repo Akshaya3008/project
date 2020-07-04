@@ -4,27 +4,19 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- <script src="jquery/jquery-3.3.1.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link href="style.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/promote.css" type="text/css">
 
-<link
-	href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
  -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <!-- <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -37,22 +29,19 @@
 
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
 <link rel="stylesheet" href="css/promote.css" type="text/css">
-<link href="assets/js/dataTables/dataTables.bootstrap.css"
-	rel="stylesheet" />
+<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
 <script src="jquery/bootstrap-multiselect.js"></script>
 
-<script
-	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script src="javascript/InstallmentDueReport.js"></script>
 <script src="javascript/accordian_view.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
-
 
 <title>Installment Due Fees Report</title>
 <style>
@@ -305,7 +294,7 @@ table.table .avatar {
 }
 .input-group
 {
- width:60% ! important;
+ width:50% ! important;
 }
 </style>
 <script type="text/javascript">
@@ -342,7 +331,6 @@ table.table .avatar {
 <body>
 	<div class="inner-wrapper">
 		<div id="navbar"></div>
-
 		<div class="table-wrapper" id="table-style">
 			<div class="table-title">
 				<div class="row">
@@ -351,259 +339,127 @@ table.table .avatar {
 							<b>Installment Due Report</b>
 						</h2>
 					</div>
-					<div class="col-sm-6">
-						<a href="" class="btn btn-success promote-b" id="promote_student"><i
-							class="material-icons">&#xE147;</i> <span>Promote</span> </a>
-
-					</div>
 				</div>
-				<!-- row div close -->
 			</div>
-			<!-- table title div close -->
-
 			<section role="main" class="content-body">
-
-
 				<div id="content" class="content">
 					<div class="panel">
 						<div class="accordion-container" id="accordion">
 							<section class="content-entry">
-								<label class="title-promote"><i id="acc_sign"> <!--
-                                   <i class="fa fa-plus"></i>
-                                   <i class="fa fa-minus"></i>--> Filter
-										Report
-								</i> </label>
+								<label class="title-promote"><i id="acc_sign">Filter Report</i></label>
 								<div class="accordion-content">
 									<div class="panel">
 										<div class="panel-body">
 											<form id="AdmReportForm" method="post">
 												<div class="form-group">
-
 													<div class="col-md-3">
 														<div class="form-group">
-
-															<label class="control-label"> <span
-																class="course_title">Installment from date</span> <span
-																class="text-danger" style="color: red">*</span>
+															<label class="control-label"> 
+																<span class="course_title">Installment from date</span> 
+																<span class="text-danger" style="color: red">*</span>
 															</label>
-															<div class="input-group" style="width: 100%;">
-																<input type="date" id="admission_from_date"
-																	name="from_date" class="form-control">
+															<div class="input-group">
+																<input type="date" id="admission_from_date" name="from_date" class="form-control">
 															</div>
-
 														</div>
 													</div>
 													<div class="col-md-3">
 														<div class="form-group">
-
-															<label class="control-label"> <span
-																class="course_title">Installment Till date</span> <span
-																class="text-danger" style="color: red">*</span>
+															<label class="control-label"> 
+																<span class="course_title">Installment Till date</span> 
+																<span class="text-danger" style="color: red">*</span>
 															</label>
-															<div class="input-group" style="width: 100%;">
-																<input type="date" id="admission_till_date"
-																	name="to_date" class="form-control">
+															<div class="input-group">
+																<input type="date" id="admission_till_date" name="to_date" class="form-control">
 															</div>
-
 														</div>
 													</div>
-
-
-
 													<div class="col-md-3">
 														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleYear">Academic Year</span> <span
-																class="text-danger" style="color: red">*</span>
+															<label class="control-label"> 
+																<span class="titleYear">Academic Year</span> 
+																<span class="text-danger" style="color: red">*</span>
 															</label>
-															<div class="input-group select" style="width: 100%;">
-																<select name="acad_year" id="acad_year"
-																	class="form-control acad_year">
-
-																</select>
-															</div>
-
-														</div>
-													</div>
-
-<!-- 													<div class="col-md-3">
-														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleYear">Standard</span> <span
-																class="text-danger" style="color: red">*</span>
-															</label>
-															<div class="input-group select" style="width: 100%;">
-																<select name="standard" id="standard"
-																	class="form-control standard">
-
-																</select>
-															</div>
-
-														</div>
-													</div> -->
-
-													<div class="col-md-3">
-														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleDiv">standard</span>
-															</label>
-															<div class="input-group" style="width: 100%">
-																<select id="multi_standard" name="standard" class="form-control standard"
-																	multiple="multiple" Required>
-
+															<div class="input-group select">
+																<select name="acad_year" id="acad_year" class="form-control acad_year">
 																</select>
 															</div>
 														</div>
 													</div>
 													<div class="col-md-3">
-														<label class="control-label"> <span
-															class="course_title">Branch</span> <span
-															class="text-danger" style="color: red">*</span>
+														<div class="form-group">
+															<label class="control-label"> 
+																<span class="titleDiv">Standard</span>
+															</label>
+															<div class="input-group">
+																<select id="multi_standard" name="standard" class="form-control standard" multiple="multiple" Required>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-3">
+														<label class="control-label"> 
+															<span class="course_title">Branch</span> 
+															<span class="text-danger" style="color: red">*</span>
 														</label>
-														<div class="input-group" style="width: 100%;">
-															<select name="branch" id="branch" class="form-control branch"
-																disabled>
-
+														<div class="input-group">
+															<select name="branch" id="branch" class="form-control branch" disabled>
 															</select>
 														</div>
 													</div>
-
-<!-- 													<div class="col-md-3">
-														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleDiv">Admission taken by</span>
-															</label>
-															<div class="input-group" style="width: 100%">
-																<select id="multi_status_select" name="status[]"
-																	class="form-control enq_taken" multiple="multiple"
-																	Required>
-
-																</select>
-															</div>
-														</div>
-													</div> -->
-
 													<div class="col-md-3">
 														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleDiv">Course package</span>
+															<label class="control-label"> 
+																<span class="titleDiv">Course package</span>
 															</label>
-															<div class="input-group" style="width: 100%">
-																<select id="multi_course" name="package" class="form-control fees"
-																	multiple="multiple" Required>
-
+															<div class="input-group">
+																<select id="multi_course" name="package" class="form-control fees" multiple="multiple" Required>
 																</select>
 															</div>
 														</div>
 													</div>
-
 													<div class="col-md-3">
 														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleDiv">Division</span>
+															<label class="control-label"> 
+																<span class="titleDiv">Division</span>
 															</label>
-															<div class="input-group" style="width: 100%">
-																<select id="multi_div" name="division"class="form-control division"
-																	multiple="multiple" Required>
-
+															<div class="input-group">
+																<select id="multi_div" name="division"class="form-control division" multiple="multiple" Required>
 																</select>
 															</div>
 														</div>
 													</div>
-
-
-<!-- 													<div class="col-md-3">
-
-														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleDiv">Admission Status</span>
-															</label>
-															<div class="input-group" style="width: 100%">
-																<select id="multi_status" name="status[]"
-																	class="form-control" multiple="multiple" Required>
-																	<option value="active">Active</option>
-																</select>
-															</div>
-														</div>
-
-													</div> -->
-													
 													<div class="col-md-3">
 														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleDiv">Student Name</span>
+															<label class="control-label"> 
+																<span class="titleDiv">Student Name</span>
 															</label>
-															<div class="input-group" style="width: 100%">
-																<input type="text" class="form-control" id="stud_name"
-																	name="stud_name" required>
+															<div class="input-group">
+																<input type="text" class="form-control" id="stud_name" name="stud_name" required>
 															</div>
 														</div>
 													</div>
-
-
-
-													<!-- <div class="col-md-3">
-
-														<div class="form-group">
-															<label class="control-label"> <span
-																class="titleDiv">Partial Received Amount</span>
-															</label>
-															<div class="col-md-1">
-																<input type="text" class="form-control"
-																	id="start_partial_amt" name="start_partial_amt"
-																	required>
-															</div>
-															<div class="col-md-1">
-																<span class="input-group-addon" id="bhvk"><label
-																	class="control-label"> <span class="titleDiv">to</span></label>
-																</span>
-															</div>
-															<div class="col-md-1">
-																<input type="text" class="form-control"
-																	id="end_partial_amt" name="end_partial_amt" required>
-															</div>
-														</div>
-													</div>
- -->
-
 													<div class="row">
-
 														<div class="col-md-12">
-
 															<div class="pull-right">
-																<input type="button" id="btnDisplay"
-																	data-style="zoom-in"
-																	class="btn btn-warning margin-right-sm" value="Display">
-																<button type="reset" id="btnClear" data-style="zoom-in"
-																	class="btn btn-light margin-right-sm">Clear</button>
-
+																<input type="button" id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" value="Display">
+																<button type="reset" id="btnClear" data-style="zoom-in" class="btn btn-light margin-right-sm">Clear</button>
 															</div>
 														</div>
 													</div>
 												</div>
 											</form>
 										</div>
-
 									</div>
 								</div>
 							</section>
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
 				<div class="col-md-12">
-
-
 					<div class="row">
 						<div class="col-md-12">
-							<!-- Advanced Tables -->
 							<div class="panel panel-default">
-								<!-- <div class="panel-heading">Advanced Tables</div> -->
 								<div class="panel-body">
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered table-hover"
@@ -621,45 +477,17 @@ table.table .avatar {
 													<th>Installment amount</th>
 													<th>Received amount</th>
 													<th>Overall due amount</th>
-
 												</tr>
 											</thead>
 										</table>
 									</div>
-
 								</div>
-								<!-- </div> -->
-								<!--End Advanced Tables -->
 							</div>
 						</div>
-
 					</div>
-
-
 				</div>
-
-
-
 			</section>
-			<!--                next <panel>    </panel>-->
-			<!-- <section class="panel" id="promotion" style="display: none">
-
-				<div class="panel-body"></div>
-				<hr>
-
-
-			</section> -->
 		</div>
-		<!-- col-md-12 div -->
-		<!-- section role-main -->
 	</div>
-	<!-- table wrapper div close -->
-	<!--        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
-<!-- 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	       <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-	       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-	<script type="text/javascript" src="javascript/bootstrap.min.js"></script> -->
 </body>
 </html>
