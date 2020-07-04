@@ -399,7 +399,7 @@ public class ReceiptDetailsDAO {
 		return installment_amt;
 	}
 
-	public ArrayList<ReceiptDetails> getStudReceiptList(long rno){
+	public ArrayList<ReceiptDetails> getStudReceiptList(String rno,String branch){
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -407,9 +407,10 @@ public class ReceiptDetailsDAO {
 		ArrayList<ReceiptDetails> receiptList = new ArrayList<>();
 		try{
 			con = Util.getDBConnection();
-			String query = "select receipt_date,receipt_no,stud_name,pay_mode,total_fees from receipt_details where RollNO=?";
+			String query = "select receipt_date,receipt_no,stud_name,pay_mode,total_fees,payment from receipt_details where RollNO=? and branch=?";
 			ps = con.prepareStatement(query);
-			ps.setLong(1, rno);
+			ps.setString(1, rno);
+			ps.setString(2, branch);
 			rs = ps.executeQuery();
 			while(rs.next()){
 				details = new ReceiptDetails();
@@ -418,6 +419,7 @@ public class ReceiptDetailsDAO {
 				details.setStud_name(rs.getString(3));
 				details.setPay_mode(rs.getString(4));
 				details.setTotal_amt(rs.getLong(5));
+				details.setAmount(rs.getLong(6));
 				receiptList.add(details);
 			}
 		}

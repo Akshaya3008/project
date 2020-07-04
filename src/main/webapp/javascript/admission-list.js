@@ -30,14 +30,12 @@ $(document).ready(function() {
 
 	table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
 	showAdmissionTable();
-	$('#admission_table tbody tr').on('click', '.cbCheck', function() {
+/*	$('#admission_table tbody tr').on('click', '.cbCheck', function() {
 		if (this.checked == true) {
-			val = table.row(this.closest('tr')).data();
-			var rno = val[4];
-			getStudReceiptList(rno);
+
 		}
 	});
-	$('#editBtn').click(function() {
+*/	$('#editBtn').click(function() {
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked) {
 				var id = $(this).val();
@@ -58,7 +56,10 @@ $(document).ready(function() {
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked) {
 				var id = $(this).val();
+				val = table.row(this.closest('tr')).data();
+				var rno = val[4];
 				getInvoiceOfSpecificStudent(id, e);
+				getStudReceiptList(rno);
 				// viewAdmissionDetails(id);
 			}
 		});
@@ -86,19 +87,12 @@ function showAdmissionTable() {
 			var fees = responseData[i].fees;
 			var paid_fees = responseData[i].paid_fees;
 			var remain_fees = responseData[i].remain_fees;
-			// var delbutton = '<a href="#editEmployeeModal" class="edit"
-			// data-toggle="modal"><i class="material-icons"
-			// data-toggle="tooltip" title="Edit">&#xE254;</i></a><button
-			// id="delete" class="delete" onclick="deleterow()" ><i
-			// class="material-icons" data-toggle="tooltip"
-			// title="Delete">&#xE872;</i></button>';
 			table.row.add(
 					[ srno, date, student_name, invoice_no, Rollno, regno,
 							contact, adm_fees_pack, acad_year, status,
 							enq_taken_by, fees, paid_fees, remain_fees ])
 					.draw();
 		}
-		// console.log(table.row(0).data());
 	}
 
 	function errorCallback(responseData, textStatus, request) {
@@ -118,7 +112,6 @@ function showAdmissionTable() {
 function getStudReceiptList(rno) {
 	function callback(responseData, textStatus, request) {
 		var table = $("#StudReceiptList_table").DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var rec_date = responseData[i].receipt_date;
@@ -126,13 +119,14 @@ function getStudReceiptList(rno) {
 			var student_name = responseData[i].stud_name;
 			var pay_mode = responseData[i].pay_mode;
 			var total = responseData[i].total_amt;
-			var viewbtn = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'
+			var amount = responseData[i].amount;
+			/*var viewbtn = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'
 					+ responseData[i].id
-					+ '"><label for="checkbox1"></label></span>';
+					+ '"><label for="checkbox1"></label></span>';*/
 			table.row
 					.add(
-							[ rec_date, rec_no, student_name, pay_mode, total,
-									viewbtn ]).draw();
+							[ rec_date, rec_no, student_name, pay_mode, total,amount
+									/*viewbtn*/ ]).draw();
 		}
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -140,7 +134,7 @@ function getStudReceiptList(rno) {
 		showNotification("error", mes);
 	}
 	var httpMethod = "GET";
-	var relativeUrl = "/Receipt/getStudReceiptList?id=" + rno;
+	var relativeUrl = "/Receipt/getStudReceiptList?rno=" + rno +"&branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
@@ -148,7 +142,7 @@ function getStudReceiptList(rno) {
 function getAdmissionPromoteData(id) {
 	var admissionPromoteData;
 	function callback(responseData, textStatus, request) {
-
+		var originalFeesDetails=responseData.feesDetails;
 		var feesData = responseData.feesDetails.split(",");
 		
 		var feesDetails = "feesDetails";
@@ -193,7 +187,7 @@ function getAdmissionPromoteData(id) {
 		responseData.division+":"+responseData.admission_date+":"+responseData.acad_year+":"+responseData.join_date+":"+
 		feesDetails+":"+responseData.fees+":"+responseData.enq_no+":"+responseData.disccount+":"+
 		responseData.paid_fees+":"+responseData.remain_fees+":"+responseData.Branch+":"+monthlypay+":"+due_date+":"+
-		fees_title+":"+paid_fees;
+		fees_title+":"+paid_fees+":"+originalFeesDetails;
 
 		sessionStorage.setItem("admissionPromoteData", admissionPromoteData);
 		window.location.href = "Admission.html";
@@ -284,6 +278,28 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 }
 function getInvoiceOfSpecificStudent(id, e) {
 
+	var table = document.getElementById("invoice_table");
+	var rowCount = table.rows.length;
+	var i = 1;
+	while (rowCount > i) {
+		document.getElementById("invoice_table").deleteRow(rowCount-1);
+		rowCount = rowCount - 1;
+	}
+	var table = document.getElementById("install-table");
+	var rowCount = table.rows.length;
+	var i = 3;
+	while (rowCount > i) {
+		document.getElementById("install-table").deleteRow(rowCount-2);
+		rowCount = rowCount - 1;
+	}
+	var table = document.getElementById("std-table");
+	var rowCount = table.rows.length;
+	var i = 2;
+	while (rowCount > i) {
+		document.getElementById("std-table").deleteRow(rowCount-1);
+		rowCount = rowCount - 1;
+	}
+
 	function callback(responseData, textStatus, request) {
 		e.preventDefault();
 		var no = 0;
@@ -310,6 +326,7 @@ function getInvoiceOfSpecificStudent(id, e) {
 				+ '</td></tr><tr><td colspan="2"></td><td colspan="2">Balance Due</td><td>'
 				+ responseData.remain_fees + '</td></tr>';
 		$("#invoice_table tfoot").append(tableFooterRow);
+		
 		var branchDetails = getInvoiceBranchDetails();
 		document.getElementById("company_name").innerHTML = branchDetails[0];
 		document.getElementById("company_address").innerHTML = branchDetails[1];
@@ -362,7 +379,8 @@ function getInvoiceOfSpecificStudent(id, e) {
 		document.getElementById("paid_total").innerHTML = paid_total;
 		document.getElementById("bal_total").innerHTML = remain_total;
 
-		var standard = responseData.standard;
+		/*var standard = responseData.standard;*/
+		var standard=getStandard(responseData.adm_fees_pack);
 		var srno = 1;
 		var std = standard.split("-");
 		for (var k = 0; k < std.length; k++) {
@@ -426,4 +444,23 @@ function getStandardSubject(standard) {
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return subject;
+}
+function getStandard(fees_pack) {
+	var standard;
+	function callback(responseData, textStatus, request) {
+		standard=responseData.standard;
+	}
+	function errorCallback(responseData, textStatus, request) {
+		var mes = responseData.responseJSON.message;
+		showNotification("error", mes);
+	}
+	var httpMethod = "POST";
+	var formData={
+			pack : fees_pack,
+			branch : branchSession
+	}
+	var relativeUrl = "/FeesPackage/getFeesPackageData";
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+			errorCallback);
+	return standard;
 }

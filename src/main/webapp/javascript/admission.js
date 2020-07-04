@@ -585,9 +585,7 @@ function StudentAdmission() {
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
-		if(request="Edit"){
-			clearSession();
-		}
+		clearSession();
 	}
 
 	var status = checkInstallmentDate(installment, document
@@ -975,7 +973,7 @@ function CurrentAcadYear() {
 function loadPromoteData(){
 	var admissionData = sessionStorage.getItem("admissionPromoteData");
 	admissionData = admissionData.split(":");
-	alert(admissionData[22])
+
 	$("#stud_details").val(
 			admissionData[0] + "|" + admissionData[1] + " " + admissionData[3]
 					+ " " + admissionData[2] + "|" + admissionData[11] + "|"
@@ -1004,15 +1002,12 @@ function loadPromoteData(){
 		}
 	}
 	document.getElementById('grand-t').value = admissionData[28];
-	/*
-	 * if (admissionData[18] == null) {
-	 * document.getElementById('amt_installment').value = document
-	 * .getElementById('grand-t').value; } else {
-	 */
+	 
 	var html_Code = '<tr><td><div class="form-group"><div class="input-group date form_date" id="demo" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"><input class="form-control display-date" size="16" id="display" type="text" value="" readonly><span class="input-group-addon"><span class="fa fa-remove"></span></span><span class="input-group-addon"><span class="fa fa-calendar"></span></span></div><input type="hidden" id="dtp_input2" class="final" value="" /><br/></div></td><td><div class="form-group"><div class="input-group"><select name="feestype" class="form-control" id="feestype">'+htmlCode+'</select><span class="input-group-addon" id="bhvk"></span></div></div></td><td><input type="number" class="form-control f-row" id="amt_installment_'
 	+ i
 	+ '" name="amt_installment" ></td><td><input type="text" class="form-control r_installment" id="r_installment" name="r_installment" value="0" disabled></td></tr>';
 	var monthly = admissionData[34].split("-");
+	alert(admissionData[35]);
 	var due = admissionData[35].split("|");
 	var title = admissionData[36].split("-");
 	var remain = admissionData[37].split("-");
@@ -1044,9 +1039,7 @@ function promoteStudent(){
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
-		if(request=="Promote"){
-			clearSession();
-		}
+		clearSession();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -1054,6 +1047,7 @@ function promoteStudent(){
 
 	}
 	var personalDetails=sessionStorage.getItem("admissionPromoteData");
+
 	var status = checkInstallmentDate(installment, document
 			.getElementById("admission_date").value);
 	if (status == false) {

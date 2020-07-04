@@ -176,10 +176,10 @@ public class ReceiptDetailsResource {
 	@GET
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response StudReceiptList(@QueryParam("rno") long rno){
+	public Response StudReceiptList(@QueryParam("rno") String rno,@QueryParam("branch") String Branch){
 		 ArrayList<ReceiptDetails> rlist = new ArrayList<>();
 		 ReceiptDetailsController controller=new ReceiptDetailsController();
-		 rlist=controller.getStudReceiptList(rno);
+		 rlist=controller.getStudReceiptList(rno,Branch);
 		 if(rlist!=null)
 			{
 				return Response.status(Status.ACCEPTED).entity(rlist).build();

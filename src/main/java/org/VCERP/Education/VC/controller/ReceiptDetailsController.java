@@ -47,9 +47,9 @@ public class ReceiptDetailsController {
 		return dao.getReceiptAdmissionData(rollno,receiptno);
 	}
 	
-	public ArrayList<ReceiptDetails> getStudReceiptList(long rno){
+	public ArrayList<ReceiptDetails> getStudReceiptList(String rno,String branch){
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
-		return dao.getStudReceiptList(rno);
+		return dao.getStudReceiptList(rno,branch);
 	}
 
 	public void updateInstallment(String rollno, String due_date, String branch, long received_amt, long due_amt) {
