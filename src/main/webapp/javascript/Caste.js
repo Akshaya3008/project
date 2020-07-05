@@ -3,21 +3,22 @@ var requestid=0;
 $(document).ready(function() {
 	validateLogin();
 	getAllCaste();
-	jQuery.validator.addMethod("lettersonly", function(value, element) {
-		  return this.optional(element) || /^[a-z]+$/i.test(value);
-		}, "Please enter letters only");
+
+	jQuery.validator.addMethod("letterswithspace", function(value, element) {
+	    return this.optional(element) || /^[a-z\s]+$/i.test(value);
+	}, "Please enter letters only");
 	
 	$('form[id="caste-form"]').validate({
 		  rules: {
 			  caste: {
 		        required: true,
-		        lettersonly: true
+		        letterswithspace: true
 		   },	
 		  },
 		 messages: {
 			 subjectname: {
 				required:'Please enter your caste',		
-				lettersonly:'Enter only letters'
+				letterswithspace:'Enter only letters'
 			},
 		  },
 		  submitHandler:function(form){

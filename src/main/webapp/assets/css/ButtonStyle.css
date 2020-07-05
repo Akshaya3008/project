@@ -17,6 +17,7 @@
 .custom-checkbox input[type="checkbox"]:checked+label:before {
 	border-color:  #435d7d !important;
 	background:  #435d7d !important;
+	color: #fff !important;
 }
 
 /* button css */
@@ -47,7 +48,8 @@
 }
 .btn-secondary{
 	background-color:#218c74 !important ;
-	border-color:#218c74 !important;		
+	border-color:#218c74 !important;	
+	color:#fff !important;	
 }
 /*   .btn-dark #btnDisplay{
 	border-color:  #435d7d !important;

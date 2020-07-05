@@ -17,7 +17,7 @@
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
 <script src="jquery/jquery.validate.min.js"></script>
-<script src="assets/js/bootstrap-multiselect.js"></script>
+<script src="jquery/bootstrap-multiselect.js"></script>
 
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script src="javascript/Promote.js"></script>
@@ -221,8 +221,9 @@ table.table .avatar {
 	z-index: 3;
 	transform: rotateZ(45deg);
 }
-custom-checkbox input[type="checkbox"]:checked+label:after {
+.custom-checkbox input[type="checkbox"]:checked+label:after {
 	border-color: #fff;
+	color: #fff !important;
 }
 
 .custom-checkbox input[type="checkbox"]:disabled+label:before {
@@ -283,22 +284,12 @@ custom-checkbox input[type="checkbox"]:checked+label:after {
 		// Activate tooltip
 		$('[data-toggle="tooltip"]').tooltip();
 
-		// Select/Deselect checkboxes
-		var checkbox = $('table tbody input[type="checkbox"]');
 		$("#selectAll").click(function() {
 			if (this.checked) {
-				checkbox.each(function() {
-					this.checked = true;
-				});
+				$("input.cbCheck").prop('checked', true);
 			} else {
-				checkbox.each(function() {
-					this.checked = false;
-				});
-			}
-		});
-		checkbox.click(function() {
-			if (!this.checked) {
-				$("#selectAll").prop("checked", false);
+				$("input.cbCheck").prop('checked', false);
+
 			}
 		});
 	});
@@ -460,7 +451,8 @@ custom-checkbox input[type="checkbox"]:checked+label:after {
 									<span class="text-danger" style="color:red"></span>
 									</label>
 									<div class="input-group" style="width: 100%;">
-										<input type="submit" class="btn btn-secondary promote-b" id="promote_student" value="Promote">
+										
+										<input type="submit"  class="btn btn-secondary promote-b" id="promote_student" value="Promote" style="color:#fff !important">
 									</div>
 								</div>
 							</div>
