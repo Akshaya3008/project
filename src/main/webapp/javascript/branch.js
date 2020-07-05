@@ -75,9 +75,9 @@ $(document).ready(function(){
 
 function addNewBranch(){
 	function callback(responseData, textStatus, request){
-		var msg = responseData.responseJSON.message;
+		var mes = responseData.message;
 		showNotification("success",mes);
-		clearBranch();
+		clearModal();
 
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -86,7 +86,6 @@ function addNewBranch(){
 		
 	}
 	var formData = $("#branchForm").serialize()+"&createdBy="+user;
-	console.log(formData);
 	var httpMethod = "POST";
 	if(request!="Edit"){
 	var relativeUrl = "/branch/addNewBranch";
