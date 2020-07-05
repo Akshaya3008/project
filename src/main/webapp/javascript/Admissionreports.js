@@ -91,32 +91,32 @@ $(document).ready(function() {
 });
 function viewAdmissionReport(){
 	document.getElementById("branch").disabled=false;
-	var fees_package=new Array();
-	var standard=new Array();
-	var div=new Array();
-	var adm_taken=new Array();
-	alert($("#multi_standard_select").val());
+	var branch=document.getElementById("branch").value;
+	var fees_packageArray=new Array();
+	var standardArray=new Array();
+	var divArray=new Array();
+	var adm_takenArray=new Array();
 	for (var option of document.getElementById('multi_course').options) {
 		if (option.selected) {
-			fees_package.push(option.value);
+			fees_packageArray.push(option.value);
 		}
 	}
 	for (var option of document.getElementById('multi_standard_select').options) {
 		if (option.selected) {
-			standard.push(option.value);
+			standardArray.push(option.value);
 		}
 	}
 	for (var option of document.getElementById('multi_div').options) {
 		if (option.selected) {
-			div.push(option.value);
+			divArray.push(option.value);
 		}
 	}
 	for (var option of document.getElementById('multi_status_select').options) {
 		if (option.selected) {
-			adm_taken.push(option.value);
+			adm_takenArray.push(option.value);
 		}
 	}
-	if(div==""){
+	if(divArray==""){
 		div="null";
 	}
 	function callback(responseData, textStatus, request){
@@ -142,8 +142,9 @@ function viewAdmissionReport(){
 		
 	}
 		var httpMethod = "POST";
-		var formData = $("#AdmReportForm").serialize()+"&package="+fees_package+"&standard="+standard+"&division="+div
-		+"&adm_taken_by="+adm_taken;
+		var formData = $("#AdmReportForm").serialize()+"&package_array="+fees_packageArray+"&standard_array="+standardArray+
+		"&division_array="+divArray+"&adm_taken_by_array="+adm_takenArray+"&branch="+branch;
+		alert(formData);
 		var relativeUrl = "/Admission/AdmissionReport";	
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);

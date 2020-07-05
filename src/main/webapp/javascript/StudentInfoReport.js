@@ -5,12 +5,6 @@ $(document).ready(function() {
 	fetchAllBranch();
 	$("#branch").val(branchSession);
 	
-	/*$('#multi_lead_source').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
-	*/
-	
 	$('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
@@ -23,33 +17,39 @@ $(document).ready(function() {
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});	
-/*	$('#multi_caste').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});*/
-	/*$('#multi_lead_stage').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
-	*/
+	 var table= $('#stud_info_report').DataTable( {
+	    	dom: 'Bfrtip',
+		    buttons: [
+		    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'print', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    	{extend: 'excel', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'csv', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    ],
+		    "order": [],
+		    "columnDefs": [ {
+		    "targets"  : 'no-sort',
+		    "orderable": false,
+		    }],
+		   
+	    } );
+	 table.buttons().container() 
+    .appendTo( '#table-style .col-sm-6:eq(1)' );
+	
 	$('form[id="StudentInfoForm"]').validate({
 		
 		 rules: {
 		    
-			  admission_from_date: {
+			 from_date: {
 		        required: true,
-		       date:true,
-		       minDate:true
+		        date:true,
+		        minDate:true
 		   },
-		   admission_till_date:{
+		   till_date:{
 			 required:true,
 			 date:true,
 			 greaterThan:"#admission_till_date"
   
-		   },
-		   
-		   
-		   
+		   },	   
 		  },
 		 messages: {
 			 admission_from_date: {
@@ -87,9 +87,9 @@ function StudentInfoReport(e){
 		}
 	}
 	document.getElementById("branch").disabled=false;
+	var branch=document.getElementById("branch").value;
 	function callback(responseData, textStatus, request){
 		var table = $("#stud_info_report").DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			e.preventDefault();
@@ -117,7 +117,7 @@ function StudentInfoReport(e){
 	
 	var httpMethod = "POST";
 	var formData=$("#StudentInfoForm").serialize()+"&enq_taken_by="+enq_taken+"&enq_status="+enq_status+
-	"&course_package="+course;
+	"&course_package="+course+"&branch="+branch;
 	alert(formData)
 	var relativeUrl = "/Enquiry/EnquiryReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl,formData, callback,
