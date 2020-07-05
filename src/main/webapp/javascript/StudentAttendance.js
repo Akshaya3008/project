@@ -150,7 +150,7 @@ $(document).ready(function() {
 			$("#selectAll").prop("checked", false);
 		}
 	});
-	$("#vR").click(function(e) {
+	$("#btn-view").click(function(e) {
 		var table = $("#attendance_stat_table").DataTable();
 		$("table .cbCheck").each(function(i,chk){
 			if (chk.checked==true) {
