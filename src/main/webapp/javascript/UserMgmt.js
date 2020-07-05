@@ -10,9 +10,11 @@ $(document).ready(function() {
 	FetchAllEmployee();
 	getDesignation();
 	EmployeeList();
-	jQuery.validator.addMethod("lettersonly", function(value, element) {
-		return this.optional(element) || /^[a-z]+$/i.test(value);
+
+	jQuery.validator.addMethod("letterswithspace", function(value, element) {
+	    return this.optional(element) || /^[a-z\s]+$/i.test(value);
 	}, "Please enter letters only");
+	
 	 jQuery.validator.addMethod("noSpace", function(value, element) { 
 		  return value.indexOf(" ") < 0 && value != ""; 
 		}, "No space please and don't leave it empty");
@@ -82,7 +84,7 @@ $(document).ready(function() {
 
 			emp_name : {
 				required : true,
-				//lettersonly : true
+				letterswithspace : true
 			},
 			emp_unq_code : {
 				required : true,
@@ -146,7 +148,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$("#deletBtn").click(function() {
+	$("#deleteBtn").click(function() {
 		//event.preventDefault();
 		$("table .cbCheck").each(function(i, chk) {
 			if (chk.checked) {
