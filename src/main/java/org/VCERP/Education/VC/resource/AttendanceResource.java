@@ -64,12 +64,12 @@ public class AttendanceResource {
 		try {
 			AttendanceController controller=new AttendanceController();
 			controller.studentAttendance(standard,division,acad_year,branch,rollno,attend);
-			return Response.status(Status.ACCEPTED).build();
+			return Util.generateErrorResponse(Status.ACCEPTED, "Student Attendance Successfully Save.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return Response.status(Status.NOT_FOUND).build();
+		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to save attendance.").build();
 	}
 	
 	@Path("/getAttendaceStat")
@@ -89,36 +89,39 @@ public class AttendanceResource {
 		attendancelist=controller.getAttendanceList(at);
 		Attendance attendance=null;
 		ArrayList<Attendance>attendancelistnew=new ArrayList<>();
-		for(int i=0;i<attendancelist.size();i++)
-		{	
-			
-			at=attendancelist.get(i);
-			String id=at.getRollNo();
-			String name=at.getName();
-			String[] hyphenSeperated=Util.hyphenSeperatedString(id);
-			String rollno=hyphenSeperated[1];
-			attendance=new Attendance();
-			attendance.setRollNo(rollno);
-			attendance.setName(name);
-			attendance.setFrom_date(from_date);
-			attendance.setTo_date(to_date);
-			attendance.setStandard(standard);
-			attendance.setDivision(division);
-			attendance.setAcad_year(acad_year);
-			attendance.setBranch(branch);
-			attendance=controller.getAttendanceStat(attendance);
-			
-			int totalDays=attendance.getTotalDays();
-			int presentCount=attendance.getTotalPresent();
-			String percentageCount= (int) Math.round(presentCount* 100.0/totalDays) + "%";
-			
-			attendance.setPercentageCount(percentageCount);
-			attendance.setRollNo(id);
-			attendancelistnew.add(attendance);
-		}
-		if(attendancelistnew!=null)
-		{
-			return Response.status(Status.ACCEPTED).entity(attendancelistnew).build();
+		try {
+			for(int i=0;i<attendancelist.size();i++)
+			{	
+				at=attendancelist.get(i);
+				String id=at.getRollNo();
+				String name=at.getName();
+				String[] hyphenSeperated=Util.hyphenSeperatedString(id);
+				String rollno=hyphenSeperated[1];
+				attendance=new Attendance();
+				attendance.setRollNo(rollno);
+				attendance.setName(name);
+				attendance.setFrom_date(from_date);
+				attendance.setTo_date(to_date);
+				attendance.setStandard(standard);
+				attendance.setDivision(division);
+				attendance.setAcad_year(acad_year);
+				attendance.setBranch(branch);
+				attendance=controller.getAttendanceStat(attendance);
+				
+				int totalDays=attendance.getTotalDays();
+				int presentCount=attendance.getTotalPresent();
+				String percentageCount= (int) Math.round(presentCount* 100.0/totalDays) + "%";
+				
+				attendance.setPercentageCount(percentageCount);
+				attendance.setRollNo(id);
+				attendancelistnew.add(attendance);
+			}
+				if(attendancelistnew!=null)
+				{
+				return Response.status(Status.ACCEPTED).entity(attendancelistnew).build();
+				}
+			} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data Not Found").build();
 	}
@@ -153,6 +156,6 @@ public class AttendanceResource {
 			e.printStackTrace();
 		}
 		
-		return Response.status(Status.NOT_FOUND).build();
+		return Util.generateErrorResponse(Status.NOT_FOUND, "Data Not Found").build();
 	}
 }

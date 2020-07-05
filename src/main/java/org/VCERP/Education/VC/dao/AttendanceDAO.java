@@ -17,7 +17,7 @@ public class AttendanceDAO {
 		ArrayList<Attendance> attendance=new ArrayList<>();
 		try {
 			con=Util.getDBConnection();
-			String query="select id,Rollno,student_name from admission where standard=? and division=? and acad_year=? and branch=?";
+			String query="select id,Rollno,student_name,fname,lname from admission where standard=? and division=? and acad_year=? and branch=?";
 			ps=con.prepareStatement(query);
 			ps.setString(1, at.getStandard());
 			ps.setString(2, at.getDivision());
@@ -29,7 +29,7 @@ public class AttendanceDAO {
 				at=new Attendance();
 				at.setId(rs.getLong(1));
 				at.setRollNo(rs.getString(2));
-				at.setName(rs.getString(3));
+				at.setName(rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5));
 				at.setCurrentDate(Util.currentDate());
 				attendance.add(at);
 			}

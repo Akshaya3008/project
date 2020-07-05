@@ -4,6 +4,10 @@ var std;
 var acad_year;
 var division;
 $(document).ready(function() {
+	validateLogin();
+	getAllStandard();
+	getAcademicYear();
+	getAllDivision();
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		return this.optional(element) || /^[a-z\s]+$/i.test(value);
 		}, "Only alphabetical characters");
@@ -62,13 +66,13 @@ $(document).ready(function() {
 			start_date:{
 				required: true,
 				date:true,
-				futureDate:true,
+				//futureDate:true,
 				lessThan:"#end_date"
 			},
 			end_date:{
 				required: true,
 				date:true,
-				futureDate:true,
+				//futureDate:true,
 				greaterThan:"#start_date"
 			},
 		  },
@@ -84,13 +88,40 @@ $(document).ready(function() {
 
 		  submitHandler:function(form){
 			  event.preventDefault();
-			 
+				std=document.getElementById("standard_stat").value;
+				acad_year=document.getElementById("acad_year_stat").value;
+				division=document.getElementById("division_stat").value;
+				from_date=document.getElementById("start_date").value;
+				to_date=document.getElementById("end_date").value;
+				attendanceStat(std,acad_year,division,from_date,to_date);
+		  }
+	});
+	$('form[id="attendance"]').validate({
+		  rules: {
+			  standard: {
+		        required: true,
+		        noSpace:true
+		        
+			},
+			acad_year: {
+		        required: true,
+		        noSpace:true
+		        
+			},
+			division:{
+				required: true,
+				noSpace: true
+			},
+		  },
+		  submitHandler:function(form){
+			  event.preventDefault();
+			  std=document.getElementById("standard").value;
+			  acad_year=document.getElementById("acad_year").value;
+			  division=document.getElementById("division").value;
+			  attendanceList(std,acad_year,division);
 		  }
 	});
 	
-	getAllStandard();
-	getAcademicYear();
-	getAllDivision();
 	$('#attendance_table').DataTable({
 		"pageLength" : 40
 	});
@@ -119,14 +150,7 @@ $(document).ready(function() {
 			$("#selectAll").prop("checked", false);
 		}
 	});
-	$("#attendance").submit(function(e) {
-		e.preventDefault();
-		std=document.getElementById("standard").value;
-		acad_year=document.getElementById("acad_year").value;
-		division=document.getElementById("division").value;
-		attendanceList(std,acad_year,division,e);
-	});
-	$("#btn-view").click(function(e) {
+	$("#vR").click(function(e) {
 		var table = $("#attendance_stat_table").DataTable();
 		$("table .cbCheck").each(function(i,chk){
 			if (chk.checked==true) {
@@ -136,25 +160,14 @@ $(document).ready(function() {
 			}
 		});	
 	});
-	$("#attendance_stat_form").submit(function(e) {
-		e.preventDefault();
-		std=document.getElementById("standard_stat").value;
-		acad_year=document.getElementById("acad_year_stat").value;
-		division=document.getElementById("division_stat").value;
-		from_date=document.getElementById("start_date").value;
-		to_date=document.getElementById("end_date").value;
-		attendanceStat(std,acad_year,division,from_date,to_date,e);
-	});
-
 });
-function attendanceStat(std,acad_year,division,from_date,to_date,e) {
+function attendanceStat(std,acad_year,division,from_date,to_date) {
 	var srno=0;
 	function callback(responseData, textStatus, request) {
 		var table = $("#attendance_stat_table").DataTable(); 
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
-			e.preventDefault();
+			//e.preventDefault();
 			srno+=1;
 			var percentage = responseData[i].percentageCount;
 			var Rollno = responseData[i].RollNo;
@@ -165,10 +178,6 @@ function attendanceStat(std,acad_year,division,from_date,to_date,e) {
 	}
 
 	function errorCallback(responseData, textStatus, request) {
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 */
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
 	}
@@ -190,10 +199,8 @@ function attendanceStat(std,acad_year,division,from_date,to_date,e) {
 function attendanceList(std,acad_year,division,e) {
 	function callback(responseData, textStatus, request) {
 		var table = $("#attendance_table").DataTable(); 
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
-			e.preventDefault();
 			var attendance = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="P"><label for="checkbox1"></label></span>';
 			var date = responseData[i].currentDate;
 			var Rollno = responseData[i].RollNo;
@@ -204,12 +211,9 @@ function attendanceList(std,acad_year,division,e) {
 	}
 
 	function errorCallback(responseData, textStatus, request) {
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 */
-		var mes = responseData.responseJSON.message;
-		showNotification("error", mes);
+		
+		  var message=responseData.responseJSON.message;
+		  showNotification("error",message);
 	}
 	var httpMethod = "POST";
 	var formData = {standard : std , acad_year : acad_year, division : division , branch : branchSession};
@@ -228,6 +232,7 @@ function getAttendance() {
 				selected : true
 			}).column(1).data()[i];
 			// var rollno=i+1;
+			alert(i+" "+chk.value)
 			attendance = attendance + "," + rollno + "|" + chk.value;
 		}
 		if (!chk.checked) {
@@ -240,23 +245,19 @@ function getAttendance() {
 		}
 	});
 	// myArray=myArray.sort();
-
+	alert(attendance);
 	saveAttendance(std, acad_year,division, attendance);
 }
 function saveAttendance(standard, acad_year,division, attendance) {
 	function callback(responseData, textStatus, request) {
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 */
-
+		  var message=responseData.message;
+		  showNotification("success",message);
 	}
 
 	function errorCallback(responseData, textStatus, request) {
-		/*
-		 * var message=responseData.responseJSON.message;
-		 * showNotification("error",message);
-		 */
+		 var message=responseData.responseJSON.message;
+		 showNotification("error",message);
+		 
 	}
 	var httpMethod = "POST";
 	console.log(attendance);
