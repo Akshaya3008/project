@@ -4,9 +4,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="jquery/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -17,8 +16,7 @@
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
-
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="jquery/jquery.validate.min.js"></script>
 <script src="assets/js/bootstrap-multiselect.js"></script>
 
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
@@ -324,8 +322,8 @@ custom-checkbox input[type="checkbox"]:checked+label:after {
 						</h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="" class="btn btn-secondary promote-b" id="promote_student">
-						<i class="fa fa-arrow-circle-o-up"></i> <span>Promote</span></a>
+<!-- 						<a href="" class="btn btn-secondary promote-b" id="promote_student">
+						<i class="fa fa-arrow-circle-o-up"></i> <span>Promote</span></a> -->
 					</div>
 				</div>
 			</div>
@@ -453,6 +451,16 @@ custom-checkbox input[type="checkbox"]:checked+label:after {
 									</label>
 									<div class="input-group" style="width: 100%;">
 										<input type="date" id="admission_date" name="admission_date" class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-3">
+									<label class="control-label"> <span class="course_title"></span> 
+									<span class="text-danger" style="color:red"></span>
+									</label>
+									<div class="input-group" style="width: 100%;">
+										<input type="submit" class="btn btn-secondary promote-b" id="promote_student" value="Promote">
 									</div>
 								</div>
 							</div>

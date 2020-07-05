@@ -77,7 +77,10 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
-			  getPromoteData();
+				$("input:checkbox[name=type]:checked").each(function() {
+					ids.push($(this).val())
+				});
+				promoteStudent(ids);
 		  }
 	});
 	
@@ -89,12 +92,9 @@ $(document).ready(function() {
 	});
 /*	$("#btnDisplay").click(function(){
 	});*/
-	$("#promote_student").click(function(){
-		$("input:checkbox[name=type]:checked").each(function() {
-			ids.push($(this).val())
-		});
-		promoteStudent(ids);
-	});	
+/*	$("#promote_student").click(function(){
+
+	});	*/
 });
 $(function() {
 	var Accordion = function(el, multiple) {
