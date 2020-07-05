@@ -4,6 +4,22 @@ var table;
 $(document).ready(function() {
 	validateLogin();
 	table=$("#EmpAttendance_table").DataTable();
+	var report_table=$("#EmpAttendance_report_table").DataTable({
+    	dom: 'Bfrtip',
+	    buttons: [
+	    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+	    	{extend: 'print', className: 'btn btn-warning glyphicon glyphicon-print'},
+	    	{extend: 'excel', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+	    	{extend: 'csv', className: 'btn btn-warning glyphicon glyphicon-print'},
+	    ],
+	    "order": [],
+	    "columnDefs": [ {
+	    "targets"  : 'no-sort',
+	    "orderable": false,
+	    }],
+	});
+	report_table.buttons().container()
+     .appendTo( '#table-style .col-sm-6:eq(1)' );
 	attendanceList();
 	jQuery.validator.addMethod("greaterThan", 
 			function(value, element, params) {
