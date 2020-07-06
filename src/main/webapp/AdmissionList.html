@@ -352,6 +352,7 @@ table.table {
 					<div class="col-sm-6">
 						<a href="Admission.html" class="btn btn-success" id="addBtn"><i class="fa fa-plus"></i> <span>Add New</span></a> 
 						<a href="" class="btn btn-warning" id="editBtn" data-toggle="modal"><i class="fa fa-plus"></i> <span>Edit</span></a>
+						<a href="" class="btn btn-default" id="cancelBtn" data-toggle="modal"><i class="fa fa-plus"></i> <span>Cancel</span></a>
 						<a href="#deleteEmployeeModal" class="btn btn-danger" id="deleteBtn" data-toggle="modal"><i class="fa fa-minus"></i>
 							<span>Delete</span></a> 
 						<a href="" class="btn btn-info" id="btn-view"><i class="fa fa-eye"></i> <span>View </span></a>
@@ -362,7 +363,7 @@ table.table {
 					</div>
 				</div>
 			</div>
-			<div class="row panel-1">
+			<div class="row panel-1" id="datatable-view">
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -855,7 +856,29 @@ function admission_print(){
 		 */
 	</script>
 
-
+	<script>
+	$(document).ready(function() {
+		$("#datatable-view-2").css("display", "none");
+		$("#btn-view").css("display", "none");
+		$("#cancelBtn").css("display", "none");
+		$(".cbCheck").click(function() {
+			$("#btn-view").css("display", "show");
+			$("#btn-view").click(function(){
+		
+					$("#datatable-view").css("display", "none");
+					$("#datatable-view-2").css("display", "block");
+					$("#cancelBtn").css("display", "block");
+			
+				});
+				$("#cancelBtn").click(function() {
+			
+					$("#datatable-view").css("display", "block");
+					$("#datatable-view-2").css("display", "none");
+				});
+		
+		});
+	});
+</script>
 	<!-- <script src="assets/js/anime.player.js"></script> -->
 	<!-- <script type="text/javascript" src="javascript/ViewRecAnime.js"></script> -->
 	<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/sp-1.0.1/datatables.min.js"></script> -->
