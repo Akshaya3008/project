@@ -1,5 +1,47 @@
 $(document).ready(function() {
 	validateLogin();
+	jQuery.validator.addMethod("futureDate", function(value, element) {
+		 var now = new Date();
+		 now.setHours(0,0,0,0);
+		 var myDate = new Date(value);
+		 return this.optional(element) || myDate > now;
+	},'Must be current date or future date');
+	
+	jQuery.validator.addMethod("greaterThan", 
+			function(value, element, params) {
+
+			    if (!/Invalid|NaN/.test(new Date(value))) {
+			        return new Date(value) > new Date($(params).val());
+			    }
+
+			    return isNaN(value) && isNaN($(params).val()) 
+			        || (Number(value) > Number($(params).val())); 
+			},'Must be greater than from date.');
+
+	$('form[id="StudentInfoForm"]').validate({
+		
+		 rules: {
+		    
+		   from_date: {
+		        required: true,
+		        date:true,
+		        futureDate:true
+		   },
+		   to_date:{
+			 required:true,
+			 date:true,
+			 greaterThan:"#from_date"
+		   },	
+		   status:{
+			   required:true
+		   },
+		  },
+		
+		  submitHandler:function(form){
+			  event.preventDefault();
+		  }
+	});
+
 	FetchAllEmployee();
 	getFeesPackage();
 	fetchAllBranch();
@@ -34,35 +76,7 @@ $(document).ready(function() {
 	    } );
 	 table.buttons().container() 
     .appendTo( '#table-style .col-sm-6:eq(1)' );
-	
-	$('form[id="StudentInfoForm"]').validate({
-		
-		 rules: {
-		    
-			 from_date: {
-		        required: true,
-		        date:true,
-		        minDate:true
-		   },
-		   till_date:{
-			 required:true,
-			 date:true,
-			 greaterThan:"#admission_till_date"
-  
-		   },	   
-		  },
-		 messages: {
-			 admission_from_date: {
-				required:'Division is required',	
-				minDate:'Date should be current or future date'
-			},
-			admission_till_date:'Enter valid date'
-		  },
-		  submitHandler:function(form){
-			  event.preventDefault();
-		  }
-	});
-	$("#btnDisplay").click(function(e){
+	 	$("#btnDisplay").click(function(e){
 		StudentInfoReport(e);
 	});
 });

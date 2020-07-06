@@ -34,35 +34,43 @@ $(document).ready(function() {
 			    return isNaN(value) && isNaN($(params).val()) 
 			        || (Number(value) > Number($(params).val())); 
 			},'Must be greater than from date.');
+	jQuery.validator.addMethod("futureDate", function(value, element) {
+		 var now = new Date();
+		 now.setHours(0,0,0,0);
+		 var myDate = new Date(value);
+		 return this.optional(element) || myDate > now;
+	},'Must be current or future date');
 	
-	
-	
+
 	$('form[id="AdmReportForm"]').validate({
 		
 		  rules: {
 		    
-			  admission_from_date: {
+		   from_date: {
 		       required: true,
 		       date:true,
-		       minDate:true
+		       futureDate:true
 		   },
-		   admission_till_date:{
+		   to_date:{
 			 required:true,
 			 date:true,
-			 greaterThan:"#admission_till_date"
+			 greaterThan:"#from_date"
    
 		   },
-		   
-		   
-		   
+		   acad_year:{
+			   required:true
+		   },
+		   standard:{
+			   required:true
+		   },
+		   adm_taken_by:{
+			   required:true
+		   },
+		   division:{
+			   required:true
+		   },
 		  },
-		 messages: {
-			 admission_from_date: {
-				required:'Division is required',	
-				minDate:'Date should be current or future date'
-			},
-			admission_till_date:'Enter valid date'
-		  },
+		
 		  submitHandler:function(form){
 			  event.preventDefault();
 		  }
