@@ -74,8 +74,12 @@ $(document).ready(function() {
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	$('#multi_type_fees').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
 
-
+	
 	
 	
 	
@@ -87,3 +91,25 @@ $(document).ready(function() {
 	
 	
 });
+
+
+
+function getFeesType() {
+	function callback(responseData,textStatus,request)
+	{ 
+			for ( var i in responseData) {
+				var htmlCode=('<option value="' + responseData[i].feesType +'" >'
+						+ responseData[i].feesType + '</option>');
+				$('#multi_type_fees').append(htmlCode);
+				
+			}
+	}
+	function errorCallback(responseData, textStatus, request) {
+		var mes=responseData.responseJSON.message;
+		showNotification("error",mes);
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/feesType/getFeesType?branch="+branchSession;
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,errorCallback);
+	return false;	
+}
