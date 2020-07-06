@@ -7,7 +7,23 @@ $(document).ready(function() {
 	    
 	    return this.optional(element) || myDate >= now;
 	 });
-	
+	var table= $('#admission-report').DataTable( {
+    	dom: 'Bfrtip',
+	    buttons: [
+	    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+	    	{extend: 'print', className: 'btn btn-warning glyphicon glyphicon-print'},
+	    	{extend: 'excel', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+	    	{extend: 'csv', className: 'btn btn-warning glyphicon glyphicon-print'},
+	    ],
+	    "order": [],
+	    "columnDefs": [ {
+	    "targets"  : 'no-sort',
+	    "orderable": false,
+	    }],
+	   
+    } );
+ table.buttons().container() 
+.appendTo( '#table-style .col-sm-6:eq(1)' );
 	jQuery.validator.addMethod("greaterThan", 
 			function(value, element, params) {
 
@@ -117,9 +133,10 @@ function viewAdmissionReport(){
 		}
 	}
 	if(divArray==""){
-		div="null";
+		divArray="null";
 	}
 	function callback(responseData, textStatus, request){
+		var total_net=0,total_grand=0,total_payment=0,total_balance=0;
 		var table = $("#admission-report").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -131,10 +148,20 @@ function viewAdmissionReport(){
 			var grand_total=parseInt(responseData[i].fees)+parseInt(responseData[i].disccount);
 			var payment=responseData[i].paid_fees;
 			var balance=responseData[i].remain_fees;
+			total_net+=grand_total;
+			total_grand+=grand_total;
+			total_payment+=payment;
+			total_balance+=balance;
 				table.row.add(
 						[  invoice, date, name ,fees_pack, net_total,grand_total, payment,balance]).draw();	
 			//}
-		}document.getElementById("branch").disabled=true;
+		}
+		table.row.add(
+				[  "", "", "" ,"", "total="+total_net,"total="+total_grand, "total="+total_payment,"total="+total_balance],3).draw(false);
+	     table.order([1, 'asc']).draw();
+	     table.page('last').draw(false);
+		
+		document.getElementById("branch").disabled=true;
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
@@ -144,7 +171,6 @@ function viewAdmissionReport(){
 		var httpMethod = "POST";
 		var formData = $("#AdmReportForm").serialize()+"&package_array="+fees_packageArray+"&standard_array="+standardArray+
 		"&division_array="+divArray+"&adm_taken_by_array="+adm_takenArray+"&branch="+branch;
-		alert(formData);
 		var relativeUrl = "/Admission/AdmissionReport";	
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);

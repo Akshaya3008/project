@@ -370,14 +370,6 @@ public class AdmissionResource {
 			@FormParam("adm_taken_by_array") String adm_taken_by, @FormParam("package_array") String fees_package,
 			@FormParam("division_array") String division, @FormParam("acad_year") String acad_year,
 			@FormParam("standard_array") String standard, @FormParam("branch") String branch) {
-		System.out.println(from_date);
-		System.out.println(to_date);
-		System.out.println(adm_taken_by);
-		System.out.println(fees_package);
-		System.out.println(division);
-		System.out.println(acad_year);
-		System.out.println(standard);
-		System.out.println(branch);
 		String[] commaSeperatedTaken = Util.commaSeperatedString(adm_taken_by);
 		String[] commaSeperatedPackage = Util.commaSeperatedString(fees_package);
 		String[] commaSeperatedStandard = Util.commaSeperatedString(standard);
