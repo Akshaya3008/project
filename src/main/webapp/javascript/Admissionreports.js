@@ -38,8 +38,8 @@ $(document).ready(function() {
 		 var now = new Date();
 		 now.setHours(0,0,0,0);
 		 var myDate = new Date(value);
-		 return this.optional(element) || myDate > now;
-	},'Must be current or future date');
+		 return this.optional(element) || myDate < now;
+	},'Future date not allowed');
 	
 
 	$('form[id="AdmReportForm"]').validate({
