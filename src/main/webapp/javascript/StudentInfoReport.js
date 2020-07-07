@@ -4,8 +4,8 @@ $(document).ready(function() {
 		 var now = new Date();
 		 now.setHours(0,0,0,0);
 		 var myDate = new Date(value);
-		 return this.optional(element) || myDate > now;
-	},'Must be current date or future date');
+		 return this.optional(element) || myDate < now;
+	},'Future date not allowed');
 	
 	jQuery.validator.addMethod("greaterThan", 
 			function(value, element, params) {
@@ -13,7 +13,6 @@ $(document).ready(function() {
 			    if (!/Invalid|NaN/.test(new Date(value))) {
 			        return new Date(value) > new Date($(params).val());
 			    }
-
 			    return isNaN(value) && isNaN($(params).val()) 
 			        || (Number(value) > Number($(params).val())); 
 			},'Must be greater than from date.');
