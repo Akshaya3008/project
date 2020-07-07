@@ -453,7 +453,6 @@ function getCurrentDate(){
 	    if (day.length < 2) 
 	        day = '0' + day;
 	    $("#current_date").val([year, month, day].join('-'));
-	    /*alert([year, month, day].join('-'));*/
 }
 function compareInstallAmtAndReceivedAmt(){
 	var table = document.getElementById("installment_table");
@@ -669,7 +668,6 @@ function addFeesType() {
 	}
 	var httpMethod = "POST";
 	formData = $('#feestype-form').serialize() + "&branch=" + branchSession;
-	alert(formData);
 	relativeUrl = "/feesType/addNewFeesType";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);

@@ -76,7 +76,6 @@ $(document).ready(function(){
 });
 
 function Expense_chart(expDate,exp_amt) {
-	alert(exp_amt);
 	  var ctx, data, myBarChart, option_bars;
 	  Chart.defaults.global.responsive = true;
 	  ctx = $('#Exp_chart').get(0).getContext('2d'); //done
@@ -323,7 +322,6 @@ function getReceiptChart(splitted_start_date, splitted_end_date){
 
 //		trying speedo
 function conversion_chart(percentage){
-	alert("per="+percentage)
 Highcharts.chart('container', {
 
     chart: {

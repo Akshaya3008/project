@@ -232,7 +232,6 @@ function getAttendance() {
 				selected : true
 			}).column(1).data()[i];
 			// var rollno=i+1;
-			alert(i+" "+chk.value)
 			attendance = attendance + "," + rollno + "|" + chk.value;
 		}
 		if (!chk.checked) {
@@ -245,7 +244,6 @@ function getAttendance() {
 		}
 	});
 	// myArray=myArray.sort();
-	alert(attendance);
 	saveAttendance(std, acad_year,division, attendance);
 }
 function saveAttendance(standard, acad_year,division, attendance) {
@@ -260,7 +258,6 @@ function saveAttendance(standard, acad_year,division, attendance) {
 		 
 	}
 	var httpMethod = "POST";
-	console.log(attendance);
 	var formData = {
 		standard : standard,
 		division : division,
@@ -268,7 +265,6 @@ function saveAttendance(standard, acad_year,division, attendance) {
 		Attendance : attendance,
 		branch : branchSession
 	}
-	console.log(formData);
 	var relativeUrl = "/Attendance/studentAttendance";
 	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);

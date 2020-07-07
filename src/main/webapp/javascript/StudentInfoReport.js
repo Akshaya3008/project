@@ -131,7 +131,6 @@ function StudentInfoReport(e){
 	var httpMethod = "POST";
 	var formData=$("#StudentInfoForm").serialize()+"&enq_taken_by="+enq_taken+"&enq_status="+enq_status+
 	"&course_package="+course+"&branch="+branch;
-	alert(formData)
 	var relativeUrl = "/Enquiry/EnquiryReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl,formData, callback,
 			errorCallback);

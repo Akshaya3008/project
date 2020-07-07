@@ -70,14 +70,12 @@ $(document).ready(function(){
 	});
 	
 	$("#getExpenseData").submit(function(e){
-		alert("success");
 		getExpenseReport(e);
 	});
 });
 
 function loadvendor() {
 	function callback(responseData, textStatus, request) {
-		alert("succ");
 		for ( var i in responseData) {
 			vendors.push('<option value="' + responseData[i].vendor + '" >'
 							+ responseData[i].vendor + '</option>');
@@ -106,9 +104,7 @@ function getExpenseReport(e) {
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			e.preventDefault();
-			alert("in");
 			var edate = responseData[i].exp_date;
-			alert(edate);
 			var ven = responseData[i].vend;
 			var amt = responseData[i].amt;
 			

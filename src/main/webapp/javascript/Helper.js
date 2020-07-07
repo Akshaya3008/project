@@ -128,7 +128,6 @@ function fetchAllBranch()
 		for ( var i in responseData) {
 			var htmlCode = '<option value="' + responseData[i].Branch + '" >'
 					+ responseData[i].Branch + '</option>';
-			console.log(responseData[i].Branch);
 			$('.branch').append(htmlCode);
 		}
 	}

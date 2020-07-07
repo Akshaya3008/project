@@ -168,7 +168,6 @@ function getPromoteData() {
 }
 
 function promoteStudent(id){
-	alert(id);
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		  showNotification("success", mes);
@@ -180,7 +179,6 @@ function promoteStudent(id){
 	}
 	var formData = $("#PromoteDataForm").serialize()+"&id="+id+"&user="+user+
 	"&branch="+branchSession;
-	alert(formData);
 	var httpMethod = "POST";
 	var relativeUrl = "/Admission/StudentPromotion";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,

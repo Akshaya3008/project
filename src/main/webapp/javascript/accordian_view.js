@@ -54,7 +54,6 @@ $(function() {
 
 	Accordion.prototype.dropdown = function(e) {
 		var $el = e.data.el;
-		/* alert(e.data); */
 		$this = $(this), $next = $this.next();
 
 		$next.slideToggle();

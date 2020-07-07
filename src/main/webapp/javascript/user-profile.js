@@ -3,7 +3,6 @@ $(document).ready(function(){
 });
 
 function profile(){
-	alert("prfile");
 	var val = user;
 	document.getElementById('profile').innerHTML  = val;
 }
