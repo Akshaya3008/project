@@ -30,7 +30,7 @@ $(document).ready(function() {
 	}
 	*/);
 
-	table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
+	//table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
 	showAdmissionTable();
 /*	$('#admission_table tbody tr').on('click', '.cbCheck', function() {
 		if (this.checked == true) {
@@ -67,7 +67,6 @@ $(document).ready(function() {
 		});
 	});
 });
-
 function showAdmissionTable() {
 	function callback(responseData, textStatus, request) {
 		table.rows().remove().draw();
@@ -77,7 +76,6 @@ function showAdmissionTable() {
 					+ '"><label for="checkbox1"></label></span>';
 			var date = responseData[i].date;
 			var student_name = responseData[i].student_name;
-			console.log(student_name);
 			var invoice_no = responseData[i].invoice_no;
 			var Rollno = responseData[i].Rollno;
 			var regno = responseData[i].regno;

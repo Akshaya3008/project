@@ -438,7 +438,11 @@ $(document)
 										});
 								addNewFeesPackage(standardData, branchData);
 							});*/
-				});
+					
+
+						  //create pdf
+						});
+
 function getCurrentDate(){
 	   var d = new Date();
        var month = '' + (d.getMonth() + 1);
