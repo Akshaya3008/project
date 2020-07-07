@@ -194,9 +194,9 @@ public class ReceiptDetailsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response ReceiptReport(@FormParam("from_date") String from_date,@FormParam("to_date") String to_date,
-			@FormParam("received_by") String received_by,@FormParam("branch") String branch,
-			@FormParam("pay_mode") String pay_mode,@FormParam("standard") String standard,
-			@FormParam("acad_year") String acad_year,@FormParam("stud_name") String stud_name){
+			@FormParam("received_by_array") String received_by,@FormParam("branch") String branch,
+			@FormParam("pay_mode_array") String pay_mode,@FormParam("standard_array") String standard,
+			@FormParam("acad_year") String acad_year/*,@FormParam("stud_name") String stud_name*/){
 		 String[] commaSeperatedReceivedBy=Util.commaSeperatedString(received_by);
 		 String[] commaSeperatedPayMode=Util.commaSeperatedString(pay_mode);
 		 String[] commaSeperatedStandard=Util.commaSeperatedString(standard);
@@ -213,7 +213,7 @@ public class ReceiptDetailsResource {
 							receipt.setReceived_by(commaSeperatedReceivedBy[i]);
 							receipt.setPay_mode(commaSeperatedPayMode[j]);
 							admission.setBranch(branch);
-							receipt.setStud_name(stud_name);
+							/*receipt.setStud_name(stud_name);*/
 							admission.setAcad_year(acad_year);
 							admission.setStandard(commaSeperatedStandard[k]);
 							receiptReportData=controller.ReceiptReport(receipt,admission,receiptReportData);
@@ -236,9 +236,9 @@ public class ReceiptDetailsResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response InstallmentDueReport(@FormParam("from_date") String from_date,@FormParam("to_date") String to_date,
-			@FormParam("division") String division,@FormParam("branch") String branch,
-			@FormParam("package") String fees_package,@FormParam("standard") String standard,
-			@FormParam("acad_year") String acad_year,@FormParam("stud_name") String stud_name){
+			@FormParam("division_array") String division,@FormParam("branch") String branch,
+			@FormParam("package_array") String fees_package,@FormParam("standard_array") String standard,
+			@FormParam("acad_year") String acad_year/*,@FormParam("stud_name") String stud_name*/){
 		 String[] commaSeperatedPackage=Util.commaSeperatedString(fees_package);
 		 String[] commaSeperatedStandard=Util.commaSeperatedString(standard);
 		 String[] commaSeperatedDivision=Util.commaSeperatedString(division);
@@ -253,7 +253,7 @@ public class ReceiptDetailsResource {
 						 Admission admission=new Admission();
 							installment.setFrom_date(from_date);
 							installment.setTo_date(to_date);
-							installment.setStud_name(stud_name);
+							/*installment.setStud_name(stud_name);*/
 							admission.setBranch(branch);
 							admission.setAcad_year(acad_year);
 							admission.setAdm_fees_pack(pipeSeperated[0]);

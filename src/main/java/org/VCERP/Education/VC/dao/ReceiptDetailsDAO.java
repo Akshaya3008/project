@@ -440,11 +440,11 @@ public class ReceiptDetailsDAO {
 		try{
 			con = Util.getDBConnection();
 			String query;
-			if(receipt.getStud_name().isEmpty()){
+			//if(receipt.getStud_name().isEmpty()){
 				query= "select * from receipt_details WHERE receipt_date BETWEEN ? AND ? AND received_by=? AND pay_mode=? AND RollNO IN (SELECT Rollno from admission WHERE acad_year=? AND standard=? AND branch=?)";
-			}else{
-				query= "select * from receipt_details WHERE receipt_date BETWEEN ? AND ? AND received_by=? AND pay_mode=? AND stud_name='"+receipt.getStud_name()+"' AND RollNO IN (SELECT Rollno from admission WHERE acad_year=? AND standard=? AND branch=?)";
-			}
+		//	}else{*/
+		//		query= "select * from receipt_details WHERE receipt_date BETWEEN ? AND ? AND received_by=? AND pay_mode=? AND stud_name='"+receipt.getStud_name()+"' AND RollNO IN (SELECT Rollno from admission WHERE acad_year=? AND standard=? AND branch=?)";
+		//	}
 			ps = con.prepareStatement(query);
 			ps.setString(1, receipt.getFrom_date());
 			ps.setString(2, receipt.getTo_date());
@@ -502,11 +502,11 @@ public class ReceiptDetailsDAO {
 		try{
 			con = Util.getDBConnection();
 			String query;
-			if(installment.getStud_name().isEmpty()){
+			//if(installment.getStud_name().isEmpty()){
 				query= "SELECT * FROM `installment` WHERE due_date BETWEEN ? AND ? AND rollno IN (SELECT Rollno from admission WHERE acad_year=? AND adm_fees_pack=? AND standard=? AND division=? AND branch=?) AND paid_status='0'";
-			}else{
+			/*}else{
 				query= "SELECT * FROM `installment` WHERE due_date BETWEEN ? AND ? AND stud_name='"+installment.getStud_name()+"' AND rollno IN (SELECT Rollno from admission WHERE acad_year=? AND adm_fees_pack=? AND standard=? AND division=? AND branch=?) AND paid_status='0'";
-			}
+			}*/
 			ps = con.prepareStatement(query);
 			ps.setString(1, installment.getFrom_date());
 			ps.setString(2, installment.getTo_date());

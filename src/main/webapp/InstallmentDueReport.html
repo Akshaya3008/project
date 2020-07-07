@@ -4,28 +4,19 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">                                    
+<script src="jquery/bootstrap.min.js"></script>
 
-<!-- <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="style.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="css/promote.css" type="text/css">
-
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
- -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-<!-- <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
- -->
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" /> -->
-
-<!-- <link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/sp-1.0.1/datatables.min.css" />
- -->
+<script src="pdf/jquery.dataTables.min.js"></script>
+<script src="pdf/dataTables.buttons.min.js"></script>
+<script src="pdf/buttons.flash.min.js"></script>
+<script src="pdf/jszip.min.js"></script>
+<script src="pdf/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="pdf/buttons.html5.min.js"></script>
+<script src="pdf/buttons.print.min.js"></script>
 
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
 <link rel="stylesheet" href="css/promote.css" type="text/css">
@@ -350,9 +341,9 @@ table.table .avatar {
 								<div class="accordion-content">
 									<div class="panel">
 										<div class="panel-body">
-											<form id="AdmReportForm" method="post">
+											<form id="InstalllmentReportForm" method="post">
 												<div class="form-group">
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label class="control-label"> 
 																<span class="course_title">Installment from date</span> 
@@ -363,7 +354,7 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label class="control-label"> 
 																<span class="course_title">Installment Till date</span> 
@@ -374,7 +365,7 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label class="control-label"> 
 																<span class="titleYear">Academic Year</span> 
@@ -386,7 +377,7 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label class="control-label"> 
 																<span class="titleDiv">Standard</span>
@@ -397,7 +388,7 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<label class="control-label"> 
 															<span class="course_title">Branch</span> 
 															<span class="text-danger" style="color: red">*</span>
@@ -407,7 +398,7 @@ table.table .avatar {
 															</select>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label class="control-label"> 
 																<span class="titleDiv">Course package</span>
@@ -418,7 +409,7 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label class="control-label"> 
 																<span class="titleDiv">Division</span>
@@ -429,7 +420,7 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+<!-- 													<div class="col-md-3">
 														<div class="form-group">
 															<label class="control-label"> 
 																<span class="titleDiv">Student Name</span>
@@ -438,11 +429,11 @@ table.table .avatar {
 																<input type="text" class="form-control" id="stud_name" name="stud_name" required>
 															</div>
 														</div>
-													</div>
+													</div> -->
 													<div class="row">
 														<div class="col-md-12">
 															<div class="pull-right">
-																<input type="button" id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" value="Display">
+																<input type="submit" id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" value="Display">
 																<button type="reset" id="btnClear" data-style="zoom-in" class="btn btn-light margin-right-sm">Clear</button>
 															</div>
 														</div>

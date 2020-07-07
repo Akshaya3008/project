@@ -7,17 +7,36 @@ $(document).ready(function(){
 	$("#branch").val(branchSession);
 	
 	$("#btnDisplay").click(function(){
+		event.preventDefault();
 		ReceiptReport();
 	});
 	$('#multi_employee').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	 var table= $('#receipts_report').DataTable( {
+	    	dom: 'Bfrtip',
+		    buttons: [
+		    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'print', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    	{extend: 'excel', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'csv', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    ],
+		    "order": [],
+		    "columnDefs": [ {
+		    "targets"  : 'no-sort',
+		    "orderable": false,
+		    }],
+		   
+	    } );
+	 table.buttons().container() 
+	 .appendTo( '#table-style .col-sm-6:eq(1)' );
 });
 
 
 function ReceiptReport(){
 	document.getElementById("branch").disabled=false;
+	var branch=document.getElementById("branch").value;
 	var pay_mode=new Array()
 	var standard=new Array()
 	var received_by=new Array()
@@ -37,7 +56,7 @@ function ReceiptReport(){
 		}
 	}
 	function callback(responseData,textStatus,request)
-	{	document.getElementById("branch").disabled=true; 
+	{	document.getElementById("branch").disabled=true;
 		var total_received_amt=0;
 		 var table = $("#receipts_report").DataTable();
 			table.rows().remove().draw();
@@ -53,17 +72,17 @@ function ReceiptReport(){
 				table.row.add(
 						[receipt_no,receipt_date, stud_name,rollno,invoice,pay_mode,total_amt]).draw();
 			}
-			total_received_amt="sum="+total_received_amt;
+/*			total_received_amt="sum="+total_received_amt;
 			table.row.add(
-					["","","","","","",total_received_amt]).draw();
+					["","","","","","",total_received_amt]).draw();*/
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 	}	
 	var httpMethod = "POST";
-	var formData=$("#Receipt_Report_Form").serialize()+"&pay_mode="+pay_mode+"&standard="+standard+"&received_by="+received_by;
-	alert(formData);
+	var formData=$("#Receipt_Report_Form").serialize()+"&pay_mode_array="+pay_mode+"&standard_array="+standard+
+	"&received_by_array="+received_by+"&branch="+branch;
 	var relativeUrl = "/Receipt/ReceiptReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,errorCallback);
 	return false;	

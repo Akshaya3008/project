@@ -35,13 +35,13 @@ $(document).ready(function() {
 	
 	
 	
-	$('form[id="AdmReportForm"]').validate({
+	$('form[id="InstalllmentReportForm"]').validate({
 		
 		  rules: {
 		    
 			  admission_from_date: {
 		        required: true,
-		       date:required,
+		       date:true,
 		       minDate:true
 		   },
 		   admission_till_date:{
@@ -60,19 +60,37 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
-			  InsertDivision();
+			  viewInstallmentReport();
 		  }
 	});
+	 var table= $('#install_report').DataTable( {
+	    	dom: 'Bfrtip',
+		    buttons: [
+		    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'print', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    	{extend: 'excel', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'csv', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    ],
+		    "order": [],
+		    "columnDefs": [ {
+		    "targets"  : 'no-sort',
+		    "orderable": false,
+		    }],
+		   
+	    } );
+	 table.buttons().container() 
+	 .appendTo( '#table-style .col-sm-6:eq(1)' );
 	
-	$("#btnDisplay").click(function(){
-		viewInstallmentReport();
-	});
+/*	$("#btnDisplay").click(function(){
+		
+	});*/
 	
 	
 });
 
 function viewInstallmentReport(){
 	document.getElementById("branch").disabled=false;
+	var branch=document.getElementById("branch").value;
 	var fees_package=new Array()
 	var standard=new Array()
 	var div=new Array()
@@ -128,9 +146,9 @@ function viewInstallmentReport(){
 		
 	}
 		var httpMethod = "POST";
-		var formData = $("#AdmReportForm").serialize()+"&package="+fees_package+"&standard="+standard+"&division="+div;
-		var relativeUrl = "/Receipt/InstallmentDueReport";
-		alert(formData);	
+		var formData = $("#InstalllmentReportForm").serialize()+"&package_array="+fees_package+"&standard_array="+standard+"&division_array="+div+
+		"&branch="+branch;
+		var relativeUrl = "/Receipt/InstallmentDueReport";	
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);
 	return false;
