@@ -406,7 +406,7 @@ table.table {
 						<div class="tab-content">
 							<div id="invoice" class="tab-pane active">
 								<div class="invoice overflow-auto" id="inv">
-									<div style="min-width: 600px">
+									<div>
 										<header>
 											<div class="row">
 												<div class="col">
@@ -699,7 +699,7 @@ table.table {
 	   var width = doc.internal.pageSize.width;  
 	   height = hratio * width;
 
-	   doc.addImage(img,'JPEG',10,20,width-20,height-10);
+	   doc.addImage(img,'PNG',10,20,width-20,height-10);
 	   doc.save('successss.pdf');
 	   }
 
