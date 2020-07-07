@@ -21,6 +21,7 @@ $(document).ready(function(){
 			    return isNaN(value) && isNaN($(params).val()) 
 			        || (Number(value) > Number($(params).val())); 
 			},'Must be greater than from date.');
+	
 	jQuery.validator.addMethod("lessThan", 
 			function(value, element, params) {
 
@@ -38,12 +39,10 @@ $(document).ready(function(){
 		rules : {
 			from_date:{
 				required:true,
-				futureDate:true,
 				lessThan:"#to_date"
 			},
 			to_date:{
 				required:true,
-				futureDate:true,
 				greaterThan:"#from_date"
 			},
 			pay_mode:{

@@ -4,8 +4,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">                                    
 <script src="jquery/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">                                   
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -26,8 +27,8 @@
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
 <script src="jquery/bootstrap-multiselect.js"></script>
-
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+<script src="jquery/jquery.validate.min.js"></script>
+<!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script> -->
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script src="javascript/InstallmentDueReport.js"></script>
 <script src="javascript/accordian_view.js"></script>
@@ -350,7 +351,7 @@ table.table .avatar {
 																<span class="text-danger" style="color: red">*</span>
 															</label>
 															<div class="input-group">
-																<input type="date" id="admission_from_date" name="from_date" class="form-control">
+																<input type="date" id="from_date" name="from_date" class="form-control">
 															</div>
 														</div>
 													</div>
@@ -361,7 +362,7 @@ table.table .avatar {
 																<span class="text-danger" style="color: red">*</span>
 															</label>
 															<div class="input-group">
-																<input type="date" id="admission_till_date" name="to_date" class="form-control">
+																<input type="date" id="to_date" name="to_date" class="form-control">
 															</div>
 														</div>
 													</div>
@@ -433,7 +434,7 @@ table.table .avatar {
 													<div class="row">
 														<div class="col-md-12">
 															<div class="pull-right">
-																<input type="submit" id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" value="Display">
+																	<button id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" >Display</button>
 																<button type="reset" id="btnClear" data-style="zoom-in" class="btn btn-light margin-right-sm">Clear</button>
 															</div>
 														</div>

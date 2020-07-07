@@ -22,6 +22,17 @@ $(document).ready(function() {
 	    return this.optional(element) || myDate >= now;
 	 });
 	
+	jQuery.validator.addMethod("lessThan", 
+			function(value, element, params) {
+
+			    if (!/Invalid|NaN/.test(new Date(value))) {
+			        return new Date(value) < new Date($(params).val());
+			    }
+
+			    return isNaN(value) && isNaN($(params).val()) 
+			        || (Number(value) < Number($(params).val())); 
+    },"Must be less than till date.");
+	
 	jQuery.validator.addMethod("greaterThan", 
 			function(value, element, params) {
 
@@ -39,24 +50,38 @@ $(document).ready(function() {
 		
 		  rules: {
 		    
-			  admission_from_date: {
+			  from_date: {
 		        required: true,
 		       date:true,
-		       minDate:true
+		       lessThan:"#to_date"
+		       
 		   },
-		   admission_till_date:{
+		   to_date:{
 			 required:true,
 			 date:true,
-			 greaterThan:"#admission_till_date"
+			 greaterThan:"#from_date"
    
+		   },
+		   multi_standard:{
+			   required:true,
+		   },
+		   multi_course:{
+			   required:true,
+		   },
+		   multi_div:{
+			   required:true,
 		   },
 		  },
 		 messages: {
-			 admission_from_date: {
-				required:'Division is required',	
-				minDate:'Date should be current or future date'
+			 from_date: {
+				required:'Please select any date',	
+				
 			},
-			admission_till_date:'Enter valid date'
+			to_date:{
+				required:'Please select any date',
+				greaterThan:'Enter a valid date'
+			}
+			
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
@@ -169,7 +194,7 @@ $(function() {
 
 	Accordion.prototype.dropdown = function(e) {
 		var $el = e.data.el;
-		/* alert(e.data); */
+		
 		$this = $(this), $next = $this.next();
 
 		$next.slideToggle();
