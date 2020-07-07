@@ -1,5 +1,25 @@
 //var designation;
 $(document).ready(function() {
+	jQuery.validator.addMethod("letterswithspace", function(value, element) {
+	    return this.optional(element) || /^[a-z\s]+$/i.test(value);
+	}, "Please enter letters only");
+
+	$('form[id="EmpReportForm"]').validate({
+		
+		 rules: {
+		    
+			 emp_name: {
+		        required: true,
+		        letterswithspace:true
+		   },
+		      
+		  },
+		
+		  submitHandler:function(form){
+			  event.preventDefault();
+		  }
+	});
+
 	validateLogin();
 	//fetchAllBranch();
 	getDesignation();
