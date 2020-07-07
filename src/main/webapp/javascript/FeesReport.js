@@ -24,24 +24,36 @@ $(document).ready(function() {
 		
 		  rules: {
 		    
-			  admission_from_date: {
+			  from_date: {
 		        required: true,
 		       date:true,
-		       minDate:true
+		      
 		   },
-		   admission_till_date:{
+		   to_date:{
 			 required:true,
 			 date:true,
-			 greaterThan:"#admission_till_date"
+			 greaterThan:"#from_date"
    
+		   },
+		   multi_course:{
+			   required:true,
+		   },
+		   multi_div:{
+			   required:true,
+		   },
+		   multi_status_select:{
+			   required:true,
 		   },
 		  },
 		 messages: {
-			 admission_from_date: {
-				required:'Division is required',	
-				minDate:'Date should be current or future date'
+			 from_date: {
+				required:'Please select any date',	
 			},
-			admission_till_date:'Enter valid date'
+			till_date:{
+				required:'Please select any date',
+				greaterThan:'Enter valid date',
+				
+			}
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
