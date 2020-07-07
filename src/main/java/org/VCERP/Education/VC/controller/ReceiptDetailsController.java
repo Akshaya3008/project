@@ -42,7 +42,7 @@ public class ReceiptDetailsController {
 		return dao.calculateTotalFeesPaid(rollno,name);
 	}
 
-	public ArrayList<ReceiptDetails> getReceiptAdmissionData(long rollno, String receiptno) {
+	public ArrayList<ReceiptDetails> getReceiptAdmissionData(String rollno, String receiptno) {
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
 		return dao.getReceiptAdmissionData(rollno,receiptno);
 	}

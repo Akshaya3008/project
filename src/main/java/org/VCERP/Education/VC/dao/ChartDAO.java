@@ -181,7 +181,6 @@ public class ChartDAO {
 			String query="SELECT SUM(payment) FROM `receipt_details` WHERE receipt_date BETWEEN ? AND ? AND branch=?";
 			
 			ps=con.prepareStatement(query);
-			System.out.println("received="+ch.getS_date()+ch.getE_date()+ch.getBranch());
 			ps.setString(1,ch.getS_date());
 			ps.setString(2,ch.getE_date());
 			ps.setString(3,ch.getBranch());

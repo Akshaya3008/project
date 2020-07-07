@@ -187,7 +187,6 @@ public class AdmissionDAO {
 		ResultSet rs=null;
 		Admission admission=null;
 		String query="";
-		System.out.println(enq_stud);
 		try {
 			con=Util.getDBConnection();
 			query="select * from"

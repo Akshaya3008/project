@@ -27,7 +27,6 @@ public class AttendanceResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAttendaceList(@FormParam("standard") String standard,@FormParam("acad_year") String acad_year
 			,@FormParam("division") String division,@FormParam("branch") String branch){
-		System.out.println("here");
 		Attendance at=new Attendance();
 		at.setStandard(standard);
 		at.setAcad_year(acad_year);

@@ -31,9 +31,7 @@ $(document).ready(function(){
 	    const search = '/';
 		const replaceWith = '-';
 		var splitted_curr_sdate = start.split(search).join(replaceWith);
-		alert("splitted_curr_sdate"+splitted_curr_sdate);
 		var splitted_curr_edate = end.split(search).join(replaceWith);
-		alert("splitted_curr_edate"+splitted_curr_edate);
 		
 		
 		getExpenseChart(splitted_curr_sdate, splitted_curr_edate);
@@ -58,9 +56,7 @@ $(document).ready(function(){
 		const replaceWith = '-';
 		
 				var splitted_start_date = start.split(search).join(replaceWith);
-				alert("splitted_start_date"+splitted_start_date);
 				var splitted_end_date = end.split(search).join(replaceWith);
-				alert("splitted_end_date"+splitted_end_date);
 				
 				getExpenseChart(splitted_start_date, splitted_end_date);
 				getConversionChart(splitted_start_date,splitted_end_date);

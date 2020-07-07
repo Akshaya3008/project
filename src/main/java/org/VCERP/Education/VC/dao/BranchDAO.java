@@ -75,6 +75,7 @@ public class BranchDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, conn);

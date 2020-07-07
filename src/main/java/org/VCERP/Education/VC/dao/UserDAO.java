@@ -163,7 +163,6 @@ public class UserDAO {
 		finally {
 			Util.closeConnection(null, st, con);
 		}
-		System.out.println(logg);
 		return logg;
 	}
 

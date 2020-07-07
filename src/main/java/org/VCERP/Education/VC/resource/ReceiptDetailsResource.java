@@ -160,7 +160,7 @@ public class ReceiptDetailsResource {
 	@GET
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getReceiptAdmissionData(@QueryParam("id") long rollno,@QueryParam("receiptno") String receiptno){
+	public Response getReceiptAdmissionData(@QueryParam("id") String rollno,@QueryParam("receiptno") String receiptno){
 		 ArrayList<ReceiptDetails> admission=new ArrayList<>();
 			ReceiptDetailsController controller=new ReceiptDetailsController();
 			admission=controller.getReceiptAdmissionData(rollno,receiptno);

@@ -81,7 +81,6 @@ public class AttendanceDAO {
 		ResultSet rs=null;
 		PreparedStatement ps1=null;
 		ResultSet rs1=null;
-		System.out.println(attendance.getRollNo());
 		try {
 			con=Util.getDBConnection();
 			String query="SELECT COUNT(`"+attendance.getRollNo()+"`) as totalCount FROM `attendance` where date BETWEEN ? AND ? AND acad_year=? and "
@@ -97,7 +96,6 @@ public class AttendanceDAO {
 			while(rs.next())
 			{
 				attendance.setTotalDays(rs.getInt("totalCount"));
-				System.out.println(rs.getInt("totalCount"));
 			}
 			
 			String query2="SELECT COUNT(`"+attendance.getRollNo()+"`) as totalPresent FROM `attendance` where `"+attendance.getRollNo()+"`='P' "
@@ -113,7 +111,6 @@ public class AttendanceDAO {
 			rs1=ps1.executeQuery();
 			while(rs1.next()){
 			attendance.setTotalPresent(rs1.getInt("totalPresent"));
-			System.out.println(rs1.getInt("totalPresent"));
 			}
 			
 		}catch (Exception e) {

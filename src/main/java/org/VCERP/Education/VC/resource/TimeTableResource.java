@@ -239,7 +239,6 @@ public class TimeTableResource {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response TimeTableReport(@FormParam("branch") String branch,@FormParam("lecturer") String lecturer,
 			@FormParam("tt_title") String tt_title){
-		System.out.println(branch+" "+lecturer+" "+tt_title);
 		String[] commaSeperatedTitle=Util.commaSeperatedString(tt_title);
 		//String[] commaSeperatedLecturer=Util.commaSeperatedString(lecturer);
 		TimeTable tt=new TimeTable();

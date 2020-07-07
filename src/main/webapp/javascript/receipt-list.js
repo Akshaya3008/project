@@ -2,7 +2,7 @@
 var table ;
 $(document).ready(function() {
 	validateLogin();
-	table=$('#receipt_table').DataTable({
+	table=$('#receipt_table').DataTable(/*{
 		"pageLength" : 40,
 		dom: 'Bfrtip',
 	    buttons: [
@@ -15,10 +15,10 @@ $(document).ready(function() {
 	    "orderable": false,
 	    }],
 	   
-	});
-	 table.buttons().container()
+	}*/);
+/*	 table.buttons().container()
      .appendTo( '#table-style .col-sm-6:eq(1)' );
-
+*/
 	$('.pdf-b').css({
 		"font-size" : "13px",
 		"padding": "6px 12px",
@@ -28,16 +28,24 @@ $(document).ready(function() {
 
 	
 	var myArray = new Array();
-	$('#receipt_table tbody tr').on('click', '.cbCheck', function() {
-		
-		
+	$('#btn-view').click(function() {
+		$('table .cbCheck').each(function(i, chk) {
+			if (chk.checked) {
+				val = table.row(this.closest('tr')).data();
+				var rno = val[5];
+				var receiptno = val[2];
+				getVeiwReceiptData(rno, receiptno);
+			}
+		});
+	});
+/*	$('#receipt_table tbody tr').on('click', '.cbCheck', function() {
 		if (this.checked == true) {
 			val = table.row(this.closest('tr')).data();
 			var rno = val[5];
 			var receiptno = val[2];
 			getVeiwReceiptData(rno, receiptno);
 		}
-	});
+	});*/
 });
 
 function showReceiptTable() {
@@ -79,19 +87,17 @@ function showReceiptTable() {
 	return false;
 }
 function getVeiwReceiptData(rno, receiptno) {
+	var viewReceiptArray=new Array();
 	function callback(responseData, textStatus, request) {
 		for ( var i in responseData) {
-			var stud_name = responseData[i].stud_name;
-			var receipt_no = responseData[i].receipt_no;
-			var received_by = responseData[i].received_by;
-			var total_amt = responseData[i].total_amt;
-			var received_amt = responseData[i].received_amt;
-			var pay_mode = responseData[i].pay_mode;
-			var admission = responseData[i].admission;
-			var invoice_no = admission.invoice_no;
-			var course = admission.adm_fees_pack;
-			var total_paid_fees = admission.paid_fees;
-			var remain_amt = admission.remain_fees;
+			var admission=responseData[i].admission;
+			var branchDetails=getBranchDetails(responseData[i].branch);
+			var viewReceiptData=responseData[i].stud_name+":"+responseData[i].receipt_no+":"+responseData[i].received_by+":"+
+			responseData[i].total_amt+":"+responseData[i].received_amt+":"+responseData[i].pay_mode+
+			":"+branchDetails+":"+responseData[i].receipt_date+":"+admission.address;
+			/*admission.adm_fees_pack+":"+admission.paid_fees+":"+admission.remain_fees+":"+*/
+			sessionStorage.setItem("viewReceipt",viewReceiptData);
+			window.location.href = "ViewReceipt.html";
 		}
 	}
 
@@ -106,4 +112,21 @@ function getVeiwReceiptData(rno, receiptno) {
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
+}
+function getBranchDetails(branch) {
+	var branchDetails;
+	function callback(responseData, textStatus, request) {
+			branchDetails=responseData.Branch+":"+responseData.Address;
+	}
+
+	function errorCallback(responseData, textStatus, request) {	
+	      var message=responseData.responseJSON.message;
+		  showNotification("error",message);
+		 
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/branch/getBranch?branch=" + branch;
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+			errorCallback);
+	return branchDetails;
 }

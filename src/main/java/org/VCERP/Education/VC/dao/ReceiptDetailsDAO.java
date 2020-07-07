@@ -242,7 +242,7 @@ public class ReceiptDetailsDAO {
 		return paid_amount;
 	}
 
-	public ArrayList<ReceiptDetails> getReceiptAdmissionData(long rollno, String receiptno) {
+	public ArrayList<ReceiptDetails> getReceiptAdmissionData(String rollno, String receiptno) {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -253,7 +253,7 @@ public class ReceiptDetailsDAO {
 			con=Util.getDBConnection();
 			String query="select * from receipt_details where RollNO=? and receipt_no=?";
 			ps=con.prepareStatement(query);
-			ps.setLong(1, rollno);
+			ps.setString(1, rollno);
 			ps.setString(2, receiptno);
 			rs=ps.executeQuery();
 			while(rs.next())
@@ -273,15 +273,15 @@ public class ReceiptDetailsDAO {
 				receipt.setReceived_amt(rs.getLong(12));
 				receipt.setAmount(rs.getLong(13));
 				receipt.setBranch(rs.getString(14));
-			}
-			if(receipt!=null)
-			{
-				ad=getAdmissionData(rollno,receipt.getBranch());
-				if(ad!=null)
-				{	
-				receipt.setAdmission(ad);
+				if(receipt!=null)
+				{
+					ad=getAdmissionData(rollno,receipt.getBranch());
+					if(ad!=null)
+					{	
+					receipt.setAdmission(ad);
+					}
+					receiptData.add(receipt);
 				}
-				receiptData.add(receipt);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -293,7 +293,7 @@ public class ReceiptDetailsDAO {
 		return receiptData;
 	}	
 	
-	private Admission getAdmissionData(long rollno,String branch) {
+	private Admission getAdmissionData(String rollno,String branch) {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -302,7 +302,7 @@ public class ReceiptDetailsDAO {
 			con=Util.getDBConnection();
 			String query="select * from admission where RollNo=? and branch=?";
 			ps=con.prepareStatement(query);
-			ps.setLong(1, rollno);
+			ps.setString(1, rollno);
 			ps.setString(2, branch);
 			rs=ps.executeQuery();
 			while(rs.next())
@@ -310,20 +310,21 @@ public class ReceiptDetailsDAO {
 				ad=new Admission();
 				ad.setId(rs.getLong(1));
 				ad.setStudent_name(rs.getString(2));
-				ad.setContact(rs.getString(3));
-				ad.setEnq_taken_by(rs.getString(4));
-				ad.setAdm_fees_pack(rs.getString(5));
-				ad.setStatus(rs.getString(6));
-				ad.setDate(rs.getString(7));
-				ad.setRollno(rs.getString(8));
-				ad.setRegno(rs.getString(9));
-				ad.setInvoice_no(rs.getString(10));
-				ad.setAdmission_date(rs.getString(11));
-				ad.setAcad_year(rs.getString(12));
-				ad.setJoin_date(rs.getString(13));
-				ad.setFees(rs.getLong(14));
-				ad.setPaid_fees(rs.getLong(15));
-				ad.setRemain_fees(rs.getLong(16));
+				ad.setContact(rs.getString(12));
+				ad.setAddress(rs.getString(15));
+				ad.setEnq_taken_by(rs.getString(19));
+				ad.setAdm_fees_pack(rs.getString(21));
+				ad.setStatus(rs.getString(22));
+				ad.setDate(rs.getString(23));
+				ad.setRollno(rs.getString(24));
+				ad.setRegno(rs.getString(25));
+				ad.setInvoice_no(rs.getString(26));
+				ad.setAdmission_date(rs.getString(29));
+				ad.setAcad_year(rs.getString(30));
+				ad.setJoin_date(rs.getString(31));
+				ad.setFees(rs.getLong(32));
+				ad.setPaid_fees(rs.getLong(35));
+				ad.setRemain_fees(rs.getLong(36));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

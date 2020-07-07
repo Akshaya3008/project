@@ -48,10 +48,6 @@ public class ChartResource {
 		//return Util.generateResponse(Status.ACCEPTED, "Data Successfully Fetched").build();
 	
 		if(exp_chart!=null){
-			for(int i=0;i<exp_chart.size();i++) {
-				System.out.println("Values"+exp_chart.get(i));
-			}
-			System.out.println("notttttttt successssss");
 		return Response.status(Status.ACCEPTED).entity(exp_chart).build();	
 	}
 	}
@@ -85,8 +81,6 @@ try{
 	//return Util.generateResponse(Status.ACCEPTED, "Data Successfully Fetched").build();
 
 	if(rec_chart!=null){
-		
-		System.out.println("notttttttt successssss");
 	return Response.status(Status.ACCEPTED).entity(rec_chart).build();	
 }
 }
@@ -121,7 +115,6 @@ try{
 
 	if(adm_chart!=null){
 		
-		System.out.println("notttttttt successssss");
 	return Response.status(Status.ACCEPTED).entity(adm_chart).build();	
 }
 }
