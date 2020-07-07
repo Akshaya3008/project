@@ -475,8 +475,8 @@
 							</table>
 							<input type="submit" id="admission" class="btn btn-success"
 								value="Submit">
-							<button id="cancel" class="btn btn-success"
-								onclick="clearSession()">Cancel</button>
+							<a id="cancel" class="btn btn-success"
+								onclick="clearSession()">Cancel</a>
 						</div>
 					</section>
 				</div>
@@ -1071,8 +1071,8 @@
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"
-							id="cancelBtn" value="Cancel" onclick="location.reload()"> <input type="submit"
-							class="btn btn-success" value="Save" id="saveBtn">
+							id="cancelBtn" value="Cancel" onclick="location.reload()"> 
+							<button  class="btn btn-success" id="saveFeesType">Save</button>
 					</div>
 				</form>
 			</div>
@@ -1141,7 +1141,6 @@
 				+ '</select><span class="input-group-addon" id="bhvk"><button type="button" id="add-btn" data-toggle="modal" data-target="#feestypeModal" style="background-color:transparent; border:none; font-size:18px; color:blue; position:relative;"> +</button></span></div></div></td><td><input type="number" class="form-control amt" id="amount" placeholder="0.00" ></td><td><input type="number" class="form-control discount" value="0"></td><td><div class="form-group"><select name="distype" class="form-control"><option value="INR">INR</option></select></div></td> <td><input type="text" class="form-control" placeholder="NONE" ></td><td> <input type="text" class="form-control totala" id="total-amt" disabled></td><td><div class="w3-padding w3-xlarge w3-teal"><button type="button" id="remove-row" class="remove-row"><i class="glyphicon glyphicon-trash"></i></button></div></td></tr>"';
 		$("#feestypetable,#feestypetable2").on('change', '.amt,.discount',
 				function() {
-					alert("10");
 					var discount = 0;
 					var amount = 0;
 					var r = document.getElementById('feestypetable');
@@ -1151,20 +1150,19 @@
 					amount = parseInt($(".amt", $trr).val());
 					discount = parseInt($(".discount", $trr).val());
 					if (amount.value != NaN) {
-						alert("1");
 						$(".totala", $trr).val(amount);
 					}
 
 					if ($(".totala", $trr).val() > 0 && discount >= 0) {
 						var cal = amount - discount;
 						if (cal < 0) {
-							alert("Profit cannot be Negative");
+							showNotification("success", "Profit cannot be Negative");
 							$(".totala", $trr).val(0);
 						} else {
 							$(".totala", $trr).val(cal);
 						}
 					} else if ($(".totala", $trr).val() < 0) {
-						alert("Input positive amount value");
+						showNotification("success", "Input positive amount value");
 						$(".totala", $trr).val(0);
 
 					}
@@ -1185,13 +1183,13 @@
 					.getElementById('grand-t').value;
 			$("#feestypetable2 .totala").each(
 					function() {
-
+						
 						var val = $(this).val();
 						total2 += isNaN(val) || $.trim(val) == "" ? 0
-								: parseFloat(val);
+								: parseInt(val);
 					});
-			$("#grand-t2").val(total2.toFixed(2));
-			$("#inputDisabledAmt").val(total2.toFixed(2));
+			$("#grand-t2").val(total2);
+			$("#inputDisabledAmt").val(total2);
 		}
 
 		//function() {

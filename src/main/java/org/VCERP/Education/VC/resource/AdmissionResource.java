@@ -123,7 +123,6 @@ public class AdmissionResource {
 	}
 
 	private String getStandard(String fees_pack, String branch) {
-		System.out.println(fees_pack + "  " + branch);
 		FeesPackage pack = new FeesPackage();
 		FeesPackageController controller = new FeesPackageController();
 		pack = controller.getFeesPackage(fees_pack, branch);
@@ -134,6 +133,7 @@ public class AdmissionResource {
 		ArrayList<String> installDate = new ArrayList<>();
 		ArrayList<String> fees_title = new ArrayList<>();
 		ArrayList<Integer> amt = new ArrayList<>();
+		String stud_name;
 		for (int i = 1; i < commaSeperated.length; i++) {
 			String a = commaSeperated[i];
 			String[] symbolSeperated = Util.symbolSeperatedString(a);
@@ -143,7 +143,11 @@ public class AdmissionResource {
 		}
 		AdmissionController controller = null;
 		Installment installment = null;
-		String stud_name=admission.getStudent_name()+" "+admission.getFname()+" "+admission.getMname();
+		if(admission.getFname()==null && admission.getLname()==null){
+			stud_name=admission.getStudent_name();
+		}else{
+			stud_name=admission.getStudent_name()+" "+admission.getFname()+" "+admission.getLname();
+		}
 		try {
 			installment = new Installment();
 			installment.setRollno(admission.getRollno());
@@ -172,7 +176,7 @@ public class AdmissionResource {
 		}
 		AdmissionController controller = null;
 		Installment installment = null;
-		String stud_name=admission.getStudent_name()+" "+admission.getFname()+" "+admission.getMname();
+		String stud_name=admission.getStudent_name()+" "+admission.getFname()+" "+admission.getLname();
 		try {
 			installment = new Installment();
 			installment.setRollno(admission.getRollno());
@@ -348,10 +352,11 @@ public class AdmissionResource {
 		try {
 			admission = controller.searchStudentFromAdmission(id, branch);
 			if(admission!=null){
-				System.out.println(admission.getRollno());
 			Installment installment = controller.getInstallment(admission.getRollno(), branch);
-			admission.setInstallment(installment);
-			return Response.status(Status.ACCEPTED).entity(admission).build();
+				if(installment!=null){
+					admission.setInstallment(installment);
+				}
+				return Response.status(Status.ACCEPTED).entity(admission).build();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -416,11 +421,17 @@ public class AdmissionResource {
 			@FormParam("Rollno") String Rollno, @FormParam("regno") String regno,
 			@FormParam("invoice_no") String invoice_no,@FormParam("admission_date") String admission_date,
 			@FormParam("acad_year") String acad_year, @FormParam("join_date") String join_date,
-			@FormParam("branch") String branch) {
+			@FormParam("branch") String branch,@FormParam("installment") String installment,
+			@FormParam("originalInstallment") String originalInstall,@FormParam("newAmt") String newAmt,
+			@FormParam("stud_details") String student_name) {
 		Admission admission = null;
 		AdmissionController controller = null;
+		String[] name = Util.symbolSeperatedString(student_name);
+		String[] symbolSeperated = Util.symbolSeperatedString(newAmt);
+		
 		try {
 			admission = new Admission();
+			admission.setStudent_name(name[1]);
 			admission.setEnq_taken_by(enq_taken_by);
 			admission.setDivision(division);
 			admission.setStatus(status);
@@ -431,7 +442,14 @@ public class AdmissionResource {
 			admission.setAdmission_date(admission_date);
 			admission.setAcad_year(acad_year);
 			admission.setJoin_date(join_date);
+			admission.setFees(Integer.parseInt(symbolSeperated[1]));
 			admission.setBranch(branch);
+			if(Integer.parseInt(originalInstall)==0){
+				String[] commaSeperatedInstallment = Util.commaSeperatedString(installment);
+				if (commaSeperatedInstallment.length > 1) {
+					saveInstallment(commaSeperatedInstallment, branch,admission);
+				}
+			}
 			controller = new AdmissionController();
 			controller.EditStudentAdmission(admission);
 			return Util.generateResponse(Status.ACCEPTED, "Data Successfully Edited").build();

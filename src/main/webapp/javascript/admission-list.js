@@ -7,7 +7,8 @@ $(document).ready(function() {
 		"stateSave" : true,
 		dom : 'Bfrtip',
 	});*/
-	table = $('#admission_table').DataTable({
+	table = $('#admission_table').DataTable(
+			/*{
 		buttons : [ {
 			extend : 'pdf',
 			className : 'btn btn-info glyphicon glyphicon-file pdf-b'
@@ -26,7 +27,8 @@ $(document).ready(function() {
 			"targets" : 'no-sort',
 			"orderable" : false,
 		} ]
-	});
+	}
+	*/);
 
 	table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
 	showAdmissionTable();
@@ -150,7 +152,6 @@ function getAdmissionPromoteData(id) {
 			feesDetails += "-" + feesData[i];
 		}
 		var installment = responseData.installment;
-
 		// var monthly=installment.monthly_pay.split(",");
 		var monthlypay = "monthlypay";
 		for (var i = 0; i < installment.monthly_pay.length; i++) {
@@ -232,7 +233,7 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 		admissionData.push(feesDetails);
 		admissionData.push(responseData.fees);
 		var installment = responseData.installment;
-
+		var checkInstallmentAvail=installment.monthly_pay.length;
 		// var monthly=installment.monthly_pay.split(",");
 		var monthlypay = "monthlypay";
 		for (var i = 0; i < installment.monthly_pay.length; i++) {
@@ -262,6 +263,7 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 		admissionData.push(paid_fees);
 		admissionData.push(responseData.standard);
 		admissionData.push(responseData.enq_no);
+		admissionData.push(checkInstallmentAvail);
 		sessionStorage.setItem("admission", admissionData);
 		window.location.href = "Admission.html";
 	}
