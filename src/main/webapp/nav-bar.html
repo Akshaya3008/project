@@ -55,14 +55,18 @@ function changeBranch(){
 		border-color:transparent !important;
    } 
    
-    .navbar-inverse .navbar-nav li a{
-    color: white !important;
-    }
+     .navbar-inverse .navbar-nav li a{
+    color: white;
+    } 
     .dropdown-menu li a{
      color:black !important;
      
     }
-    .dropdown-menu li :hover{
+    .dropdown-menu .dropdown-submenu>.open:hover li{
+    	background:#6383ab !important;
+    }
+    
+    .left_nav .dropdown-menu li :hover{
      background:#6383ab !important;
      color:white !important;
     }
@@ -70,9 +74,15 @@ function changeBranch(){
     .navbar-inverse .navbar-nav>.open>a{
     	background-color:#C1F0F6 !important;
     }
+    
+    
       .navbar-inverse .navbar-nav>.active>a{
     	background-color:#C1F0F6 !important;
     }
+    
+    .navbar-inverse .navbar-nav .open .dropdown-menu .dropdown-submenu ul {
+     background-color: white !important; 
+}
     /* .navbar .navbar-nav .open .dropdown-submenu .dropdown-menu > li > a{
      color:black !important;
     } */
@@ -95,6 +105,12 @@ function changeBranch(){
     padding: 10px;
     padding-bottom: 0px;
 }
+#branch_login{
+color:white !important;
+}
+#logout{
+color:white !important;
+}
 
 .navbar-login p{
 padding-top:0px !important;
@@ -103,6 +119,7 @@ margin: 0 0 1px !important;
 
 .navbar-login a{
 	border-radius:0px !important;
+	
 }
 
 .navbar-login-session
@@ -177,63 +194,64 @@ data-toggle="collapse">
 </div>
 
 <div class="navbar-collapse collapse" id="bs-navbar-collapse-1">
-<ul class="nav navbar-nav">
-<li class="active"><a href="dashboard.html">Dashboard</a></li>
-<li><a class="dropdown-toggle"
-data-toggle="dropdown">Transaction <span class="caret"></span></a>
+<ul class="nav navbar-nav left_nav">
+	<li class="active"><a href="dashboard.html">Dashboard</a></li>
+	<li><a class="dropdown-toggle"
+	data-toggle="dropdown">Transaction <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+	
+		<li><a href="EnquiryList.html">Student Info/Enquiry</a></li>
+		<li><a href="AdmissionList.html">Admission Invoice</a></li>
+		<li><a href="ReceiptList.html">Receipt</a></li>
+	
+		<li class="dropdown-submenu">
+		<a tabindex="-1" class="dropdown-submenu-toggle">Attendance <b class="caret"></b></a>
+		   <ul class="dropdown-menu">
+		       <li><a href="StudentAttendance.html">Student Attendance</a></li>
+		       <li><a href="EmployeeAttendance.html">Employee Attendance</a></li>
+		   </ul>
+		</li>
+		<li><a href="TimeTable.html">Timetable</a></li>
+		</ul>
+	</li>
+
+
+	<li><a href="MasterPage.html">Masters</a></li>
+	<li>
+		<a class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a href="RolesPermission.html">Roles And Permissions</a></li>
+			<li><a href="Branch.html">Branch Profile</a></li>
+			<li><a href="UserManagement.html">User Management</a></li>
+			<li><a href="OrganizationProfile.html">Organization Profile</a></li>
+			<li><a href="Promote.html">Promotion</a></li>	
+	
+		</ul>
+	</li>
+	<li><a class="dropdown-toggle" data-toggle="dropdown">Reports <span class="caret"></span></a>
 <ul class="dropdown-menu">
+	<li class="dropdown-submenu">
+	<a tabindex="-1" class="dropdown-submenu-toggle">Student Reports <b class="caret"></b></a>
+	   <ul class="dropdown-menu">
+	       <li><a href="StudentInfoReport.html">Student Info Report</a></li>
+	       <li><a href="AdmissionReport.html">Admission Report</a></li>
+	      
+	   </ul>
+	</li>
+ 	<li><a href="EmployeeReport.html">Employee Report</a></li>
 
-<li><a href="EnquiryList.html">Student Info/Enquiry</a></li>
-<li><a href="AdmissionList.html">Admission Invoice</a></li>
-<li><a href="ReceiptList.html">Receipt</a></li>
-
-<li class="dropdown-submenu"><a tabindex="-1" class="dropdown-submenu-toggle">Attendance <b class="caret"></b>
-                                            </a>
-   <ul class="dropdown-menu">
-       <li><a href="StudentAttendance.html">Student Attendance</a></li>
-       <li><a href="EmployeeAttendance.html">Employee Attendance</a></li>
-   </ul>
-</li>
-<li><a href="TimeTable.html">Timetable</a></li>
+	<li class="dropdown-submenu"><a tabindex="-1" class="dropdown-submenu-toggle">Fees Reports <b class="caret"></b>
+	                                            </a>
+	   <ul class="dropdown-menu">
+	       <li><a href="ReceiptsReport.html">Receipts Report</a></li>
+	       <li><a href="ReceivableReport.html">Receivable Report</a></li>
+	         <li><a href="FeesReport.html">Fees Report</a></li>
+	       <li><a href="InstallmentDueReport.html">Installment due fees Report</a></li>
+	   </ul>
+	</li>
+	<li><a href="ExpenseReport.html">Expenses Reports</a></li>
 </ul>
 </li>
-
-
-<li><a href="MasterPage.html">Masters</a></li>
-<li><a class="dropdown-toggle"
-data-toggle="dropdown">Settings <span class="caret"></span></a>
-<ul class="dropdown-menu">
-<li><a href="RolesPermission.html">Roles And Permissions</a></li>
-<li><a href="Branch.html">Branch Profile</a></li>
-<li><a href="UserManagement.html">User Management</a></li>
-<li><a href="OrganizationProfile.html">Organization Profile</a></li>
-<li><a href="Promote.html">Promotion</a></li>	
-
-</ul></li>
-<li><a class="dropdown-toggle"
-data-toggle="dropdown">Reports <span class="caret"></span></a>
-<ul class="dropdown-menu">
-<li class="dropdown-submenu"><a tabindex="-1" class="dropdown-submenu-toggle">Student Reports <b class="caret"></b>
-                                            </a>
-   <ul class="dropdown-menu">
-       <li><a href="StudentInfoReport.html">Student Info Report</a></li>
-       <li><a href="AdmissionReport.html">Admission Report</a></li>
-      
-   </ul>
-</li>
- <li><a href="EmployeeReport.html">Employee Report</a></li>
-
-<li class="dropdown-submenu"><a tabindex="-1" class="dropdown-submenu-toggle">Fees Reports <b class="caret"></b>
-                                            </a>
-   <ul class="dropdown-menu">
-       <li><a href="ReceiptsReport.html">Receipts Report</a></li>
-       <li><a href="ReceivableReport.html">Receivable Report</a></li>
-         <li><a href="FeesReport.html">Fees Report</a></li>
-       <li><a href="InstallmentDueReport.html">Installment due fees Report</a></li>
-   </ul>
-</li>
-<li><a href="ExpenseReport.html">Expenses Reports</a></li>
-</ul></li>
 
 </ul>
 
@@ -260,7 +278,7 @@ data-toggle="dropdown">Reports <span class="caret"></span></a>
 					</p>
 					<p class="text-left small" id="branch_name"></p>
 					<p class="text-left">
-					<a href="#ChangebranchModal" data-toggle="modal" data-target="#ChangebranchModal"  class="btn btn-primary btn-block btn-sm">Change Branch</a>
+					<a href="#ChangebranchModal" id="branch_login" data-toggle="modal" data-target="#ChangebranchModal"  class="btn btn-primary btn-block btn-sm">Change Branch</a>
 					</p>
 					</div>
 				</div>
