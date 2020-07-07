@@ -3,6 +3,7 @@ $(document).ready(function(){
 });
 
 function profile(){
-	var val = localStorage.getItem("user");
+	alert("prfile");
+	var val = user;
 	document.getElementById('profile').innerHTML  = val;
 }
