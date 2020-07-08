@@ -324,6 +324,7 @@ table.table .avatar {
 <div class="wrapper">
 <div id="navbar">
 </div>
+<div class="row" id="datatable-view">
 	<div class="table-wrapper" id="table-style">
 		<div class="table-title">
 			<div class="row">
@@ -338,11 +339,10 @@ table.table .avatar {
 						 <a href="#deleteEmployeeModal" id="deleteBtn" class="btn btn-danger" id="btn-danger" data-toggle="modal"><i class="fa fa-minus" ></i> 
 						 <span>Delete</span></a> -->
 					<a class="btn btn-info" id="btn-view" ><i class="fa fa-eye" ></i> <span>View</span></a>
-					<a class="btn btn-danger" id="cancelBtn"><i class="fa fa-plus"></i> <span>Cancel</span></a>
 				</div>
 			</div>
 		</div>
-		<div class="row" id="datatable-view">
+		
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -375,7 +375,22 @@ table.table .avatar {
 		</div>
 	</div>
 	<section class="panel panel-2" id="datatable-view-2">
+	<div class="table-wrapper" id="table-style">
 		         <div class="panel">
+		         <div class="table-title">
+			<div class="row">
+				<div class="col-sm-6">
+					<h2>
+						<b>Receipts</b>
+					</h2>
+				</div>
+				<div class="col-sm-6">
+						<button class="btn btn-secondary" id="Print_Admission_pdf" onclick="admission_print()"><i class="fa fa-file-print-o"></i> Print Admission</button>
+
+					<a class="btn btn-danger" id="cancelB"><i class="fa fa-window-close"></i> <span>Cancel</span></a>
+				</div>
+			</div>
+		</div>
              <div class="panel-heading panel-visible">
                  <div class="panel-title my-name">
                      <i class="fa fa-hand-o-right" id="stud">   </i>
@@ -554,7 +569,7 @@ table.table .avatar {
                  </div>
              </div>
          </div>
-	
+	</div>
 	</section>
 	
 	</div>
@@ -562,14 +577,15 @@ table.table .avatar {
 	<script>
 	$(document).ready(function() {
 		$("#datatable-view-2").css("display", "none");
-		$("#cancelBtn").css("display", "none");
+		$("#cancelB").css("display", "none");
+		
 		$("#btn-view").click(function(){
 			$(this).css("display", "none");
 			$("#datatable-view").css("display", "none");
 			$("#datatable-view-2").css("display", "block");
-			$("#cancelBtn").css("display", "block");
+			$("#cancelB").css("display", "block");
 		});
-		$("#cancelBtn").click(function() {
+		$("#cancelB").click(function() {
 			
 			$("#datatable-view").css("display", "block");
 			$("#datatable-view-2").css("display", "none");
