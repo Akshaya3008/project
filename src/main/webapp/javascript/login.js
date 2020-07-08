@@ -18,7 +18,8 @@ $(document).ready(function(){
 		    }
 		  },
 		  submitHandler:function(form){
-			 // event.preventDefault();
+			  event.preventDefault();
+			  $("#loadingModal").show();
 			  attemptLogin();
 		  }
 	});
@@ -26,7 +27,7 @@ $(document).ready(function(){
 
 
 function attemptLogin(){
-	document.getElementById("loading").style.display = 'block';
+//	document.getElementById("loading").style.display = 'block';
 	function callback(responseData,textStatus,request){
 		var token=request.getResponseHeader('X-Authorization');
 		sessionStorage.setItem("token", token);
@@ -37,7 +38,8 @@ function attemptLogin(){
 		if(role!="")
 			{
 			sessionStorage.setItem("user",name);
-			document.getElementById("loading").style.display = 'none';
+			$("#loadingModal").hide();
+			//document.getElementById("loading").style.display = 'none';
 			window.location.href="dashboard.html";
 			}
 		else
@@ -50,6 +52,7 @@ function attemptLogin(){
 	function errorCallback(responseData,textStatus,request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").hide();
 	}
 	var formData = $('#signin').serialize();
 	var httpMethod="POST";
