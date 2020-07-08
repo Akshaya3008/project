@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -25,7 +26,7 @@ import org.VCERP.Education.VC.utility.Util;
 public class AcademicYearResource{
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_ACADEMIC_YEAR")
 	@JWTTokenNeeded
 	@Path("/NewAcademic")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -61,7 +62,7 @@ public class AcademicYearResource{
 	}
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_ACADEMIC_YEAR")
 	@JWTTokenNeeded
 	@Path("/AcademicList")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -99,7 +100,7 @@ public class AcademicYearResource{
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_ACADEMIC_YEAR")
 	@JWTTokenNeeded
 	@Path("/editAcademicYear")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -135,7 +136,7 @@ public class AcademicYearResource{
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}
 	@DELETE
-	@PermitAll
+	@RolesAllowed("DELETE_ACADEMIC_YEAR")
 	@JWTTokenNeeded
 	@Path("/DeleteAcadYear")
 	@Consumes(MediaType.APPLICATION_JSON)

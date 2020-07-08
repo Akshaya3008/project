@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -29,8 +30,9 @@ import org.VCERP.Education.VC.utility.Util;
 
 @Path("TimeTable")
 public class TimeTableResource {
+	
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_TIMETABLE")
 	@JWTTokenNeeded
 	@Path("/NewTimeTable")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -67,8 +69,9 @@ public class TimeTableResource {
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new time table.Please try agin or contact with administrator").build();
 	}
+	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_TIMETABLE")
 	@JWTTokenNeeded
 	@Path("/FetchTimeTable")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -106,7 +109,7 @@ public class TimeTableResource {
 	}
 
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_TIMETABLE")
 	@JWTTokenNeeded
 	@Path("/InsertTimeSlot")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -167,7 +170,7 @@ public class TimeTableResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_TIMETABLE")
 	@JWTTokenNeeded
 	@Path("/EditTimeTable")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -213,7 +216,7 @@ public class TimeTableResource {
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable ot complete the task.").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("DELETE_TIMETABLE")
 	@JWTTokenNeeded
 	@Path("/deleteTimeTable")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -233,7 +236,7 @@ public class TimeTableResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Unable to complete the task.").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("VIEW_TIME_TABLE_REPORT")
 	@JWTTokenNeeded
 	@Path("/TimeTableReport")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)

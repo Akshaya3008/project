@@ -28,7 +28,7 @@ public class ChartResource {
 
 		
 	@POST
-	@PermitAll
+	@RolesAllowed("VIEW_DASHBOARD")
 	@JWTTokenNeeded
 	@Path("/getExpenseChart")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -61,7 +61,7 @@ public class ChartResource {
 
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_DASHBOARD")
 @JWTTokenNeeded
 @Path("/getReceiptChart")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -93,9 +93,8 @@ return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_DASHBOARD")
 @JWTTokenNeeded
-@RolesAllowed("VIEW_ADMISSION_CHART")
 @Path("/getAdmissionChart")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 @Produces(MediaType.APPLICATION_JSON)
@@ -127,7 +126,7 @@ return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_DASHBOARD")
 @JWTTokenNeeded
 @Path("/getConversionChart")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -154,7 +153,7 @@ return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 }
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_DASHBOARD")
 @JWTTokenNeeded
 @Path("/getSalesCard")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -178,7 +177,7 @@ public Response getSalesCard(@FormParam("start_date") String start_date,@FormPar
 }
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_DASHBOARD")
 @JWTTokenNeeded
 @Path("/getReceivedCard")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -204,7 +203,7 @@ public Response getReceivedCard(@FormParam("start_date") String start_date,@Form
 }
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_DASHBOARD")
 @JWTTokenNeeded
 @Path("/getReceivableCard")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -232,7 +231,7 @@ public Response getReceivableCard(@FormParam("start_date") String start_date,@Fo
 
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_DASHBOARD")
 @JWTTokenNeeded
 @Path("/getNetIncomeCard")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

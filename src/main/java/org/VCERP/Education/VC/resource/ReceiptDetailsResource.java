@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -44,9 +45,9 @@ public class ReceiptDetailsResource {
 			}
 	}
 	
-	@PermitAll
 	@GET
 	@JWTTokenNeeded
+	@RolesAllowed("VIEW_RECEIPT")
 	@Path("/FetchAllReceiptDetails")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response FetchAllReceiptDetails(@QueryParam("branch") String branch){
@@ -90,10 +91,10 @@ public class ReceiptDetailsResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to get receipt no.").build();
 	}
 	
-	@PermitAll
 	@POST
 	@JWTTokenNeeded
 	@Path("/ReceiptDetails")
+	@RolesAllowed("ADD_NEW_RECEIPT")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response ReceiptDetailsForm(@FormParam("stud_details") String stud_name,
 			@FormParam("receipt_date") String receipt_date,@FormParam("receipt_no") String receipt_no,
@@ -159,6 +160,7 @@ public class ReceiptDetailsResource {
 	@Path("/getReceiptAdmissionData")
 	@GET
 	@PermitAll
+	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getReceiptAdmissionData(@QueryParam("id") String rollno,@QueryParam("receiptno") String receiptno){
 		 ArrayList<ReceiptDetails> admission=new ArrayList<>();
@@ -174,7 +176,8 @@ public class ReceiptDetailsResource {
 	}
 	@Path("/getStudReceiptList")
 	@GET
-	@PermitAll
+	@JWTTokenNeeded
+	@RolesAllowed("VIEW_RECEIPT")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response StudReceiptList(@QueryParam("rno") String rno,@QueryParam("branch") String Branch){
 		 ArrayList<ReceiptDetails> rlist = new ArrayList<>();
@@ -190,7 +193,8 @@ public class ReceiptDetailsResource {
 	}
 	@Path("/ReceiptReport")
 	@POST
-	@PermitAll
+	@JWTTokenNeeded
+	@RolesAllowed("VIEW_RECEIPT_REPORT")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response ReceiptReport(@FormParam("from_date") String from_date,@FormParam("to_date") String to_date,
@@ -230,7 +234,7 @@ public class ReceiptDetailsResource {
 	}
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("VIEW_INSTALLMENT_DUE_FEES_REPORT")
 	@JWTTokenNeeded
 	@Path("/InstallmentDueReport")
 	@Produces(MediaType.APPLICATION_JSON)

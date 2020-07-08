@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -47,7 +48,7 @@ public class EmpAttendanceResource {
 	
 	@POST
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("ADD_NEW_EMPLOYEE_ATTENDANCE")
 	@Path("/employeeAttendance")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response employeeAttendance(@FormParam("Attendance") String attendance,@FormParam("branch") String branch )
@@ -76,7 +77,7 @@ public class EmpAttendanceResource {
 	}
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("VIEW_EMPLOYEE_ATTENDANCE")
 	@JWTTokenNeeded
 	@Path("/getEmpAttendaceStat")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -111,7 +112,7 @@ public class EmpAttendanceResource {
 	
 
 @POST
-@PermitAll
+@RolesAllowed("VIEW_EMPLOYEE_ATTENDANCE_REPORT")
 @JWTTokenNeeded
 @Path("/getEmpAttendaceReport")
 @Produces(MediaType.APPLICATION_JSON)

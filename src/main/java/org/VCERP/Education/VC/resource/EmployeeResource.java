@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -27,7 +28,7 @@ import org.VCERP.Education.VC.utility.Util;
 public class EmployeeResource {
 
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_EMPLOYEE")
 	@JWTTokenNeeded
 	@Path("/NewEmployee")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -62,12 +63,10 @@ public class EmployeeResource {
 	}
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_EMPLOYEE")
 	@JWTTokenNeeded
 	@Path("/FetchAllEmployee")
-	//@PreAuthorize("hasRole('desk')")
 	@Produces(MediaType.APPLICATION_JSON)
-	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response FetchAllEmployee(@QueryParam("branch") String branch){
 		ArrayList<Employee> emp=new ArrayList<>();
 		EmployeeController controller=new EmployeeController();
@@ -101,7 +100,7 @@ public class EmployeeResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_EMPLOYEE")
 	@JWTTokenNeeded
 	@Path("/EditEmployee")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -136,7 +135,7 @@ public class EmployeeResource {
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}
 	@DELETE
-	@PermitAll
+	@RolesAllowed("DELETE_EMPLOYEE")
 	@JWTTokenNeeded
 	@Path("/deleteEmployee")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -151,7 +150,7 @@ public class EmployeeResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Unable to complete task.").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("VIEW_EMPLOYEE_REPORT")
 	@JWTTokenNeeded
 	@Path("/FetchEmployeeReport")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -32,10 +33,10 @@ import org.VCERP.Education.VC.utility.Util;
 public class AdmissionResource {
 	
 
-	@PermitAll
 	@POST
 	@JWTTokenNeeded
 	@Path("/StudentAdmission")
+	@RolesAllowed("ADD_NEW_ADMISSION")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response StudentAdmission(@FormParam("stud_details") String student_name,
 			@FormParam("enq_taken_by") String enq_taken_by, @FormParam("adm_fees_pack") String adm_fees_pack,
@@ -216,10 +217,10 @@ public class AdmissionResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to get student data.").build();
 	}
 
-	@PermitAll
 	@GET
 	@JWTTokenNeeded
 	@Path("/FetchAllAdmittedStudent")
+	@RolesAllowed("VIEW_ADMISSION")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchAllAdmittedStudent(@QueryParam("branch") String branch) {
 		ArrayList<Admission> admission = null;
@@ -280,8 +281,8 @@ public class AdmissionResource {
 
 	@Path("/StudentPromotion")
 	@POST
-	@PermitAll
 	@JWTTokenNeeded
+	@RolesAllowed("ADD_NEW_PROMOTION")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response StudentPromotion(@FormParam("fees") String fees, @FormParam("student_status") String status,
 			@FormParam("acad_year") String acad_year, @FormParam("division") String division,
@@ -365,10 +366,10 @@ public class AdmissionResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
 
-	@PermitAll
 	@POST
 	@JWTTokenNeeded
 	@Path("/AdmissionReport")
+	@RolesAllowed("VIEW_ADMISSION_REPORT")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response AdmissionReport(@FormParam("from_date") String from_date, @FormParam("to_date") String to_date,
@@ -411,9 +412,10 @@ public class AdmissionResource {
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
-	@PermitAll
+
 	@POST
 	@JWTTokenNeeded
+	@RolesAllowed("EDIT_ADMISSION")
 	@Path("/EditStudentAdmission")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response EditStudentAdmission(@FormParam("enq_taken_by") String enq_taken_by, 
@@ -459,10 +461,11 @@ public class AdmissionResource {
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to completed the process.").build();
 	}
-	@PermitAll
+
 	@POST
 	@JWTTokenNeeded
 	@Path("/PromoteStudent")
+	@RolesAllowed("ADD_NEW_PROMOTION")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response PromoteStudent(@FormParam("stud_details") String student_name,
 			@FormParam("enq_taken_by") String enq_taken_by, @FormParam("adm_fees_pack") String adm_fees_pack,

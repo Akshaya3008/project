@@ -1,5 +1,6 @@
 package org.VCERP.Education.VC.resource;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -18,6 +19,7 @@ public class RolesPermissionResource {
 	
 	@POST
 	@JWTTokenNeeded
+	@RolesAllowed("ADD_NEW_ROLES_AND_PERMISSION")
 	@Path("saveRolesPermission")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response saveRolesPermission(@FormParam("rolename") String role,@FormParam("permission") String permission,

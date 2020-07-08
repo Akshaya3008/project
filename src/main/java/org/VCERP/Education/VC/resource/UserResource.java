@@ -110,7 +110,7 @@ public class UserResource {
 	}
 
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_USER_ACCOUNT")
 	@JWTTokenNeeded
 	@Path("/getAllAccount")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -143,7 +143,7 @@ public class UserResource {
 	}
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_USER_ACCOUNT")
 	@JWTTokenNeeded
 	@Path("/EditEmployeeAccount")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -167,7 +167,7 @@ public class UserResource {
 		}
 	
 	@DELETE
-	@PermitAll
+	@RolesAllowed("DELETE_USER_ACCOUNT")
 	@JWTTokenNeeded
 	@Path("/DeactivateAccount")
 	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)

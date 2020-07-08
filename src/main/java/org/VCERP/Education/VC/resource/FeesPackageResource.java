@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -24,7 +25,7 @@ import org.VCERP.Education.VC.utility.Util;
 public class FeesPackageResource {
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_FEES_PACKAGE")
 	@JWTTokenNeeded
 	@Path("/addNewFeesPackage")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -92,7 +93,7 @@ public class FeesPackageResource {
 	}
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_FEES_PACKAGE")
 	@JWTTokenNeeded
 	@Path("/getFeesPackage")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -113,8 +114,8 @@ public class FeesPackageResource {
 	
 	
 	@POST
-	@JWTTokenNeeded
 	@PermitAll
+	@JWTTokenNeeded
 	@Path("/getFeesPackageData")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response getSpecificFeesPackageData(@FormParam("pack") String pack,@FormParam("branch") String branch)
@@ -134,7 +135,7 @@ public class FeesPackageResource {
 	
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_FEES_PACKAGE")
 	@JWTTokenNeeded
 	@Path("/EditFeesPackage")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -162,7 +163,7 @@ public class FeesPackageResource {
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}
 	@DELETE
-	@PermitAll
+	@RolesAllowed("DELETE_FEES_PACKAGE")
 	@JWTTokenNeeded
 	@Path("/deleteFeesPackage")
 	@Produces(MediaType.APPLICATION_JSON)

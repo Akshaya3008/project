@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
@@ -28,9 +29,8 @@ public class EnquiryResource {
 	
 	@Path("/EnquiryData")
 	@POST
-	@PermitAll
 	@JWTTokenNeeded
-	//@PreAuthorize("hasRole('desk')")
+	@RolesAllowed("ADD_NEW_ENQUIRY")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response EnquiryData(@Valid @BeanParam Enquiry enquiry){
 		EnquiryController controller=new EnquiryController();
@@ -45,10 +45,8 @@ public class EnquiryResource {
 
 	@Path("/editEnquiryData")
 	@POST
-	@PermitAll
 	@JWTTokenNeeded
-	//@PreAuthorize("hasRole('desk')")
-	//@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("EDIT_ENQUIRY")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response EditEnquiryData(@Valid @BeanParam Enquiry enquiry){
 		EnquiryController controller=new EnquiryController();
@@ -72,9 +70,9 @@ public class EnquiryResource {
 	}
 	
 	@GET
-	@PermitAll
 	@JWTTokenNeeded
 	@Path("/FetchAllEnquiryData")
+	@RolesAllowed("VIEW_ENQUIRY")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response FetchAllEnquiryData(@QueryParam("branch") String branch){
 		try {
@@ -89,10 +87,9 @@ public class EnquiryResource {
 	}
 	
 	@DELETE
-	@PermitAll
 	@JWTTokenNeeded
 	@Path("/DeleteMultipleEnquiryData")
-	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@RolesAllowed("DELETE_ENQUIRY")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response DeleteMultipleEnquiryData(@QueryParam("delete") String ids,@QueryParam("branch") String branch){
 		EnquiryController controller=new EnquiryController();
@@ -125,9 +122,9 @@ public class EnquiryResource {
 		return Util.generateErrorResponse(Status.BAD_REQUEST,"Admission not done.").build();
 	}*/
 	@POST
-	@PermitAll
 	@JWTTokenNeeded
 	@Path("/EnquiryReport")
+	@RolesAllowed("VIEW_STUDENT_INFO_REPORT")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response EnquiryReport(@FormParam("enq_taken_by") String enq_taken,@FormParam("from_date") String from_date,
@@ -166,6 +163,7 @@ public class EnquiryResource {
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST,"Admission not done.").build();
 	}
+	
 	@GET
 	@PermitAll
 	@JWTTokenNeeded

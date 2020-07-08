@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.VCERP.Education.VC.controller.AttendanceController;
+import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Attendance;
 import org.VCERP.Education.VC.utility.Util;
 
@@ -23,6 +25,7 @@ public class AttendanceResource {
 
 	@Path("/getAttendaceList")
 	@POST
+	@JWTTokenNeeded
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAttendaceList(@FormParam("standard") String standard,@FormParam("acad_year") String acad_year
@@ -45,7 +48,8 @@ public class AttendanceResource {
 	
 	@Path("/studentAttendance")
 	@POST
-	@PermitAll
+	@JWTTokenNeeded
+	@RolesAllowed("ADD_NEW_STUDENT_ATTENDANCE")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response studentAttendance(@FormParam("standard") String standard,@FormParam("division") String division
 			,@FormParam("acad_year") String acad_year
@@ -73,7 +77,8 @@ public class AttendanceResource {
 	
 	@Path("/getAttendaceStat")
 	@POST
-	@PermitAll
+	@RolesAllowed("VIEW_STUDENT_ATTENDANCE")
+	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAttendaceStat(@FormParam("standard") String standard,@FormParam("acad_year") String acad_year
 			,@FormParam("division") String division,@FormParam("from_date") String from_date,@FormParam("to_date") String to_date,
@@ -127,7 +132,8 @@ public class AttendanceResource {
 	
 	@Path("/studentAttendanceReport")
 	@POST
-	@PermitAll
+	@JWTTokenNeeded
+	@RolesAllowed("VIEW_STUDENT_ATTENDANCE_REPORT")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response studentAttendanceReport(@FormParam("rollno") String rollno,
 			@FormParam("standard") String standard,@FormParam("division") String division

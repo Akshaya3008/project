@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -28,7 +29,7 @@ import org.VCERP.Education.VC.utility.Util;
 @Path("Expense")
 public class ExpenseResource {
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_EXPENSE")
 	@JWTTokenNeeded
 	@Path("/NewExpense")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -55,7 +56,7 @@ public class ExpenseResource {
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new expense.Please try again or contact with administrator.").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_EXPENSE")
 	@JWTTokenNeeded
 	@Path("/EditExpense")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -84,7 +85,7 @@ public class ExpenseResource {
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete this .").build();
 }
 	@DELETE
-	@PermitAll
+	@RolesAllowed("DELETE_EXPENSE")
 	@JWTTokenNeeded
 	@Path("/DeleteExpense")
 	//@PreAuthorize("hasRole('desk')")
@@ -101,7 +102,7 @@ public class ExpenseResource {
 	}
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_EXPENSE")
 	@JWTTokenNeeded
 	@Path("/FetchAllExpense")
 	//@PreAuthorize("hasRole('desk')")
@@ -123,7 +124,7 @@ public class ExpenseResource {
 	
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_EXPENSE")
 	@JWTTokenNeeded
 	@Path("/NewVendor")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -151,7 +152,6 @@ public class ExpenseResource {
 	@PermitAll
 	@JWTTokenNeeded
 	@Path("/LoadVendor")
-	//@PreAuthorize("hasRole('desk')")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response LoadVendor(){
 			//@QueryParam("branch") String branch
@@ -171,7 +171,8 @@ public class ExpenseResource {
 	
 	@Path("/ExpenseReport")
 	@POST
-	@PermitAll
+	@JWTTokenNeeded
+	@RolesAllowed("VIEW_EXPENSE_REPORT")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response ReceiptReport(@FormParam("from_date") String from_date,@FormParam("to_date") String to_date,

@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -25,7 +26,7 @@ public class StandardResource {
 	
 	@Path("/getAllStandard")
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_STANDARD")
 	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllStandard(@QueryParam("branch") String branch){
@@ -47,7 +48,7 @@ public class StandardResource {
 	@Path("/addStandard")
 	@POST
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("ADD_NEW_STANDARD")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response addStandard(@FormParam("stdname") String stdname,@FormParam("stdamt") String stdamt,
 			@FormParam("sub") String sub,@FormParam("branchData") String branchData){
@@ -76,7 +77,7 @@ public class StandardResource {
 	@Path("/deleteStandard")
 	@DELETE
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("DELETE_STANDARD")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteStandard(@QueryParam("id") Long id,@QueryParam("branch") String branch){
 		Standard standard=new Standard();
@@ -94,7 +95,7 @@ public class StandardResource {
 	@Path("/EditStandard")
 	@POST
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("EDIT_STANDARD")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response EditStandard(@FormParam("stdname") String stdname,@FormParam("stdamt") String stdamt,
 			@FormParam("sub") String sub,@FormParam("branchData") String branchData,@FormParam("id") Long id){

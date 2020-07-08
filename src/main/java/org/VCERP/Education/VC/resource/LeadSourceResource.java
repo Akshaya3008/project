@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -26,7 +27,7 @@ import org.VCERP.Education.VC.utility.Util;
 public class LeadSourceResource {
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_LEAD_SOURCE")
 	@JWTTokenNeeded
 	@Path("/NewSource")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -50,7 +51,7 @@ public class LeadSourceResource {
 	
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_LEAD_SOURCE")
 	@JWTTokenNeeded
 	@Path("/LeadSourceList")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -72,7 +73,7 @@ public class LeadSourceResource {
 	}
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_LEAD_SOURCE")
 	@JWTTokenNeeded
 	@Path("/EditLeadSource")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -97,7 +98,7 @@ public class LeadSourceResource {
 	@DELETE
 	@Path("/deleteSource")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("DELETE_LEAD_SOURCE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteSource(@QueryParam("id") String id)
 	{

@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -25,7 +26,7 @@ public class BranchResource {
 	@Path("/addNewBranch")
 	@POST
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("ADD_NEW_BRANCH")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response addNewBranch(@BeanParam Branch branch) {
 		BranchController controller = new BranchController();
@@ -41,7 +42,7 @@ public class BranchResource {
 	@Path("/getBranch")
 	@GET
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("VIEW_BRANCH")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBranchDetails(@QueryParam("branch") String branch) {
 		BranchController controller = new BranchController();
@@ -76,7 +77,7 @@ public class BranchResource {
 	@Path("/editBranch")
 	@POST
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("EDIT_BRANCH")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response editBranch(@BeanParam Branch branch) {
 		try {

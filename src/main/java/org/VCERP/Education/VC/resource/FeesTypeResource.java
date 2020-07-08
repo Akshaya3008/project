@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -30,7 +31,7 @@ public class FeesTypeResource {
 	@POST
 	@Path("/addNewFeesType")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("ADD_NEW_FEES_TYPE")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response addNewFeesType(@FormParam("feesType") String feesType,@FormParam("branch") String branch)
 	{
@@ -51,7 +52,7 @@ public class FeesTypeResource {
 	@GET
 	@Path("/getFeesType")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("VIEW_FEES_TYPE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFeesType(@QueryParam("branch") String branch)
 	{
@@ -73,7 +74,7 @@ public class FeesTypeResource {
 	@POST
 	@Path("/EditFeesType")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("EDIT_FEES_TYPE")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response EditFeesType(@FormParam("feesType") String feesType,@FormParam("id") Long id,@FormParam("branch") String branch)
 	{
@@ -94,7 +95,7 @@ public class FeesTypeResource {
 	@DELETE
 	@Path("/deleteFeesType")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("DELETE_FEES_TYPE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteFeesType(@QueryParam("id") String id)
 	{

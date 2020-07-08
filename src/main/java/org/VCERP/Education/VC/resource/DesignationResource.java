@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -30,7 +31,7 @@ import org.VCERP.Education.VC.utility.Util;
 @Path("Designation")
 public class DesignationResource {
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_DESIGNATION")
 	@JWTTokenNeeded
 	@Path("/NewDesignation")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -56,10 +57,9 @@ public class DesignationResource {
 	}
 	
 	@GET
-	@PermitAll
 	@JWTTokenNeeded
 	@Path("/FetchAllDesignation")
-	//@PreAuthorize("hasRole('desk')")
+	@RolesAllowed("VIEW_DESIGNATION")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response FetchAllDesignation(@QueryParam("branch") String branch){
 		try {
@@ -73,7 +73,7 @@ public class DesignationResource {
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_DESIGNATION")
 	@JWTTokenNeeded
 	@Path("/EditDesignation")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -96,7 +96,7 @@ public class DesignationResource {
 	}
 	@DELETE
 	@Path("/deleteDesignation")
-	@PermitAll
+	@RolesAllowed("DELETE_DESIGNATION")
 	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteDesignation(@QueryParam("id") String id)

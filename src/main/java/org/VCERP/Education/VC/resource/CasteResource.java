@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -29,7 +30,7 @@ public class CasteResource {
 	@POST
 	@Path("/addNewCaste")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("ADD_NEW_CASTE")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response addNewCaste(@FormParam("caste") String stud_caste,@FormParam("branch") String branch)
 	{
@@ -50,7 +51,7 @@ public class CasteResource {
 	@GET
 	@Path("/getCaste")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("VIEW_CASTE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCaste(@QueryParam("branch") String branch)
 	{
@@ -72,7 +73,7 @@ public class CasteResource {
 	@POST
 	@Path("/EditCaste")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("EDIT_CASTE")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response EditCaste(@FormParam("caste") String stud_caste,@FormParam("id") Long id)
 	{
@@ -92,7 +93,7 @@ public class CasteResource {
 	@DELETE
 	@Path("/deleteCaste")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("DELETE_CASTE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteCaste(@QueryParam("id") String id)
 	{

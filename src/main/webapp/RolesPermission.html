@@ -351,8 +351,8 @@ table.table .avatar {
 								</div>
 								<div class="col-sm-6">
 									<a id="addBtn" class="btn btn-success"><i class="fa fa-plus"></i> <span>Add New</span></a>
-									<a href="" id="editBtn" class="btn btn-warning" id="edit"><i class="fa fa-plus"></i> <span>Edit </span></a> 
-									<a href="" class="btn btn-danger" id="deleteBtn"  data-toggle="modal"><i class="fa fa-minus"></i> <span>Delete</span></a>
+									<!-- <a href="" id="editBtn" class="btn btn-warning" id="edit"><i class="fa fa-plus"></i> <span>Edit </span></a> 
+									<a href="" class="btn btn-danger" id="deleteBtn"  data-toggle="modal"><i class="fa fa-minus"></i> <span>Delete</span></a> -->
 									<a href="" class="btn btn-info" id="btn-view"> <i class="fa fa-eye"></i> <span>View</span></a>
 								</div>
 							</div>
@@ -523,7 +523,7 @@ table.table .avatar {
 															</span> --></th>
 															<th colspan="2"class="no-sort"><span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
-																	value="VIEW_REPORT_STUDENT_ATTENDANCE"> <label
+																	value="VIEW_STUDENT_ATTENDANCE"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
@@ -810,10 +810,10 @@ table.table .avatar {
 																	<input type="checkbox" id="permission" name="permission"
 																	value="EDIT_BRANCH"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
+															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="DELETE_BRANCH"> <label for="checkbox1"></label>
-															</span></th>
+															</span> --></th>
 															<th colspan="2"class="no-sort"><span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_BRANCH"> <label
@@ -841,7 +841,26 @@ table.table .avatar {
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														
+														<tr>
+															<td colspan="4">Expenses</td>
+															<th colspan="2" class="no-sort"><span class="custom-checkbox">
+																	<input type="checkbox" id="permission" name="permission"
+																	value="ADD_NEW_EXPENSE"> <label for="checkbox1"></label>
+															</span></th>
+															<th colspan="2" class="no-sort"><span class="custom-checkbox">
+																	<input type="checkbox" id="permission" name="permission"
+																	value="EDIT_EXPENSE"> <label for="checkbox1"></label>
+															</span></th>
+															<th colspan="2"class="no-sort"><span class="custom-checkbox">
+																	<input type="checkbox" id="permission" name="permission"
+																	value="DELETE_EXPENSE"> <label for="checkbox1"></label>
+															</span></th>
+															<th colspan="2"class="no-sort"><span class="custom-checkbox">
+																	<input type="checkbox" id="permission" name="permission"
+																	value="VIEW_EXPENSE"> <label
+																	for="checkbox1"></label>
+															</span></th>
+														</tr>
 														<tr>
 															<td colspan="4">Organization Profile</td>
 															<th colspan="2" class="no-sort"><span class="custom-checkbox">
@@ -920,6 +939,23 @@ table.table .avatar {
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
+														<tr>
+															<td colspan="4">Expense Report</td>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	 <label >NA</label>
+															</span></th>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	 <label >NA</label>
+															</span></th>
+															<th colspan="2"class="no-sort"><span class="Label">
+																	 <label >NA</label>
+															</span></th>
+															<th colspan="2"class="no-sort"><span class="custom-checkbox">
+																	<input type="checkbox" id="permission" name="permission"
+																	value="VIEW_EXPENSE_REPORT"> <label
+																	for="checkbox1"></label>
+															</span></th>
+														</tr>
 														
 														<tr>
 															<td colspan="4">Employee Report</td>
@@ -957,8 +993,8 @@ table.table .avatar {
 															</span></th>
 														</tr>
 														
-														<!-- <tr>
-															<td colspan="4">Receivable Report</td>
+														 <tr>
+															<td colspan="4">Student Attendance Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
 																	 <label >NA</label>
 															</span></th>
@@ -970,13 +1006,13 @@ table.table .avatar {
 															</span></th>
 															<th colspan="2"class="no-sort"><span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
-																	value="VIEW_REPORT_RECEIVABLE_REPORT"> <label
+																	value="VIEW_STUDENT_ATTENDANCE_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														 -->
-															<!-- <tr>
-															<td colspan="4">Fees Report</td>
+														 
+															 <tr>
+															<td colspan="4">Employee Attendance Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
 																	 <label >NA</label>
 															</span></th>
@@ -988,11 +1024,28 @@ table.table .avatar {
 															</span></th>
 															<th colspan="2"class="no-sort"><span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
-																	value="VIEW_REPORT_FEES_REPORT"> <label
+																	value="VIEW_EMPLOYEE_ATTENDANCE_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														 -->
+														<tr>
+															<td colspan="4">Time Table Report</td>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	 <label >NA</label>
+															</span></th>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	 <label >NA</label>
+															</span></th>
+															<th colspan="2"class="no-sort"><span class="Label">
+																	 <label >NA</label>
+															</span></th>
+															<th colspan="2"class="no-sort"><span class="custom-checkbox">
+																	<input type="checkbox" id="permission" name="permission"
+																	value="VIEW_TIME_TABLE_REPORT"> <label
+																	for="checkbox1"></label>
+															</span></th>
+														</tr>
+														 
 														<tr>
 															<td colspan="4">Installment due fees report </td>
 															<th colspan="2" class="no-sort"><span class="Label">

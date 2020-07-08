@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -27,7 +28,7 @@ import org.VCERP.Education.VC.utility.Util;
 public class DivisionResource {
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_DIVISION")
 	@JWTTokenNeeded
 	@Path("/NewDivision")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -52,7 +53,7 @@ public class DivisionResource {
 	
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_DIVISION")
 	@JWTTokenNeeded
 	@Path("/DivisionList")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -92,7 +93,7 @@ public class DivisionResource {
 	}
 	*/
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_DIVISION")
 	@JWTTokenNeeded
 	@Path("/EditDivision")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -117,7 +118,7 @@ public class DivisionResource {
 	@DELETE
 	@Path("/deleteDivision")
 	@JWTTokenNeeded
-	@PermitAll
+	@RolesAllowed("DELETE_DIVISION")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteDivision(@QueryParam("id") String id)
 	{	

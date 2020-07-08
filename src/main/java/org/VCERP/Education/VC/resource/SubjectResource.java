@@ -3,6 +3,7 @@ package org.VCERP.Education.VC.resource;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -26,7 +27,7 @@ import org.VCERP.Education.VC.utility.Util;
 @Path("Subject")
 public class SubjectResource {
 	@POST
-	@PermitAll
+	@RolesAllowed("ADD_NEW_SUBJECT")
 	@JWTTokenNeeded
 	@Path("/NewSubject")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -52,10 +53,9 @@ public class SubjectResource {
 	}
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("VIEW_SUBJECT")
 	@JWTTokenNeeded
 	@Path("/FetchAllSubject")
-	//@PreAuthorize("hasRole('desk')")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response FetchAllSubject(@QueryParam("branch") String branch){
 		try {
@@ -70,7 +70,7 @@ public class SubjectResource {
 	}
 	
 	@POST
-	@PermitAll
+	@RolesAllowed("EDIT_SUBJECT")
 	@JWTTokenNeeded
 	@Path("/EditSubject")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -97,7 +97,7 @@ public class SubjectResource {
 	}
 	@DELETE
 	@Path("/deleteSubject")
-	@PermitAll
+	@RolesAllowed("DELETE_SUBJECT")
 	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteSubject(@QueryParam("id") String id)
