@@ -5,9 +5,10 @@
 
 <script src="jquery/jquery-3.3.1.min.js"></script>
 <script src="jquery/bootstrap.min.js"></script>  
-<link rel="stylesheet" href="css/bootstrap.min.css">                  
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->                  
 
 <script src="jquery/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -77,7 +78,11 @@ label.error {
 }
 
 .new-receipt .form-control{
-	margin-bottm:10px;
+	
+}
+.panel-body .row{
+
+margin-bottom:10px;
 }
 </style>
 	<script>
@@ -215,7 +220,7 @@ label.error {
 							</div>
 							</div>
 							<br> <input type="submit" id="receipt" class="btn btn-info rec" value="Submit">
-								<input type="button" id="cancel" class="btn btn-info rec" value="Cancel">
+								<input type="button" id="cancel" data-dismiss="modal" onclick="location.reload()" class="btn btn-info rec" value="Cancel">
 						</div>
 					</section>
 				</div>

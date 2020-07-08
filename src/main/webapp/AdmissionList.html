@@ -327,8 +327,8 @@ table.table {
 <body>
 	<div class="wrapper">
 		<div id="navbar"></div>
+			<div class="row panel-1" id="datatable-view">
 		<div class="table-wrapper">
-
 			<div class="table-title" id="table-style">
 				<div class="row">
 					<div class="col-sm-6">
@@ -339,18 +339,15 @@ table.table {
 					<div class="col-sm-6">
 						<a href="Admission.html" class="btn btn-success" id="addBtn"><i class="fa fa-plus"></i> <span>Add New</span></a> 
 						<a href="" class="btn btn-warning" id="editBtn" data-toggle="modal"><i class="fa fa-plus"></i> <span>Edit</span></a>
-						<a href="" class="btn btn-default" id="cancelBtn" data-toggle="modal"><i class="fa fa-plus"></i> <span>Cancel</span></a>
+						
 						<!-- <a href="#deleteEmployeeModal" class="btn btn-danger" id="deleteBtn" data-toggle="modal"><i class="fa fa-minus"></i>
 							<span>Delete</span></a>  -->
 						<a href="" class="btn btn-info" id="btn-view"><i class="fa fa-eye"></i> <span>View </span></a>
-						<button class="btn btn-secondary" id="Invoice_pdf" onclick="invoice_pdf()"><i class="fa fa-file-pdf-o"></i> Inovice PDF</button>
-						<button class="btn btn-secondary" id="Admission_pdf" onclick="admission_pdf()"><i class="fa fa-file-pdf-o"></i> Admission PDF</button>
-						<button class="btn btn-secondary" id="Print_Invoice_pdf" onclick="invoice_print()"><i class="fa fa-file-print-o"></i> Print Invoice</button>
-						<button class="btn btn-secondary" id="Print_Admission_pdf" onclick="admission_print()"><i class="fa fa-file-print-o"></i> Print Admission</button>
+				
 					</div>
 				</div>
 			</div>
-			<div class="row panel-1" id="datatable-view">
+		
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
@@ -387,6 +384,26 @@ table.table {
 			</div>
 		</div>
 		<section class="panel panel-2" id="datatable-view-2">
+		<div class="table-wrapper">
+		
+		<div class="table-title" id="table-style">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>
+							<b>Admission</b>
+						</h2>
+					</div>
+					<div class="col-sm-6">
+							<button class="btn btn-secondary" id="Invoice_pdf" onclick="invoice_pdf()"><i class="fa fa-file-pdf-o"></i> Inovice PDF</button>
+						<button class="btn btn-secondary" id="Admission_pdf" onclick="admission_pdf()"><i class="fa fa-file-pdf-o"></i> Admission PDF</button>
+						<button class="btn btn-secondary" id="Print_Invoice_pdf" onclick="invoice_print()"><i class="fa fa-file-print-o"></i> Print Invoice</button>
+						<button class="btn btn-secondary" id="Print_Admission_pdf" onclick="admission_print()"><i class="fa fa-file-print-o"></i> Print Admission</button>
+				<a href="" class="btn btn-danger" id="cancelB" data-toggle="modal"><i class="fa fa-window-close"></i> <span>Cancel</span></a>
+					</div>
+				</div>
+			</div>
+
+
 
 			<div class="panel">
 				<div class="panel-heading panel-visible">
@@ -650,6 +667,7 @@ table.table {
 				</div>
 
 			</div>
+			</div>
 		</section>
 
 		<!-- Delete Modal HTML -->
@@ -833,24 +851,22 @@ function admission_print(){
 	<script>
 	$(document).ready(function() {
 		$("#datatable-view-2").css("display", "none");
-		$("#btn-view").css("display", "none");
-		$("#cancelBtn").css("display", "none");
-		$(".cbCheck").click(function() {
-			$("#btn-view").css("display", "show");
+		/* $("#cancelB").css("display", "none"); */
+			
 			$("#btn-view").click(function(){
 		
 					$("#datatable-view").css("display", "none");
 					$("#datatable-view-2").css("display", "block");
-					$("#cancelBtn").css("display", "block");
+					$("#cancelB").css("display", "block");
 			
 				});
-				$("#cancelBtn").click(function() {
+				$("#cancelB").click(function() {
 			
 					$("#datatable-view").css("display", "block");
 					$("#datatable-view-2").css("display", "none");
 				});
 		
-		});
+		
 	});
 </script>
 	<!-- <script src="assets/js/anime.player.js"></script> -->
