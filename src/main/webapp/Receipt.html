@@ -76,6 +76,9 @@ label.error {
   display: block;
 }
 
+.new-receipt .form-control{
+	margin-bottm:10px;
+}
 </style>
 	<script>
 	$(function() {
@@ -87,7 +90,7 @@ label.error {
 <div id="navbar">
 	</div>
 	<div class="container">
-		<form id="receipt-form" class="horizontal-form" method="post">
+		<form id="receipt-form" class="horizontal-form new-receipt" method="post">
 			<div class="row">
 				<div class="col-md-12">
 					<section class="panel">
@@ -139,7 +142,7 @@ label.error {
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Receipt No.<span class="text-red">*</span></label>
 								<div class="col-sm-6">
-									<div class="input-group">
+									<div class="input-group" style="width: 100%;">
 										<input type="text" name="receipt_no" id="receipt_no" class="form-control" readonly>
 									</div>
 								</div>
@@ -150,7 +153,7 @@ label.error {
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Received Amount<font color=red>*</font></label>
 								<div class="col-sm-6">
-									<div class="input-group">
+									<div class="input-group" style="width: 100%;">
 										<input type="number" id="received_amt" name="received_amt" class="form-control">
 									</div>
 								</div>
@@ -161,7 +164,7 @@ label.error {
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Received In<font color=red>*</font></label>
 								<div class="col-sm-6">
-									<div class="input-group">
+									<div class="input-group" style="width: 100%;">
 										<select name="pay_mode" class="form-control" id="received_in" required>
 											<option value="Cheque">Cheque</option>
 											<option value="Cash">Cash</option>
@@ -172,13 +175,13 @@ label.error {
 							</div>
 							
 							<div class="row">
-							<div class="form-group">
+							<div class="form-group" style="width: 100%;">
 								<label class="col-sm-3 control-label">Transaction/Cheque Status<font color=red>*</font>
 								</label>
 								<div class="col-sm-6">
-									<div class="input-group">
+									<div class="input-group" style="width: 100%;">
 										<select name="trans_status" class="form-control"
-											id="trans_status" required style="width: 196px;">
+											id="trans_status" required>
 											<option value="Cleared">Cleared</option>
 											<option value="deposited">Deposited</option>
 										</select>
@@ -193,7 +196,7 @@ label.error {
 									Date<font color=red>*</font>
 								</label>
 								<div class="col-sm-6">
-									<div class="input-group">
+									<div class="input-group" style="width: 100%;">
 										<input type="date" id="trans_date" name="trans_date" class="form-control">
 									</div>
 								</div>
@@ -204,7 +207,7 @@ label.error {
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Received By<font color=red>*</font></label>
 								<div class="col-sm-6">
-									<div class="input-group">
+									<div class="input-group" style="width: 100%;">
 										<select name="received_by" class="form-control" id="enq_taken" required>
 										</select>
 									</div>
