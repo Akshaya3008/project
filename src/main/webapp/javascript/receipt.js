@@ -68,6 +68,7 @@ $(document).ready(function(){
 		document.getElementById("InstallmentTable").style.display = "none";
 		clearModal();
 		location.reload();
+		window.location.href="ReceiptList.html";
 	});
 /*	$("#receipt").click(function() {
 		event.preventDefault();
