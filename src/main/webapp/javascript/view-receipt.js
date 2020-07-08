@@ -3,7 +3,7 @@ $(document).ready(function(){
 	if(sessionStorage.getItem("viewReceipt")!=null){
 	showdat();
 	}
-	$("#cancel").click(function(){
+	$("#cancelBtn").click(function(){
 		sessionStorage.removeItem("viewReceipt");
 		window.location.href = "ReceiptList.html"
 	});
