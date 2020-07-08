@@ -102,7 +102,8 @@ public class ExpenseResource {
 	}
 	
 	@GET
-	@RolesAllowed("VIEW_EXPENSE")
+	@PermitAll
+	//@RolesAllowed("VIEW_EXPENSE")
 	@JWTTokenNeeded
 	@Path("/FetchAllExpense")
 	//@PreAuthorize("hasRole('desk')")

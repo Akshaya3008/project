@@ -51,7 +51,8 @@ public class LeadSourceResource {
 	
 	
 	@GET
-	@RolesAllowed("VIEW_LEAD_SOURCE")
+	@PermitAll
+	//@RolesAllowed("VIEW_LEAD_SOURCE")
 	@JWTTokenNeeded
 	@Path("/LeadSourceList")
 	@Consumes(MediaType.APPLICATION_JSON)

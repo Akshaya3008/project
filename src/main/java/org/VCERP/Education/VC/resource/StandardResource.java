@@ -26,7 +26,8 @@ public class StandardResource {
 	
 	@Path("/getAllStandard")
 	@GET
-	@RolesAllowed("VIEW_STANDARD")
+	@PermitAll
+	//@RolesAllowed("VIEW_STANDARD")
 	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllStandard(@QueryParam("branch") String branch){

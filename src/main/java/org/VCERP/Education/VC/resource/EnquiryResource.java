@@ -72,7 +72,8 @@ public class EnquiryResource {
 	@GET
 	@JWTTokenNeeded
 	@Path("/FetchAllEnquiryData")
-	@RolesAllowed("VIEW_ENQUIRY")
+	@PermitAll
+	//@RolesAllowed("VIEW_ENQUIRY")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response FetchAllEnquiryData(@QueryParam("branch") String branch){
 		try {

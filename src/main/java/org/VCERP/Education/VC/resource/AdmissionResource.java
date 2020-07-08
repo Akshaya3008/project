@@ -220,7 +220,8 @@ public class AdmissionResource {
 	@GET
 	@JWTTokenNeeded
 	@Path("/FetchAllAdmittedStudent")
-	@RolesAllowed("VIEW_ADMISSION")
+	@PermitAll
+	//@RolesAllowed("VIEW_ADMISSION")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response fetchAllAdmittedStudent(@QueryParam("branch") String branch) {
 		ArrayList<Admission> admission = null;
@@ -344,6 +345,7 @@ public class AdmissionResource {
 
 	@PermitAll
 	@GET
+	@JWTTokenNeeded
 	@Path("/getAdmissionDetailsOfSpecificStudent")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAdmissionDetailsOfSpecificStudent(@QueryParam("id") String id,

@@ -77,7 +77,8 @@ public class EmpAttendanceResource {
 	}
 	
 	@POST
-	@RolesAllowed("VIEW_EMPLOYEE_ATTENDANCE")
+	@PermitAll
+	//@RolesAllowed("VIEW_EMPLOYEE_ATTENDANCE")
 	@JWTTokenNeeded
 	@Path("/getEmpAttendaceStat")
 	@Produces(MediaType.APPLICATION_JSON)

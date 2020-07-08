@@ -52,7 +52,8 @@ public class FeesTypeResource {
 	@GET
 	@Path("/getFeesType")
 	@JWTTokenNeeded
-	@RolesAllowed("VIEW_FEES_TYPE")
+	@PermitAll
+	//@RolesAllowed("VIEW_FEES_TYPE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFeesType(@QueryParam("branch") String branch)
 	{

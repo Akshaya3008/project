@@ -47,7 +47,8 @@ public class ReceiptDetailsResource {
 	
 	@GET
 	@JWTTokenNeeded
-	@RolesAllowed("VIEW_RECEIPT")
+	@PermitAll
+	//@RolesAllowed("VIEW_RECEIPT")
 	@Path("/FetchAllReceiptDetails")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response FetchAllReceiptDetails(@QueryParam("branch") String branch){

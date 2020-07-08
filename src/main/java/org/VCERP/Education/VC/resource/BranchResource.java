@@ -42,7 +42,8 @@ public class BranchResource {
 	@Path("/getBranch")
 	@GET
 	@JWTTokenNeeded
-	@RolesAllowed("VIEW_BRANCH")
+	@PermitAll
+	//@RolesAllowed("VIEW_BRANCH")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBranchDetails(@QueryParam("branch") String branch) {
 		BranchController controller = new BranchController();

@@ -51,7 +51,8 @@ public class CasteResource {
 	@GET
 	@Path("/getCaste")
 	@JWTTokenNeeded
-	@RolesAllowed("VIEW_CASTE")
+	@PermitAll
+	//@RolesAllowed("VIEW_CASTE")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCaste(@QueryParam("branch") String branch)
 	{

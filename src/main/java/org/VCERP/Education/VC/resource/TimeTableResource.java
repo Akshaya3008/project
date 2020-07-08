@@ -71,7 +71,8 @@ public class TimeTableResource {
 	}
 	
 	@GET
-	@RolesAllowed("VIEW_TIMETABLE")
+	@PermitAll
+	//@RolesAllowed("VIEW_TIMETABLE")
 	@JWTTokenNeeded
 	@Path("/FetchTimeTable")
 	@Produces(MediaType.APPLICATION_JSON)

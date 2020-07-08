@@ -59,7 +59,8 @@ public class DesignationResource {
 	@GET
 	@JWTTokenNeeded
 	@Path("/FetchAllDesignation")
-	@RolesAllowed("VIEW_DESIGNATION")
+	@PermitAll
+	/*@RolesAllowed("VIEW_DESIGNATION")*/
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response FetchAllDesignation(@QueryParam("branch") String branch){
 		try {

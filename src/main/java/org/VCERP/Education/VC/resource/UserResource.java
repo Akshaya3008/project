@@ -110,7 +110,8 @@ public class UserResource {
 	}
 
 	@GET
-	@RolesAllowed("VIEW_USER_ACCOUNT")
+	@PermitAll
+	//@RolesAllowed("VIEW_USER_ACCOUNT")
 	@JWTTokenNeeded
 	@Path("/getAllAccount")
 	@Produces(MediaType.APPLICATION_JSON)

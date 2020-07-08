@@ -62,7 +62,8 @@ public class AcademicYearResource{
 	}
 	
 	@GET
-	@RolesAllowed("VIEW_ACADEMIC_YEAR")
+	@PermitAll
+	//@RolesAllowed("VIEW_ACADEMIC_YEAR")
 	@JWTTokenNeeded
 	@Path("/AcademicList")
 	@Consumes(MediaType.APPLICATION_JSON)

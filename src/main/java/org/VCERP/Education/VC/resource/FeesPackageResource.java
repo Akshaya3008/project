@@ -93,7 +93,8 @@ public class FeesPackageResource {
 	}
 	
 	@GET
-	@RolesAllowed("VIEW_FEES_PACKAGE")
+	@PermitAll
+	//@RolesAllowed("VIEW_FEES_PACKAGE")
 	@JWTTokenNeeded
 	@Path("/getFeesPackage")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -77,7 +77,8 @@ public class AttendanceResource {
 	
 	@Path("/getAttendaceStat")
 	@POST
-	@RolesAllowed("VIEW_STUDENT_ATTENDANCE")
+	@PermitAll
+	//@RolesAllowed("VIEW_STUDENT_ATTENDANCE")
 	@JWTTokenNeeded
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAttendaceStat(@FormParam("standard") String standard,@FormParam("acad_year") String acad_year

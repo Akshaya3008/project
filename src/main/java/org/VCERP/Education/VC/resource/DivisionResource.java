@@ -53,7 +53,8 @@ public class DivisionResource {
 	
 	
 	@GET
-	@RolesAllowed("VIEW_DIVISION")
+	@PermitAll
+	//@RolesAllowed("VIEW_DIVISION")
 	@JWTTokenNeeded
 	@Path("/DivisionList")
 	@Consumes(MediaType.APPLICATION_JSON)

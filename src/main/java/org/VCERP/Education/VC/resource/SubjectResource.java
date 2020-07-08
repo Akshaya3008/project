@@ -53,7 +53,8 @@ public class SubjectResource {
 	}
 	
 	@GET
-	@RolesAllowed("VIEW_SUBJECT")
+	@PermitAll
+	//@RolesAllowed("VIEW_SUBJECT")
 	@JWTTokenNeeded
 	@Path("/FetchAllSubject")
 	@Produces(MediaType.APPLICATION_JSON)

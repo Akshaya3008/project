@@ -63,7 +63,8 @@ public class EmployeeResource {
 	}
 	
 	@GET
-	@RolesAllowed("VIEW_EMPLOYEE")
+	@PermitAll
+	//@RolesAllowed("VIEW_EMPLOYEE")
 	@JWTTokenNeeded
 	@Path("/FetchAllEmployee")
 	@Produces(MediaType.APPLICATION_JSON)
