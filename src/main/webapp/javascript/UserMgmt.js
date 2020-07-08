@@ -10,7 +10,7 @@ $(document).ready(function() {
 	FetchAllEmployee();
 	getDesignation();
 	EmployeeList();
-
+	fetchUserStat();
 	jQuery.validator.addMethod("letterswithspace", function(value, element) {
 	    return this.optional(element) || /^[a-z\s]+$/i.test(value);
 	}, "Please enter letters only");
@@ -368,6 +368,24 @@ function fetchAllRole(){
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/user/getAllRole?branch="+branchSession;
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+			errorCallback);
+	return false;
+}
+function fetchUserStat(){
+	function callback(responseData, textStatus, request) {
+		document.getElementById('TotalEnquiesTaken').innerHTML=responseData[0];
+		document.getElementById('TotalAdmissionsTaken').innerHTML=responseData[1];
+		document.getElementById('TotalReceiptTaken').innerHTML=responseData[2];
+
+	}
+
+	function errorCallback(responseData, textStatus, request) {
+		var mes = responseData.responseJSON.message;
+		showNotification("error", mes);
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/user/getUserStat?username="+user+"&branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;

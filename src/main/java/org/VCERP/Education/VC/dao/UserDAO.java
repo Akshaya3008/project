@@ -310,6 +310,53 @@ public class UserDAO {
 		}
    	 return permisison;
     }
+
+	public ArrayList<Integer> getEmployeeStat(String username, String branch) {
+		 Connection con=null;
+	   	 PreparedStatement st1=null;
+	   	 PreparedStatement st2=null;
+	   	 PreparedStatement st3=null;
+	   	 ResultSet rs1=null;
+	   	 ResultSet rs2=null;
+	   	 ResultSet rs3=null;
+	   	 ArrayList<Integer> stat=new ArrayList<>();
+	   	 try {
+				con=Util.getDBConnection();
+				String query1="select COUNT(`enq_taken`) from enquiry where enq_taken=? and branch=?";
+				String query2="select COUNT(`enq_taken_by`) from admission where enq_taken_by=? and branch=?";
+				String query3="select COUNT(`received_by`) from receipt_details where received_by=? and branch=?";
+				st1=con.prepareStatement(query1);
+				st1.setString(1, username);
+				st1.setString(2, branch);
+				rs1=st1.executeQuery();
+				while(rs1.next()){
+					stat.add(rs1.getInt(1));
+				}
+				st2=con.prepareStatement(query2);
+				st2.setString(1, username);
+				st2.setString(2, branch);
+				rs2=st2.executeQuery();
+				while(rs2.next()){
+					stat.add(rs2.getInt(1));
+				}
+				st3=con.prepareStatement(query3);
+				st3.setString(1, username);
+				st3.setString(2, branch);
+				rs3=st3.executeQuery();
+				while(rs3.next()){
+					stat.add(rs3.getInt(1));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	   	 finally {
+				Util.closeConnection(rs1, st1, con);
+				Util.closeConnection(rs2, st2, con);
+				Util.closeConnection(rs3, st3, con);
+			}
+	   	 return stat;
+	 
+	}
 }
 
 

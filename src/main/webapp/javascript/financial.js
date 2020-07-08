@@ -1,3 +1,4 @@
+var unauth_message="";
 $(document).ready(function(){
 	 	var start = moment().startOf('month');
 	    var end = moment().endOf('month');
@@ -35,6 +36,7 @@ $(document).ready(function(){
 		
 		
 		getExpenseChart(splitted_curr_sdate, splitted_curr_edate);
+		if(unauth_message==""){		
 		getConversionChart(splitted_curr_sdate,splitted_curr_edate);
 		getReceiptChart(splitted_curr_sdate, splitted_curr_edate);
 		getAdmissionChart(splitted_curr_sdate, splitted_curr_edate);
@@ -43,7 +45,7 @@ $(document).ready(function(){
 		getReceivedCard(splitted_curr_sdate,splitted_curr_edate);
 		getReceivableCard(splitted_curr_sdate, splitted_curr_edate);
 		getNetIncomeCard(splitted_curr_sdate, splitted_curr_edate);
-		
+		}
 		
 	
 	$('#e2').change(function()
@@ -59,6 +61,7 @@ $(document).ready(function(){
 				var splitted_end_date = end.split(search).join(replaceWith);
 				
 				getExpenseChart(splitted_start_date, splitted_end_date);
+				if(unauth_message==""){
 				getConversionChart(splitted_start_date,splitted_end_date);
 				getReceiptChart(splitted_start_date, splitted_end_date);
 				getAdmissionChart(splitted_start_date, splitted_end_date);
@@ -67,7 +70,7 @@ $(document).ready(function(){
 				getReceivedCard(splitted_start_date,splitted_end_date);
 				getReceivableCard(splitted_start_date, splitted_end_date);
 				getNetIncomeCard(splitted_start_date, splitted_end_date);
-					
+				}	
 	});
 	
 	
@@ -261,7 +264,6 @@ function getExpenseChart(splitted_start_date, splitted_end_date){
 	var expDate = new Array();
 	var exp_amt = new Array();
 	function callback(responseData, textStatus, request){
-		//alert("len"+responseData.length);
 		for ( var i in responseData) {
 			expDate.push(responseData[i].date);
 			exp_amt.push(responseData[i].amount);
@@ -271,7 +273,10 @@ function getExpenseChart(splitted_start_date, splitted_end_date){
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes = responseData.responseJSON.message;
-		showNotification("error", mes);
+		if(mes=="You Are UNAUTHORIZED To PerForm This Task."){
+			unauth_message="You Are UNAUTHORIZED To PerForm This Task.";
+			showNotification("error", mes);
+		} 
 	}
 	var httpMethod = "POST";
 	var formData = {

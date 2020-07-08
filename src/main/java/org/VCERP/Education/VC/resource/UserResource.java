@@ -234,6 +234,22 @@ public class UserResource {
 		return Response.status(Status.ACCEPTED).entity(roles).build();
 		}else{
 			return Util.generateErrorResponse(Status.BAD_REQUEST, "Roles not Found").build();
+		}		
+	}
+	
+	@GET
+	@PermitAll
+	@JWTTokenNeeded
+	@Path("/getUserStat")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getEmployeeStat(@QueryParam("username") String username,@QueryParam("branch") String branch){
+		ArrayList<Integer> stat=new ArrayList<>();
+		UserController controller=new UserController();
+		stat=controller.getEmployeeStat(username,branch);
+		if(stat!=null){
+		return Response.status(Status.ACCEPTED).entity(stat).build();
+		}else{
+			return Util.generateErrorResponse(Status.BAD_REQUEST, "Roles not Found").build();
 		}
 		
 	}

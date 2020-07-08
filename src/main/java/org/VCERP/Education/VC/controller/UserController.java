@@ -59,4 +59,9 @@ public class UserController {
 		UserDAO dao=new UserDAO();
 		return dao.getAllRole(branch);
 	}
+
+	public ArrayList<Integer> getEmployeeStat(String username, String branch) {
+		UserDAO dao=new UserDAO();
+		return dao.getEmployeeStat(username,branch);
+	}
 }
