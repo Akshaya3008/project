@@ -63,7 +63,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#cancel").click(function() {
-		window.location.href = "ReceiptList.html";
+		
 		removeInstallmentTableRow();
 		document.getElementById("InstallmentTable").style.display = "none";
 		clearModal();
@@ -83,6 +83,7 @@ $(document).ready(function(){
 			var message="Receive amount should be less than or equals to Net amount";
 			showNotification("error",message);
 		}
+		
 	});
 });
 

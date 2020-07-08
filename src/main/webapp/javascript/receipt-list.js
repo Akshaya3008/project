@@ -97,7 +97,7 @@ function getVeiwReceiptData(rno, receiptno) {
 			":"+branchDetails+":"+responseData[i].receipt_date+":"+admission.address;
 			/*admission.adm_fees_pack+":"+admission.paid_fees+":"+admission.remain_fees+":"+*/
 			sessionStorage.setItem("viewReceipt",viewReceiptData);
-			window.location.href = "ViewReceipt.html";
+			
 		}
 	}
 
