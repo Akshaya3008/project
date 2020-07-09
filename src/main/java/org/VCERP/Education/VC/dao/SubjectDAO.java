@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import org.VCERP.Education.VC.model.Employee;
 import org.VCERP.Education.VC.model.Subject;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SubjectDAO{
-	
+	private static final Logger logger = LogManager.getLogger(SubjectDAO.class.getName());
 	public Subject addSubject(Subject sub){
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -26,7 +28,7 @@ public class SubjectDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -58,7 +60,7 @@ public class SubjectDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -81,7 +83,7 @@ public class SubjectDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -103,6 +105,7 @@ public class SubjectDAO{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 	

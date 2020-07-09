@@ -9,9 +9,11 @@ import org.VCERP.Education.VC.model.Expense;
 
 import org.VCERP.Education.VC.model.Vendor;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ExpenseDAO{
-	
+	private static final Logger logger = LogManager.getLogger(ExpenseDAO.class.getName());
 	public Expense addExpense(Expense exp){
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -28,7 +30,7 @@ public class ExpenseDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -61,7 +63,7 @@ public class ExpenseDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -83,7 +85,7 @@ public class ExpenseDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -114,7 +116,7 @@ public class ExpenseDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -139,7 +141,7 @@ public class ExpenseDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(null, st, con);
@@ -161,6 +163,7 @@ public class ExpenseDAO{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 	
@@ -194,6 +197,7 @@ public class ExpenseDAO{
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);

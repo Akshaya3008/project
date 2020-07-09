@@ -100,8 +100,8 @@ public class UserResource {
 			controller.createEmployeeAccount(user);
 			return Util.generateResponse(Status.ACCEPTED, "User Account Successfully Created.").build();
 		} catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
-			System.out.println(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create user account.Please try again or contact with Administrator").build();
 	}
@@ -159,6 +159,7 @@ public class UserResource {
 			return Util.generateResponse(Status.ACCEPTED, "User Account Successfully Updated.").build();
 		} 
 		catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
 		}
 			return Util.generateErrorResponse(Status.BAD_REQUEST, "Failed to complete updation task.Please try again or contact with administrator.").build();
@@ -176,6 +177,7 @@ public class UserResource {
 			return Util.generateResponse(Status.ACCEPTED, "User Account Deactivated.").build();
 		} 
 		catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
 		}
 			return Util.generateErrorResponse(Status.BAD_REQUEST, "Failed to complete task.").build();

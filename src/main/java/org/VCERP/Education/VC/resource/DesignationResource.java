@@ -27,9 +27,12 @@ import org.VCERP.Education.VC.model.FeesType;
 import org.VCERP.Education.VC.model.Subject;
 import org.VCERP.Education.VC.model.Designation;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("Designation")
 public class DesignationResource {
+	private static final Logger logger = LogManager.getLogger(Util.class.getName());
 	@POST
 	@RolesAllowed("ADD_NEW_DESIGNATION")
 	@JWTTokenNeeded
@@ -51,7 +54,7 @@ public class DesignationResource {
 	}
 	catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new Designation.Please try again or contact with administrator.").build();
 	}
@@ -70,6 +73,7 @@ public class DesignationResource {
 			return Response.status(Status.OK).entity(des_list).build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -92,6 +96,7 @@ public class DesignationResource {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}
@@ -109,6 +114,7 @@ public class DesignationResource {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}

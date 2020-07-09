@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import org.VCERP.Education.VC.model.TimeTable;
 import org.VCERP.Education.VC.model.Employee;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TimeTableDAO{
+	private static final Logger logger = LogManager.getLogger(TimeTableDAO.class.getName());
 	public TimeTable addTimeTable(TimeTable tt){
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -34,7 +37,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -63,7 +66,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -89,7 +92,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -109,7 +112,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -135,7 +138,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -177,7 +180,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -199,7 +202,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(null, st, con);
@@ -238,7 +241,7 @@ public class TimeTableDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);

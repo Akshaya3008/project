@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 import org.VCERP.Education.VC.model.FeesType;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FeesTypeDAO {
-
+	private static final Logger logger = LogManager.getLogger(FeesTypeDAO.class.getName());
 	public void addNewFeesType(FeesType type) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -23,6 +25,7 @@ public class FeesTypeDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -47,6 +50,7 @@ public class FeesTypeDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return type;
 	}
@@ -64,6 +68,7 @@ public class FeesTypeDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -82,6 +87,7 @@ public class FeesTypeDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 

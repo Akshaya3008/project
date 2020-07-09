@@ -1,6 +1,5 @@
 package org.VCERP.Education.VC.resource;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -14,14 +13,16 @@ import org.VCERP.Education.VC.controller.RolesPermissionController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.RolesPermission;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("RolePermisison")
 public class RolesPermissionResource {
-	
+	private static final Logger logger = LogManager.getLogger(Util.class.getName());
 	@POST
 	@JWTTokenNeeded
-	@PermitAll
-	//@RolesAllowed("ADD_NEW_ROLES_AND_PERMISSION")
+//	@PermitAll
+	@RolesAllowed("ADD_NEW_ROLES_AND_PERMISSION")
 	@Path("saveRolesPermission")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response saveRolesPermission(@FormParam("rolename") String role,@FormParam("permission") String permission,
@@ -39,6 +40,7 @@ public class RolesPermissionResource {
 			return Util.generateResponse(Status.ACCEPTED, "New Roles And Permission Successfully Created").build();
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new role and permission.Please try agin or contact with administrator.").build();
 	}

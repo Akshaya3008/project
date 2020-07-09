@@ -20,10 +20,12 @@ import org.VCERP.Education.VC.controller.StandardController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Standard;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("standard")
 public class StandardResource {
-	
+	private static final Logger logger = LogManager.getLogger(StandardResource.class.getName());
 	@Path("/getAllStandard")
 	@GET
 	@PermitAll
@@ -41,6 +43,7 @@ public class StandardResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Data Not Found").build();
 	}
@@ -72,6 +75,7 @@ public class StandardResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new standard.Please try again or contact with administrator").build();
 	}
@@ -90,6 +94,7 @@ public class StandardResource {
 			return Util.generateResponse(Status.ACCEPTED, "Standard Successfully Deleted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete this task.").build();
 	}
@@ -120,6 +125,7 @@ public class StandardResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete this task.").build();
 	}

@@ -22,10 +22,12 @@ import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Chart;
 
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("chart")
 public class ChartResource {
-
+	private static final Logger logger = LogManager.getLogger(ChartResource.class.getName());
 		
 	@POST
 	@RolesAllowed("VIEW_DASHBOARD")
@@ -53,7 +55,7 @@ public class ChartResource {
 	}
 	catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -86,7 +88,7 @@ try{
 }
 catch(Exception e){
 	e.printStackTrace();
-	System.out.println(e);
+	logger.error(e);
 }
 return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 }
@@ -119,7 +121,7 @@ try{
 }
 catch(Exception e){
 	e.printStackTrace();
-	System.out.println(e);
+	logger.error(e);
 }
 return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 }
@@ -147,7 +149,7 @@ try{
 }
 catch(Exception e){
 	e.printStackTrace();
-	System.out.println(e);
+	logger.error(e);
 }
 return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 }
@@ -171,7 +173,7 @@ public Response getSalesCard(@FormParam("start_date") String start_date,@FormPar
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Data Not Found").build();
 }
@@ -196,7 +198,7 @@ public Response getReceivedCard(@FormParam("start_date") String start_date,@Form
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Data Not Found").build();
@@ -222,7 +224,7 @@ public Response getReceivableCard(@FormParam("start_date") String start_date,@Fo
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Data Not Found").build();
@@ -251,7 +253,7 @@ public Response getNetIncomeCard(@FormParam("start_date") String start_date,@For
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Data Not Found").build();

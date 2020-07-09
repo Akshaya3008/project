@@ -9,9 +9,11 @@ import org.VCERP.Education.VC.model.Employee;
 import org.VCERP.Education.VC.model.Subject;
 import org.VCERP.Education.VC.model.Designation;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DesignationDAO{
-	
+	private static final Logger logger = LogManager.getLogger(DesignationDAO.class.getName());
 	public Designation addDesignation(Designation des){
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -26,7 +28,7 @@ public class DesignationDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -56,7 +58,7 @@ public class DesignationDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally{
 			Util.closeConnection(rs, st, con);
@@ -78,7 +80,7 @@ public class DesignationDAO{
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -100,6 +102,7 @@ public class DesignationDAO{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 }

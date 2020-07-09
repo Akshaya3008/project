@@ -25,9 +25,12 @@ import org.VCERP.Education.VC.model.Admission;
 import org.VCERP.Education.VC.model.Expense;
 import org.VCERP.Education.VC.model.ReceiptDetails;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("Expense")
 public class ExpenseResource {
+	private static final Logger logger = LogManager.getLogger(ExpenseResource.class.getName());
 	@POST
 	@RolesAllowed("ADD_NEW_EXPENSE")
 	@JWTTokenNeeded
@@ -51,7 +54,7 @@ public class ExpenseResource {
 	}
 	catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new expense.Please try again or contact with administrator.").build();
 	}
@@ -80,7 +83,7 @@ public class ExpenseResource {
 	}
 	catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete this .").build();
 }
@@ -97,6 +100,7 @@ public class ExpenseResource {
 			return Util.generateResponse(Status.ACCEPTED, "Expense Successfully Deleted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete this .").build();
 	}
@@ -119,6 +123,7 @@ public class ExpenseResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -142,7 +147,7 @@ public class ExpenseResource {
 	}
 	catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new vendor.Please try again or contact with administrator.").build();
 	}
@@ -165,6 +170,7 @@ public class ExpenseResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}

@@ -23,10 +23,12 @@ import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Division;
 
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("Division")
 public class DivisionResource {
-	
+	private static final Logger logger = LogManager.getLogger(DivisionResource.class.getName());
 	@POST
 	@RolesAllowed("ADD_NEW_DIVISION")
 	@JWTTokenNeeded
@@ -45,7 +47,7 @@ public class DivisionResource {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create division.please try again or contact to administrator.").build();
@@ -69,7 +71,7 @@ public class DivisionResource {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -111,7 +113,7 @@ public class DivisionResource {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
@@ -130,6 +132,7 @@ public class DivisionResource {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}

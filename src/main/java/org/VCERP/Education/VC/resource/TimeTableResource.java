@@ -27,16 +27,17 @@ import org.VCERP.Education.VC.model.TimeTable;
 import org.VCERP.Education.VC.model.Employee;
 
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("TimeTable")
 public class TimeTableResource {
-	
+	private static final Logger logger = LogManager.getLogger(TimeTableResource.class.getName());
 	@POST
 	@RolesAllowed("ADD_NEW_TIMETABLE")
 	@JWTTokenNeeded
 	@Path("/NewTimeTable")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	
 	public Response addTimeTable(@FormParam("aca_year") String aca_year,@FormParam("standard") String std,
 			@FormParam("division") String division,@FormParam("subject") String subject,@FormParam("title") String title,
 			@FormParam("tt_details") String tt_details,@FormParam("branch") String branch)
@@ -65,7 +66,7 @@ public class TimeTableResource {
 	}
 	catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new time table.Please try agin or contact with administrator").build();
 	}
@@ -86,6 +87,7 @@ public class TimeTableResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -105,6 +107,7 @@ public class TimeTableResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Lecturer Data Not Found.").build();
 	}
@@ -128,7 +131,7 @@ public class TimeTableResource {
 		}
 		catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to insert new time slot").build();
 	}
@@ -148,6 +151,7 @@ public class TimeTableResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Time Slot Not Found.").build();
 	}
@@ -167,6 +171,7 @@ public class TimeTableResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -212,7 +217,7 @@ public class TimeTableResource {
 	}
 	catch(Exception e){
 		e.printStackTrace();
-		System.out.println(e);
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable ot complete the task.").build();
 	}
@@ -233,6 +238,7 @@ public class TimeTableResource {
 			return Util.generateResponse(Status.ACCEPTED,"Data Successfully Deleted.").build();	
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Unable to complete the task.").build();
 	}
@@ -262,6 +268,7 @@ public class TimeTableResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Unable to complete the task.").build();
 	}

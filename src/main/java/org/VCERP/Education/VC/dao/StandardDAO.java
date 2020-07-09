@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 import org.VCERP.Education.VC.model.Standard;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class StandardDAO {
-
+	private static final Logger logger = LogManager.getLogger(StandardDAO.class.getName());
 	public ArrayList<Standard> getAllStandard(String branch) {
 			Connection conn=null;
 			PreparedStatement ps=null;
@@ -36,6 +38,7 @@ public class StandardDAO {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				logger.error(e);
 			}
 			finally {
 				Util.closeConnection(rs, ps, conn);
@@ -59,6 +62,7 @@ public class StandardDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, conn);
@@ -83,6 +87,7 @@ public class StandardDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		
 	}
@@ -104,6 +109,7 @@ public class StandardDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, conn);

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 import org.VCERP.Education.VC.model.Attendance;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AttendanceDAO {
-
+	private static final Logger logger = LogManager.getLogger(AttendanceDAO.class.getName());
 	public ArrayList<Attendance> getAttendanceList(Attendance at) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -36,7 +38,7 @@ public class AttendanceDAO {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -72,6 +74,7 @@ public class AttendanceDAO {
 		ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -115,7 +118,7 @@ public class AttendanceDAO {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -152,7 +155,7 @@ public class AttendanceDAO {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -183,7 +186,7 @@ public class AttendanceDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -200,7 +203,7 @@ public class AttendanceDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);

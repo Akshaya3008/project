@@ -22,11 +22,13 @@ import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 //import org.VCERP.Education.VC.model.Attendance;
 import org.VCERP.Education.VC.model.Employee;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 @Path("Attendance")
 public class EmpAttendanceResource {
-	
+	private static final Logger logger = LogManager.getLogger(EmpAttendanceResource.class.getName());
 	@GET
 	@PermitAll
 	@JWTTokenNeeded
@@ -40,6 +42,7 @@ public class EmpAttendanceResource {
 			return Response.status(Status.OK).entity(em).build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -72,6 +75,7 @@ public class EmpAttendanceResource {
 			return Util.generateResponse(Status.ACCEPTED,"Employee Attendance Successfully Submitted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Unable to submit employee attendance.please try again or contact with administrator..").build();
 	}
@@ -107,6 +111,7 @@ public class EmpAttendanceResource {
 			return Response.status(Status.OK).entity(employeeattendancestat).build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -133,6 +138,7 @@ public Response getEmpAttendanceReport(@FormParam("id") String id,@FormParam("fr
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
+		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 }

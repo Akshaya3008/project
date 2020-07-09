@@ -26,7 +26,7 @@ import org.apache.logging.log4j.Logger;
 @Path("feesType")
 public class FeesTypeResource {
 
-	//private static final Logger LOGGER = LogManager.getLogger(FeesTypeResource.class);
+	private static final Logger logger = LogManager.getLogger(FeesTypeResource.class);
 	
 	@POST
 	@Path("/addNewFeesType")
@@ -46,6 +46,7 @@ public class FeesTypeResource {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new FeesType.please try again or contact with administrator.").build();
 	}
@@ -68,6 +69,7 @@ public class FeesTypeResource {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Data not found").build();
 	}
@@ -90,6 +92,7 @@ public class FeesTypeResource {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}
@@ -107,6 +110,7 @@ public class FeesTypeResource {
 		}catch(Exception e)
 		{
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}

@@ -20,10 +20,12 @@ import org.VCERP.Education.VC.controller.FeesPackageController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.FeesPackage;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("FeesPackage")
 public class FeesPackageResource {
-	
+	private static final Logger logger = LogManager.getLogger(FeesPackageResource.class.getName());
 	@POST
 	@RolesAllowed("ADD_NEW_FEES_PACKAGE")
 	@JWTTokenNeeded
@@ -48,6 +50,7 @@ public class FeesPackageResource {
 		return Util.generateResponse(Status.ACCEPTED, "New Course Package Successfully Cretaed.").build();
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new course package.Please try again or contact with administrator.").build();
 	}
@@ -68,6 +71,7 @@ public class FeesPackageResource {
 		}
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to get standard data").build();
 	}
@@ -88,6 +92,7 @@ public class FeesPackageResource {
 		}
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to load branch.").build();
 	}
@@ -109,6 +114,7 @@ public class FeesPackageResource {
 		}
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Data Not Found.").build();
 	}
@@ -130,6 +136,7 @@ public class FeesPackageResource {
 		}
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to get Fees Package Data").build();
 	}
@@ -160,6 +167,7 @@ public class FeesPackageResource {
 		return Util.generateResponse(Status.ACCEPTED, "Course Package Successfully Updated.").build();
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}
@@ -176,6 +184,7 @@ public class FeesPackageResource {
 		return Util.generateResponse(Status.ACCEPTED, "Course Package Successfully Deleted.").build();
 		}catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}

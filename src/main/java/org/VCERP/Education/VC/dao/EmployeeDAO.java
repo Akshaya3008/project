@@ -9,9 +9,11 @@ import org.VCERP.Education.VC.model.Employee;
 import org.VCERP.Education.VC.model.Enquiry;
 import org.VCERP.Education.VC.model.User;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EmployeeDAO {
-
+	private static final Logger logger = LogManager.getLogger(EmployeeDAO.class.getName());
 	public Employee addEmployee(Employee emp) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -34,7 +36,7 @@ public class EmployeeDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -72,7 +74,7 @@ public class EmployeeDAO {
 				}
 			}catch(Exception e){
 				e.printStackTrace();
-				System.out.println(e);
+				logger.error(e);
 			}
 			finally {
 				Util.closeConnection(rs, st, con);
@@ -115,7 +117,7 @@ public class EmployeeDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, st, con);
@@ -151,7 +153,7 @@ public class EmployeeDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, st, con);
@@ -181,7 +183,7 @@ public class EmployeeDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -204,6 +206,7 @@ public class EmployeeDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 }

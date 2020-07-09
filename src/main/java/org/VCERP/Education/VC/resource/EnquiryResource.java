@@ -23,10 +23,12 @@ import org.VCERP.Education.VC.controller.EnquiryController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Enquiry;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("Enquiry")
 public class EnquiryResource {
-	
+	private static final Logger logger = LogManager.getLogger(EnquiryResource.class.getName());
 	@Path("/EnquiryData")
 	@POST
 	@JWTTokenNeeded
@@ -39,6 +41,7 @@ public class EnquiryResource {
 			return Util.generateResponse(Status.ACCEPTED,"Student Enquiry Data Successfully Submited.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_ACCEPTABLE,"Data not submited.please try again or contact with administrator.").build();
 	}
@@ -65,6 +68,7 @@ public class EnquiryResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_ACCEPTABLE,"Unable to update data.please try again or contact with administrator.").build();
 	}
@@ -83,6 +87,7 @@ public class EnquiryResource {
 			return Response.status(Status.OK).entity(enq).build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -102,6 +107,7 @@ public class EnquiryResource {
 			return Util.generateResponse(Status.ACCEPTED,"Data Successfully Deleted. ").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Unable to delete data.please try again or contact with administrator.").build();
 	}
@@ -161,6 +167,7 @@ public class EnquiryResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST,"Admission not done.").build();
 	}
@@ -184,6 +191,7 @@ public class EnquiryResource {
 			return Response.status(Status.ACCEPTED).entity(enq_no).build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST,"Unable to get Auto Incremented Enquiry Number.").build();
 	}

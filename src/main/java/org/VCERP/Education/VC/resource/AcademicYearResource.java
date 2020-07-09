@@ -10,7 +10,6 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,12 +18,13 @@ import javax.ws.rs.core.Response.Status;
 import org.VCERP.Education.VC.controller.AcademicYearController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.AcademicYear;
-import org.VCERP.Education.VC.model.Employee;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("AcademicYear")
 public class AcademicYearResource{
-	
+	private static final Logger logger = LogManager.getLogger(AcademicYearResource.class.getName());
 	@POST
 	@RolesAllowed("ADD_NEW_ACADEMIC_YEAR")
 	@JWTTokenNeeded
@@ -55,8 +55,8 @@ public class AcademicYearResource{
 			return Util.generateResponse(Status.ACCEPTED, "New Academic Year Successfully Created.").build();
 		}
 		catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
-			System.out.println(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to create new academic year.please try again or contact with administrator").build();
 	}
@@ -77,7 +77,7 @@ public class AcademicYearResource{
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -96,7 +96,7 @@ public class AcademicYearResource{
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -132,7 +132,7 @@ public class AcademicYearResource{
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
 	}
@@ -150,7 +150,7 @@ public class AcademicYearResource{
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to complete task.").build();
 	}
@@ -170,7 +170,7 @@ public class AcademicYearResource{
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Academic Year Not Found.").build();
 	}

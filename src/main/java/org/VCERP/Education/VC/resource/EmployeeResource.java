@@ -23,10 +23,12 @@ import org.VCERP.Education.VC.model.Employee;
 import org.VCERP.Education.VC.model.Enquiry;
 import org.VCERP.Education.VC.model.User;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("Employee")
 public class EmployeeResource {
-
+	private static final Logger logger = LogManager.getLogger(EmployeeResource.class.getName());
 	@POST
 	@RolesAllowed("ADD_NEW_EMPLOYEE")
 	@JWTTokenNeeded
@@ -56,7 +58,7 @@ public class EmployeeResource {
 			return Util.generateResponse(Status.ACCEPTED, "Data Successfully Inserted").build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to Insert Data.").build();
@@ -78,6 +80,7 @@ public class EmployeeResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -97,6 +100,7 @@ public class EmployeeResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}
@@ -130,7 +134,7 @@ public class EmployeeResource {
 			return Util.generateResponse(Status.ACCEPTED, "Data Successfully Updated.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete task.").build();
@@ -147,6 +151,7 @@ public class EmployeeResource {
 			return Util.generateErrorResponse(Status.ACCEPTED,"Data Successfully Deleted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Unable to complete task.").build();
 	}
@@ -175,6 +180,7 @@ public class EmployeeResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
 	}	

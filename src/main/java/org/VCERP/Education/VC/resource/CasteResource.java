@@ -23,10 +23,12 @@ import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Caste;
 import org.VCERP.Education.VC.model.FeesType;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("caste")
 public class CasteResource {
-
+	private static final Logger logger = LogManager.getLogger(CasteResource.class.getName());
 	@POST
 	@Path("/addNewCaste")
 	@JWTTokenNeeded
@@ -44,6 +46,7 @@ public class CasteResource {
 		return Util.generateResponse(Status.ACCEPTED, "Caste Successfully Added.").build();
 		}catch(Exception e)
 		{
+			logger.error(e);
 			e.printStackTrace();
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to add casste.please try again or contact with administrator.").build();
@@ -66,6 +69,7 @@ public class CasteResource {
 		}
 		}catch(Exception e)
 		{
+			logger.error(e);
 			e.printStackTrace();
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "data not found").build();
@@ -87,6 +91,7 @@ public class CasteResource {
 		return Util.generateResponse(Status.ACCEPTED, "Caste Data Successfully Updated.").build();
 		}catch(Exception e)
 		{
+			logger.error(e);
 			e.printStackTrace();
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete this task.").build();
@@ -104,6 +109,7 @@ public class CasteResource {
 		return Util.generateErrorResponse(Status.ACCEPTED,"Caste Successfully Deleted.").build();
 		}catch(Exception e)
 		{
+			logger.error(e);
 			e.printStackTrace();
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to complete this task.").build();

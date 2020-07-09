@@ -5,14 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import org.VCERP.Education.VC.model.Employee;
-import org.VCERP.Education.VC.model.User;
-import org.VCERP.Education.VC.resource.UserResource;
 import org.VCERP.Education.VC.model.LoginHistory;
+import org.VCERP.Education.VC.model.User;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UserDAO {
-
+	private static final Logger logger = LogManager.getLogger(UserDAO.class.getName());
 	public User authenticateUser(String userid, String password) {
 		Connection con=null;
 		PreparedStatement st=null;
@@ -41,7 +41,7 @@ public class UserDAO {
 			permission=getUserPermission(user);
 			user.setPermission(permission);
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -68,7 +68,7 @@ public class UserDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -103,7 +103,7 @@ public class UserDAO {
 			}
 			
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -127,7 +127,7 @@ public class UserDAO {
 			ps.executeUpdate();
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -157,7 +157,7 @@ public class UserDAO {
 			}
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -180,7 +180,7 @@ public class UserDAO {
 			ps.executeUpdate();
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -199,7 +199,7 @@ public class UserDAO {
 			ps.executeUpdate();
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -224,7 +224,7 @@ public class UserDAO {
 			}
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -250,7 +250,7 @@ public class UserDAO {
 			}
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -279,7 +279,7 @@ public class UserDAO {
 			}
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			logger.error(e);
 			e.printStackTrace();
 		}
 		finally {
@@ -304,6 +304,7 @@ public class UserDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
    	 finally {
 			Util.closeConnection(rs, st, con);
@@ -348,6 +349,7 @@ public class UserDAO {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				logger.error(e);
 			}
 	   	 finally {
 				Util.closeConnection(rs1, st1, con);

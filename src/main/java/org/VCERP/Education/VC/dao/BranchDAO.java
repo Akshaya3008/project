@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 import org.VCERP.Education.VC.model.Branch;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BranchDAO {
-
+	private static final Logger logger = LogManager.getLogger(BranchDAO.class.getName());
 	public void addNewBranch(Branch branch) {
 		
 		Connection con=null;
@@ -37,6 +39,7 @@ public class BranchDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -75,7 +78,7 @@ public class BranchDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, conn);
@@ -115,6 +118,7 @@ public class BranchDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, conn);
@@ -146,6 +150,7 @@ public class BranchDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);

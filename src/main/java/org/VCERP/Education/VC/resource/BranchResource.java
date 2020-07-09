@@ -19,10 +19,12 @@ import org.VCERP.Education.VC.controller.BranchController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Branch;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("branch")
 public class BranchResource {
-
+	private static final Logger logger = LogManager.getLogger(BranchResource.class.getName());
 	@Path("/addNewBranch")
 	@POST
 	@JWTTokenNeeded
@@ -35,6 +37,7 @@ public class BranchResource {
 			return Util.generateResponse(Status.ACCEPTED, "New Branch Successfully Created.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to save create new branch.Please try again or contact with administrator.").build();
 	}
@@ -54,6 +57,7 @@ public class BranchResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to get branch details").build();
 	}
@@ -72,6 +76,7 @@ public class BranchResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to get branch details").build();
 	}
@@ -87,6 +92,7 @@ public class BranchResource {
 			return Util.generateResponse(Status.ACCEPTED, "Branch Details Successfully Updated.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to update branch details.Please try again or contact with administrator.").build();
 	}

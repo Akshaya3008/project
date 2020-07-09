@@ -11,9 +11,11 @@ import org.VCERP.Education.VC.model.FeesPackage;
 import org.VCERP.Education.VC.model.Installment;
 import org.VCERP.Education.VC.model.ReceiptDetails;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AdmissionDAO {
-
+	private static final Logger logger = LogManager.getLogger(AdmissionDAO.class.getName());
 	public Admission StudentAdmission(Admission admission) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -66,7 +68,7 @@ public class AdmissionDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -113,7 +115,7 @@ public class AdmissionDAO {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -174,7 +176,7 @@ public class AdmissionDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -239,7 +241,7 @@ public class AdmissionDAO {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -261,7 +263,7 @@ public class AdmissionDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -290,7 +292,7 @@ public class AdmissionDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -337,7 +339,7 @@ public class AdmissionDAO {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -364,7 +366,7 @@ public class AdmissionDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -406,7 +408,7 @@ public class AdmissionDAO {
 			install.setRemain_fees(remain);
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -451,7 +453,7 @@ public class AdmissionDAO {
 			}			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -472,7 +474,7 @@ public class AdmissionDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -501,7 +503,7 @@ public class AdmissionDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -561,7 +563,7 @@ public class AdmissionDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);

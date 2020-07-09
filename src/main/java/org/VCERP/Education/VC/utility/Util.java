@@ -38,6 +38,7 @@ public class Util {
 			 conn = DriverManager.getConnection(ConnectionUrl,PropertiesCache.userName,PropertiesCache.password);
 			 
 		 } catch (Exception ex) {
+			 ex.printStackTrace();
 			 logger.error(ex);
 		 }
 		 return conn;
@@ -54,6 +55,7 @@ public class Util {
 			con.close();
 		}
 		catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
 		}
 	}

@@ -28,11 +28,13 @@ import org.VCERP.Education.VC.model.Enquiry;
 import org.VCERP.Education.VC.model.FeesPackage;
 import org.VCERP.Education.VC.model.Installment;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("Admission")
 public class AdmissionResource {
 	
-
+	private static final Logger logger = LogManager.getLogger(AdmissionResource.class.getName());
 	@POST
 	@JWTTokenNeeded
 	@Path("/StudentAdmission")
@@ -118,7 +120,7 @@ public class AdmissionResource {
 			return Util.generateResponse(Status.ACCEPTED, "Student Successfully Admitted").build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to completed the process.Please try again or contact with Administrator").build();
 	}
@@ -161,6 +163,7 @@ public class AdmissionResource {
 			controller.saveInstallment(installment, branch);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 	private void savePromoteInstallment(String[] commaSeperated, String branch,Admission admission) {
@@ -189,6 +192,7 @@ public class AdmissionResource {
 			controller = new AdmissionController();
 			controller.saveInstallment(installment, branch);
 		} catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
 		}
 	}
@@ -213,6 +217,7 @@ public class AdmissionResource {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to get student data.").build();
 	}
@@ -233,7 +238,7 @@ public class AdmissionResource {
 			return Response.status(Status.ACCEPTED).entity(admission).build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -252,7 +257,7 @@ public class AdmissionResource {
 			return Response.status(Status.ACCEPTED).entity(acad).build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to get academic year details.").build();
 	}
@@ -339,6 +344,7 @@ public class AdmissionResource {
 			return Util.generateResponse(Status.ACCEPTED, "Student Successfully Promoted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -363,7 +369,7 @@ public class AdmissionResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -410,7 +416,7 @@ public class AdmissionResource {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -459,7 +465,7 @@ public class AdmissionResource {
 			return Util.generateResponse(Status.ACCEPTED, "Data Successfully Edited").build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to completed the process.").build();
 	}
@@ -553,7 +559,7 @@ public class AdmissionResource {
 			return Util.generateResponse(Status.ACCEPTED, "Student Successfully Promoted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to completed the process.").build();
 	}

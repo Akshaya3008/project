@@ -1,6 +1,5 @@
 package org.VCERP.Education.VC.dao;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,9 +7,11 @@ import java.util.ArrayList;
 
 import org.VCERP.Education.VC.model.FeesPackage;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FeesPackageDAO {
-
+	private static final Logger logger = LogManager.getLogger(Util.class.getName());
 	public void addNewFeesPackage(FeesPackage pack) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -29,7 +30,7 @@ public class FeesPackageDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -61,7 +62,7 @@ public class FeesPackageDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -86,7 +87,7 @@ public class FeesPackageDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -111,7 +112,7 @@ public class FeesPackageDAO {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -146,7 +147,7 @@ public class FeesPackageDAO {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -170,7 +171,7 @@ public class FeesPackageDAO {
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, ps, con);
@@ -192,6 +193,7 @@ public class FeesPackageDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 }

@@ -23,10 +23,12 @@ import org.VCERP.Education.VC.model.Enquiry;
 import org.VCERP.Education.VC.model.Installment;
 import org.VCERP.Education.VC.model.ReceiptDetails;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path("Receipt")
 public class ReceiptDetailsResource {
-	
+	private static final Logger logger = LogManager.getLogger(ReceiptDetailsResource.class.getName());
 	@Path("/SearchStudent")
 	@GET
 	@JWTTokenNeeded
@@ -63,7 +65,7 @@ public class ReceiptDetailsResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -87,7 +89,7 @@ public class ReceiptDetailsResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to get receipt no.").build();
 	}
@@ -153,7 +155,7 @@ public class ReceiptDetailsResource {
 			return Util.generateResponse(Status.ACCEPTED, "Receipt Details Successfully Inserted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to insert data.Please try again or contact with administrator").build();
 	}
@@ -230,6 +232,7 @@ public class ReceiptDetailsResource {
 			 }
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
@@ -273,6 +276,7 @@ public class ReceiptDetailsResource {
 			 }
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}

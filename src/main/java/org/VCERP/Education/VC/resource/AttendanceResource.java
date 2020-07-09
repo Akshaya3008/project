@@ -8,7 +8,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,11 +17,13 @@ import org.VCERP.Education.VC.controller.AttendanceController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Attendance;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 @Path("Attendance")
 public class AttendanceResource {
-
+	private static final Logger logger = LogManager.getLogger(AttendanceResource.class.getName());
 	@Path("/getAttendaceList")
 	@POST
 	@JWTTokenNeeded
@@ -70,6 +71,7 @@ public class AttendanceResource {
 			return Util.generateErrorResponse(Status.ACCEPTED, "Student Attendance Successfully Save.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to save attendance.").build();
@@ -127,6 +129,7 @@ public class AttendanceResource {
 				}
 			} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data Not Found").build();
 	}
@@ -160,6 +163,7 @@ public class AttendanceResource {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data Not Found").build();

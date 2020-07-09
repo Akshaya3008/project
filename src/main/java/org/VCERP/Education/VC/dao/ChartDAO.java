@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import org.VCERP.Education.VC.model.Chart;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ChartDAO {
-
+	private static final Logger logger = LogManager.getLogger(ChartDAO.class.getName());
 	public ArrayList<Chart> getExpenseData(Chart ch, ArrayList<Chart> exp_chart) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -33,7 +35,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -66,7 +68,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -100,7 +102,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -133,7 +135,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -163,7 +165,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -191,7 +193,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -223,7 +225,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);
@@ -256,7 +258,7 @@ public class ChartDAO {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(rs, ps, con);

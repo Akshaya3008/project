@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import org.VCERP.Education.VC.model.Caste;
 import org.VCERP.Education.VC.model.FeesType;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CasteDAO {
+	private static final Logger logger = LogManager.getLogger(CasteDAO.class.getName());
 	public void addNewCaste(Caste caste) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -23,6 +26,7 @@ public class CasteDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -47,6 +51,7 @@ public class CasteDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 		return type;
 	}
@@ -63,6 +68,7 @@ public class CasteDAO {
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -82,6 +88,7 @@ public class CasteDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 }

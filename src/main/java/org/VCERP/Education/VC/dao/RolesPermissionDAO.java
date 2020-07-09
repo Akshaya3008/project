@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 
 import org.VCERP.Education.VC.model.RolesPermission;
 import org.VCERP.Education.VC.utility.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class RolesPermissionDAO {
-
+	private static final Logger logger = LogManager.getLogger(RolesPermissionDAO.class.getName());
 	public void saveRolesPermission(RolesPermission rolepermission) {
 		Connection con=null;
 		PreparedStatement st=null;
@@ -23,7 +25,7 @@ public class RolesPermissionDAO {
 			st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(e);
+			logger.error(e);
 		}
 		finally {
 			Util.closeConnection(null, st, con);
