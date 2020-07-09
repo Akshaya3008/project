@@ -1,5 +1,6 @@
 package org.VCERP.Education.VC.resource;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
@@ -34,6 +35,7 @@ import org.VCERP.Education.VC.controller.UserController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.User;
 import org.VCERP.Education.VC.model.LoginHistory;
+import org.VCERP.Education.VC.utility.PropertiesCache;
 import org.VCERP.Education.VC.utility.SecureUtil;
 import org.VCERP.Education.VC.utility.Util;
 import org.springframework.format.annotation.NumberFormat;
@@ -70,6 +72,9 @@ public class UserResource {
 			history.setEmployee(user.getName());
 			history.setIp(request.getRemoteAddr());
 			controller.createLoginHistory(history);
+			
+			delete();
+			
 			PrivateKey key = SigningKeyGenerator.signKey();
 			String session = Util.randomStringGenerator(8);
 			SecureUtil secure = new SecureUtil();
@@ -252,4 +257,28 @@ public class UserResource {
 		}
 		
 	}
+	
+	private void delete() {
+        File folder = new File(PropertiesCache.DirectoryPath);
+        long days=PropertiesCache.olderThanDays;
+        if (folder.exists()) {
+ 
+            File[] listFiles = folder.listFiles();
+ 
+            long eligibleForDeletion = System.currentTimeMillis() -(days * 24 * 60 * 60 * 1000 );
+ 
+            for (File listFile: listFiles) {
+ 
+                if (listFile.getName().endsWith(".log") &&
+                    listFile.lastModified() < eligibleForDeletion) {
+ 
+                    if (!listFile.delete()) {
+ 
+                        logger.error("Sorry Unable to Delete Files..");
+ 
+                    }
+                }
+            }
+        }
+    }
 }

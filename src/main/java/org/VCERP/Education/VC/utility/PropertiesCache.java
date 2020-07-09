@@ -13,6 +13,8 @@ public class PropertiesCache {
 	public static String parentDBName;
 	public static String userName;
 	public static String password;
+	public static long olderThanDays;
+	public static String DirectoryPath;
 
 	public String getParentDBName() {
 		return parentDBName;
@@ -36,6 +38,22 @@ public class PropertiesCache {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public long getOlderThanDays() {
+		return olderThanDays;
+	}
+
+	public void setOlderThanDays(long olderThanDays) {
+		this.olderThanDays = olderThanDays;
+	}
+
+	public String getDirectoryPath() {
+		return DirectoryPath;
+	}
+
+	public void setDirectoryPath(String directoryPath) {
+		DirectoryPath = directoryPath;
 	}
 
 }
