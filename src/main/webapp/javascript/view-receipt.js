@@ -1,11 +1,12 @@
-
+/*
 $(document).ready(function(){
+	alert(sessionStorage.getItem("viewReceipt"));
 	if(sessionStorage.getItem("viewReceipt")!=null){
 	showdat();
 	}
-	$("#cancelBtn").click(function(){
+	$("#cancelB").click(function(){
 		sessionStorage.removeItem("viewReceipt");
-		window.location.href = "ReceiptList.html"
+		location.reload();
 	});
 });
 function showdat(){
@@ -33,4 +34,4 @@ function showdat(){
 	  document.getElementById('StudentAddress').innerHTML = displayData[9];
 	  document.getElementById('receivedAmount1').innerHTML = displayData[4];
 	  
-}
+}*/

@@ -17,8 +17,8 @@
 
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script type="text/javascript" src="javascript/receipt-list.js"></script>
-<script type="text/javascript" src="javascript/view-receipt.js"></script>
-
+<!-- <script type="text/javascript" src="javascript/view-receipt.js"></script>
+ -->
 <script type="text/javascript" src="javascript/ButtonHideDisplay.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <script type="text/javascript" src="core/noty.js"></script>
@@ -579,16 +579,14 @@ table.table .avatar {
 		$("#datatable-view-2").css("display", "none");
 		$("#cancelB").css("display", "none");
 		
-		$("#btn-view").click(function(){
-			$(this).css("display", "none");
-			$("#datatable-view").css("display", "none");
-			$("#datatable-view-2").css("display", "block");
-			$("#cancelB").css("display", "block");
+/* 		$("#btn-view").click(function(){
+
 		});
-		$("#cancelB").click(function() {
+ */		$("#cancelB").click(function() {
 			
 			$("#datatable-view").css("display", "block");
 			$("#datatable-view-2").css("display", "none");
+			location.reload();
 		});
 	});
 	</script>

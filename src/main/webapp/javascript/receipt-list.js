@@ -90,13 +90,25 @@ function getVeiwReceiptData(rno, receiptno) {
 	var viewReceiptArray=new Array();
 	function callback(responseData, textStatus, request) {
 		for ( var i in responseData) {
-			var admission=responseData[i].admission;
-			var branchDetails=getBranchDetails(responseData[i].branch);
-			var viewReceiptData=responseData[i].stud_name+":"+responseData[i].receipt_no+":"+responseData[i].received_by+":"+
-			responseData[i].total_amt+":"+responseData[i].received_amt+":"+responseData[i].pay_mode+
-			":"+branchDetails+":"+responseData[i].receipt_date+":"+admission.address;
-			/*admission.adm_fees_pack+":"+admission.paid_fees+":"+admission.remain_fees+":"+*/
-			sessionStorage.setItem("viewReceipt",viewReceiptData);
+			  var admission=responseData[i].admission;
+			  var branchDetails=getBranchDetails(responseData[i].branch);
+			  branchDetails=branchDetails.split(":"); 
+			  document.getElementById('receivedAmount').innerHTML = responseData[i].received_amt ;
+			  document.getElementById('receiptno1').innerHTML = 'Receipt #'+ responseData[i].receipt_no;
+			  document.getElementById('receipt2').innerHTML = responseData[i].receipt_no;
+			  document.getElementById('stud').innerHTML = responseData[i].stud_name ;
+			  document.getElementById('creatddate1').innerHTML = responseData[i].receipt_date;
+			  document.getElementById('ReceiptDate1').innerHTML = responseData[i].receipt_date;
+			  document.getElementById('receivedIn1').innerHTML = responseData[i].pay_mode;
+			  document.getElementById('StudentName').innerHTML = responseData[i].stud_name;
+			  document.getElementById('companyname').innerHTML = branchDetails[0];
+			  document.getElementById('companyaddress').innerHTML = branchDetails[1];
+			  document.getElementById('StudentAddress').innerHTML = admission.address;
+			  document.getElementById('receivedAmount1').innerHTML = responseData[i].received_amt;
+			$(this).css("display", "none");
+			$("#datatable-view").css("display", "none");
+			$("#datatable-view-2").css("display", "block");
+			$("#cancelB").css("display", "block");
 			
 		}
 	}
