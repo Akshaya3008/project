@@ -66,9 +66,6 @@ public class UserResource {
 			permission=user.getPermission();
 			LoginHistory history=new LoginHistory();
 			
-			
-			InetAddress ip=InetAddress.getLocalHost();
-			logger.error(ip.getHostAddress());
 			history.setBranch(user.getBranch());
 			history.setEmployee(user.getName());
 			history.setIp(request.getRemoteAddr());

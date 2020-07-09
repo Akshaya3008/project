@@ -1,46 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="warn" package="org.VCERP.Education.VC.configuration">
-<!-- <Properties>
-		<Property name="basePath">D:\\project\\vc-erp-logs</Property>
-		<Property name="basePath">/home/tepscetp/logs/backend</Property>
-
-	</Properties> -->
-
-	<Appenders>
-<!-- 		<RollingFile name="file_logger" fileName="${basePath}\\backend.log"
-			filePattern="${basePath}/app-info-%d{yyyy-MM-dd}.log">
-			<PatternLayout>
-				<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [%X{IP}] [%X{userid}][%X{TAG}] [%c{1}] %msg%n</pattern>
-			</PatternLayout>
-			<Policies>
-				<TimeBasedTriggeringPolicy interval="1"
-					modulate="true" />
-			</Policies>
-		</RollingFile> -->
-
-		<Console name="console" target="SYSTEM_OUT">
-			<PatternLayout
-				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [%X{IP}] [%X{userid}] [%X{TAG}] %c{1} - %msg%n" />
-		</Console>
-		<RollingFile name="json_file_logger" fileName="D:\\project\\vc-erp-logs\\backend.log"
-			filePattern="D:\\project\\vc-erp-logs\\app-info-%d{yyyy-MM-dd}.log">
-			<JsonLayout complete="false" compact="true" properties="true" eventEol="true" objectMessageAsJsonObject="True">
-				<KeyValuePair key="myCustomField" value="myCustomValue" />
-			</JsonLayout>
-			<Policies>
-				<TimeBasedTriggeringPolicy interval="1"
-					modulate="true" />
-			</Policies>
-		</RollingFile>
-
-	</Appenders>
-	<Loggers>
-		<Logger name="org.VCERP.Education.VC" level="info" additivity="true">
-			<appender-ref ref="json_file_logger" level="info" />
-		</Logger>
-		<Root level="info" additivity="false">
-			<appender-ref ref="console" />
-		</Root>
-	</Loggers>
-
+<Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [%l] [%C] [%M] [%X{ip}] [%X{method}] [%X{tag}] %c{1} - %msg%n</Property>
+        <Property name="APP_LOG_ROOT">D:/project/vc-erp-logs</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [%X{tag}] %c{1} - %msg%n" />
+        </Console>
+ 
+        <RollingFile name="appLog"
+            fileName="${APP_LOG_ROOT}/application.log"
+            filePattern="${APP_LOG_ROOT}/application-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="19500KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1" />
+        </RollingFile>
+ 
+    </Appenders>
+    <Loggers>
+ 
+        <Logger name="org.VCERP.Education.VC" level="info" additivity="true">
+            <AppenderRef ref="appLog" level="info"/>
+        </Logger>
+ 
+        <Root level="info" additivity="false">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
 </Configuration>
