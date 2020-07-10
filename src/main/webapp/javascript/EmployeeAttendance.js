@@ -102,7 +102,7 @@ function attendanceList() {
 	function callback(responseData, textStatus, request) {
 		table.rows().remove().draw();
 		for ( var i in responseData) {
-			var present = '<span clas s="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="P"><label for="checkbox1"></label></span>';
+			var present = '<span clas s="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheckPrs" name="type" value="P"><label for="checkbox1"></label></span>';
 			var absent = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheckAbs" name="type" value="A"><label for="checkbox1"></label></span>';
 			var intime = '<input type="time" name="time" id="intime" class="time" value="'+time+'"/>';
 			var outtime = '<input type="time" name="time" id="outtime" class="time" value="'+time+'"/>';
@@ -129,24 +129,18 @@ function attendanceList() {
 function getAttendance() {
 	var table = $('#EmpAttendance_table').DataTable();
 	var attendance = "0|0";
-	$('table .cbCheck').each(
-			function(i, chk) {
+	$('table .cbCheckPrs').each(function(i, chk) {
 				if (chk.checked) {
-					var code = table.rows({
-						selected : true
-					}).column(1).data()[i];
+					var code = table.rows({selected : true}).column(1).data()[i];
 					var intime = table.cell(i, 4).nodes().to$().find('input').val();
 					var out = table.cell(i, 5).nodes().to$().find('input').val();
 					attendance = attendance + "," + code + "|" + intime + "|"
 							+ out + "|" + chk.value;
 				}
 			});
-	$('table .cbCheckAbs').each(
-			function(i, chk) {
+	$('table .cbCheckAbs').each(function(i, chk) {
 				if (chk.checked) {
-					var code = table.rows({
-						selected : true
-					}).column(1).data()[i];
+					var code = table.rows({selected : true}).column(1).data()[i];
 					var intime = "null";
 					var out = "null";/*table.cell(i, 5).nodes().to$().find('input')
 							.val();*/
