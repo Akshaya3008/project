@@ -1,5 +1,35 @@
 //var designation;
+var table;
 $(document).ready(function() {
+	validateLogin();
+	fetchAllBranch();
+	getDesignation();
+	$(".branch").val(branchSession);
+	
+	 table= $('#employee-report').DataTable({
+    	dom: 'Bfrtip',
+	    buttons: [
+	    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+	    	{extend: 'print', className: 'btn btn-warning glyphicon glyphicon-print'},
+	    	{extend: 'excel', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+	    	{extend: 'csv', className: 'btn btn-warning glyphicon glyphicon-print'},
+	    ],
+	    "order": [],
+	    "columnDefs": [ {
+	    "targets"  : 'no-sort',
+	    "orderable": false,
+	    }],
+	   
+    } );
+	 table.buttons().container() 
+	 .appendTo( '#table-style .col-sm-6:eq(1)' );
+	
+	 fetchAllEmployee();
+	 $('#emp_design').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+
 	jQuery.validator.addMethod("letterswithspace", function(value, element) {
 	    return this.optional(element) || /^[a-z\s]+$/i.test(value);
 	}, "Please enter letters only");
@@ -9,7 +39,7 @@ $(document).ready(function() {
 		 rules: {
 		    
 			 emp_name: {
-		        required: true,
+		        //required: true,
 		        letterswithspace:true
 		   },
 		      
@@ -17,27 +47,14 @@ $(document).ready(function() {
 		
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  fetchEmployeeReport();
 		  }
-	});
-
-	validateLogin();
-	//fetchAllBranch();
-	getDesignation();
-	fetchAllEmployee();
-	$(".branch").val(branchSession);
-	
-	$('#multi_emp_design').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
-	$("#EmpReportForm").submit(function(e){
-		fetchEmployeeReport(e);
 	});
 });
 
 function fetchAllEmployee(){
 	function callback(responseData, textStatus, request){
-		var table = $("#employee-report").DataTable();
+		//var table = $("#employee-report").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var branch = responseData[i].branch;
@@ -66,18 +83,18 @@ function fetchAllEmployee(){
 	return false;
 
 }
-function fetchEmployeeReport(e){
+function fetchEmployeeReport(){
 	var design=new Array()
-	for (var option of document.getElementById('multi_emp_design').options) {
+	for (var option of document.getElementById('emp_design').options) {
 		if (option.selected) {
 			design.push(option.value);
 		}
 	}
 	function callback(responseData, textStatus, request){
-		var table = $("#employee-report").DataTable();
+		//var table = $("#employee-report").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
-			e.preventDefault();
+			//e.preventDefault();
 			var branch = responseData[i].branch;
 			var emp_name = responseData[i].emp_name;
 			var emp_unq_code = responseData[i].emp_unq_code;

@@ -3,14 +3,23 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="jquery/jquery-3.3.1.min.js"></script>
 <script src="jquery/bootstrap.min.js"></script>  
-<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
 <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/promote.css" type="text/css">
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
+
+<script src="pdf/jquery.dataTables.min.js"></script>
+<script src="pdf/dataTables.buttons.min.js"></script>
+<script src="pdf/buttons.flash.min.js"></script>
+<script src="pdf/jszip.min.js"></script>
+<script src="pdf/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="pdf/buttons.html5.min.js"></script>
+<script src="pdf/buttons.print.min.js"></script>
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
@@ -340,7 +349,7 @@ table.table .avatar {
 										<div class="panel-body">
 											<form id="EmpReportForm" method="post">
 												<div class="form-group">
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<label class="control-label"> 
 															<span class="branch_title">Branch</span> 
 															<span class="text-danger" style="color: red">*</span>
@@ -350,7 +359,7 @@ table.table .avatar {
 															</select>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label>Employee name</label> 
 															<div class="input-group">
@@ -358,13 +367,13 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<div class="form-group">
 															<label class="control-label">
 																<span class="Employee_type">Employee Designation</span>
 															</label>
 															<div class="input-group">
-																<select id="multi_emp_design" name="emp_design" class="form-control designation" multiple="multiple">
+																<select id="emp_design" class="form-control designation" name="emp_design" multiple="multiple">
 																</select>
 															</div>
 														</div>
