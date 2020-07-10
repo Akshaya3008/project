@@ -23,10 +23,10 @@ $('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});*/
-	$('#multi_emp_design').multiselect({
+	/*$('#multi_emp_design').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
-	});
+	});*/
 	
 	$('#multi_rec_status').multiselect({
 		includeSelectAllOption : true,
