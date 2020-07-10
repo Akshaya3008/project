@@ -5,7 +5,13 @@
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
 <script src="jquery/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">                                   
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  --> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css">                        
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,7 +34,7 @@
 
 <script src="jquery/bootstrap-multiselect.js"></script>
 <script src="jquery/jquery.validate.min.js"></script>
-<!-- <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script> -->
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script src="javascript/InstallmentDueReport.js"></script>
 <script src="javascript/accordian_view.js"></script>
@@ -36,6 +42,11 @@
 <link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 
 <title>Installment Due Fees Report</title>
+<script>
+	$(function() {
+		$("#navbar").load("nav-bar.html");
+	});
+</script>
 <style>
 .table-wrapper {
 	background: #fff;
@@ -315,11 +326,7 @@ table.table .avatar {
 		});
 	});
 </script>
-<script>
-	$(function() {
-		$("#navbar").load("nav-bar.html");
-	});
-</script>
+
 </head>
 <body>
 	<div class="inner-wrapper">
@@ -485,5 +492,6 @@ table.table .avatar {
 			</section>
 		</div>
 	</div>
+	<script src="assets/js/jquery.metisMenu.js"></script>
 </body>
 </html>

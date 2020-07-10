@@ -131,7 +131,7 @@ function SearchStudent(id){
 			        cell7.innerHTML = remain_fees[i-1];
 			        
 			        var cell8 = row.insertCell(7);
-			        cell8.innerHTML = '<input type="text" id="Amount" name="Amount" class="form-control text" value="0" readonly></td>';
+			        cell8.innerHTML = '<td><input type="text" id="Amount" name="Amount" class="form-control text" value="0" readonly style="width=100% !important;"></td>';
 			       // j=j-1;
 				}
 			document.getElementById("InstallmentTable").style.display = "block";
