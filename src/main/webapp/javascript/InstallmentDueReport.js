@@ -13,6 +13,17 @@ $(document).ready(function() {
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	$('#standard').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+	jQuery.validator.addMethod("needsSelection", function(value, element) {
+		
+		 var count = $(element).find('option:selected').length;
+		 alert("in"+count);
+         return count > 0;
+    });
+	//jQuery.validator.messages.needsSelection = 'You gotta pick something.';
 	
 	jQuery.validator.addMethod("minDate", function (value, element) {
 	    var now = new Date();
@@ -24,7 +35,7 @@ $(document).ready(function() {
 	
 	jQuery.validator.addMethod("lessThan", 
 			function(value, element, params) {
-
+		alert("in");
 			    if (!/Invalid|NaN/.test(new Date(value))) {
 			        return new Date(value) < new Date($(params).val());
 			    }
@@ -51,7 +62,7 @@ $(document).ready(function() {
 		  rules: {
 		    
 			  from_date: {
-		        required: true,
+		       required: true,
 		       date:true,
 		       lessThan:"#to_date"
 		       
@@ -62,8 +73,9 @@ $(document).ready(function() {
 			 greaterThan:"#from_date"
    
 		   },
-		   multi_standard:{
-			   required:true,
+		   standard:{
+			   required: true,
+			   needsSelection:"true"
 		   },
 		   multi_course:{
 			   required:true,
@@ -72,9 +84,15 @@ $(document).ready(function() {
 			   required:true,
 		   },
 		  },
+		  ignore: ':hidden:not("#standard")', // Tells the validator to check the hidden select
+		    errorClass: 'invalid',
 		 messages: {
 			 from_date: {
 				required:'Please select any date',	
+				
+			},
+			standard: {
+				required:'Please select atleast one standard',	
 				
 			},
 			to_date:{
