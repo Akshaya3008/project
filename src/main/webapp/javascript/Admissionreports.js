@@ -1,5 +1,14 @@
 var ids=new Array();
 $(document).ready(function() {
+	validateLogin();
+	FetchAllEmployee();
+	getAcademicYear();
+	getFeesPackage();
+	getAllDivision();
+	getAllStandard();
+	fetchAllBranch();
+	$(".branch").val(branchSession);
+	
 	jQuery.validator.addMethod("minDate", function (value, element) {
 	    var now = new Date();
 	    now.setHours(0,0,0,0);
@@ -75,14 +84,6 @@ $(document).ready(function() {
 			  event.preventDefault();
 		  }
 	});
-	validateLogin();
-	FetchAllEmployee();
-	getAcademicYear();
-	getFeesPackage();
-	getAllDivision();
-	getAllStandard();
-	fetchAllBranch();
-	$(".branch").val(branchSession);
 	
 	$('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
@@ -164,10 +165,10 @@ function viewAdmissionReport(){
 						[  invoice, date, name ,fees_pack, net_total,grand_total, payment,balance]).draw();	
 			//}
 		}
-		table.row.add(
+		/*table.row.add(
 				[  "", "", "" ,"", "total="+total_net,"total="+total_grand, "total="+total_payment,"total="+total_balance],3).draw(false);
 	     table.order([1, 'asc']).draw();
-	     table.page('last').draw(false);
+	     table.page('last').draw(false);*/
 		
 		document.getElementById("branch").disabled=true;
 	}

@@ -14,6 +14,10 @@ $(document).ready(function(){
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	$('#multi_standard').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
 	 var table= $('#receipts_report').DataTable( {
 	    	dom: 'Bfrtip',
 		    buttons: [

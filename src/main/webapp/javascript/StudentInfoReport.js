@@ -1,46 +1,5 @@
 $(document).ready(function() {
 	validateLogin();
-	jQuery.validator.addMethod("futureDate", function(value, element) {
-		 var now = new Date();
-		 now.setHours(0,0,0,0);
-		 var myDate = new Date(value);
-		 return this.optional(element) || myDate < now;
-	},'Future date not allowed');
-	
-	jQuery.validator.addMethod("greaterThan", 
-			function(value, element, params) {
-
-			    if (!/Invalid|NaN/.test(new Date(value))) {
-			        return new Date(value) > new Date($(params).val());
-			    }
-			    return isNaN(value) && isNaN($(params).val()) 
-			        || (Number(value) > Number($(params).val())); 
-			},'Must be greater than from date.');
-
-	$('form[id="StudentInfoForm"]').validate({
-		
-		 rules: {
-		    
-		   from_date: {
-		        required: true,
-		        date:true,
-		        futureDate:true
-		   },
-		   to_date:{
-			 required:true,
-			 date:true,
-			 greaterThan:"#from_date"
-		   },	
-		   status:{
-			   required:true
-		   },
-		  },
-		
-		  submitHandler:function(form){
-			  event.preventDefault();
-		  }
-	});
-
 	FetchAllEmployee();
 	getFeesPackage();
 	fetchAllBranch();
@@ -74,7 +33,50 @@ $(document).ready(function() {
 		   
 	    } );
 	 table.buttons().container() 
-    .appendTo( '#table-style .col-sm-6:eq(1)' );
+	 .appendTo( '#table-style .col-sm-6:eq(1)' );
+	 
+		jQuery.validator.addMethod("futureDate", function(value, element) {
+			 var now = new Date();
+			 now.setHours(0,0,0,0);
+			 var myDate = new Date(value);
+			 return this.optional(element) || myDate < now;
+		},'Future date not allowed');
+		
+		jQuery.validator.addMethod("greaterThan", 
+				function(value, element, params) {
+
+				    if (!/Invalid|NaN/.test(new Date(value))) {
+				        return new Date(value) > new Date($(params).val());
+				    }
+				    return isNaN(value) && isNaN($(params).val()) 
+				        || (Number(value) > Number($(params).val())); 
+				},'Must be greater than from date.');
+
+		$('form[id="StudentInfoForm"]').validate({
+			
+			 rules: {
+			    
+			   from_date: {
+			        required: true,
+			        date:true,
+			        futureDate:true
+			   },
+			   to_date:{
+				 required:true,
+				 date:true,
+				 greaterThan:"#from_date"
+			   },	
+			   status:{
+				   required:true
+			   },
+			  },
+			
+			  submitHandler:function(form){
+				  event.preventDefault();
+			  }
+		});
+
+		
 	 	$("#btnDisplay").click(function(e){
 		StudentInfoReport(e);
 	});
