@@ -191,7 +191,7 @@ function attendanceStat(std,acad_year,division,from_date,to_date) {
 			branch : branchSession
 			};
 	var relativeUrl = "/Attendance/getAttendaceStat";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
@@ -218,7 +218,7 @@ function attendanceList(std,acad_year,division,e) {
 	var httpMethod = "POST";
 	var formData = {standard : std , acad_year : acad_year, division : division , branch : branchSession};
 	var relativeUrl = "/Attendance/getAttendaceList";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
@@ -227,17 +227,13 @@ function getAttendance() {
 	var myArray = new Array();
 	var attendance = "0|0";
 	$('table .cbCheck').each(function(i, chk) {
-		if (chk.checked == true) {
-			var rollno = table.rows({
-				selected : true
-			}).column(1).data()[i];
+		if (chk.checked) {
+			var rollno = table.rows({selected : true}).column(1).data()[i];
 			// var rollno=i+1;
 			attendance = attendance + "," + rollno + "|" + chk.value;
 		}
 		if (!chk.checked) {
-			var rollno = table.rows({
-				selected : false
-			}).column(1).data()[i];
+			var rollno = table.rows({selected : false}).column(1).data()[i];
 			// var rollno=i+1;
 			attendance = attendance + "," + rollno + "|A";
 			// myArray.push(rollno+"|"+"A");
@@ -266,7 +262,7 @@ function saveAttendance(standard, acad_year,division, attendance) {
 		branch : branchSession
 	}
 	var relativeUrl = "/Attendance/studentAttendance";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
@@ -304,7 +300,7 @@ function StudentAttendanceReport(rno){
 			branch : branchSession
 			};
 	var relativeUrl = "/Attendance/studentAttendanceReport";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 
