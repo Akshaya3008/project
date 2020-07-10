@@ -4,8 +4,9 @@ var table;
 $(document).ready(function() {
 	validateLogin();
 	table=$("#UserMgmt_table").DataTable();;
-	checkUserLevel();
 	fetchAllBranch();
+	$(".branch").val(branchSession);
+	checkUserLevel();
 	fetchAllRole();
 	FetchAllEmployee();
 	getDesignation();
