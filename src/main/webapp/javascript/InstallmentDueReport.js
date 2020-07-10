@@ -79,9 +79,7 @@ $(document).ready(function() {
 		   },
 		   multi_course:{
 			   required:true,
-		   },
-		   multi_div:{
-			   required:true,
+			   needsSelection:"true"
 		   },
 		  },
 		  ignore: ':hidden:not("#standard")', // Tells the validator to check the hidden select
@@ -142,7 +140,7 @@ function viewInstallmentReport(){
 			fees_package.push(option.value);
 		}
 	}
-	for (var option of document.getElementById('multi_standard').options) {
+	for (var option of document.getElementById('standard').options) {
 		if (option.selected) {
 			standard.push(option.value);
 		}
@@ -191,6 +189,7 @@ function viewInstallmentReport(){
 		var httpMethod = "POST";
 		var formData = $("#InstalllmentReportForm").serialize()+"&package_array="+fees_package+"&standard_array="+standard+"&division_array="+div+
 		"&branch="+branch;
+		alert(formData);
 		var relativeUrl = "/Receipt/InstallmentDueReport";	
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);
