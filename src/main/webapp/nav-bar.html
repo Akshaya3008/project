@@ -1,48 +1,3 @@
-<script>
-$(document).ready(function(){
-	validateLogin();
-	fetchAllBranch();
-	profile();
-	if(emp_type=="Organizatoin Level Employee"){
-		document.getElementById("branch").disabled=false;
-	}else{
-		document.getElementById("branch").disabled=true;
-	}
-	$("#logout").click(function(){
-		logout();
-	});
-	
-$('.dropdown-submenu a.dropdown-submenu-toggle').on("click", function(e){
-    $('.dropdown-submenu ul').removeAttr('style');
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-});
-// Clear Submenu Dropdowns on hidden event
-$('#bs-navbar-collapse-1').on('hidden.bs.dropdown', function () {
-  $('.navbar-nav .dropdown-submenu ul.dropdown-menu').removeAttr('style');
-});
-});
-
-
-function profile(){ 
-	var val = user;
-	var branch = branchSession;
-	//$(".user").innerHTML  = val;
-	document.getElementById('user').innerHTML  = val;
-	document.getElementById('user_inside').innerHTML  = val;
-	document.getElementById('branch_name').innerHTML  = branch;
-	document.getElementById('user_name').innerHTML  = val;
-}
-
-function changeBranch(){
-	event.preventDefault();
-	var newBranchSession=document.getElementById("branch").value;
-	sessionStorage.removeItem("branch");
-	sessionStorage.setItem("branch",newBranchSession);
-	location.reload();
-}
-</script>
 <style>
     .navbar{
         border-radius: 0px;
@@ -244,8 +199,8 @@ data-toggle="collapse">
 	                                            </a>
 	   <ul class="dropdown-menu">
 	       <li><a href="ReceiptsReport.html">Receipts Report</a></li>
-	       <li><a href="ReceivableReport.html">Receivable Report</a></li>
-	         <li><a href="FeesReport.html">Fees Report</a></li>
+<!-- 	       <li><a href="ReceivableReport.html">Receivable Report</a></li>
+	         <li><a href="FeesReport.html">Fees Report</a></li> -->
 	       <li><a href="InstallmentDueReport.html">Installment due fees Report</a></li>
 	   </ul>
 	</li>
@@ -259,7 +214,7 @@ data-toggle="collapse">
 <ul class="nav navbar-nav navbar-right">
 	
 		<li class="dropdown">
-		<a id="profile" class="dropdown-toggle" data-toggle="dropdown">
+		<a id="profile" class="dropdown-toggle" data-toggle="dropdown" onclick="checkUserLevel()">
 			
 				<span class="glyphicon glyphicon-user"></span>      
 				<strong id="user"></strong>
@@ -291,7 +246,7 @@ data-toggle="collapse">
 		<div class="navbar-login navbar-login-session">
              <div class="row">
                   <div class="col-lg-12">
-						<a id="logout" class="btn btn-danger btn-block">Logout</a>
+						<a id="logout" class="btn btn-danger btn-block" onclick="logout()">Logout</a>
 					</div>
 			</div>
 		</div>
@@ -334,5 +289,45 @@ data-toggle="collapse">
 	</div>
 <!-- </div>-->
 </nav>
-
-
+<script>
+$(document).ready(function(){
+	validateLogin();
+	fetchAllBranch();
+	profile();
+/* $('.dropdown-submenu a.dropdown-submenu-toggle').on("click", function(e){
+    $('.dropdown-submenu ul').removeAttr('style');
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+});
+// Clear Submenu Dropdowns on hidden event
+$('#bs-navbar-collapse-1').on('hidden.bs.dropdown', function () {
+  $('.navbar-nav .dropdown-submenu ul.dropdown-menu').removeAttr('style');
+}); */
+});
+</script>
+<script>
+function checkUserLevel(){
+	if(emp_type=="Organizatoin Level Employee"){
+		document.getElementById("branch").disabled=false;
+	}else{
+		document.getElementById("branch").disabled=true;
+	}
+}
+function changeBranch(){
+	event.preventDefault();
+	var newBranchSession=document.getElementById("branch").value;
+	sessionStorage.removeItem("branch");
+	sessionStorage.setItem("branch",newBranchSession);
+	location.reload();
+}
+function profile(){ 
+	var val = user;
+	var branch = branchSession;
+	//$(".user").innerHTML  = val;
+	document.getElementById('user').innerHTML  = val;
+	document.getElementById('user_inside').innerHTML  = val;
+	document.getElementById('branch_name').innerHTML  = branch;
+	document.getElementById('user_name').innerHTML  = val;
+}
+</script>
