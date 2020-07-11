@@ -33,17 +33,42 @@ $(document).ready(function() {
 	jQuery.validator.addMethod("letterswithspace", function(value, element) {
 	    return this.optional(element) || /^[a-z\s]+$/i.test(value);
 	}, "Please enter letters only");
+	
+	jQuery.validator.addMethod("needsSelection", function(value, element) {
+		
+		 var count = $(element).find('option:selected').length;
+        return count > 0;
+   });
 
 	$('form[id="EmpReportForm"]').validate({
 		
 		 rules: {
 		    
 			 emp_name: {
-		        //required: true,
+		        /*required: true,*/
 		        letterswithspace:true
 		   },
+		   emp_design:{
+			   required: true,
+			   needsSelection:"true"
+		   }
 		      
 		  },
+		  ignore: ':hidden:not(".valid_test")', // Tells the validator to check the hidden select
+		    errorClass: 'invalid',
+		    
+		    messages: {
+		    	emp_name: {
+			        letterswithspace:'Please enter letters only',	
+					
+				},
+				emp_design: {
+					required:'Please select atleast one designtion',	
+					
+				},
+			
+				
+			  },
 		
 		  submitHandler:function(form){
 			  event.preventDefault();

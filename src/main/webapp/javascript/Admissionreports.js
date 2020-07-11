@@ -79,6 +79,18 @@ $(document).ready(function() {
 			   required:true
 		   },
 		  },
+		    messages: {
+		    	from_date: {
+		    		required:'Please select a date',
+					
+				},
+				to_date: {
+					required:'Please select a date',	
+					
+				},
+			
+				
+			  },
 		
 		  submitHandler:function(form){
 			  event.preventDefault();

@@ -293,6 +293,7 @@ table.table .avatar {
 {
 	width: 50% ! important;
 }
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -397,7 +398,7 @@ table.table .avatar {
 														<span class="titleDiv">Enquiry taken by</span>
 													</label>
 													<div class="input-group">
-														<select id="multi_status_select" name="status[]" class="form-control enq_taken" multiple="multiple" Required></select>
+														<select id="multi_status_select" name="status[]" class="form-control enq_taken valid_test" multiple="multiple" Required></select>
 													</div>
 												</div>
 											</div>
@@ -405,7 +406,7 @@ table.table .avatar {
 												<div class="form-group">
 													<label class="control-label"> <span class="titleDiv">Course package</span></label>
 														<div class="input-group">
-															<select id="multi_course" name="package" class="form-control fees" multiple="multiple" Required></select>
+															<select id="multi_course" name="course_package" class="form-control fees valid_test" multiple="multiple" Required></select>
 														</div>
 												</div>
 											</div>
@@ -415,7 +416,7 @@ table.table .avatar {
 														<span class="titleDiv">Enquiry Status</span>
 													</label>
 													<div class="input-group">
-														<select id="multi_status" name="status" class="form-control enq_status" multiple="multiple" Required>
+														<select id="multi_status" name="status" class="form-control enq_status valid_test" multiple="multiple" Required>
 															<option value="Admitted">Admitted</option>
 															<option value="Non Admitted">Non Admitted</option>	
 														</select>

@@ -51,6 +51,13 @@ $(document).ready(function() {
 				    return isNaN(value) && isNaN($(params).val()) 
 				        || (Number(value) > Number($(params).val())); 
 				},'Must be greater than from date.');
+		
+		jQuery.validator.addMethod("needsSelection", function(value, element) {
+			
+			 var count = $(element).find('option:selected').length;
+	         return count > 0;
+	    });
+		
 
 		$('form[id="StudentInfoForm"]').validate({
 			
@@ -69,7 +76,45 @@ $(document).ready(function() {
 			   status:{
 				   required:true
 			   },
+			   'status[]':{
+				    required: true,
+				   needsSelection:"true"
+			   },
+			   course_package:{
+				   required: true,
+				   needsSelection:"true"  				   
+			   },
+			   status:{
+				   required: true,
+				   needsSelection:"true"
+			   }
 			  },
+			  ignore: ':hidden:not(".valid_test")', // Tells the validator to check the hidden select
+			    errorClass: 'invalid',
+			  
+			 messages: {
+				 from_date: {
+					required:'Please select any date',	
+					
+				},
+				to_date:{
+					required:'Please select any date',
+					greaterThan:'Enter a valid date'
+				},
+				'status[]':{
+					required:'Please select atleast one value',	
+					
+				},
+				course_package:{
+					 required:'Please select atleast one course',	  				   
+				   },
+				   status:{
+					   required:'Please select atleast one course',	  	
+				   
+				  },
+
+				
+			 },
 			
 			  submitHandler:function(form){
 				  event.preventDefault();
