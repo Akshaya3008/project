@@ -108,13 +108,11 @@ $(document).ready(function() {
 				course_package:{
 					 required:'Please select atleast one course',	  				   
 				   },
-				   status:{
-					   required:'Please select atleast one course',	  	
 				   
-				  },
 
 				
 			 },
+			 
 			
 			  submitHandler:function(form){
 				  event.preventDefault();

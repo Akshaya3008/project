@@ -291,7 +291,7 @@ table.table .avatar {
 }
 .input-group
 {
- 	width:70% ! important;
+ 	width:60% ! important;
 }
 
 </style>
@@ -348,8 +348,9 @@ table.table .avatar {
 								<div class="panel">
 									<form id="getExpenseData" method="post">
 										<div class="panel-body">											
-											<div class="form-group">
-												<div class="col-md-3">
+											
+											<div class="row">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label class="control-label"> 
 															<span class="titleYear">Expenses From Date</span> 
@@ -361,7 +362,7 @@ table.table .avatar {
 														</div>
 													</div>
 												</div>
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label class="control-label"> 
 															<span class="titleYear">Expenses Till Date</span> 
@@ -373,26 +374,28 @@ table.table .avatar {
 														</div>
 													</div>
 												</div>		
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label class="control-label"> 
 															<span class="titleYear">Vendor</span> 
 															<span class="text-danger" style="color:red">*</span>
 														</label>
 														<div class="input-group select">
-															<select name="vendor" id="multi_vendor_select" class="form-control vendor_list" multiple="multiple">									
+															<select name="vendor" id="multi_vendor_select" class="form-control vendor_list valid_test" multiple="multiple">									
 															</select>
 														</div>
 													</div>
 												</div>
-												<div class="col-md-3">
+												</div>
+												<div class="row">
+												<div class="col-md-4">
 													<div class="form-group">
 														<label class="control-label"> 
 															<span class="titleYear">Payment Mode</span> 
 															<span class="text-danger" style="color:red">*</span>
 														</label>
 														<div class="input-group select">
-															<select name="pay_mode" id="pay_mode" class="form-control pay_mode">
+															<select name="pay_mode" id="pay_mode" class="form-control pay_mode valid_test">
 																<option>Cash</option>
 																<option>Cheque</option>
 																<option>Google Pay</option>
@@ -404,21 +407,21 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="fom-group">
-													<div class="col-md-3">
+											
+													<div class="col-md-4">
 														<div class="form-group">
 													
 															<label class="control-label"> 
 																<span class="titleDiv">Branch</span>
 															</label>
 															<div class="input-group">
-																<select id="branch" name="branch" class="form-control branch">
+																<select id="branch" name="branch" class="form-control branch" disabled>
 																</select>
 															</div>
 														</div>
 													</div>
-												</div>
+													</div>
+												
 											</div>
 											<div style="background:white;">
 												<div class="row">

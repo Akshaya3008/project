@@ -34,6 +34,12 @@ $(document).ready(function(){
     },"Must be less than till date.");
 
 
+	jQuery.validator.addMethod("needsSelection", function(value, element) {
+		
+		 var count = $(element).find('option:selected').length;
+         return count > 0;
+    });
+
 	$('form[id="getExpenseData"]').validate({
 
 		rules : {
@@ -45,13 +51,43 @@ $(document).ready(function(){
 				required:true,
 				greaterThan:"#from_date"
 			},
+			vendor:{
+			    	required: true,
+				   needsSelection:"true"
+			},
 			pay_mode:{
-				required:true
+			 	required: true,
+				   needsSelection:"true"
 			},
-			branch:{
-				required:true
-			},
+		/*	branch:{
+			 	required: true,
+				   needsSelection:"true"
+			},*/
 		},
+		 ignore: ':hidden:not(".valid_test")', // Tells the validator to check the hidden select
+		    errorClass: 'invalid',
+		    
+		    messages: {
+		    	 from_date: {
+						required:'Please select any date',	
+						
+					},
+					to_date:{
+						required:'Please select any date',
+						greaterThan:'Enter a valid date'
+					},
+					vendor:{
+						required:'Please select atleast one value',	
+				},
+				pay_mode:{
+					required:'Please select atleast one value',	
+			},
+		/*	branch:{
+				required:'Please select atleast one value',	
+		},*/
+			
+				
+			  },
 		submitHandler : function(form) {
 			event.preventDefault();
 			
