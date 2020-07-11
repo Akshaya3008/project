@@ -7,10 +7,10 @@ $('#multi_status_select').multiselect({
 		enableFiltering : true
 	});
 
-	$('#multi_course').multiselect({
+	/*$('#multi_course').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
-	});
+	});*/
 	$('#multi_div').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true

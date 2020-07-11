@@ -17,6 +17,10 @@ $(document).ready(function() {
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	$('#multi_course').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
 	jQuery.validator.addMethod("needsSelection", function(value, element) {
 		
 		 var count = $(element).find('option:selected').length;
@@ -82,8 +86,10 @@ $(document).ready(function() {
 			   needsSelection:"true"
 		   },
 		  },
-		  ignore: ':hidden:not("#standard")', // Tells the validator to check the hidden select
+		  ignore: ':hidden:not(".valid_test")', // Tells the validator to check the hidden select
 		    errorClass: 'invalid',
+		    /*ignore: ':hidden:not("#multi_course")', // Tells the validator to check the hidden select
+		    errorClass: 'invalid',*/
 		 messages: {
 			 from_date: {
 				required:'Please select any date',	
@@ -91,6 +97,10 @@ $(document).ready(function() {
 			},
 			standard: {
 				required:'Please select atleast one standard',	
+				
+			},
+			multi_course: {
+				required:'Please select atleast one course',	
 				
 			},
 			to_date:{
