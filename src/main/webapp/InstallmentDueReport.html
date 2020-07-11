@@ -420,7 +420,7 @@ table.table .avatar {
 																<span class="titleDiv">Division</span>
 															</label>
 															<div class="input-group">
-																<select id="multi_div" name="division"class="form-control division valid_test" multiple="multiple" Required>
+																<select id="multi_div" name="division"class="form-control division" multiple="multiple" Required>
 																</select>
 															</div>
 														</div>
@@ -477,7 +477,10 @@ table.table .avatar {
 											</thead>
 											<tfoot >
 												<tr>
-												<th colspan="9" style="text-align:right;">Total</th>
+												<th colspan="8"></th>
+												<th id="total_remain" style="text-align:right;"></th>
+												<th id="total_paid" style="text-align:right;"></th>
+												<th id="total_due_amt" style="text-align:right;"></th>
 												</tr>
 											</tfoot>
 										</table>

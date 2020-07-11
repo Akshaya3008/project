@@ -24,7 +24,6 @@ $(document).ready(function() {
 	jQuery.validator.addMethod("needsSelection", function(value, element) {
 		
 		 var count = $(element).find('option:selected').length;
-		 alert("in"+count);
          return count > 0;
     });
 	//jQuery.validator.messages.needsSelection = 'You gotta pick something.';
@@ -39,7 +38,6 @@ $(document).ready(function() {
 	
 	jQuery.validator.addMethod("lessThan", 
 			function(value, element, params) {
-		alert("in");
 			    if (!/Invalid|NaN/.test(new Date(value))) {
 			        return new Date(value) < new Date($(params).val());
 			    }
@@ -164,6 +162,7 @@ function viewInstallmentReport(){
 		div="null";
 	}
 	function callback(responseData, textStatus, request){
+		var total_due_amt=0,total_remain=0,total_paid=0;
 		var table = $("#install_report").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -177,7 +176,7 @@ function viewInstallmentReport(){
 				var stud_name = installment.stud_name;
 				var invoice = responseData[i].invoice_no;
 				var rollno = installment.rollno;
-				var due_date = due_date[j];
+				var date = due_date[j];
 				var fees_package = responseData[i].adm_fees_pack;
 				var title = fees_title[j];
 				var due_amt = monthly_pay[j];
@@ -185,11 +184,17 @@ function viewInstallmentReport(){
 				var paid = paid_fees[j];
 				var remain=remain_fees[j];
 				var total_fees=installment.total_fees;
+				total_paid+=paid;
+				total_remain+=remain;
+				total_due_amt+=total_fees;
 				table.row.add(
-						[  stud_name, invoice, rollno, due_date,fees_package, title,due_amt,branch,remain,paid,total_fees ]).draw();	
+						[  stud_name, invoice, rollno, date,fees_package, title,due_amt,branch,remain,paid,total_fees ]).draw();	
 			}
-			document.getElementById("branch").disabled=true;
 		}
+		document.getElementById("branch").disabled=true;
+		document.getElementById("total_paid").innerHTML="Sum="+total_paid;
+		document.getElementById("total_remain").innerHTML="Sum="+total_remain;
+		document.getElementById("total_due_amt").innerHTML="Sum="+total_due_amt;
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
@@ -199,7 +204,6 @@ function viewInstallmentReport(){
 		var httpMethod = "POST";
 		var formData = $("#InstalllmentReportForm").serialize()+"&package_array="+fees_package+"&standard_array="+standard+"&division_array="+div+
 		"&branch="+branch;
-		alert(formData);
 		var relativeUrl = "/Receipt/InstallmentDueReport";	
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);

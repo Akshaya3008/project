@@ -533,7 +533,7 @@ public class ReceiptDetailsDAO {
 				remain_fees.add(rs.getInt(9));
 				installmentData.setBranch(rs.getString(11));
 			}
-			if(due_date!=null){
+			if(due_amt.size()!=0){
 			installmentData.setDue_date(due_date);
 			installmentData.setFees_title(title);
 			installmentData.setMonthly_pay(due_amt);
