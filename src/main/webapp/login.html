@@ -1,96 +1,119 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="jquery/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
+	<head>
+	<meta charset="ISO-8859-1">
+		<script src="jquery/jquery-3.3.1.min.js"></script>
+		 <script src="jquery/bootstrap.min.js"></script>
+		<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> --> 
 
-<script src="jquery/jquery.validate.min.js"></script>
+		<script src="jquery/jquery.validate.min.js"></script>
 
-<script type="text/javascript" src="core/noty.js"></script>
-<script type="text/javascript" src="javascript/login.js"></script>
-<script type="text/javascript" src="javascript/Helper.js"></script>
+		<script type="text/javascript" src="core/noty.js"></script>
+		<script type="text/javascript" src="javascript/login.js"></script>
+		<script type="text/javascript" src="javascript/Helper.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/noty.css" />
-<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<!------ Include the above in your HEAD tag ---------->
-<title>LOGIN</title>
-<style>
-#loading {
-	position: fixed;
-	width: 100%;
-	height: 100vh;
-	background: #fff url('img/ring.gif') no-repeat center center;
-	z-index: 99999;
-}
-</style>
-</head>
-<body>
-
-
-	<div class="container">
-		<div id="loginbox" style="margin-top: 50px;"
-			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-			<div class="panel panel-info">
-				<div class="panel-heading">
+		  <link rel="stylesheet" type="text/css" href="css/noty.css" />  
+	<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/Loginstyle.css">
+	
+	<!------ Include the above in your HEAD tag ---------->
+	<title>LOGIN</title>
+	<style>
+		#loading {
+		position: fixed;
+		padding:0;
+		margin:0;
+		width: 100%;
+		height: 100vh;
+		background: #fff url('img/ring.gif') no-repeat center center;
+		z-index: 99999;
+		}
+		</style>
+	</head>
+	<body onload="myFunction()">
+	<div id="loading"></div>
+		<!-- <div class="container">
+			<div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+				<div class="panel panel-info">
+					<div class="panel-heading">
 					<div class="panel-title">Student Details</div>
-					<div
-						style="float: right; font-size: 80%; position: relative; top: -10px">
+						<div style="float: right; font-size: 80%; position: relative; top: -10px">
 						<a href="#">Forgot password?</a>
+						</div>
+					</div>		
+					<div style="padding-top: 30px" class="panel-body">		
+						<div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>					
+							<form id="signin" method="post" class="form-horizontal" role="form">						
+									<div style="margin-bottom: 25px" class="input-group">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+										<input id="login-username" type="text" class="form-control" name="userid" value="" placeholder="username or email">
+									</div>						
+									<div style="margin-bottom: 25px" class="input-group">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
+										<input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+									</div>							
+									<div style="margin-top: 10px" class="form-group">
+									Button						
+										<div class="col-sm-12 controls">
+											<input type="submit" id="btn-login" class="btn btn-success"	value="login">
+										</div>
+									</div>
+							</form>
 					</div>
 				</div>
-
-				<div style="padding-top: 30px" class="panel-body">
-
-					<div style="display: none" id="login-alert"
-						class="alert alert-danger col-sm-12"></div>
-
-					<form id="signin" method="post" class="form-horizontal" role="form">
-
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-								type="text" class="form-control" name="userid" value=""
-								placeholder="username or email">
-						</div>
-
-						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
-								type="password" class="form-control" name="password"
-								placeholder="password">
-						</div>
-
-						<div style="margin-top: 10px" class="form-group">
-							<!-- Button -->
-
-							<div class="col-sm-12 controls">
-								<input type="submit" id="btn-login" class="btn btn-success"
-									value="login">
-							</div>
-						</div>
-					</form>
-
-				</div>
 			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="loadingModal" role="dialog">
-		<div class="modal-dialog">
+		</div> -->
+		
+		<!-- new code -->
+	
+	<div class="box">
+			<h2>Login</h2>
+			<div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>					
+			<form id="signin" method="post" role="form">
+				<div class="inputBox"> 
+				
+					<input type="text" id="login-username" name="userid" autocomplete="off" required >
+					<label class="input_label">User Name</label>
+				</div>
+				<div class="inputBox"> 
+				
+					<input type="password" id="login-password" name="password" autocomplete="off" required >
+					<label class="input_label">Password</label>
+				</div>
 
+				<input type="submit" id="btn-login" class="sub" value="Login">
+				<br><br>
+				<a href="#">Forgot password?</a>
+			</form>
+	</div>
+	
+		
+		
+		
+		<div class="modal fade" id="loadingModal" role="dialog">
+			<div class="modal-dialog">
+			
 			<!-- Modal content-->
 			<div class="modal-content">
-
-				<div class="modal-body">
-					<div id="loading"></div>
-				</div>
+			
+			<div class="modal-body">
+			<!-- <div id="loading"></div> -->
 			</div>
-
+			</div>
+			
+			</div>
 		</div>
-	</div>
 
+<script>
+		
+		var preloader = document.getElementById("loading");
+		
 
+		function myFunction(){
+			preloader.style.display = 'none';
+		};
+	</script>
 
 </body>
 </html>
