@@ -19,7 +19,7 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
-			  $("#loadingModal").show();
+			  document.getElementById("loadingModal").style.display="block";
 			  attemptLogin();
 		  }
 	});
@@ -27,7 +27,6 @@ $(document).ready(function(){
 
 
 function attemptLogin(){
-//	document.getElementById("loading").style.display = 'block';
 	function callback(responseData,textStatus,request){
 		var token=request.getResponseHeader('X-Authorization');
 		sessionStorage.setItem("token", token);
@@ -38,8 +37,7 @@ function attemptLogin(){
 		if(role!="")
 			{
 			sessionStorage.setItem("user",name);
-			$("#loadingModal").hide();
-			//document.getElementById("loading").style.display = 'none';
+			document.getElementById("loadingModal").style.display="block";
 			window.location.href="dashboard.html";
 			}
 		else
