@@ -186,7 +186,7 @@ data-toggle="collapse">
 	<li><a class="dropdown-toggle" data-toggle="dropdown">Reports <span class="caret"></span></a>
 <ul class="dropdown-menu">
 	<li class="dropdown-submenu">
-	<a tabindex="-1" class="dropdown-submenu-toggle">Student Reports <b class="caret"></b></a>
+	<a class="dropdown-submenu-toggle">Student Reports <b class="caret"></b></a>
 	   <ul class="dropdown-menu">
 	       <li><a href="StudentInfoReport.html">Student Info Report</a></li>
 	       <li><a href="AdmissionReport.html">Admission Report</a></li>
@@ -291,9 +291,7 @@ data-toggle="collapse">
 </nav>
 <script>
 $(document).ready(function(){
-	validateLogin();
-	fetchAllBranch();
-	profile();
+
  $('.dropdown-submenu a.dropdown-submenu-toggle').on("click", function(e){
     $('.dropdown-submenu ul').removeAttr('style');
     $(this).next('ul').toggle();
@@ -304,6 +302,9 @@ $(document).ready(function(){
 $('#bs-navbar-collapse-1').on('hidden.bs.dropdown', function () {
   $('.navbar-nav .dropdown-submenu ul.dropdown-menu').removeAttr('style');
 }); 
+validateLogin();
+fetchAllBranch();
+profile();
 });
 </script>
 <script>
