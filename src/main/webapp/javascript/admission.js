@@ -363,7 +363,9 @@ $(document)
 						deletefeesTypeTableRow();
 						var id = document.getElementById('enq_stud').value;
 						event.preventDefault();
-						SearchStudent(id);
+						if(id!=""){
+							SearchStudent(id);
+						}
 					});
 					/*
 					 * $("#saveFeesType").click(function() {

@@ -38,8 +38,10 @@ public class UserDAO {
 				user.setRole(rs.getString(7));			
 				user.setCreated_date(rs.getString(8));
 			}
+			if(user!=null){
 			permission=getUserPermission(user);
 			user.setPermission(permission);
+			}
 		} catch (Exception e) {
 			logger.error(e);
 			e.printStackTrace();

@@ -20,6 +20,7 @@ $(document).ready(function(){
 		  submitHandler:function(form){
 			  event.preventDefault();
 			  document.getElementById("loadingModal").style.display="block";
+			  $("#loadingModal").show();
 			  attemptLogin();
 		  }
 	});
@@ -37,7 +38,8 @@ function attemptLogin(){
 		if(role!="")
 			{
 			sessionStorage.setItem("user",name);
-			document.getElementById("loadingModal").style.display="block";
+			document.getElementById("loadingModal").style.display="none";
+			$("#loadingModal").hide();
 			window.location.href="dashboard.html";
 			}
 		else
@@ -48,9 +50,10 @@ function attemptLogin(){
 	}
 	
 	function errorCallback(responseData,textStatus,request){
+		document.getElementById("loadingModal").style.display="none";
+		$("#loadingModal").hide();
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
-		$("#loadingModal").hide();
 	}
 	var formData = $('#signin').serialize();
 	var httpMethod="POST";
