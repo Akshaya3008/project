@@ -134,8 +134,8 @@ public class EnquiryResource {
 	@RolesAllowed("VIEW_STUDENT_INFO_REPORT")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response EnquiryReport(@FormParam("enq_taken_by") String enq_taken,@FormParam("from_date") String from_date,
-			@FormParam("to_date") String to_date,@FormParam("enq_status") String enq_status,@FormParam("course_package") String course,
+	public Response EnquiryReport(@FormParam("enq_taken_by_array") String enq_taken,@FormParam("from_date") String from_date,
+			@FormParam("to_date") String to_date,@FormParam("enq_status_array") String enq_status,@FormParam("course_package_array") String course,
 			@FormParam("branch") String branch){
 		String[] commaSeperated_Enq_taken=Util.commaSeperatedString(enq_taken);
 		String[] commaSeperated_Enq_status=Util.commaSeperatedString(enq_status);

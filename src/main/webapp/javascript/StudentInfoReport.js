@@ -116,16 +116,17 @@ $(document).ready(function() {
 			
 			  submitHandler:function(form){
 				  event.preventDefault();
+				  StudentInfoReport();
 			  }
 		});
 
 		
-	 	$("#btnDisplay").click(function(e){
-		StudentInfoReport(e);
-	});
+	 	/*$("#btnDisplay").click(function(e){
+		
+	});*/
 });
 
-function StudentInfoReport(e){
+function StudentInfoReport(){
 	var enq_status=new Array();
 	var enq_taken=new Array();
 	var course=new Array();
@@ -150,7 +151,6 @@ function StudentInfoReport(e){
 		var table = $("#stud_info_report").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
-			e.preventDefault();
 			var enq_date = responseData[i].enq_date;
 			var stud_name = responseData[i].sname+" "+responseData[i].fname+" "+responseData[i].lname;
 			var gender = responseData[i].gender;
@@ -174,8 +174,8 @@ function StudentInfoReport(e){
 	}
 	
 	var httpMethod = "POST";
-	var formData=$("#StudentInfoForm").serialize()+"&enq_taken_by="+enq_taken+"&enq_status="+enq_status+
-	"&course_package="+course+"&branch="+branch;
+	var formData=$("#StudentInfoForm").serialize()+"&enq_taken_by_array="+enq_taken+"&enq_status_array="+enq_status+
+	"&course_package_array="+course+"&branch="+branch;
 	var relativeUrl = "/Enquiry/EnquiryReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl,formData, callback,
 			errorCallback);
