@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 			    return isNaN(value) && isNaN($(params).val()) 
 			        || (Number(value) > Number($(params).val())); 
-			},'Must be greater than from date.');
+			});
 	jQuery.validator.addMethod("futureDate", function(value, element) {
 		 var now = new Date();
 		 now.setHours(0,0,0,0);
@@ -50,19 +50,34 @@ $(document).ready(function() {
 		 return this.optional(element) || myDate < now;
 	},'Future date not allowed');
 	
+	jQuery.validator.addMethod("lessThan", 
+			function(value, element, params) {
 
+			    if (!/Invalid|NaN/.test(new Date(value))) {
+			        return new Date(value) < new Date($(params).val());
+			    }
+
+			    return isNaN(value) && isNaN($(params).val()) 
+			        || (Number(value) < Number($(params).val())); 
+    });
+	jQuery.validator.addMethod("needsSelection", function(value, element) {
+		
+		 var count = $(element).find('option:selected').length;
+       return count > 0;
+  });
 	$('form[id="AdmReportForm"]').validate({
 		
 		  rules: {
 		    
 		   from_date: {
 		       required: true,
-		       date:true,
+		       //date:true,
 		       futureDate:true
+		       //lessThan:"#to_date"
 		   },
 		   to_date:{
 			 required:true,
-			 date:true,
+			// date:true,
 			 greaterThan:"#from_date"
    
 		   },
@@ -70,7 +85,8 @@ $(document).ready(function() {
 			   required:true
 		   },
 		   standard:{
-			   required:true
+			   required:true,
+			   needsSelection:true
 		   },
 		   adm_taken_by:{
 			   required:true
@@ -79,22 +95,29 @@ $(document).ready(function() {
 			   required:true
 		   },
 		  },
+		  ignore: ':hidden:not(".valid_test")', // Tells the validator to check the hidden select
+		    errorClass: 'invalid',
+		    
 		    messages: {
 		    	from_date: {
 		    		required:'Please select a date',
+		    		lessThan:'must be less than'
 					
 				},
 				to_date: {
 					required:'Please select a date',	
-					
+					greaterThan:'Must be greater than from date.'
 				},
 			
-				
+				standard:{
+					required:'required',
+					needsSelection:'select anyone'
+				},
 			  },
-		
-		  submitHandler:function(form){
-			  event.preventDefault();
-		  }
+			  submitHandler:function(form){
+				  event.preventDefault();
+			  }
+		  
 	});
 	
 	$('#multi_status_select').multiselect({

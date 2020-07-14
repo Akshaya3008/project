@@ -294,6 +294,16 @@ table.table .avatar {
 {
  width:60% ! important;
 }
+.error { 
+	color:red;
+	font-family: "Hlvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px; 
+    font-weight:lighter;
+}
+label.error {
+  display: block;
+}
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -411,7 +421,7 @@ table.table .avatar {
 															</label>
 															<div class="input-group select" style="width:100%;">
 																<select name="received_by" id="multi_employee"
-																	class="form-control enq_taken" multiple="multiple">
+																	class="form-control enq_taken valid_test" multiple="multiple">
 
 																</select>
 															</div>
@@ -428,7 +438,7 @@ table.table .avatar {
 															</label>
 															<div class="input-group select" style="width:100%;">
 																<select name="standard" id="multi_standard"
-																	class="form-control standard" multiple="multiple">
+																	class="form-control standard valid_test" multiple="multiple">
 
 																</select>
 															</div>
@@ -500,7 +510,7 @@ table.table .avatar {
 															</label>
 															<div class="input-group select" style="width:100%;">
 																<select name="pay_mode" id="multi_pay_mode"
-																	class="form-control pay_mode" multiple="multiple">
+																	class="form-control pay_mode valid_test" multiple="multiple">
 																	<option value="cash">cash</option>
 																	<option value="cheque">cheque</option>
 																</select>

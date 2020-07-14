@@ -35,6 +35,92 @@ $(document).ready(function(){
 	    } );
 	 table.buttons().container() 
 	 .appendTo( '#table-style .col-sm-6:eq(1)' );
+	 jQuery.validator.addMethod("greaterThan", 
+				function(value, element, params) {
+
+				    if (!/Invalid|NaN/.test(new Date(value))) {
+				        return new Date(value) > new Date($(params).val());
+				    }
+
+				    return isNaN(value) && isNaN($(params).val()) 
+				        || (Number(value) > Number($(params).val())); 
+				},'Must be greater than from date.');
+		
+		jQuery.validator.addMethod("lessThan", 
+				function(value, element, params) {
+
+				    if (!/Invalid|NaN/.test(new Date(value))) {
+				        return new Date(value) < new Date($(params).val());
+				    }
+
+				    return isNaN(value) && isNaN($(params).val()) 
+				        || (Number(value) < Number($(params).val())); 
+	    },"Must be less than till date.");
+
+		jQuery.validator.addMethod("futureDate", function(value, element) {
+			 var now = new Date();
+			 now.setHours(0,0,0,0);
+			 var myDate = new Date(value);
+			 return this.optional(element) || myDate <= now;
+		},'Future date not allowed');
+		jQuery.validator.addMethod("needsSelection", function(value, element) {
+			
+			 var count = $(element).find('option:selected').length;
+	         return count > 0;
+	    });
+		$('form[id="Receipt_Report_Form"]').validate({
+			
+			  rules: {
+				  from_date:{
+						required:true,
+						fututeDate:true,
+						lessThan:"#to_date"
+					},
+				  to_date:{
+						required:true,
+						fututeDate:true,
+						greaterThan:"#from_date"
+					},
+					received_by:{
+						required:true,
+						needsSelection:true
+					},
+					standard:{
+						required:true,
+						needsSelection:true
+					},
+					pay_mode:{
+						required:true,
+						needsSelection:true
+					},
+				  },
+				  ignore: ':hidden:not(".valid_test")', // Tells the validator to check the hidden select
+				    errorClass: 'invalid',
+				  
+				    messages: {
+				    	 from_date: {
+								required:'Please select any date',	
+								
+							},
+						 to_date:{
+								required:'Please select any date',
+								greaterThan:'Enter a valid date'
+							},
+						 received_by:{
+								required:'Please select atleast one value',	
+						    },
+						 standard:{
+							required:'Please select atleast one value',	
+					        },
+					     pay_mode:{
+						    required:'Please select atleast one value',	
+				            },
+				    },
+				  submitHandler:function(form){
+					  event.preventDefault();
+					  ReceiptReport()
+				  }
+		});
 });
 
 
