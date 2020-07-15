@@ -48,11 +48,13 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  StudentReceipt();
 		  }
 	});
 
 	$("#stud_id").focusout(function() {
+		$("#loadingModal").modal('show');
 		var id=document.getElementById('stud_id').value;
 		event.preventDefault();
 		if(id!=""){
@@ -135,12 +137,15 @@ function SearchStudent(id){
 			       // j=j-1;
 				}
 			document.getElementById("InstallmentTable").style.display = "block";
+			
 		}
+		$("#loadingModal").modal('hide');
 		
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Receipt/SearchStudent?id="+id+"&branch="+branchSession;
@@ -168,10 +173,12 @@ function StudentReceipt(){
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	
 	var receive_amt=document.getElementById("received_amt").value;

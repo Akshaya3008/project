@@ -296,7 +296,15 @@ table.table .avatar {
 	background:  #435d7d !important;
 	color: white ! important
 }
-
+#loading {
+		position: fixed;
+		padding:0;
+		margin:0;
+		width: 100%;
+		height: 100vh;
+		background: #fff url('img/ring.gif') no-repeat center center;
+		z-index: 99999;
+		}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -435,7 +443,7 @@ table.table .avatar {
 					</div>
 					<div class="col-sm-6">
 						<a href="" class="btn btn-danger" id="cancel"><i class="fa fa-window-close"></i> <span>cancel</span></a>
-						<button class="btn btn-success" id="saveAttendance" onclick="getAttendance()">
+						<button class="btn btn-success" id="saveAttendance">
 							<i class="fa fa-floppy-o"></i> <span>Save</span>
 						</button>
 					</div>
@@ -536,6 +544,19 @@ table.table .avatar {
 				</div>
 			</div>
 		</section>
+		<div class="modal fade" id="loadingModal">
+			<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+			
+			<div class="modal-body">
+			<div id="loading"></div>
+			</div>
+			</div>
+			
+			</div>
+		</div>
 	</div>
 </body>
 </html>

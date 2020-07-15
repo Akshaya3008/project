@@ -42,7 +42,8 @@ $(document).ready(function(){
 		 },
 		  submitHandler:function(form){
 			  event.preventDefault();
-			
+			  $("#loadingModal").modal('show');
+			  InsertExpense();
 		  }
 	});
 	$('form[id="vendorForm"]').validate({
@@ -54,7 +55,8 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
-			
+			  $("#loadingModal").modal('show');
+			  InsertVendor();
 		  }
 	});
 	$('#expense_table').DataTable({
@@ -67,12 +69,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#ExpenseForm").submit(function(){
-		InsertExpense();
-	});
-	$("#vendorForm").submit(function(){
-		InsertVendor();
-	});
 	$("#edit").click(function(e) {		 
 		var table = $('#expense_table').DataTable();
 		$('table .cbCheck').each(function(i, chk) {
@@ -87,6 +83,7 @@ $(document).ready(function(){
 		});
 	});
 	$("#Delete").click(function() {
+		$("#loadingModal").modal('show');
 		var idarray=new Array();
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
@@ -105,11 +102,13 @@ function InsertExpense(){
 	function callback(responseData,textStatus,request){
 		var mes=responseData.responseJSON.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	
 	var httpMethod = "POST";
@@ -165,11 +164,13 @@ function InsertVendor(){
 	function callback(responseData,textStatus,request){
 		var mes=responseData.responseJSON.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	
 	var httpMethod = "POST";
@@ -209,11 +210,13 @@ function deleteExpenses(id) {
 	function callback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 
 	var httpMethod = "DELETE";

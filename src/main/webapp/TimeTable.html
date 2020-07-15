@@ -355,6 +355,15 @@ table.table .avatar {
 		"sans-serif" !important;
 	font-weight: normal !important;
 }
+#loading {
+		position: fixed;
+		padding:0;
+		margin:0;
+		width: 100%;
+		height: 100vh;
+		background: #fff url('img/ring.gif') no-repeat center center;
+		z-index: 99999;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -650,6 +659,19 @@ table.table .avatar {
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="loadingModal">
+			<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+			
+			<div class="modal-body">
+			<div id="loading"></div>
+			</div>
+			</div>
+			
+			</div>
+		</div>
 </body>
 <script>
 	$(document).ready(function() {

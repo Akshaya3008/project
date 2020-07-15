@@ -69,6 +69,7 @@ $(document).ready(function() {
 			},
 		submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  getEmployeeAttendanceStat();
 		  }
 	});
@@ -86,12 +87,17 @@ $(document).ready(function() {
 	$("#btn-view").click(function(e){
 		var table = $("#EmpAttendance_stat_table").DataTable();
 		$("table .cbCheckAbs").each(function(i,chk){
+			$("#loadingModal").modal('show');
 			if (chk.checked==true) {
 				
 			var rno=table.rows({selected : true}).column(2).data()[i];
 			getEmployeeAttendanceReport(rno,e);
 			}
 		});
+	})
+	$("#saveAttendance").click(function(){
+		$("#loadingModal").modal('show');
+		getAttendance();
 	})
 
 });
@@ -155,11 +161,13 @@ function saveAttendance(attendance) {
 	function callback(responseData, textStatus, request) {
 		  var message=responseData.message;
 		  showNotification("success",message);
+		  $("#loadingModal").modal('hide');
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		  var message=responseData.responseJSON.message;
 		  showNotification("error",message);
+		  $("#loadingModal").modal('hide');
 	}
 
 	var httpMethod = "POST";
@@ -176,6 +184,7 @@ function saveAttendance(attendance) {
 function getEmployeeAttendanceStat() {
 	var srno=0;
 	function callback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
 		var table = $("#EmpAttendance_stat_table").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -196,6 +205,7 @@ function getEmployeeAttendanceStat() {
 	function errorCallback(responseData, textStatus, request) {
 		  var message=responseData.responseJSON.message;
 		  showNotification("error",message);
+		  $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = $("#attendance_stat_form").serialize()+"&branch="+branchSession;
@@ -207,6 +217,7 @@ function getEmployeeAttendanceStat() {
 function getEmployeeAttendanceReport(id,e) {
 	var srno=0;
 	function callback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
 		var table = $("#EmpAttendance_report_table").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -234,6 +245,7 @@ function getEmployeeAttendanceReport(id,e) {
 	function errorCallback(responseData, textStatus, request) {
 		  var message=responseData.responseJSON.message;
 		  showNotification("error",message);
+		  $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = $("#attendance_stat_form").serialize()+"&id="+id+"&branch="+branchSession;

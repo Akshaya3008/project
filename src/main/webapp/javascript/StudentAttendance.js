@@ -88,6 +88,7 @@ $(document).ready(function() {
 
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 				std=document.getElementById("standard_stat").value;
 				acad_year=document.getElementById("acad_year_stat").value;
 				division=document.getElementById("division_stat").value;
@@ -115,6 +116,7 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  std=document.getElementById("standard").value;
 			  acad_year=document.getElementById("acad_year").value;
 			  division=document.getElementById("division").value;
@@ -153,6 +155,7 @@ $(document).ready(function() {
 	$("#btn-view").click(function(e) {
 		var table = $("#attendance_stat_table").DataTable();
 		$("table .cbCheck").each(function(i,chk){
+			$("#loadingModal").modal('show');
 			if (chk.checked==true) {
 			e.preventDefault();
 			var rno=table.rows({selected : true}).column(1).data()[i];
@@ -160,10 +163,15 @@ $(document).ready(function() {
 			}
 		});	
 	});
+	$("#saveAttendance").click(function() {
+		$("#loadingModal").modal('show');
+		getAttendance();
+	});
 });
 function attendanceStat(std,acad_year,division,from_date,to_date) {
 	var srno=0;
 	function callback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
 		var table = $("#attendance_stat_table").DataTable(); 
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -175,11 +183,13 @@ function attendanceStat(std,acad_year,division,from_date,to_date) {
 			var view='<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type"><label for="checkbox1"></label></span>';
 			table.row.add([srno, Rollno, student_name, percentage, view ]).draw();
 		}
+		
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = {
@@ -196,8 +206,9 @@ function attendanceStat(std,acad_year,division,from_date,to_date) {
 	return false;
 }
 
-function attendanceList(std,acad_year,division,e) {
+function attendanceList(std,acad_year,division) {
 	function callback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
 		var table = $("#attendance_table").DataTable(); 
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -214,6 +225,7 @@ function attendanceList(std,acad_year,division,e) {
 		
 		  var message=responseData.responseJSON.message;
 		  showNotification("error",message);
+		  $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = {standard : std , acad_year : acad_year, division : division , branch : branchSession};
@@ -246,11 +258,13 @@ function saveAttendance(standard, acad_year,division, attendance) {
 	function callback(responseData, textStatus, request) {
 		  var message=responseData.message;
 		  showNotification("success",message);
+		  $("#loadingModal").modal('hide');
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		 var message=responseData.responseJSON.message;
 		 showNotification("error",message);
+		 $("#loadingModal").modal('hide');
 		 
 	}
 	var httpMethod = "POST";
@@ -269,6 +283,7 @@ function saveAttendance(standard, acad_year,division, attendance) {
 function StudentAttendanceReport(rno){
 	var srno=0;
 	function callback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
 		var table = $("#attendance_report_table").DataTable(); 
 		var value = 0;
 		table.rows().remove().draw();
@@ -288,6 +303,7 @@ function StudentAttendanceReport(rno){
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = {

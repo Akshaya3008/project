@@ -45,6 +45,7 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  getTimeTableDetails();
 		  }
 		  });
@@ -67,6 +68,7 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  InsertTimeSlot();
 		  }
 	});
@@ -101,6 +103,7 @@ $(document).ready(function() {
 	});
 
 	$('#editBtn').click(function() {
+		 $("#loadingModal").modal('show');
 		removeTableRow();
 		var created_date,title;
 		var table = $("#timetable_table").DataTable();
@@ -115,6 +118,7 @@ $(document).ready(function() {
 		  loadTimeTable(created_date,title);
 	});
 	$('#deleteBtn').click(function(e) {
+		 $("#loadingModal").modal('show');
 		var created_date,title;
 		var table = $("#timetable_table").DataTable();
 		  $('table .cbCheck').each(function(i, chk) { 
@@ -130,6 +134,7 @@ $(document).ready(function() {
 				$(this).closest('tr').remove();
 		});
 	$("#btnDisplay").click(function(e){
+		$("#loadingModal").modal('show');
 		tt_report();
 	})
 });
@@ -150,10 +155,12 @@ function InsertTimeTable(tt_details) {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		 $("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		 $("#loadingModal").modal('hide');
 
 	}
 	var httpMethod = "POST";
@@ -208,10 +215,12 @@ function InsertTimeSlot() {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		 $("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		 $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = $("#time_slot_new").serialize()+"&branch="+branchSession;
@@ -222,6 +231,7 @@ function InsertTimeSlot() {
 }
 function loadTimeTable(created_date,title){
 	function callback(responseData, textStatus, request) {
+		 $("#loadingModal").modal('hide');
 		var j=0;
 		var table = document.getElementById("tt");
 		var html = '<tr><td><div class="form-group"><div class="col-md-6 lesspadding"><div class="input-group"><select class="form-control" name="day" style="width:100%;"><option value="monday">Monday</option><option value="tuesday">Tuesday</option><option value="wednesday">Wednesday</option><option value="thursday">Thursday</option><option value="friday">Friday</option><option value="saturday">Saturday</option><option value="sunday">Sunday</option></select></div></div></div></td><td><div class="form-group"><div class="col-md-4 lesspadding"><div class="input-group" style="width:100%"><select id="multi_time" class="form-control" name="time-slot" style="width:100%;">'
@@ -251,6 +261,7 @@ function loadTimeTable(created_date,title){
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		 $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = "&created_date="+created_date+"&title="+title+"&branch="+branchSession;
@@ -263,10 +274,12 @@ function deleteTimeTable(created_date,title){
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		 $("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		 $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = "&created_date="+created_date+"&title="+title+"&branch="+branchSession;
@@ -316,6 +329,7 @@ function tt_report(){
 		}
 	}
 	function callback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
 		var table = $("#timetable_report").DataTable();
 		table.rows().remove().draw();
 
@@ -362,6 +376,7 @@ function tt_report(){
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 
 	}
 	
