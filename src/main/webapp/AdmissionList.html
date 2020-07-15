@@ -292,6 +292,15 @@ table.table .avatar {
 table.table {
 	max-width: none important!;
 }
+#loading {
+		position: fixed;
+		padding:0;
+		margin:0;
+		width: 100%;
+		height: 100vh;
+		background: #fff url('img/ring.gif') no-repeat center center;
+		z-index: 99999;
+		}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -669,7 +678,19 @@ table.table {
 			</div>
 			</div>
 		</section>
-
+		<div class="modal fade" id="loadingModal">
+			<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+			
+			<div class="modal-body">
+			<div id="loading"></div>
+			</div>
+			</div>
+			
+			</div>
+		</div>
 		<!-- Delete Modal HTML -->
 		<div id="deleteEmployeeModal" class="modal fade">
 			<div class="modal-dialog">
@@ -755,42 +776,7 @@ table.table {
 	    	   });
 
 	  }  
-	   
-	   
-	/* function admission_pdf()
-	  {
-	       alert("hie");
-	       var divHeight = $('#admission_details').height();
-	       var divWidth = $('#admission_details').width();
-	       var ratio = divHeight / divWidth;
-	       
-	   html2canvas(document.getElementById('admission_details'),{
-		   height: divHeight,
-		     width: divWidth,
-		   
-	   onrendered:function(canvas){
 
-	   var img=canvas.toDataURL("image/png");
-	  
-	   //var hratio = hgt/wid;
-	   var doc = new jsPDF();
-	   /* const imgProps= doc.getImageProperties(img);
-	   const pdfWidth = doc.internal.pageSize.getWidth();
-       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-       doc.addImage(img, 'PNG', 0, 0, pdfWidth, pdfHeight); 
-	   //doc.internal.scaleFactor = 1.33;
-	   var width = doc.internal.pageSize.width; 
-	   var height = doc.internal.pageSize.height; 
-	   height = ratio * width;
-
-	   doc.addImage(img,'JPEG',0,0,width,height);
-	   doc.save('TRYTRY.pdf');
-	   }
-
-	   });
-
-	  }  
-	    */
 function admission_print(){
 		
 		$('#admission_details').printElement({
@@ -798,58 +784,6 @@ function admission_print(){
 
 	}
 	   
-	
-	
-		/* generate = function() {
-
-			html2canvas(document.getElementById("edit"), {
-				onrendered : function(canvas) {
-
-					var imgData = canvas.toDataURL('image/JPEG');
-					console.log('Report Image URL: ' + imgData);
-					var doc = new jsPDF('p', 'mm', 'a4'); //210mm wide and 297mm high
-
-					doc.addImage(imgData, 'JPEG', 10, 10);
-					doc.save('sample.pdf');
-				}
-			});
-
-			/* html2canvas(document.getElementById('edit')).then(canvas => {
-			
-			let pdf = new jsPDF('p', 'mm', 'a4');
-			pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
-			pdf.save(sample.pdf); 
-			}); 
-
-		} */
-		/* margins = {
-			  top: 10,
-			  bottom: 40,
-			  left: 30,
-			  width: 550
-			};
-		generate = function(){
-			var pdf = new jsPDF('p', 'pt', 'a4');
-			  pdf.setFontSize(18);
-			  pdf.addHTML(document.getElementById('invoice'), 
-			    margins.left, // x coord
-			    margins.top,
-			    {
-			      // y coord
-			      width: margins.width// max width of content on PDF
-			    },
-			     function(dispose) {
-			       headerFooterFormatting(pdf)  
-			    }, 
-			    margins);
-			    
-			   var iframe = document.createElement('iframe');
-			  iframe.setAttribute('style','position:absolute;right:0; top:0; bottom:0; height:100%; width:650px; padding:20px;');
-			  document.body.appendChild(iframe);
-			  iframe.src = pdf.output('datauristring'); s
-			  pdf.save('sample.pdf');
-		}
-		 */
 	</script>
 
 	<script>

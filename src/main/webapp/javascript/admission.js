@@ -117,8 +117,10 @@ $(document)
 							var status = compareInstallAmtAndReceivedAmt();
 							if (status == false) {
 								if (request == "Save" || request == "Edit") {
+									$("#loadingModal").modal('show');
 									StudentAdmission();
 								} else {
+									$("#loadingModal").modal('show');
 									promoteStudent();
 								}
 
@@ -209,6 +211,7 @@ $(document)
 						},
 						submitHandler : function(form) {
 							event.preventDefault();
+							$("#loadingModal").modal('show');
 							AddNewEnquiryStudent();
 						}
 					});
@@ -258,7 +261,8 @@ $(document)
 							},
 						},
 						submitHandler : function(form) {
-							// event.preventDefault();
+							 event.preventDefault();
+							 $("#loadingModal").modal('show');
 							AddEmployee();
 						}
 					});
@@ -296,6 +300,7 @@ $(document)
 										},
 										submitHandler : function(form) {
 											event.preventDefault();
+											$("#loadingModal").modal('show');
 											standardData = new Array();
 											branchData = new Array();
 											$('#standard input:checked')
@@ -338,6 +343,7 @@ $(document)
 						},
 						submitHandler : function(form) {
 							event.preventDefault();
+							$("#loadingModal").modal('show');
 							addFeesType();
 						}
 					});
@@ -364,6 +370,7 @@ $(document)
 						var id = document.getElementById('enq_stud').value;
 						event.preventDefault();
 						if(id!=""){
+							$("#loadingModal").modal('show');
 							SearchStudent(id);
 						}
 					});
@@ -386,7 +393,7 @@ $(document)
 											document
 													.getElementById("admission").disabled = true;
 											showNotification("error",
-													"Student Already Admitteed For This Course.");
+													"Student Already Admitted For This Course.");
 										}
 									});
 					$("#discount")
@@ -534,11 +541,11 @@ function SearchStudent(id) {
 		var feesdetails = feespack.fees_details;
 
 		createFeesTypeRow(feesdetails, responseData.fees_pack);
-
+		$("#loadingModal").modal('hide');
 		if (status.trim() == "Admitted") {
 			admitted_fees_pack = responseData.fees_pack;
 			showNotification("error",
-					"Student AlreadyAdmitteed For This Course.");
+					"Student Already Admitteed For This Course.");
 			document.getElementById("admission").disabled = true;
 		} else {
 			document.getElementById("admission").disabled = false;
@@ -547,6 +554,7 @@ function SearchStudent(id) {
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/SearchStudent?id=" + id + "&branch="
@@ -609,11 +617,13 @@ function StudentAdmission() {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
 		clearSession();
+		$("#loadingModal").modal('hide');
 	}
 
 	var status = checkInstallmentDate(installment, document
@@ -661,11 +671,13 @@ function AddNewEnquiryStudent() {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		$("#loadingModal").modal('hide');
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var formData = $('#EnquiryForm').serialize() + "&branch=" + branchSession;
 	var httpMethod = "POST";
@@ -686,10 +698,12 @@ function AddEmployee() {
 		document.getElementById("branch").disabled = true;
 		var mes = responseData.message;
 		showNotification("success", mes);
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var formData = $("#addEmployee").serialize() + "&emp_type=" + emp_type
 			+ "&branch=" + branch;
@@ -703,10 +717,12 @@ function addFeesType() {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	formData = $('#feestypeform').serialize() + "&branch=" + branchSession;
@@ -877,10 +893,12 @@ function addNewFeesPackage(standardData, branchData) {
 		showNotification("success", mes);
 		document.getElementById("inputDisabledAmt").disabled = true;
 		deleteRoWFeesPackage2();
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -1056,10 +1074,12 @@ function promoteStudent() {
 		var mes = responseData.message;
 		showNotification("success", mes);
 		clearSession();
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 
 	}
 	var personalDetails = sessionStorage.getItem("admissionPromoteData");

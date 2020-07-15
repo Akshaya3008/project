@@ -6,6 +6,7 @@ $(document).ready(function() {
 	table = $("#enq_table").DataTable();
 	showDashboard();
 	$('#deleteBtn').click(function() {
+		$("#loadingModal").modal('show');
 		var selected=new Array();
 		$("input:checkbox[name=type]:checked").each(function() {
 			selected.push($(this).val());
@@ -14,6 +15,7 @@ $(document).ready(function() {
 
 	});
 	$("#admission").click(function() {
+		$("#loadingModal").modal('show');
 		request = "Save";
 		var enq_no;
 		$('table .cbCheck').each(function(i, chk) {
@@ -24,6 +26,7 @@ $(document).ready(function() {
 		Admission(enq_no, request);
 	});
 	$("#editBtn").click(function() {
+		$("#loadingModal").modal('show');
 		request = "Edit";
 		var enq_no;
 		$('table .cbCheck').each(function(i, chk) {
@@ -74,11 +77,13 @@ function deletemultiplerow(id) {
 	function callback(responseData, textStatus, request) {
 		var message=responseData.message;
 		showNotification("success",message);
+		$("#loadingModal").modal('hide');
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/Enquiry/DeleteMultipleEnquiryData?delete=" + id+"&branch="+branchSession;
@@ -104,42 +109,13 @@ function Admission(id, req) {
 		
 		if (req == "Edit") {
 			sessionStorage.setItem("EditData", enqData);
+			$("#loadingModal").modal('hide');
 			window.location.href = "EnquiryForm.html";
 		}else{
 			sessionStorage.setItem("EnquiryAdmission", id);
+			$("#loadingModal").modal('hide');
 			window.location.href = "Admission.html";
 		}
-		/* else {
-			var feespack = responseData.fees_pack;
-			var fees=feespack.split("|");
-			var installment = "installment details";
-			var feespackname=feespack.split("|");
-			var feespackdetails=feespackagedetails(feespackname[0]);
-			//feespackdetails=feespackdetails.split(",");
-			var disc=0;
-			feespackdetails=feespackdetails.split(",");
-			for(var i=0;i<feespackdetails.length;i++){
-				var packdisc=feespackdetails[i].split("|");
-				for(var j=0;j<packdisc.length;j++){
-					disc=disc+parseInt(packdisc[2]);
-				}
-			}
-			var newAmt = disc+"|"+fees[1];
-			var enq_taken = localStorage.getItem("user");
-			var date= new Date(today.getTime() - (today.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
-			var date = today.getFullYear() + "-" + today.getMonth() + "-"
-					+ today.getDate();
-			var status = "active";
-			var division="null";
-			var acad_data = getIncrementalData();
-			var acad_year = acad_data[0];
-			var id_no = acad_data[1] + "-" + acad_data[2];
-			var invoice_no = acad_data[3] + "-" + acad_data[4];
-			var reg_no = acad_data[5] + "-" + acad_data[6];
-			StudentAdmission(studentDetails, enq_taken, feespack,division, status, date,
-					id_no, reg_no, invoice_no, date, acad_year, date, enqData,
-					feespackdetails,installment, newAmt, branchSession);
-		}*/
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
@@ -152,72 +128,3 @@ function Admission(id, req) {
 			errorCallback);
 	return false;
 }
-/*function feespackagedetails(pack){
-	var packdetails="";
-	function callback(responseData,textStatus,request)
-	{
-		packdetails=responseData.fees_details;
-	}
-	function errorCallback(responseData, textStatus, request) {
-		var mes=responseData.responseJSON.message;
-		showNotification("error",mes);
-	}
-	var httpMethod = "POST";
-	var formData = {
-		pack : pack,
-		branch : branchSession
-	}
-	var relativeUrl = "/FeesPackage/getFeesPackageData";
-	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
-			errorCallback);
-	return packdetails;
-}
-function getIncrementalData() {
-	var acad_data;
-	function callback(responseData, textStatus, request) {
-		acad_data = new Array();
-		acad_data.push(responseData.aca_year);
-		acad_data.push(responseData.id_prefix);
-		acad_data.push(responseData.id_no);
-		acad_data.push(responseData.invoice_prefix);
-		acad_data.push(responseData.invoice);
-		acad_data.push(responseData.reg_prefix);
-		acad_data.push(responseData.registration);
-	}
-	function errorCallback(responseData, textStatus, request) {
-		var mes=responseData.responseJSON.message;
-		showNotification("error",mes);
-	}
-	var httpMethod = "GET";
-	var relativeUrl = "/Admission/getAutoIncrementedDetails?branch="
-			+ branchSession;
-	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
-			errorCallback);
-	return acad_data;
-}
-
-function StudentAdmission(studentDetails, enq_taken, feespack, division ,status, date,
-		id_no, reg_no, invoice_no, date, acad_year, date, enqData, feespackdetails, installment,
-		newAmt, branchSession) {
-	function callback(responseData, textStatus, request) {
-		var mes=responseData.responseJSON.message;
-		showNotification("success",mes);
-	}
-	function errorCallback(responseData, textStatus, request) {
-		var mes=responseData.responseJSON.message;
-		showNotification("error",mes);
-	}
-	formData = "stud_details=" + studentDetails + "&enq_taken_by=" + enq_taken
-			+ "&adm_fees_pack=" + feespack +"&division=" + division + "&status=" + status + "&date="
-			+ date + "&Rollno=" + id_no + "&regno=" + reg_no + "&invoice_no="
-			+ invoice_no + "&admission_date=" + date + "&acad_year="
-			+ acad_year + "&join_date=" + date + "&personalDetails=" + enqData+ "&feestypeDetails=" + feespackdetails
-			+ "&installment=" + installment + "&newAmt=" + newAmt + "&branch="
-			+ branchSession;
-	var httpMethod = "POST";
-	var relativeUrl = "/Admission/StudentAdmission";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, formData, callback,
-			errorCallback);
-	return false;
-}
-*/

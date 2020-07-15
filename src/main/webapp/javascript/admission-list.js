@@ -2,11 +2,6 @@ var mes;
 var table;
 $(document).ready(function() {
 	validateLogin();
-/*	table=$('#admission_table').DataTable({
-		"pageLength" : 40,
-		"stateSave" : true,
-		dom : 'Bfrtip',
-	});*/
 	table = $('#admission_table').DataTable(
 			/*{
 		buttons : [ {
@@ -38,6 +33,7 @@ $(document).ready(function() {
 		}
 	});
 */	$('#editBtn').click(function() {
+	$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked) {
 				var id = $(this).val();
@@ -46,13 +42,13 @@ $(document).ready(function() {
 		});
 	});
 	$('#addBtn').click(function() {
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked) {
 				var id = $(this).val();
 				getAdmissionPromoteData(id)
 			}
 		});
-		window.location.href = "Admission.html";
 	});
 	$('#btn-view').click(function(e) {
 		$('table .cbCheck').each(function(i, chk) {
@@ -60,6 +56,7 @@ $(document).ready(function() {
 				var id = $(this).val();
 				val = table.row(this.closest('tr')).data();
 				var rno = val[4];
+				$("#loadingModal").modal('show');
 				getInvoiceOfSpecificStudent(id, e);
 				getStudReceiptList(rno);
 				// viewAdmissionDetails(id);
@@ -128,10 +125,12 @@ function getStudReceiptList(rno) {
 							[ rec_date, rec_no, student_name, pay_mode, total,amount
 									/*viewbtn*/ ]).draw();
 		}
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Receipt/getStudReceiptList?rno=" + rno +"&branch="+branchSession;
@@ -189,11 +188,13 @@ function getAdmissionPromoteData(id) {
 		fees_title+":"+paid_fees+":"+originalFeesDetails;
 
 		sessionStorage.setItem("admissionPromoteData", admissionPromoteData);
+		$("#loadingModal").modal('hide');
 		window.location.href = "Admission.html";
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/getAdmissionDetailsOfSpecificStudent?id="
@@ -263,11 +264,13 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 		admissionData.push(responseData.enq_no);
 		admissionData.push(checkInstallmentAvail);
 		sessionStorage.setItem("admission", admissionData);
+		$("#loadingModal").modal('hide');
 		window.location.href = "Admission.html";
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/getAdmissionDetailsOfSpecificStudent?id="

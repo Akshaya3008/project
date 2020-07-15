@@ -115,6 +115,7 @@ $(document).ready(function() {
 		    },
 		  },*/
 		  submitHandler:function(form){
+			  $("#loadingModal").modal('show');
 			  event.preventDefault();
 			  EnquiryData();
 		  }
@@ -164,7 +165,8 @@ $(document).ready(function() {
 				},
 			 },
 		  submitHandler:function(form){
-			 // event.preventDefault();
+			  $("#loadingModal").modal('show');
+			  event.preventDefault();
 			  AddEmployee();
 		  }
 	});
@@ -201,6 +203,7 @@ $(document).ready(function() {
 		},
 		submitHandler : function(form) {
 			event.preventDefault();
+			$("#loadingModal").modal('show');
 			standardData = new Array();
 			branchData = new Array();
 			$('#standard input:checked').each(function() {
@@ -227,6 +230,7 @@ $(document).ready(function() {
 		  },
 		 
 		  submitHandler:function(form){
+			  $("#loadingModal").modal('show');
 			  addFeesType();
 		  }
 	});
@@ -271,11 +275,13 @@ function EnquiryData() {
 			sessionStorage.removeItem("EditData");
 			window.location.href = "EnquiryList.html";
 		}
+		$("#loadingModal").modal('hide');
 	}
 
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var formData ;
 	var relativeUrl ;
@@ -297,17 +303,20 @@ function EnquiryData() {
 function AddEmployee() {
 	document.getElementById('emp_type').disabled = false;
 	document.getElementById('branch').disabled = false;
+	branch=document.getElementById('branch').value;
 	function callback(responseData, textStatus, request) {
 		 var message=responseData.message;
 		 showNotification("success",message);
 		document.getElementById('emp_type').disabled = true;
 		document.getElementById('branch').disabled = true;
+		 $("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		 $("#loadingModal").modal('hide');
 	}
-	var formData = $("#add_employee").serialize();
+	var formData = $("#add_employee").serialize()+"&branch="+branch;
 	var httpMethod = "POST";
 	var relativeUrl = "/Employee/NewEmployee";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
@@ -348,10 +357,12 @@ function addFeesType() {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 		}
 	var httpMethod = "POST";
 	var formData =$("#feestype-form").serialize()+"&branch="+branchSession;
@@ -409,11 +420,13 @@ function addNewFeesPackage(standardData, branchData) {
 		var mes = responseData.message;
 		showNotification("success", mes);
 		document.getElementById("inputDisabledAmt").disabled = true;
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
 		document.getElementById("inputDisabledAmt").disabled = true;
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;

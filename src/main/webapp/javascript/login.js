@@ -18,9 +18,8 @@ $(document).ready(function(){
 		    }
 		  },
 		  submitHandler:function(form){
+			  $("#loadingModal").modal('show');
 			  event.preventDefault();
-			  document.getElementById("loadingModal").style.display="block";
-			  $("#loadingModal").show();
 			  attemptLogin();
 		  }
 	});
@@ -38,8 +37,7 @@ function attemptLogin(){
 		if(role!="")
 			{
 			sessionStorage.setItem("user",name);
-			document.getElementById("loadingModal").style.display="none";
-			$("#loadingModal").hide();
+			$("#loadingModal").modal('hide');
 			window.location.href="dashboard.html";
 			}
 		else
@@ -50,8 +48,7 @@ function attemptLogin(){
 	}
 	
 	function errorCallback(responseData,textStatus,request){
-		document.getElementById("loadingModal").style.display="none";
-		$("#loadingModal").hide();
+		$("#loadingModal").modal('hide');
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 	}
