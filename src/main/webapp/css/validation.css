@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+.error { 
+	color:red;
+	font-family: "Hlvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px; 
+    font-weight:lighter;
+}
+label.error {
+  display: block;
+}

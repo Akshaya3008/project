@@ -25,7 +25,7 @@ $(document).ready(function(){
 		  },
 		 messages: {
 			 subjectname: {
-				required:'subjectname is required',		
+				required:'subject name is required',		
 			},
 			timeline: {
 				required:'Timeline is required',	
