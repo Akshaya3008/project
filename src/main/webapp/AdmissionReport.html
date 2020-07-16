@@ -397,7 +397,7 @@ label.error {
 													<div class="col-md-3">
 														<div class="form-group">
 															<label class="control-label"> 
-															<span class="titleDiv">standard</span>
+															<span class="titleDiv">Standard</span>
 															</label>
 															<div class="input-group">
 															<select id="multi_standard_select" name="standard" class="form-control standard valid_test" multiple="multiple" Required>
@@ -423,8 +423,7 @@ label.error {
 															<span class="titleDiv">Admission taken by</span>
 															</label>
 															<div class="input-group">
-																<select id="multi_status_select" name="adm_taken_by" class="form-control enq_taken" multiple="multiple" Required>
-																</select>
+																<select id="multi_status_select" name="adm_taken_by" class="form-control enq_taken valid_test" multiple="multiple"></select>
 															</div>
 														</div>
 													</div>
@@ -434,7 +433,7 @@ label.error {
 															<span class="titleDiv">Course package</span>
 															</label>
 															<div class="input-group">
-																<select id="multi_course" class="form-control fees" name="package" multiple="multiple" Required>
+																<select id="multi_course" class="form-control fees valid_test" name="package_course" multiple="multiple" >
 																</select>
 															</div>
 														</div>
@@ -445,7 +444,7 @@ label.error {
 															<span class="titleDiv">Division</span>
 															</label>
 															<div class="input-group">
-																<select id="multi_div" class="form-control division" name="division" multiple="multiple" Required>
+																<select id="multi_div" class="form-control division valid_test" name="division" multiple="multiple" >
 																</select>
 															</div>
 														</div>
@@ -454,7 +453,7 @@ label.error {
 													<div class="row">
 														<div class="col-md-12">
 															<div class="pull-right">
-																<input type="button" id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" value="Display">
+																<input type="submit" id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" value="Display">
 																<button type="reset" id="btnClear" data-style="zoom-in" class="btn btn-light margin-right-sm">Clear</button>
 															</div>
 														</div>
@@ -478,7 +477,7 @@ label.error {
 											<thead>
 												<tr>
 													<th>Invoice</th>
-													<th>Admision date</th>
+													<th>Admission date</th>
 													<th>Student name</th>
 													<th>Course package</th>
 													<th>Net total</th>
@@ -497,8 +496,8 @@ label.error {
 			</section>
 		</div>
 	</div>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+	 
+	<script type="text/javascript" src="javascript/bootstrap.min.js"></script> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

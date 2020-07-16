@@ -8,14 +8,27 @@ $(document).ready(function() {
 	getAllStandard();
 	fetchAllBranch();
 	$(".branch").val(branchSession);
+	$('#multi_status_select').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+	$('#multi_standard_select').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
 	
-	jQuery.validator.addMethod("minDate", function (value, element) {
-	    var now = new Date();
-	    now.setHours(0,0,0,0);
-	    var myDate = new Date(value);
-	    
-	    return this.optional(element) || myDate >= now;
-	 });
+	$('#multi_course').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+	
+
+	$('#multi_div').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+	
+	
 	var table= $('#admission-report').DataTable( {
     	dom: 'Bfrtip',
 	    buttons: [
@@ -31,8 +44,17 @@ $(document).ready(function() {
 	    }],
 	   
     } );
- table.buttons().container() 
+ table.buttons().container()
 .appendTo( '#table-style .col-sm-6:eq(1)' );
+ 
+ jQuery.validator.addMethod("minDate", function (value, element) {
+	    var now = new Date();
+	    now.setHours(0,0,0,0);
+	    var myDate = new Date(value);
+	    
+	    return this.optional(element) || myDate >= now;
+	 });
+ 
 	jQuery.validator.addMethod("greaterThan", 
 			function(value, element, params) {
 
@@ -89,11 +111,18 @@ $(document).ready(function() {
 			   needsSelection:true
 		   },
 		   adm_taken_by:{
-			   required:true
+			   required:true,
+			   needsSelection:true
+		   },
+		   package_course:{
+			   required:true,
+			   needsSelection:true
 		   },
 		   division:{
-			   required:true
+			   required:true,
+			   needsSelection:true
 		   },
+		  
 		  },
 		  ignore: ':hidden:not(".valid_test")', // Tells the validator to check the hidden select
 		    errorClass: 'invalid',
@@ -109,43 +138,38 @@ $(document).ready(function() {
 					greaterThan:'Must be greater than from date.'
 				},
 			
-				standard:{
-					required:'required',
-					needsSelection:'select anyone'
+				standard:{				
+					required:'Select atleast one Standard',
+			
 				},
+				adm_taken_by:{
+					required:'Select atleast one option',
+				
+				},
+				division:{				
+					required:'Select atleast one Division',
+				
+				},
+				package_course:{
+					required:'Select atleast one package',
+				
+				}
 			  },
 			  submitHandler:function(form){
 				  event.preventDefault();
+				  viewAdmissionReport();
 			  }
 		  
 	});
 	
-	$('#multi_status_select').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
-	$('#multi_standard_select').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
-	
-	$('#multi_course').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
-	
-
-	$('#multi_div').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
 	
 	
 	
+	/*
 	$("#btnDisplay").click(function(){
 		viewAdmissionReport();
 	});
-	
+	*/
 	
 	
 });

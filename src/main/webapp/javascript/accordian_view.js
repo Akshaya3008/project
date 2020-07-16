@@ -2,19 +2,19 @@ $(document).ready(function(){
 	
 
 
-$('#multi_status_select').multiselect({
+/*$('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
-	});
+	});*/
 
 	/*$('#multi_course').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});*/
-	$('#multi_div').multiselect({
+/*	$('#multi_div').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
-	});
+	});*/
 	/*$('#multi_standard').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
@@ -28,14 +28,14 @@ $('#multi_status_select').multiselect({
 		enableFiltering : true
 	});*/
 	
-	$('#multi_rec_status').multiselect({
+/*	$('#multi_rec_status').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
 	$('#multi_pay_mode').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
-	});
+	});*/
 	
 });
 
