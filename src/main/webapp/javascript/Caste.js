@@ -23,6 +23,7 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  addCaste();
 			  
 		  }
@@ -30,6 +31,7 @@ $(document).ready(function() {
 
 	$("#editBtn").click(function(e) {		 
 		var table = $('#caste-table').DataTable();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
@@ -40,6 +42,7 @@ $(document).ready(function() {
 	});
 	$("#deleteBtn").click(function() {
 		var idarray=new Array();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
@@ -58,11 +61,13 @@ function addCaste() {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -108,11 +113,14 @@ function deleteCaste(id) {
 	function callback(responseData,textStatus,request)
 	{
 		var mes=responseData.message;
-		showNotification("success",mes);	
+		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/caste/deleteCaste?id="+id;
@@ -121,6 +129,7 @@ function deleteCaste(id) {
 }
 function loadCaste(caste,e){
 	document.getElementById("caste").value=caste;
+	$("#loadingModal").modal('hide');
 	e.preventDefault();
 	$('#CasteModal').modal({
         show: true, 

@@ -111,11 +111,13 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  InsertYear();
 			  
 		  }
 	});
 	$("#editBtn").click(function(e){
+		$("#loadingModal").modal('show');
 		$("input:checkbox[name=type]:checked").each(function() {
 			requestid=$(this).val();
 			loadAcadData(requestid,e);
@@ -123,6 +125,7 @@ $(document).ready(function(){
 	});
 	$("#deleteBtn").click(function() {
 		var idarray=new Array();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
@@ -141,12 +144,14 @@ function InsertYear(){
 	function callback(responseData, textStatus, request){
 		var mes = responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModel();
 		
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 		
 	}
 	var formData;
@@ -202,6 +207,7 @@ function loadAcadData(id,e)
 		document.getElementById("invoice").value=responseData.invoice;
 		document.getElementById("prefix_regno").value=responseData.reg_prefix;
 		document.getElementById("regno").value=responseData.registration;
+		$("#loadingModal").modal('hide');
 		e.preventDefault();
 		$('#academicModal').modal({
 		        show: true, 
@@ -237,10 +243,13 @@ function deleteAcadYear(idarray){
 	function callback(responseData, textStatus, request){
 		var mes = responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 		
 	}
 	var httpMethod = "DELETE";

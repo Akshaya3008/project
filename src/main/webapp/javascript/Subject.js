@@ -34,6 +34,7 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  createSubject();
 			  
 		  }
@@ -46,6 +47,7 @@ $(document).ready(function(){
 	});
 	$("#editBtn").click(function(e){
 		var table = $('#subjecttable').DataTable();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
@@ -57,6 +59,7 @@ $(document).ready(function(){
 	});
 	$("#deleteBtn").click(function() {
 		var idarray=new Array();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
@@ -75,11 +78,13 @@ function createSubject(){
 	function callback(responseData,textStatus,request){
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	
 	var httpMethod = "POST";
@@ -129,10 +134,13 @@ function deleteSubject(id) {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/Subject/deleteSubject?id="+id+"&branch="+branchSession;
@@ -142,6 +150,7 @@ function deleteSubject(id) {
 function loadSubject(subject,time,e){
 	document.getElementById("subjectname").value=subject;
 	document.getElementById("timeline").value=time;
+	$("#loadingModal").modal('hide');
 	e.preventDefault();
 	$('#subjectModal').modal({
         show: true, 

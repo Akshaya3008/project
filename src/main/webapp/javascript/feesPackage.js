@@ -51,6 +51,7 @@ $(document)
 						},
 						submitHandler : function(form) {
 							event.preventDefault();
+							$("#loadingModal").modal('show');
 							standardData = new Array();
 							branchData = new Array();
 							$('#standard input:checked').each(function() {
@@ -81,6 +82,7 @@ $(document)
 						},
 						submitHandler : function(form) {
 							event.preventDefault();
+							$("#loadingModal").modal('show');
 							addFeesType();
 						}
 					});
@@ -100,6 +102,7 @@ $(document)
 					});
 					$("#editBtn").click(function(e) {
 						var table = $("#feespackage").DataTable();
+						$("#loadingModal").modal('show');
 						$('table .cbCheck').each(function(i, chk) {
 							if (chk.checked) {
 								requestid = $(this).val();
@@ -121,6 +124,7 @@ $(document)
 					})
 					$("#deleteBtn").click(function() {
 						var idarray = new Array();
+						$("#loadingModal").modal('show');
 						$('table .cbCheck').each(function(i, chk) {
 							if (chk.checked) {
 								idarray.push($(this).val());
@@ -150,12 +154,14 @@ function addNewFeesPackage(standardData, branchData) {
 		var mes = responseData.message;
 		showNotification("success", mes);
 		document.getElementById("inputDisabledAmt").disabled = true;
+		$("#loadingModal").modal('hide');
 		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
 		document.getElementById("inputDisabledAmt").disabled = true;
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -311,12 +317,14 @@ function loadFeesPackageData(pack, branch) {
 			}
 		}
 		document.getElementById('grand-t').value = responseData.total_amt;
+		$("#loadingModal").modal('hide');
 		$("#datatable-view").hide();
 		$("#datatable-view-2").show();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData = {
@@ -385,10 +393,12 @@ function addFeesType() {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -403,10 +413,13 @@ function deleteFeesPackage(id) {
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/FeesPackage/deleteFeesPackage?id=" + id + "&branch="

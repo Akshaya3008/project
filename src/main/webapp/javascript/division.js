@@ -25,11 +25,13 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  InsertDivision();
 		  }
 	});
 	$("#editBtn").click(function(e){
 		var table = $('#divisiontable').DataTable();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
@@ -40,6 +42,7 @@ $(document).ready(function(){
 	});
 	$("#deleteBtn").click(function() {
 		var idarray=new Array();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
@@ -57,12 +60,14 @@ function InsertDivision(){
 	function callback(responseData, textStatus, request){
 		var mes = responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 		
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 		
 	}
 	var httpMethod = "POST";
@@ -109,10 +114,13 @@ function deleteDivision(id) {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/Division/deleteDivision?id="+id;
@@ -121,6 +129,7 @@ function deleteDivision(id) {
 }
 function loadDivision(div,e){
 		document.getElementById("division").value=div;
+		$("#loadingModal").modal('hide');
 		e.preventDefault();
 		$('#divisionModal').modal({
 	        show: true, 

@@ -39,6 +39,7 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			   getStandardData();
 		  }
 	});
@@ -52,6 +53,7 @@ $("#stdamt").focusout(function(){
 
 });
 $("#deleteBtn").click(function() {
+	$("#loadingModal").modal('show');
 	$('table .cbCheck').each(function(i, chk) {
 		if(chk.checked){
 		var idarray=new Array();
@@ -63,6 +65,7 @@ $("#deleteBtn").click(function() {
 
   $("#editBtn").click(function(e){ 
 	  var table = $("#stdtable").DataTable();
+	  $("#loadingModal").modal('show');
 	  $('table .cbCheck').each(function(i, chk) {
 		  if (chk.checked==true) {
 			  requestid=$(this).val(); 
@@ -213,11 +216,13 @@ function addStandard(branchData,subject){
 		for ( var i in responseData) {
 			var mes=responseData.message;
 			showNotification("success",mes);
+			$("#loadingModal").modal('hide');
 		}
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData ;
@@ -236,10 +241,13 @@ function deleteStandard(id){
 	function callback(responseData, textStatus, request){
 			var mes=responseData.message;
 			showNotification("success",mes);
+			$("#loadingModal").modal('hide');
+			reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 
 	var httpMethod = "DELETE";
@@ -275,7 +283,7 @@ function deleteStandard(id){
 		rowCount = rowCount - 1;
 	}
 	loadBranch();
-
+	$("#loadingModal").modal('hide');
   e.preventDefault();
   $('#standardmodal').modal({ 
 	  show: true, 

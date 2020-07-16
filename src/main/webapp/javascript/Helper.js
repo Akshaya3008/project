@@ -304,4 +304,9 @@ function getDesignation(){
 			errorCallback);
 	return false;
 }
+function reloadPage(){
+	setTimeout(function(){
+		location.reload();
+	},3500);
+}
 

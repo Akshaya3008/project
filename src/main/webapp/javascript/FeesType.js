@@ -17,12 +17,14 @@ $(document).ready(function() {
 		   },	
 		  },	
 		  submitHandler:function(form){
-			  event.preventDefault();  
+			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  addFeesType();
 		  }
 	});
 	$("#editBtn").click(function(e) {		 
 		var table = $('#feestypetable').DataTable();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
@@ -36,6 +38,7 @@ $(document).ready(function() {
 	});
 	$("#deleteBtn").click(function() {
 		var idarray=new Array();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
@@ -51,11 +54,13 @@ function addFeesType() {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -103,11 +108,13 @@ function deleteFeesType(id) {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
-		location.reload();
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/feesType/deleteFeesType?id="+id;
@@ -117,6 +124,7 @@ function deleteFeesType(id) {
 
 function loadFeesType(type,e){
 	document.getElementById("feesType").value=type;
+	$("#loadingModal").modal('hide');
 	e.preventDefault();
 	$('#feestypeModal').modal({
         show: true, 

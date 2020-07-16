@@ -78,6 +78,7 @@ $(document).ready(function() {
 			 },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  AddEmployee();
 		  }
 	});
@@ -88,6 +89,7 @@ $(document).ready(function() {
 		}
 	});
 	$("#editBtn").click(function(e){
+		$("#loadingModal").modal('show');
 		$("table .cbCheckAbs").each(function(i,chk){
 			if (chk.checked==true) {
 				requestid=$(this).val();
@@ -97,6 +99,7 @@ $(document).ready(function() {
 	})
 	$("#deleteBtn").click(function() {
 		var idarray=new Array();
+		$("#loadingModal").modal('show');
 		$('table .cbCheckAbs').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
@@ -115,10 +118,12 @@ function AddEmployee() {
 		 showNotification("success",message);
 		document.getElementById('emp_type').disabled = true;
 		document.getElementById('branch').disabled = true;
+		$("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -177,6 +182,7 @@ function getSepecificEmployeeDetails(requestid,e){
 		$("#dob").val(responseData.dob);
 		$("#join_date").val(responseData.join_date);
 		$("#design").val(responseData.design);
+		$("#loadingModal").modal('hide');
 		e.preventDefault();
 		$('#addEmployeeModal').modal({
 	        show: true, 
@@ -188,6 +194,7 @@ function getSepecificEmployeeDetails(requestid,e){
 	function errorCallback(responseData, textStatus, request) {
 		  var message=responseData.responseJSON.message;
 		  showNotification("error",message);
+		  $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Employee/getSepecificEmployeeDetails?id="+requestid;
@@ -200,11 +207,13 @@ function deleteEmployee(id) {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
-		location.reload();
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/Employee/deleteEmployee?id="+id;

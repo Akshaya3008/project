@@ -17,13 +17,15 @@ $(document).ready(function() {
 		   },	
 		  },	
 		  submitHandler:function(form){
-			  event.preventDefault();  
+			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  createDesignation();
 		  }
 	});
 	
 	$("#editBtn").click(function(e){
 		var table = $('#designationTable').DataTable();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
@@ -34,6 +36,7 @@ $(document).ready(function() {
 	});
 	$("#deleteBtn").click(function() {
 		var idarray=new Array();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			idarray.push($(this).val());
@@ -59,11 +62,13 @@ function createDesignation()
 		
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	
 	var httpMethod = "POST";
@@ -113,10 +118,13 @@ function deleteDesignation(id) {
 	{
 		var mes=responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/Designation/deleteDesignation?id="+id;
@@ -127,6 +135,7 @@ function deleteDesignation(id) {
 
 function loadDesignation(designation,e){
 	document.getElementById("designation_name").value=designation;
+	$("#loadingModal").modal('hide');
 	e.preventDefault();
 	$('#designationModal').modal({
         show: true, 
