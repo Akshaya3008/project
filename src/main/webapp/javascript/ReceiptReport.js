@@ -6,15 +6,19 @@ $(document).ready(function(){
 	fetchAllBranch();
 	$("#branch").val(branchSession);
 	
-	$("#btnDisplay").click(function(){
+	/*$("#btnDisplay").click(function(){
 		event.preventDefault();
 		ReceiptReport();
-	});
+	});*/
 	$('#multi_employee').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
 	$('#multi_standard').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+	$('#multi_pay_mode').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
@@ -118,7 +122,7 @@ $(document).ready(function(){
 				    },
 				  submitHandler:function(form){
 					  event.preventDefault();
-					  ReceiptReport()
+					  ReceiptReport();
 				  }
 		});
 });
