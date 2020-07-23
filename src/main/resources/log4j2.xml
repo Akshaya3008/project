@@ -2,7 +2,9 @@
 <Configuration status="warn" package="org.VCERP.Education.VC.configuration">
 <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [%l] [%C] [%M] [%X{ip}] [%X{method}] [%X{tag}] %c{1} - %msg%n</Property>
-        <Property name="APP_LOG_ROOT">D:/project/vc-erp-logs</Property>
+        <!-- <Property name="APP_LOG_ROOT">D:/project/vc-erp-logs</Property> -->
+        <Property name="APP_LOG_ROOT">/home/logs/vc-erp-logs</Property>
+       
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT" follow="true">

@@ -1,7 +1,8 @@
 /**
  * 
  */
-var host="http://localhost";
+//var host="http://localhost";
+var host="http://vidyachaitanyaedutech.com";
 var port="8080";
 
 var branchSession=sessionStorage.getItem("branch");
