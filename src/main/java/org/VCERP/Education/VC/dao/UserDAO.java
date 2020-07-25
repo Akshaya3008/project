@@ -21,7 +21,7 @@ public class UserDAO {
 		ArrayList<String> permission=new ArrayList<>();
 		try {
 			con=Util.getDBConnection();
-			String query="select * from user_db where username=? and password=password(?) and active='1'";
+			String query="select * from user_db where username=? and password=md5(?) and active='1'";
 			st=con.prepareStatement(query);
 			st.setString(1, userid);
 			st.setString(2, password);
@@ -58,7 +58,7 @@ public class UserDAO {
 		try {
 			con=Util.getDBConnection();
 			String query="insert into user_db(`name`,`username`,`password`,`emp_type`,`branch`,`role`,`created_date`,`active`) "
-					+ "values(?,?,password(?),?,?,?,?,'1')";
+					+ "values(?,?,md5(?),?,?,?,?,'1')";
 			ps=con.prepareStatement(query);
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getUserid());
@@ -173,7 +173,7 @@ public class UserDAO {
 		PreparedStatement ps = null;
 		try {
 			con=Util.getDBConnection();
-			String query = "update user_db set username=?,password=password(?),role=? where id=?";
+			String query = "update user_db set username=?,password=md5(?),role=? where id=?";
 			ps = con.prepareStatement(query);
 			ps.setString(1,user.getUserid());
 			ps.setString(2,user.getPassword());

@@ -340,8 +340,9 @@ function checkUsernameExist(username){
 	return false;
 }
 function checkUserLevel(){
-	if(emp_type=="Organizatoin Level Employee"){
+	if(emp_type=="Organization Level Employee"){
 		document.getElementById("emp_type").disabled=false;
+		document.getElementById("employee_type").disabled=false;
 		document.getElementById("ebranch").disabled=false;
 		document.getElementById("emp_branch").disabled=false;
 		$("#emp_type").val(emp_type);
@@ -349,6 +350,7 @@ function checkUserLevel(){
 		$("#emp_type").val(emp_type);
 		$(".branch").val(branchSession);
 		document.getElementById("emp_type").disabled=true;
+		document.getElementById("employee_type").disabled=true;
 		document.getElementById("ebranch").disabled=true;
 		document.getElementById("emp_branch").disabled=true;
 	}

@@ -1,15 +1,15 @@
 $(document).ready(function(){
+	validateLogin();
 	fetchLoginHistory();
-	$('#loginHistory').DataTable({
-		"pageLength" : 40
-	});
+	//table=$('#loginHistory').DataTable({
+	//	"pageLength" : 40
+	//});
 	
 });
 
 function fetchLoginHistory(){
 	function callback(responseData, textStatus, request) {
 		var table = $('#loginHistory').DataTable();
-		var value = 0;
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var loginTime = responseData[i].timestamp;
@@ -26,7 +26,7 @@ function fetchLoginHistory(){
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/user/LoginHistoryList";
-	ajaxUnauthenticatedRequest(httpMethod, relativeUrl, null, callback,
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
 }

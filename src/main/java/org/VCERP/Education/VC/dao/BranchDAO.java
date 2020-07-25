@@ -53,7 +53,7 @@ public class BranchDAO {
 		Branch branch=null;
 		try {
 			conn=Util.getDBConnection();
-			String query="select * from Branch where branch_name=? or branchCode=?";
+			String query="select * from branch where branch_name=? or branchCode=?";
 			ps=conn.prepareStatement(query);
 			ps.setString(1, input);
 			ps.setString(2 	, input);
@@ -94,7 +94,7 @@ public class BranchDAO {
 		ArrayList<Branch> b=new ArrayList<>();
 		try {
 			conn=Util.getDBConnection();
-			String query="select * from Branch";
+			String query="select * from branch";
 			ps=conn.prepareStatement(query);
 			rs=ps.executeQuery();
 			while(rs.next())
