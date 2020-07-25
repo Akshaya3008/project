@@ -5,10 +5,12 @@ $(document).ready(function() {
 	validateLogin();
 	table = $("#employeeTable").DataTable();
 	FetchAllEmployee();
-	//fetchAllBranch();
-	getDesignation();
-	$("#emp_type").val(emp_type);
+	if(emp_type=="Branch Level Employee"){
+		fetchAllBranch();
+	}
 	$("#branch").val(branchSession);
+	getDesignation();
+	checkUserLevel();
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		return this.optional(element) || /^[a-z\s]+$/i.test(value);
 		}, "Only alphabetical characters");
@@ -58,23 +60,28 @@ $(document).ready(function() {
 		        maxlength: 10,
 		        noSpace: true
 			},
-			dob:{
-				required:true,
-				date:true,
-				futureDate:true
+		    dob:{
+			required:true,
+			date:true,
+			futureDate:true
 			},
-			join_date:{
-				required:true,
-				date:true
+		join_date:{
+			required:true,
+			date:true,
+			greaterThan:"#dob"
 			},
-			design:{
-				required:true
+		design:{
+			required:true
 			},
 		  },
 		  messages: {
 				dob: {
-					futureDate:'future date not allowed'
+					futureDate:'Future date not allowed'
 				},
+				join_date:{
+					required:'Please enter Joining date'				
+				}
+
 			 },
 		  submitHandler:function(form){
 			  event.preventDefault();
@@ -229,4 +236,16 @@ function clearModal(){
 	$("#dob").val("");
 	$("#join_date").val("");
 	requestid=0;
+}
+function checkUserLevel(){
+	if(emp_type=="Organization Level Employee"){
+		document.getElementById("emp_type").disabled=false;
+		document.getElementById("branch").disabled=false;
+		$("#emp_type").val(emp_type);
+	}else{
+		$("#emp_type").val(emp_type);
+		$(".branch").val(branchSession);
+		document.getElementById("emp_type").disabled=true;
+		document.getElementById("branch").disabled=true;
+	}
 }

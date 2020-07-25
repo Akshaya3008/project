@@ -72,7 +72,7 @@ function showAdmissionTable() {
 					+ responseData[i].id
 					+ '"><label for="checkbox1"></label></span>';
 			var date = responseData[i].date;
-			var student_name = responseData[i].student_name;
+			var student_name = responseData[i].student_name+" "+responseData[i].fname+" "+responseData[i].lname;
 			var invoice_no = responseData[i].invoice_no;
 			var Rollno = responseData[i].Rollno;
 			var regno = responseData[i].regno;

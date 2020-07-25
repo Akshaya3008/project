@@ -3,8 +3,10 @@ requestid = 0;
 var table;
 $(document).ready(function() {
 	validateLogin();
-	table=$("#UserMgmt_table").DataTable();;
-	fetchAllBranch();
+	table=$("#UserMgmt_table").DataTable();
+	if(emp_type=="Branch Level Employee"){
+		fetchAllBranch();
+	}
 	$(".branch").val(branchSession);
 	checkUserLevel();
 	fetchAllRole();

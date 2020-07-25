@@ -84,7 +84,7 @@ public class AdmissionDAO {
 		Admission ad=null;
 		try {
 			con=Util.getDBConnection();
-			String query="select `id`,`student_name`,`contact`,`address`,`enq_taken_by`,`adm_fees_pack`,`status`,`date`"
+			String query="select `id`,`student_name`,`fname`,`lname`,`contact`,`address`,`enq_taken_by`,`adm_fees_pack`,`status`,`date`"
 					+ ",`Rollno`,`regno`,`invoice_no`,`admission_date`,`acad_year`,`join_date`,`fees`,`paid_fees`"
 					+ ",`remain_fees` from admission where branch=?";
 			ps=con.prepareStatement(query);
@@ -95,21 +95,23 @@ public class AdmissionDAO {
 				ad=new Admission();
 				ad.setId(rs.getLong(1));
 				ad.setStudent_name(rs.getString(2));
-				ad.setContact(rs.getString(3));
-				ad.setAddress(rs.getString(4));
-				ad.setEnq_taken_by(rs.getString(5));
-				ad.setAdm_fees_pack(rs.getString(6));
-				ad.setStatus(rs.getString(7));
-				ad.setDate(rs.getString(8));
-				ad.setRollno(rs.getString(9));
-				ad.setRegno(rs.getString(10));
-				ad.setInvoice_no(rs.getString(11));
-				ad.setAdmission_date(rs.getString(12));
-				ad.setAcad_year(rs.getString(13));
-				ad.setJoin_date(rs.getString(14));
-				ad.setFees(rs.getLong(15));
-				ad.setPaid_fees(rs.getLong(16));
-				ad.setRemain_fees(rs.getLong(17));
+				ad.setFname(rs.getString(3));
+				ad.setLname(rs.getString(4));
+				ad.setContact(rs.getString(5));
+				ad.setAddress(rs.getString(6));
+				ad.setEnq_taken_by(rs.getString(7));
+				ad.setAdm_fees_pack(rs.getString(8));
+				ad.setStatus(rs.getString(9));
+				ad.setDate(rs.getString(10));
+				ad.setRollno(rs.getString(11));
+				ad.setRegno(rs.getString(12));
+				ad.setInvoice_no(rs.getString(13));
+				ad.setAdmission_date(rs.getString(14));
+				ad.setAcad_year(rs.getString(15));
+				ad.setJoin_date(rs.getString(16));
+				ad.setFees(rs.getLong(17));
+				ad.setPaid_fees(rs.getLong(18));
+				ad.setRemain_fees(rs.getLong(19));
 				admission.add(ad);
 			}
 			

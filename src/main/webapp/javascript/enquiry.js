@@ -8,9 +8,9 @@ $(document).ready(function() {
 	loadLeadSource();
 	FetchAllEmployee();
 	getFeesPackage();
+	fetchAllBranch();
 	getDesignation();
 	loadBranchSpecificStandard();
-	$("#branch").val(branchSession);
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		return this.optional(element) || /^[a-z\s]+$/i.test(value);
 		}, "Only alphabetical characters");
@@ -263,7 +263,7 @@ $(document).ready(function() {
 		});
 });
 	
-	
+$("#branch").val(branchSession);	
 });
 
 function EnquiryData() {

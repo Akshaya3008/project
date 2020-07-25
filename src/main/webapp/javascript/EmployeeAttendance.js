@@ -86,8 +86,8 @@ $(document).ready(function() {
 	});
 	$("#btn-view").click(function(e){
 		var table = $("#EmpAttendance_stat_table").DataTable();
+		$("#loadingModal").modal('show');
 		$("table .cbCheckAbs").each(function(i,chk){
-			$("#loadingModal").modal('show');
 			if (chk.checked==true) {
 				
 			var rno=table.rows({selected : true}).column(2).data()[i];
@@ -217,7 +217,6 @@ function getEmployeeAttendanceStat() {
 function getEmployeeAttendanceReport(id,e) {
 	var srno=0;
 	function callback(responseData, textStatus, request) {
-		$("#loadingModal").modal('hide');
 		var table = $("#EmpAttendance_report_table").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -235,11 +234,11 @@ function getEmployeeAttendanceReport(id,e) {
 			}table.row.add(
 					[srno, date, emp_code, attendance, start_time, end_time])
 					.draw();
-			 $("#attendance_stat").css("display", "none");
-				$("#attendance").css("display", "none");
-				$("#attendance_report").css("display", "block");
 		}
-
+			 $("#attendance_stat").css("display", "none");
+			$("#attendance").css("display", "none");
+			$("#attendance_report").css("display", "block");
+			$("#loadingModal").modal('hide');
 	}
 
 	function errorCallback(responseData, textStatus, request) {

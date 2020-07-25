@@ -59,9 +59,9 @@ $(document).ready(function(){
 			  InsertVendor();
 		  }
 	});
-	$('#expense_table').DataTable({
-		"pageLength" : 40
-	});
+	//$('#expense_table').DataTable({
+	//	"pageLength" : 40
+	//});
 	var checkbox = $('table tbody input[type="checkbox"]');
 	checkbox.click(function() {
 		if (!this.checked) {
@@ -71,6 +71,7 @@ $(document).ready(function(){
 	
 	$("#edit").click(function(e) {		 
 		var table = $('#expense_table').DataTable();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
@@ -100,7 +101,7 @@ $(document).ready(function(){
 
 function InsertExpense(){
 	function callback(responseData,textStatus,request){
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 		$("#loadingModal").modal('hide');
 		clearModal();
@@ -162,7 +163,7 @@ function ExpenseList(){
 
 function InsertVendor(){
 	function callback(responseData,textStatus,request){
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 		$("#loadingModal").modal('hide');
 		clearModal();
@@ -208,9 +209,10 @@ function loadvendor() {
 }
 function deleteExpenses(id) {
 	function callback(responseData, textStatus, request) {
-		var mes=responseData.responseJSON.message;
+		var mes=responseData.message;
 		showNotification("success",mes);
 		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 
 	function errorCallback(responseData, textStatus, request) {
@@ -231,6 +233,7 @@ function loadExpenses(date,expenses,vendor,pay_mode,e){
 	document.getElementById("exp_amt").value=expenses;
 	$("#vendor_list").val(vendor);
 	$("#pay_mode").val(pay_mode);
+	$("#loadingModal").modal('hide');
 	e.preventDefault();
 	$('#expenseModal').modal({
         show: true, 

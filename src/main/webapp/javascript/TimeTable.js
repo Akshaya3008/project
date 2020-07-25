@@ -63,7 +63,8 @@ $(document).ready(function() {
 	          },
 	          time_slot:{
 	        	  required:true,
-	        	  noSpace:true
+	        	  noSpace:true,
+			  digits:true
 	          },
 		  },
 		  submitHandler:function(form){
@@ -85,7 +86,7 @@ $(document).ready(function() {
 	$("#addrow").on("click", function() {
 		$("table .tt-details").append(html);
 	});
-	$('#div').focusout(function() {
+	$('select').focusout(function() {
 		var aca_year = document.getElementById('acad_year').value;
 		var std = document.getElementById('std').value;
 		var div = document.getElementById('div').value;
