@@ -54,6 +54,7 @@ $(document).ready(function(){
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 			  addNewBranch();
 		  }
 	});
@@ -61,6 +62,7 @@ $(document).ready(function(){
 	$("#editBtn").click(function(e){
 		request="Edit";
 		var code;
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked == true) {
 				code = table.rows({selected : true}).column(2).data()[i];	
@@ -77,12 +79,14 @@ function addNewBranch(){
 	function callback(responseData, textStatus, request){
 		var mes = responseData.message;
 		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
 		clearModal();
 
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
+		$("#loadingModal").modal('hide');
 		
 	}
 	var formData = $("#branchForm").serialize()+"&createdBy="+user;
@@ -131,6 +135,7 @@ function loadBranch(code,e,req){
 		document.getElementById("address").value=responseData.Address;
 		document.getElementById("email").value=responseData.Email;
 		document.getElementById("contact").value=responseData.Contact;
+		$("#loadingModal").modal('hide');
 		e.preventDefault();
 		$('#branchModal').modal({
 		        show: true, 

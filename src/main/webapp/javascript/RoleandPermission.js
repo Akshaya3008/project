@@ -4,6 +4,7 @@ $(document).ready(function(){
 	table=$("#RoleandPermission_table").DataTable();
 	fetchAllRole();
 	$("#saveB").click(function(){
+		$("#loadingModal").modal('show');
 		saveAllPermission();
 	});
 });
@@ -16,12 +17,15 @@ function saveAllPermission(){
 	  function callback(responseData, textStatus, request){
 				var mes=responseData.message;
 				showNotification("success",mes);
+				$("#loadingModal").modal('hide');
+				reloadPage();
 		}
 
 
 		function errorCallback(responseData, textStatus, request){
 			var mes=responseData.responseJSON.message;
 			showNotification("error",mes);
+			$("#loadingModal").modal('hide');
 		}
 
 		var httpMethod = "POST";

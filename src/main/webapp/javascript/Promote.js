@@ -77,6 +77,7 @@ $(document).ready(function() {
 		  },
 		  submitHandler:function(form){
 			  event.preventDefault();
+			  $("#loadingModal").modal('show');
 				$("input:checkbox[name=type]:checked").each(function() {
 					ids.push($(this).val())
 				});
@@ -171,11 +172,13 @@ function promoteStudent(id){
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		  showNotification("success", mes);
+		  $("#loadingModal").modal('hide');
 	}
 	function errorCallback(responseData, textStatus, request) {
 		
 		  var mes = responseData.responseJSON.message;
 		  showNotification("error", mes);
+		$("#loadingModal").modal('hide');
 	}
 	var formData = $("#PromoteDataForm").serialize()+"&id="+id+"&user="+user+
 	"&branch="+branchSession;

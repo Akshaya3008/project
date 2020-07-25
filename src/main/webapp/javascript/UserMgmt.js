@@ -75,7 +75,8 @@ $(document).ready(function() {
 
 		},
 		submitHandler : function(form) {
-			//event.preventDefault();
+			event.preventDefault();
+			$("#loadingModal").modal('show');
 			createEmployeeAccount();
 		}
 	});
@@ -129,7 +130,8 @@ $(document).ready(function() {
 				dob:'Date of birth cannot be a future date'
 		},
 		submitHandler : function(form) {
-			//event.preventDefault();
+			event.preventDefault();
+			$("#loadingModal").modal('show');
 			AddEmployee();
 		}
 	});
@@ -140,7 +142,8 @@ $(document).ready(function() {
 		}
 	});
 	$("#editBtn").click(function(e) {
-		event.preventDefault();
+		//event.preventDefault();
+		$("#loadingModal").modal('show');
 		$("table .cbCheck").each(function(i, chk) {
 			if (chk.checked) {
 				requestid = $(this).val();
@@ -151,6 +154,7 @@ $(document).ready(function() {
 
 	$("#deleteBtn").click(function() {
 		//event.preventDefault();
+		$("#loadingModal").modal('show');
 		$("table .cbCheck").each(function(i, chk) {
 			if (chk.checked) {
 				requestid = $(this).val();
@@ -215,11 +219,13 @@ function AddEmployee() {
 		document.getElementById('emp_type').disabled = true;
 		document.getElementById('branch').disabled = true;
 		document.getElementById("emp_branch").disabled=true;
-		location.reload();
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		  var mes=responseData.responseJSON.message;
 		  showNotification("error",mes);
+		 $("#loadingModal").modal('hide');
 		 
 	}
 	var formData = $("#add_employee").serialize();
@@ -241,12 +247,13 @@ function createEmployeeAccount() {
 		document.getElementById('emp_type').disabled = true;
 		document.getElementById('branch').disabled = true;
 		document.getElementById("emp_branch").disabled=true;
-		clearModal();
-		location.reload();
+		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		  message=responseData.responseJSON.message;
 		  showNotification("error",message);
+		 $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
 	var formData;
@@ -277,6 +284,7 @@ function loadUserAccount(i, e) {
 	$("#enq_taken").val(empname);
 	$("#role").val(role);
 	document.getElementById("userid").value = username;
+	$("#loadingModal").modal('hide');
 	e.preventDefault();
 	$("#datatable-view").hide();
 	$("#datatable-view-2").show();
@@ -294,11 +302,14 @@ function deactivateUserAccount() {
 		  var mes=responseData.message;
 		  showNotification("success",mes);
 		  requestid = 0;
-		  location.reload();
+		  $("#loadingModal").modal('hide');
+		  reloadPage();
+		  
 	}
 	function errorCallback(responseData, textStatus, request) {
 		  var mes=responseData.responseJSON.message;
 		  showNotification("error",mes);
+		  $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "DELETE";
 	var relativeUrl = "/user/DeactivateAccount?id=" + requestid;
