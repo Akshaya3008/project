@@ -11,6 +11,8 @@ import org.VCERP.Education.VC.utility.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 public class ChartDAO {
 	private static final Logger logger = LogManager.getLogger(ChartDAO.class.getName());
 	public ArrayList<Chart> getExpenseData(Chart ch, ArrayList<Chart> exp_chart) {
@@ -25,6 +27,35 @@ public class ChartDAO {
 			ps.setString(1, ch.getS_date());
 			ps.setString(2, ch.getE_date());
 			ps.setString(3, ch.getBranch());
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				Chart chart=new Chart();
+				chart.setDate(rs.getString(1));
+				chart.setAmount(rs.getString(2));
+				exp_chart.add(chart);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return exp_chart;
+	}
+	
+	public ArrayList<Chart> getOverallExpenseData(Chart ch, ArrayList<Chart> exp_chart) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		try {
+			con=Util.getDBConnection();
+			String query="select exp_date, SUM(amount) from expenses where exp_date BETWEEN ? AND ? GROUP BY exp_date";
+			ps=con.prepareStatement(query);
+			ps.setString(1, ch.getS_date());
+			ps.setString(2, ch.getE_date());
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -76,6 +107,36 @@ public class ChartDAO {
 		return rec_chart;
 	}
 	
+	public ArrayList<Chart> getOverallReceiptData(Chart ch, ArrayList<Chart> rec_chart) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		try {
+			con=Util.getDBConnection();
+			String query="select  receipt_date, SUM(payment) from receipt_details WHERE receipt_date BETWEEN ? AND ? GROUP BY receipt_date";
+			ps=con.prepareStatement(query);
+			ps.setString(1, ch.getS_date());
+			ps.setString(2, ch.getE_date());
+			
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				Chart chart=new Chart();
+				chart.setDate(rs.getString(1));
+				chart.setAmount(rs.getString(2));
+				rec_chart.add(chart);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return rec_chart;
+	}
+	
 	
 	public ArrayList<Chart> getAdmissionData(Chart ch, ArrayList<Chart> adm_chart) {
 		Connection con=null;
@@ -97,7 +158,36 @@ public class ChartDAO {
 				chart.setDate(rs.getString(1));
 				chart.setAmount(rs.getString(2));
 				
-				
+				adm_chart.add(chart);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return adm_chart;
+	}
+	
+	
+	public ArrayList<Chart> getOverallAdmissionData(Chart ch, ArrayList<Chart> adm_chart) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+																					
+		try {
+			con=Util.getDBConnection();
+			String query="select  admission_date, SUM(fees) from admission WHERE admission_date BETWEEN ? AND ? GROUP BY admission_date";
+			ps=con.prepareStatement(query);
+			ps.setString(1, ch.getS_date());
+			ps.setString(2, ch.getE_date());
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				Chart chart=new Chart();
+				chart.setDate(rs.getString(1));
+				chart.setAmount(rs.getString(2));		
 				adm_chart.add(chart);
 			}
 		}catch(Exception e){
@@ -144,6 +234,33 @@ public class ChartDAO {
 	}
 	
 	
+	public Integer getOverallConversionData(Chart ch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int value=0;
+		try {
+			con=Util.getDBConnection();
+			String query="select SUM(status = 'Admitted' ) * 100 / (SELECT COUNT(*) from enquiry) from enquiry WHERE enq_date BETWEEN ? AND ?";
+			ps=con.prepareStatement(query);
+			ps.setString(1, ch.getS_date());
+			ps.setString(2, ch.getE_date());
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				value=rs.getInt(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return value;
+	}
+	
+	
 	
 	public Integer getSalesCard(Chart ch) {
 		Connection con=null;
@@ -173,6 +290,34 @@ public class ChartDAO {
 		return value;
 	}
 	
+	public Integer getOverallSalesCard(Chart ch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int value=0;
+		try {
+			con=Util.getDBConnection();
+			String query="SELECT SUM(fees) FROM `admission` WHERE admission_date BETWEEN ? AND ?";
+			
+			ps=con.prepareStatement(query);
+			ps.setString(1,ch.getS_date());
+			ps.setString(2,ch.getE_date());
+			
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				value=rs.getInt(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return value;
+	}
+	
 	public Integer getReceivedCard(Chart ch) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -186,6 +331,34 @@ public class ChartDAO {
 			ps.setString(1,ch.getS_date());
 			ps.setString(2,ch.getE_date());
 			ps.setString(3,ch.getBranch());
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				value=rs.getInt(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return value;
+	}
+	
+	public Integer getOverallReceivedCard(Chart ch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int value=0;
+		try {
+			con=Util.getDBConnection();
+			String query="SELECT SUM(payment) FROM `receipt_details` WHERE receipt_date BETWEEN ? AND ?";
+			
+			ps=con.prepareStatement(query);
+			ps.setString(1,ch.getS_date());
+			ps.setString(2,ch.getE_date());
+			
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -233,6 +406,35 @@ public class ChartDAO {
 		return value;
 	}
 	
+	public Integer getOverallReceivableCard(Chart ch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int value=0;
+		try {
+			con=Util.getDBConnection();
+			String query="SELECT SUM(amount) FROM `receipt_details` WHERE receipt_date BETWEEN ? AND ?";
+			
+			ps=con.prepareStatement(query);
+			
+			ps.setString(1,ch.getS_date());
+			ps.setString(2,ch.getE_date());
+			
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				value=rs.getInt(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return value;
+	}
+	
 	
 	public Integer getNetIncomeCard(Chart ch) {
 		Connection con=null;
@@ -251,6 +453,38 @@ public class ChartDAO {
 			ps.setString(4,ch.getBranch());
 			ps.setString(5,ch.getS_date());
 			ps.setString(6,ch.getE_date());
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				value=rs.getInt(1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return value;
+	}
+	
+	public Integer getOverallNetIncomeCard(Chart ch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int value=0;
+		try {
+			con=Util.getDBConnection();
+			String query="SELECT (SELECT SUM(payment) FROM `receipt_details` WHERE receipt_date BETWEEN ? AND ?)-(SELECT SUM(amount) FROM `expenses` WHERE exp_date BETWEEN ? AND ?)";
+			
+			ps=con.prepareStatement(query);
+			
+			
+			ps.setString(1,ch.getS_date());
+			ps.setString(2,ch.getE_date());
+			
+			ps.setString(3,ch.getS_date());
+			ps.setString(4,ch.getE_date());
 			rs=ps.executeQuery();
 			while(rs.next())
 			{

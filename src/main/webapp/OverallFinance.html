@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Overall Finance</title>
+<script src="jquery/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+
+<!-- FontAwesome Styles-->
+<link href="assets/css/font-awesome.css" rel="stylesheet" />
+<!-- Morris Chart Styles-->
+<link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+<!-- Custom Styles-->
+<link href="assets/css/custom-styles.css" rel="stylesheet" />
+<!-- Google Fonts-->
+
+
+<link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<script type="text/javascript" src="javascript/ValidateLogin.js"></script>
+<script type="text/javascript" src="javascript/OverallFinance.js"></script>
+<script type="text/javascript" src="javascript/Helper.js"></script>
+<script type="text/javascript" src="core/noty.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/noty.css" />
+<script>
+	$(function() {
+		$("#navbar").load("nav-bar.html");
+	});
+</script>
+<style>
+  .mr-sm{
+   margin-right:10px !important;
+  
+  }
+  .comiseo-daterangepicker {
+	position: absolute;
+	padding: 5px;
+}
+.comiseo-daterangepicker-presets,
+.comiseo-daterangepicker-calendar {
+	display: table-cell;
+	vertical-align: top;
+	height: 230px;
+}
+.comiseo-daterangepicker-right .comiseo-daterangepicker-presets {
+	padding: 2px 7px 7px 2px;
+}
+
+.comiseo-daterangepicker-left .comiseo-daterangepicker-presets {
+	padding: 2px 2px 7px 7px;
+}
+.comiseo-daterangepicker-presets .ui-menu {
+	padding: 2px; /* fix v1.11 */
+	white-space: nowrap;
+}
+
+.comiseo-daterangepicker-presets .ui-menu-item { /* fix v1.11 */
+	padding: 0;
+}
+
+.comiseo-daterangepicker-presets .ui-menu-item > * { /* fix v1.11 */
+	text-decoration: none;
+	display: block;
+	padding: 2px 0.4em;
+	line-height: 1.5;
+	min-height: 0; /* support: IE7 */
+}
+
+.comiseo-daterangepicker .ui-widget-content,
+.comiseo-daterangepicker .ui-datepicker .ui-state-highlight {
+	border-width: 0;
+}
+
+.comiseo-daterangepicker > .comiseo-daterangepicker-main.ui-widget-content {
+	border-bottom-width: 1px;
+}
+
+.comiseo-daterangepicker .ui-datepicker .ui-datepicker-today .ui-state-highlight {
+	border-width: 1px;
+}
+
+.comiseo-daterangepicker-right .comiseo-daterangepicker-calendar {
+	border-left-width: 1px;
+	padding-left: 5px;
+}
+.comiseo-daterangepicker-right .comiseo-daterangepicker-buttonpanel {
+	float: left;
+}
+
+.comiseo-daterangepicker-left .comiseo-daterangepicker-buttonpanel {
+	float: right;
+}
+
+.comiseo-daterangepicker-buttonpanel > button  {
+	margin-top: 6px;
+}
+
+.comiseo-daterangepicker-right .comiseo-daterangepicker-buttonpanel > button {
+	margin-right: 6px;
+}
+
+.comiseo-daterangepicker-left .comiseo-daterangepicker-buttonpanel > button {
+	margin-left: 6px;
+}
+
+.right-wrapper{
+	margin:0;
+	text-align:right;
+	padding: 38px 22px 32px 0;
+}
+#container{
+	/* height:613px !important; */
+}
+</style>
+</head>
+<body>
+	<div id="wrapper">
+	<div id="navbar">
+	
+	</div>
+		<!--/. NAV TOP  -->
+
+		<!-- /. NAV SIDE  -->
+
+		<div id="page-wrapper">
+			<div class="header">
+			
+			
+			<div class="right-wrapper pull-right mt-sm mr-sm mb-lg">
+			<form id="chart_data">
+					<div class="form-group">
+					<div class="pull-right">
+					<div class="input-group">
+						  <div class="input-group">
+						    <span class="input-group-addon" style="border-radius:0 !important"><i class="fa fa-calendar"></i></span>
+						     <input id="e2" name="e2" class="form-control e2" type="text" style="border-radius:0 !important">
+						  </div> 
+					</div>
+					
+					
+					</div>
+					</div>
+					</form>	
+					</div>
+				
+					
+					
+				<h1 class="page-header">
+					Dashboard <small id="user_name"></small>
+				</h1>
+				<!-- calendar options -->
+				<!-- <div class="right-wrapper pull-right mt-sm mr-sm mb-lg">
+					<div class="form-group">
+					<div class="pull-right">
+					<i class="fa fa-calendar"></i>
+					<input id="e2" name="e2">
+					</div>
+					</div>
+					</div> -->
+				<!-- end  -->
+				
+				<ol class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Dashboard</a></li>
+					<li class="active">Data</li>
+				</ol>
+
+			</div>
+			<div id="page-inner">
+
+				<!-- /. ROW  -->
+
+				<div class="row">
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div class="board">
+							<div class="panel panel-primary">
+								<div class="number">
+									<h3>
+										<h3 id="sales_card"></h3>
+										<small>Sales</small>
+									</h3>
+								</div>
+								<div class="icon">
+									<i class="fa fa-eye fa-5x red"></i>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div class="board">
+							<div class="panel panel-primary">
+								<div class="number">
+									<h3>
+										<h3 id="received_card"></h3>
+										<small>Received</small>
+									</h3>
+								</div>
+								<div class="icon">
+									<i class="fa fa-shopping-cart fa-5x blue"></i>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div class="board">
+							<div class="panel panel-primary">
+								<div class="number">
+									<h3>
+										<h3 id="receivable_card"></h3>
+										<small>Receivable</small>
+									</h3>
+								</div>
+								<div class="icon">
+									<i class="fa fa-comments fa-5x green"></i>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div class="board">
+							<div class="panel panel-primary">
+								<div class="number">
+									<h3>
+										<h3 id="NetIncome_Card"></h3>
+										<small>Net Income</small>
+									</h3>
+								</div>
+								<div class="icon">
+									<i class="fa fa-user fa-5x yellow"></i>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<!--  Experimenting		-->
+					<!-- <div class="col-sm-6 col-xs-12">
+						<div class="panel panel-default chartJs">
+							<div class="panel-heading">
+								<div class="card-title">
+									<div class="title">Monthly Sales Report</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<canvas id="bar-chart" class="chart"></canvas>
+							</div>
+						</div>
+					</div> -->
+					<!--  -->
+					
+					<div class="col-sm-6 col-xs-12">
+						<div class="panel panel-default chartJs">
+							<div class="panel-heading">
+								<div class="card-title">
+									<div class="title">Admission Chart</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<canvas id="Adm_chart" class="chart" width="400" height="400" style=""></canvas>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+						<div class="panel panel-default chartJs">
+							<div class="panel-heading">
+								<div class="card-title">
+									<div class="title">Conversion Chart</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<figure class="highcharts-figure" width="400" height="600">
+								<div id="container" width="400" height="600"></div>
+								<!-- <canvas id="Rec_chart" class="chart" width="400" height="400" style=""></canvas> -->
+								</figure>
+							</div>
+						</div>
+					</div>
+				
+				
+					
+				</div>
+				<!-- <div class="row"> -->
+				<!-- 	<div class="col-sm-6 col-xs-12">
+						<div class="panel panel-default chartJs">
+							<div class="panel-heading">
+								<div class="card-title">
+									<div class="title">Monthly Receipts Report</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<canvas id="mychart" class="chart" width="400" height="400"></canvas>
+							</div>
+						</div>
+					</div> -->
+				
+				
+					
+				<!-- </div> -->
+				
+				<div class="row">
+					
+				<div class="col-sm-6 col-xs-12">
+						<div class="panel panel-default chartJs">
+							<div class="panel-heading">
+								<div class="card-title">
+									<div class="title">Expense Chart</div>
+								</div>
+							</div>
+							<div class="panel-body">
+							<!-- <figure class="highcharts-figure">
+								<div id="Exp_chart"></div>
+								<canvas id="Rec_chart" class="chart" width="400" height="400" style=""></canvas>
+								</figure> -->
+								<canvas id="Exp_chart" class="chart" width="400" height="400" style=""></canvas> 
+							</div>
+						</div>
+					</div>
+				
+			
+					<div class="col-sm-6 col-xs-12">
+						<div class="panel panel-default chartJs">
+							<div class="panel-heading">
+								<div class="card-title">
+									<div class="title">Receipt Chart</div>
+								</div>
+							</div>
+							<div class="panel-body">
+								<canvas id="Rec_chart" class="chart" width="400" height="400" style=""></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+<!-- 				<div class="row">
+					<div class="col-xs-6 col-md-3">
+						<div class="panel panel-default">
+							<div class="panel-body easypiechart-panel">
+								<h4>Profit</h4>
+								<div class="easypiechart" id="easypiechart-blue"
+									data-percent="82">
+									<span class="percent">82%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-3">
+						<div class="panel panel-default">
+							<div class="panel-body easypiechart-panel">
+								<h4>Sales</h4>
+								<div class="easypiechart" id="easypiechart-orange"
+									data-percent="55">
+									<span class="percent">55%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-3">
+						<div class="panel panel-default">
+							<div class="panel-body easypiechart-panel">
+								<h4>Customers</h4>
+								<div class="easypiechart" id="easypiechart-teal"
+									data-percent="84">
+									<span class="percent">84%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-3">
+						<div class="panel panel-default">
+							<div class="panel-body easypiechart-panel">
+								<h4>No. of Visits</h4>
+								<div class="easypiechart" id="easypiechart-red"
+									data-percent="46">
+									<span class="percent">46%</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<!--/.row-->
+
+
+				
+
+			
+				<div class="row">
+					<div class="col-md-12"></div>
+				</div>
+				<!-- /. ROW  -->
+
+
+
+
+
+
+				<!-- /. ROW  -->
+
+
+
+
+
+			</div>
+			<!-- /. PAGE INNER  -->
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+	
+	<!-- <script src="javascript/user-profile.js"></script> -->
+	
+
+	
+	<script src="assets/js/jquery.metisMenu.js"></script>
+	
+
+
+	<script src="assets/js/easypiechart.js"></script>
+	<script src="assets/js/easypiechart-data.js"></script>
+
+	 <script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+
+	
+
+	<!-- Chart Js -->
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script type="text/javascript" src="assets/js/chart.min.js"></script> 
+	
+	<!-- high chart js -->
+	
+	<script type="text/javascript" src="assets/js/highcharts.js"></script>
+	<script type="text/javascript" src="assets/js/highcharts-more.js"></script>
+	<script type="text/javascript" src="assets/js/accessibility.js"></script>
+	
+	
+	<!--  <script type="text/javascript" src="assets/js/chartjs.js"></script>  -->
+	<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script> -->
+
+	
+</body>
+
+</html>
