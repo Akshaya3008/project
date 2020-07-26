@@ -3,6 +3,7 @@ var date;
 var htmlCode = new Array();
 var lecturers = new Array();
 var all_time_slot=new Array();
+var created_date,title;
 var table;
 $(document).ready(function() {
 	validateLogin();
@@ -106,7 +107,6 @@ $(document).ready(function() {
 	$('#editBtn').click(function() {
 		 $("#loadingModal").modal('show');
 		removeTableRow();
-		var created_date,title;
 		var table = $("#timetable_table").DataTable();
 		  $('table .cbCheck').each(function(i, chk) { 
 			  if (chk.checked==true) {
@@ -126,10 +126,10 @@ $(document).ready(function() {
 			  if (chk.checked==true) {
 				  created_date=table.rows({selected :true}).column(0).data()[i]; 
 				  title=table.rows({selected :true}).column(1).data()[i]; 
+				  e.preventDefault();
+				  deleteTimeTable(created_date,title);
 			  }
 		  });
-		  e.preventDefault();
-		  deleteTimeTable(created_date,title);
 	});
 	$('#tt').on('click','.remove-row',function(e) {
 				$(this).closest('tr').remove();
@@ -172,8 +172,8 @@ function InsertTimeTable(tt_details) {
 		+ "&branch=" + branchSession;
 		relativeUrl = "/TimeTable/NewTimeTable";
 	}else{
-		formData = $("#time-table").serialize() + "&tt_details=" + tt_details+"&created_date=" + date
-		+ "&branch=" + branchSession;
+		formData = $("#time-table").serialize() + "&tt_details=" + tt_details+"&created_date=" + created_date
+		+"&old_title=" + title+ "&branch=" + branchSession;
 		relativeUrl = "/TimeTable/EditTimeTable";
 	}
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
@@ -276,6 +276,7 @@ function deleteTimeTable(created_date,title){
 		var mes = responseData.message;
 		showNotification("success", mes);
 		 $("#loadingModal").modal('hide');
+		 reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;

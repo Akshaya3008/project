@@ -188,16 +188,17 @@ public class TimeTableDAO{
 		return tt;
 	}
 
-	public void DeleteTimeTable(TimeTable tt) {
+	public void DeleteTimeTable(String title,String created_date,String branch) {
 		Connection con=null;
 		PreparedStatement st=null;
 		try {
 			con=Util.getDBConnection();
 			String query="delete from time_table where tt_title=? and created_date=? and branch=?";
 			st=con.prepareStatement(query);
-			st.setString(1, tt.getTitle());
-			st.setString(2, tt.getCreated_date());
-			st.setString(3, tt.getBranch());
+			System.out.println(title+created_date+branch);
+			st.setString(1, title);
+			st.setString(2, created_date);
+			st.setString(3, branch);
 			st.executeUpdate();
 		}
 		catch(Exception e){

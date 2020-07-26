@@ -32,13 +32,13 @@ public class TimeTableController{
 		TimeTableDAO dao=new TimeTableDAO();
 		return dao.getSpecificTimeTable(created_date,title,branch);
 	}
-	public void EditTimeTable(TimeTable tt) {
+	public void EditTimeTable(String old_title,String created_date,String branch) {
 		TimeTableDAO dao=new TimeTableDAO();
-		dao.DeleteTimeTable(tt);
+		dao.DeleteTimeTable(old_title,created_date,branch);
 	}
-	public void deleteTimeTable(TimeTable tt) {
+	public void deleteTimeTable(String title,String created_date,String branch) {
 		TimeTableDAO dao=new TimeTableDAO();
-		dao.DeleteTimeTable(tt);
+		dao.DeleteTimeTable(title,created_date,branch);
 	}
 	public ArrayList<TimeTable> TimeTableReport(TimeTable tt, ArrayList<TimeTable> time_table) {
 		TimeTableDAO dao=new TimeTableDAO();

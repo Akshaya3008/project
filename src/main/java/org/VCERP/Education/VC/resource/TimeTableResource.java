@@ -184,6 +184,7 @@ public class TimeTableResource {
 	public Response EditTimeTable(@FormParam("aca_year") String aca_year,@FormParam("standard") String std,
 			@FormParam("division") String division,@FormParam("subject") String subject,@FormParam("title") String title,
 			@FormParam("tt_details") String tt_details,@FormParam("created_date") String created_date,
+			@FormParam("old_title") String old_title,
 			@FormParam("branch") String branch)
 	{
 		TimeTable tt = null;
@@ -206,10 +207,9 @@ public class TimeTableResource {
 		tt.setStatus(pipeSeperatedTT[3]);
 		tt.setCreated_date(created_date);
 		tt.setBranch(branch);
-		while(j<1)
-		{
-			controller.EditTimeTable(tt);
-			j++;
+		while(j<1){
+		controller.deleteTimeTable(old_title,created_date,branch);
+		j++;
 		}
 		controller.addTimeTable(tt);
 		}
@@ -228,13 +228,9 @@ public class TimeTableResource {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response deleteTimeTable(@FormParam("created_date") String created_date,
 			@FormParam("title") String title,@FormParam("branch") String branch){
-		TimeTable tt=new TimeTable();
 		TimeTableController controller=new TimeTableController();
 		try {
-			tt.setCreated_date(created_date);
-			tt.setTitle(title);
-			tt.setBranch(branch);
-			controller.deleteTimeTable(tt);
+			controller.deleteTimeTable(title,created_date,branch);
 			return Util.generateResponse(Status.ACCEPTED,"Data Successfully Deleted.").build();	
 		} catch (Exception e) {
 			e.printStackTrace();
