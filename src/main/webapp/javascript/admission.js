@@ -9,6 +9,7 @@ $(document)
 		.ready(
 				function() {
 					validateLogin();
+					showStudentList();
 					getAcademicYear();
 					FetchAllEmployee();
 					getAutoIncrementedDetails();
@@ -367,7 +368,9 @@ $(document)
 					}
 					$("#enq_stud").focusout(function() {
 						deletefeesTypeTableRow();
-						var id = document.getElementById('enq_stud').value;
+						var search_stud = document.getElementById('enq_stud').value;
+						var id=search_stud.split("|");
+						id=id[0];
 						event.preventDefault();
 						if(id!=""){
 							$("#loadingModal").modal('show');
@@ -1124,6 +1127,26 @@ function getAutoIncreamentedEnquiryNo() {
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Enquiry/IncrementedEnqNo?branch=" + branchSession;
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+			errorCallback);
+	return false;
+}
+function showStudentList() {
+	function callback(responseData, textStatus, request) {
+		for ( var i in responseData) {
+			var enq_no = responseData[i].enq_no;
+			var student_name = responseData[i].sname+" "+responseData[i].fname+" "+responseData[i].lname;
+			$("#stud_list").append('<option value="'+enq_no+"|"+student_name+'">');
+		}
+	}
+
+	function errorCallback(responseData, textStatus, request) {
+		var mes = responseData.responseJSON.message;
+		showNotification("error", mes);
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/Enquiry/FetchAllEnquiryData?branch=" + branchSession;
+
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;

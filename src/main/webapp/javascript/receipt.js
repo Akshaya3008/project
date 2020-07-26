@@ -5,6 +5,7 @@ $(document).ready(function(){
 	validateLogin();
 	getIncrementedReceiptNumber();
 	FetchAllEmployee();
+	showStudentList();
 	document.getElementById('receipt_date').value=date;
 	document.getElementById('trans_date').value=date;
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
@@ -54,10 +55,13 @@ $(document).ready(function(){
 	});
 
 	$("#stud_id").focusout(function() {
-		$("#loadingModal").modal('show');
-		var id=document.getElementById('stud_id').value;
+		
+		var search_stud=document.getElementById('stud_id').value;
+		var id=search_stud.split("|");
+		id=id[0];
 		event.preventDefault();
 		if(id!=""){
+		$("#loadingModal").modal('show');
 		removeInstallmentTableRow();
 		SearchStudent(id);
 		}else{
@@ -243,4 +247,28 @@ function placeReceiveAmountInInstallmentTable(received_amt){
 			i=rowCount;
 		}
 	}
+}
+function showStudentList() {
+	function callback(responseData, textStatus, request) {
+		for ( var i in responseData) {
+			var student_name = responseData[i].student_name+" "+responseData[i].fname+" "+responseData[i].lname;
+			var Rollno = responseData[i].Rollno;
+//'<option value="'+Rollno+"|"+student_name+'">';
+			    $("#stud_list").append('<option value="'+Rollno+"|"+student_name+'">');
+			  //document.getElementById('select_stud').innerHTML = options;
+		}
+	}
+
+	function errorCallback(responseData, textStatus, request) {
+		
+		 var message=responseData.responseJSON.message;
+		 showNotification("error",message);
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/Admission/FetchAllAdmittedStudent?branch="
+			+ branchSession;
+
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+			errorCallback);
+	return false;
 }

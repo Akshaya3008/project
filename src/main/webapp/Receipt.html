@@ -145,10 +145,12 @@ table.table tr th:last-child {
 									class="text-red">*</span>
 								</label>
 								<div class="col-sm-6">
-									<div class="input-group">
-										<input type="text" class="form-control" name="search" id="stud_id" placeholder="Search student by ID"> 
-										<a class="input-group-addon"><i class="fa fa-search"></i></a>
-									</div>
+										<input type="text" id="stud_id" class="form-control" list="stud_list" placeholder="e.g. search student" style="width">
+
+											<datalist id="stud_list">
+
+											</datalist>
+									
 								</div>
 							</div>
 							</div>

@@ -59,15 +59,16 @@
 	background-color: #d43f3a !important;
 	border-color: #d43f3a !important;
 }
+
 #loading {
-		position: fixed;
-		padding:0;
-		margin:0;
-		width: 100%;
-		height: 100vh;
-		background: #fff url('img/ring.gif') no-repeat center center;
-		z-index: 99999;
-		}
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100vh;
+	background: #fff url('img/ring.gif') no-repeat center center;
+	z-index: 99999;
+}
 </style>
 <script>
 	$(function() {
@@ -96,8 +97,13 @@
 								<div class="col-md-4">
 									<div class="input-group">
 										<!-- <span class="input-group-addon"><i class="fa fa-search"></i></span> -->
-										<input type="text" class="form-control" id="enq_stud"
-											name="enq_stud" placeholder="Search by student enquiry number"/> <span class="input-group-addon" id="bhvk">
+										<input type="text" id="enq_stud" class="form-control"
+											list="stud_list" placeholder="e.g. search student" style="">
+
+										<datalist id="stud_list">
+
+										</datalist>
+										<span class="input-group-addon" id="bhvk">
 											<button type="button" id="add-btn" data-toggle="modal"
 												data-target="#addStudentModal"
 												style="background-color: transparent; border: none; font-size: 18px; color: blue; position: relative;">
@@ -1057,18 +1063,18 @@
 		</div>
 	</div>
 	<div class="modal fade" id="loadingModal">
-			<div class="modal-dialog">
-			
+		<div class="modal-dialog">
+
 			<!-- Modal content-->
 			<div class="modal-content">
-			
-			<div class="modal-body">
-			<div id="loading"></div>
+
+				<div class="modal-body">
+					<div id="loading"></div>
+				</div>
 			</div>
-			</div>
-			
-			</div>
+
 		</div>
+	</div>
 
 	<script type="text/javascript"
 		src="javascript/bootstrap-datetimepicker.js" charset="UTF-8"></script>
