@@ -104,6 +104,7 @@ function getVeiwReceiptData(rno, receiptno) {
 			  document.getElementById('companyname').innerHTML = branchDetails[0];
 			  document.getElementById('companyaddress').innerHTML = branchDetails[1];
 			  document.getElementById('StudentAddress').innerHTML = admission.address;
+			  document.getElementById('chequeNumber1').innerHTML = responseData[i].cheque_no;
 			  document.getElementById('receivedAmount1').innerHTML = responseData[i].received_amt;
 			$(this).css("display", "none");
 			$("#datatable-view").css("display", "none");

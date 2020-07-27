@@ -8,11 +8,13 @@
 <script src="jquery/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
+<script type="text/javascript" src="javascript/ButtonHideDisplay.js"></script>
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
@@ -22,6 +24,7 @@
 <script type="text/javascript" src="javascript/Helper.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/noty.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 <link rel="stylesheet" type="text/css" href="css/validation.css" />
 
 <style type="text/css">
@@ -167,13 +170,6 @@ table.table .avatar {
 	color: #666;
 }
 
-.pagination li.active a, .pagination li.active a.page-link {
-	background: #03A9F4;
-}
-
-.pagination li.active a:hover {
-	background: #0397d6;
-}
 
 .pagination li.disabled i {
 	color: #ccc;
@@ -230,11 +226,6 @@ table.table .avatar {
 	transform: inherit;
 	z-index: 3;
 	transform: rotateZ(45deg);
-}
-
-.custom-checkbox input[type="checkbox"]:checked+label:before {
-	border-color: #03A9F4;
-	background: #03A9F4;
 }
 
 .custom-checkbox input[type="checkbox"]:checked+label:after {
@@ -345,12 +336,12 @@ table.table .avatar {
 
 						<a href="#expenseModal" data-toggle="modal"
 							data-target="#expenseModal" class="btn btn-success"><i
-							class="material-icons">&#xE147;</i> <span>Add New</span></a>
-						<a href="" class="btn btn-success" id="edit"><i
-							class="material-icons">&#xE147;</i> <span>Edit</span></a>
+							class="fa fa-plus"></i> <span>Add New</span></a>
+						<a href="" class="btn btn-warning" id="editBtn"><i
+							class="fa fa-plus"></i> <span>Edit</span></a>
 							<a href=""
-							class="btn btn-danger" id="Delete" data-toggle="modal"><i
-							class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+							class="btn btn-danger" id="deleteBtn" data-toggle="modal"><i
+							class="fa fa-minus"></i> <span>Delete</span></a>
 					</div>
 				</div>
 			</div>
@@ -361,7 +352,7 @@ table.table .avatar {
 						<!-- <div class="panel-heading">Advanced Tables</div> -->
 						<div class="panel-body">
 							<div class="table-responsive">
-								<table class="table table-striped table-bordered table-hover"
+								<table class="table table-striped table-bordered table-hover TableClass" 
 									id="expense_table">
 									<thead>
 										<tr>
@@ -393,8 +384,7 @@ table.table .avatar {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form id="ExpenseForm" id="form" method="post">
-					<div class="modal-header"
-						style="background-color: #53b700; color: aliceblue">
+					<div class="modal-header headerClass">
 						<h4 class="modal-title">Expense</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
@@ -436,10 +426,10 @@ table.table .avatar {
 
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" id="cancel" data-dismiss="modal"
+						<input type="button" class="btn btn-default" id="cancelBtn" data-dismiss="modal"
 							value="Cancel" onclick="location.reload()"> 
-							<input type="submit" class="btn btn-success" value="Save"
-							style="background-color: #53b700; color: aliceblue">
+							<input type="submit" class="btn btn-success" value="Save" id="saveBtn"
+							style="color: aliceblue">
 					</div>
 				</form>
 			</div>
@@ -450,8 +440,7 @@ table.table .avatar {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form id="vendorForm" id="form">
-					<div class="modal-header"
-						style="background-color: #53b700; color: aliceblue">
+					<div class="modal-header headerClass">
 						<h4 class="modal-title">Vendor</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
@@ -464,10 +453,10 @@ table.table .avatar {
 
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" id="cancel" data-dismiss="modal"
+						<input type="button" class="btn btn-default" id="cancelBtn" data-dismiss="modal"
 							value="Cancel" onclick="location.reload()"> 
-							<input type="submit" class="btn btn-success" value="Save"
-							style="background-color: #53b700; color: aliceblue">
+							<input type="submit" class="btn btn-success" value="Save" id="saveBtn"
+							style="color: aliceblue">
 					</div>
 				</form>
 			</div>
@@ -489,8 +478,5 @@ table.table .avatar {
 </body>
 
 <script>
-
-
-
 </script>
 </html>

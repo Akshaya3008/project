@@ -50,7 +50,13 @@ $(document).ready(function(){
 		  submitHandler:function(form){
 			  event.preventDefault();
 			  $("#loadingModal").modal('show');
+			 /* if (Date.parse(document.getElementById('receipt_date').value) > date && 
+					  Date.parse(document.getElementById('trans_date').value) > date) {
+					showNotification("error", "End date should be after start date");
+				}
+			  else{*/
 			  StudentReceipt();
+			  //}
 		  }
 	});
 

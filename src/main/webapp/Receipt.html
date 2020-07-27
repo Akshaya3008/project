@@ -177,7 +177,7 @@ table.table tr th:last-child {
 								<label class="col-sm-3 control-label">Receipt Date<span class="text-red">*</span>
 								</label>
 								<div class="col-sm-6">
-									<input type="date" name="receipt_date" id="receipt_date" class="form-control" readonly>
+									<input type="date" name="receipt_date" id="receipt_date" class="form-control">
 								</div>
 							</div>
 							</div>
@@ -232,7 +232,16 @@ table.table tr th:last-child {
 								</div>
 							</div>
 							</div>
-							
+							<div class="row">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Transaction/Cheque Number<font color=red>*</font></label>
+								<div class="col-sm-6">
+									<div class="input-group" style="width: 100%;">
+										<input type="text" id="cheque_no" name="cheque_no" class="form-control">
+									</div>
+								</div>
+							</div>
+							</div>
 							<div class="row">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Transaction/Cheque

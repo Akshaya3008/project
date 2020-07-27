@@ -40,7 +40,7 @@ $(document)
 						var now = new Date();
 						now.setHours(0, 0, 0, 0);
 						var myDate = new Date(value);
-						return this.optional(element) || myDate < now;
+						return this.optional(element) || myDate <= now;
 					});
 
 					jQuery.validator.addMethod("letterswithspace", function(
@@ -110,7 +110,10 @@ $(document)
 						},
 						messages : {
 							admission_date : {
-								futureDate : 'futuredate not allowed'
+								futureDate : 'future date not allowed'
+							},
+							join_date : {
+								futureDate : 'future date not allowed'
 							},
 						},
 						submitHandler : function(form) {
@@ -118,7 +121,6 @@ $(document)
 							var status = compareInstallAmtAndReceivedAmt();
 							if (status == false) {
 								if (request == "Save" || request == "Edit") {
-									$("#loadingModal").modal('show');
 									StudentAdmission();
 								} else {
 									$("#loadingModal").modal('show');
@@ -629,9 +631,11 @@ function StudentAdmission() {
 		$("#loadingModal").modal('hide');
 	}
 
-	var status = checkInstallmentDate(installment, document
+	var installmentDateStatus = checkInstallmentDate(installment, document
 			.getElementById("admission_date").value);
-	if (status == false) {
+	var installmentAmtStatus = checkInstallmentAmount(installment, g_total);
+	if (installmentDateStatus == false && installmentAmtStatus == false) {
+		$("#loadingModal").modal('show');
 		var httpMethod = "POST";
 		var formData;
 		var relativeUrl;
@@ -666,6 +670,22 @@ function checkInstallmentDate(installment, admission_date) {
 	if (status == true) {
 		showNotification("error",
 				"Installment Date must be greater than admission date.");
+	}
+	return status;
+}
+function checkInstallmentAmount(installment, g_total) {
+	var status = false;
+	installment = installment.split(",");
+	var total=0;
+	for (var i = 1; i < installment.length; i++) {
+		var installmentAmount = installment[i].split("|");
+		total+=parseInt(installmentAmount[2]);
+	}
+	
+	if(total!=g_total) {
+		status=true;
+		showNotification("error",
+				"Installment amount must be equal to grant total.");
 	}
 	return status;
 }

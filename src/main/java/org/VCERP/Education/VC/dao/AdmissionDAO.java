@@ -252,6 +252,7 @@ public class AdmissionDAO {
 	}
 
 	public void updateTotalFeesPaid(String rollno, long fees_paid, long fees_remain,String branch) {
+		logger.warn("in update total fees paid rollno="+rollno+" feesPaid="+fees_paid+" feesremain="+fees_paid+" branch="+branch);
 		Connection con=null;
 		PreparedStatement ps=null;
 		try {

@@ -103,7 +103,7 @@ public class ReceiptDetailsResource {
 			@FormParam("receipt_date") String receipt_date,@FormParam("receipt_no") String receipt_no,
 			@FormParam("received_amt") long received_amt,@FormParam("pay_mode") String pay_mode
 			,@FormParam("trans_status") String trans_status,@FormParam("trans_date") String trans_date
-			,@FormParam("received_by") String received_by,
+			,@FormParam("received_by") String received_by,@FormParam("cheque_no") String cheque_no,
 			@FormParam("installmentDetails") String installDetails,@FormParam("branch") String branch)
 	{
 		String[] stud_details=Util.symbolSeperatedString(stud_name);
@@ -116,7 +116,7 @@ public class ReceiptDetailsResource {
 		try {
 			details=new ReceiptDetails();
 			details.setStud_name(stud_details[1]);
-			details.setRollno(stud_details[0]);
+			details.setRollno(stud_details[0].trim());
 			details.setContact(stud_details[2]);
 			details.setReceipt_date(receipt_date);
 			details.setReceipt_no(receipt_no);
@@ -124,6 +124,7 @@ public class ReceiptDetailsResource {
 			details.setTrans_status(trans_status);
 			details.setTrans_date(trans_date);
 			details.setReceived_by(received_by);
+			details.setCheque_no(cheque_no);
 			details.setTotal_amt(Long.parseLong(stud_details[3].trim()));
 			details.setReceived_amt(received_amt);		
 			details.setBranch(branch);
@@ -149,7 +150,7 @@ public class ReceiptDetailsResource {
 				long due_amt=Long.parseLong(pipeSeperatedInstallDetails[0]);
 				String due_date=pipeSeperatedInstallDetails[1];
 				long receivedAmt=Long.parseLong(pipeSeperatedInstallDetails[2]);
-				controller.updateInstallment(stud_details[0],due_date,branch,receivedAmt,due_amt);
+				controller.updateInstallment(stud_details[0].trim(),due_date,branch,receivedAmt,due_amt);
 			}
 			
 			return Util.generateResponse(Status.ACCEPTED, "Receipt Details Successfully Inserted.").build();

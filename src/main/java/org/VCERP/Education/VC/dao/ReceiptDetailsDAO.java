@@ -34,13 +34,14 @@ public class ReceiptDetailsDAO {
 	}
 	
 	public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
+		logger.warn("in add receipt");
 		Connection con=null;
 		PreparedStatement ps=null;
 		try {
 			con=Util.getDBConnection();
 			String query="insert into receipt_details(`stud_name`,`RollNO`,`contact`,`receipt_date`,`receipt_no`,"
-					+ "`pay_mode`,`trans_status`,`trans_date`,`received_by`,`total_fees`,`payment`,`amount`,`branch`)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "`pay_mode`,`trans_status`,`trans_date`,`cheque_no`,`received_by`,`total_fees`,`payment`,`amount`,`branch`)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps=con.prepareStatement(query);
 			ps.setString(1, details.getStud_name());
 			ps.setString(2, details.getRollno());
@@ -50,11 +51,12 @@ public class ReceiptDetailsDAO {
 			ps.setString(6, details.getPay_mode());
 			ps.setString(7, details.getTrans_status());
 			ps.setString(8, details.getTrans_date());
-			ps.setString(9, details.getReceived_by());
-			ps.setLong(10, details.getTotal_amt());
-			ps.setLong(11, details.getReceived_amt());
-			ps.setLong(12, details.getAmount());
-			ps.setString(13,details.getBranch());
+			ps.setString(9, details.getCheque_no());
+			ps.setString(10, details.getReceived_by());
+			ps.setLong(11, details.getTotal_amt());
+			ps.setLong(12, details.getReceived_amt());
+			ps.setLong(13, details.getAmount());
+			ps.setString(14,details.getBranch());
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -174,10 +176,11 @@ public class ReceiptDetailsDAO {
 				rec.setPay_mode(rs.getString(7));
 				rec.setTrans_status(rs.getString(8));
 				rec.setTrans_date(rs.getString(9));
-				rec.setReceived_by(rs.getString(10));
-				rec.setTotal_amt(rs.getLong(11));
-				rec.setReceived_amt(rs.getLong(12));
-				rec.setAmount(rs.getLong(13));
+				rec.setCheque_no(rs.getString(10));
+				rec.setReceived_by(rs.getString(11));
+				rec.setTotal_amt(rs.getLong(12));
+				rec.setReceived_amt(rs.getLong(13));
+				rec.setAmount(rs.getLong(14));
 				receipt.add(rec);
 			}
 			
@@ -192,6 +195,7 @@ public class ReceiptDetailsDAO {
 	}
 
 	public ReceiptDetails updateRemainingAmount(String id) {
+		logger.warn("In receipt update remain amout "+ id);
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -219,6 +223,7 @@ public class ReceiptDetailsDAO {
 	}
 
 	public long calculateTotalFeesPaid(String rollno, String name) {
+		logger.warn("in calculate total fees paid rollno="+rollno+" name="+name);
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -244,6 +249,7 @@ public class ReceiptDetailsDAO {
 	}
 
 	public ArrayList<ReceiptDetails> getReceiptAdmissionData(String rollno, String receiptno) {
+		logger.warn("in view receipt get address rollno="+rollno+" receiptno="+receiptno);
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -269,17 +275,19 @@ public class ReceiptDetailsDAO {
 				receipt.setPay_mode(rs.getString(7));
 				receipt.setTrans_status(rs.getString(8));
 				receipt.setTrans_date(rs.getString(9));
-				receipt.setReceived_by(rs.getString(10));
-				receipt.setTotal_amt(rs.getLong(11));
-				receipt.setReceived_amt(rs.getLong(12));
-				receipt.setAmount(rs.getLong(13));
-				receipt.setBranch(rs.getString(14));
+				receipt.setCheque_no(rs.getString(10));
+				receipt.setReceived_by(rs.getString(11));
+				receipt.setTotal_amt(rs.getLong(12));
+				receipt.setReceived_amt(rs.getLong(13));
+				receipt.setAmount(rs.getLong(14));
+				receipt.setBranch(rs.getString(15));
 				if(receipt!=null)
 				{
 					ad=getAdmissionData(rollno,receipt.getBranch());
 					if(ad!=null)
 					{	
 					receipt.setAdmission(ad);
+					logger.warn("student address="+receipt.getAdmission().getAddress());
 					}
 					receiptData.add(receipt);
 				}
@@ -295,13 +303,14 @@ public class ReceiptDetailsDAO {
 	}	
 	
 	private Admission getAdmissionData(String rollno,String branch) {
+		logger.warn("in view receipt get address from admission");
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		Admission ad=null;
 		try {
 			con=Util.getDBConnection();
-			String query="select * from admission where RollNo=? and branch=?";
+			String query="select * from admission where Rollno=? and branch=?";
 			ps=con.prepareStatement(query);
 			ps.setString(1, rollno);
 			ps.setString(2, branch);
@@ -338,6 +347,7 @@ public class ReceiptDetailsDAO {
 	}
 
 	public void updateInstallment(String rollno, String due_date, String branch, long received_amt, long due_amt) {
+		logger.warn("in update installment rollno="+rollno+" duedate="+due_amt+" branch="+branch+" receivedamt="+received_amt+" duwamt"+due_amt);
 		Connection con=null;
 		PreparedStatement ps=null;
 		int status=0;
@@ -379,7 +389,7 @@ public class ReceiptDetailsDAO {
 		long paid_amount=0;
 		try{
 			con = Util.getDBConnection();
-			String query = "select remain_fees,paid_amount from installment where RollNO=? and due_date=? and branch=?";
+			String query = "select remain_fees,paid_amount from installment where rollno=? and due_date=? and branch=?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, rollno);
 			ps.setString(2, due_date);

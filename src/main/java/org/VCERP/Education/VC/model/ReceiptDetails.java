@@ -13,6 +13,7 @@ public class ReceiptDetails {
 	private String pay_mode;
 	private String trans_status;
 	private String trans_date;
+	private String cheque_no;
 	private String received_by;
 	private long total_amt;
 	private long received_amt;
@@ -129,6 +130,12 @@ public class ReceiptDetails {
 	}
 	public String getTo_date() {
 		return to_date;
+	}
+	public String getCheque_no() {
+		return cheque_no;
+	}
+	public void setCheque_no(String cheque_no) {
+		this.cheque_no = cheque_no;
 	}
 	public void setTo_date(String to_date) {
 		this.to_date = to_date;
