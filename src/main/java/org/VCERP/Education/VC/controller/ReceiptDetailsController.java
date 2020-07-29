@@ -52,9 +52,9 @@ public class ReceiptDetailsController {
 		return dao.getStudReceiptList(rno,branch);
 	}
 
-	public void updateInstallment(String rollno, String due_date, String branch, long received_amt, long due_amt) {
+	public void updateInstallment(String rollno, String due_date, String branch, long received_amt, long due_amt,String receiptno) {
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
-		dao.updateInstallment(rollno,due_date,branch,received_amt,due_amt);
+		dao.updateInstallment(rollno,due_date,branch,received_amt,due_amt,receiptno);
 	}
 
 	public ArrayList<ReceiptDetails> ReceiptReport(ReceiptDetails receipt, Admission admission,ArrayList<ReceiptDetails> receiptReportData) {
@@ -71,6 +71,16 @@ public class ReceiptDetailsController {
 	public String ReceiptIncrementedNumber() {
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
 		return dao.ReceiptIncrementedNumber();
+	}
+
+	public Installment getInstallmentForViewReceipt(String rno, String receiptno) {
+		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
+		return dao.getInstallmentForViewReceipt(rno,receiptno);
+	}
+
+	public void revertInstallment(String receiptDetails) {
+		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
+		dao.revertInstallment(receiptDetails);
 	}
 
 }

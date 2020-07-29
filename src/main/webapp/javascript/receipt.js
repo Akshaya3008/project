@@ -59,7 +59,13 @@ $(document).ready(function(){
 			  //}
 		  }
 	});
-
+/*	if(sessionStorage.getItem("EditDetails")!=null){
+		var editDetails=sessionStorage.getItem("EditDetails");
+		editDetails=editDetails.split(":");
+		var rno=editDetails[0];
+		var receiptno=editDetails[1];
+		loadEditData(rno,receiptno);
+	}*/
 	$("#stud_id").focusout(function() {
 		
 		var search_stud=document.getElementById('stud_id').value;
@@ -96,10 +102,65 @@ $(document).ready(function(){
 			var message="Receive amount should be less than or equals to Net amount";
 			showNotification("error",message);
 		}
-		
 	});
 });
+/*function loadEditData(rno,receiptno){
+function callback(responseData, textStatus, request) {
+	for ( var i in responseData) {
+		  var admission=responseData[i].admission;
+		  var rno=responseData[i].Rollno;
+		  var stud_name=responseData[i].stud_name;
+		  var contact=admission.contact;
+		  var fees=admission.fees;
+		  var student_details=rno+" | "+stud_name+" | "+contact+" | "+fees;
+		  document.getElementById('stud_details').value=student_details;
+		  var net_amount=parseInt(responseData[i].amount)+parseInt(responseData[i].received_amt)
+		  $("#net_receive").val(net_amount);
+		  $("#receipt_date").val(responseData[i].receipt_date);
+		  $("#receipt_no").val(responseData[i].receipt_no);
+		  $("#received_amt").val(responseData[i].received_amt);
+		  $("#pay_mode").val(responseData[i].paid_mode);
+		  $("#trans_status").val(responseData[i].trans_status);
+		  $("#cheque_no").val(responseData[i].cheque_no);
+		  $("#trans_date").val(responseData[i].trans_date);
+		  $("#enq_taken").val(responseData[i].received_by);
+		  
+		  loadInstallmentDetails(rno,receipt_no);
+	}
+}
 
+function errorCallback(responseData, textStatus, request) {	
+      var message=responseData.responseJSON.message;
+	  showNotification("error",message);
+	 
+}
+var httpMethod = "GET";
+var relativeUrl = "/Receipt/getReceiptAdmissionData?id=" + rno
+		+ "&receiptno=" + receiptno;
+ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+		errorCallback);
+return false;
+}
+
+function loadInstallmentDetails(rno,receipt_no){
+	function callback(responseData, textStatus, request) {
+		for ( var i in responseData) {
+
+		}
+	}
+
+	function errorCallback(responseData, textStatus, request) {	
+	      var message=responseData.responseJSON.message;
+		  showNotification("error",message);
+		 
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/Receipt/loadInstallmentData?id=" + rno
+			+ "&receiptno=" + receiptno;
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+			errorCallback);
+	return false;
+}*/
 function SearchStudent(id){
 	function callback(responseData,textStatus,request)
 	{

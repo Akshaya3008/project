@@ -150,7 +150,7 @@ public class ReceiptDetailsResource {
 				long due_amt=Long.parseLong(pipeSeperatedInstallDetails[0]);
 				String due_date=pipeSeperatedInstallDetails[1];
 				long receivedAmt=Long.parseLong(pipeSeperatedInstallDetails[2]);
-				controller.updateInstallment(stud_details[0].trim(),due_date,branch,receivedAmt,due_amt);
+				controller.updateInstallment(stud_details[0].trim(),due_date,branch,receivedAmt,due_amt,receipt_no);
 			}
 			
 			return Util.generateResponse(Status.ACCEPTED, "Receipt Details Successfully Inserted.").build();
@@ -195,6 +195,45 @@ public class ReceiptDetailsResource {
 				return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 			}
 	}
+	
+	@Path("/getInstallmentForViewReceipt")
+	@GET
+	@JWTTokenNeeded
+	@PermitAll
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getInstallmentForViewReceipt(@QueryParam("rno") String rno,@QueryParam("receiptno") String receiptno){
+		 Installment install = new Installment();
+		 ReceiptDetailsController controller=new ReceiptDetailsController();
+		 install=controller.getInstallmentForViewReceipt(rno,receiptno);
+		 if(install!=null)
+			{
+				return Response.status(Status.ACCEPTED).entity(install).build();
+			}
+			else{
+				return Util.generateErrorResponse(Status.NOT_FOUND, "Installment Details Not Found.").build();
+			}
+	}
+	
+	@Path("/deleteReceipt")
+	@POST
+	@JWTTokenNeeded
+	@RolesAllowed("DELETE_RECEIPT")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteReceipt(@FormParam("receiptDetails") String receiptDetails,@FormParam("branch") String branch){
+		try {
+			AdmissionController adcontroller=new AdmissionController();
+			adcontroller.revertAdmissionPayment(receiptDetails,branch);
+			ReceiptDetailsController rdcontroller=new ReceiptDetailsController();
+			rdcontroller.revertInstallment(receiptDetails);
+			return Util.generateResponse(Status.ACCEPTED, "Receipt Successfully Deteleted.").build();	
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to complete task.Please try again or contact with administrator").build();
+	}
+	
 	@Path("/ReceiptReport")
 	@POST
 	@JWTTokenNeeded

@@ -17,6 +17,8 @@ public class Installment {
 	private String from_date;
 	private String to_date;
 	private String branch;
+	private String receiptno;
+	private ArrayList<Integer> current_paid_amount;
 	
 	public ArrayList<Integer> getId() {
 		return id;
@@ -91,4 +93,17 @@ public class Installment {
 	public void setRemain_fees(ArrayList<Integer> remain_fees) {
 		this.remain_fees = remain_fees;
 	}
+	public String getReceiptno() {
+		return receiptno;
+	}
+	public void setReceiptno(String receiptno) {
+		this.receiptno = receiptno;
+	}
+	public ArrayList<Integer> getCurrent_paid_amount() {
+		return current_paid_amount;
+	}
+	public void setCurrent_paid_amount(ArrayList<Integer> current_paid_amount) {
+		this.current_paid_amount = current_paid_amount;
+	}
+	
 }

@@ -62,4 +62,8 @@ public class AdmissionController {
 		AdmissionDAO dao=new AdmissionDAO();
 		dao.PromoteStudentFromAdmission(admission);
 	}
+	public void revertAdmissionPayment(String receiptDetails, String branch) {
+		AdmissionDAO dao=new AdmissionDAO();
+		dao.revertAdmissionPayment(receiptDetails,branch);
+	}
 }

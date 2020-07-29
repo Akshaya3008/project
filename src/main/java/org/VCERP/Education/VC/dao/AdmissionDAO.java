@@ -279,8 +279,8 @@ public class AdmissionDAO {
 		try {
 			con=Util.getDBConnection();
 			String query="insert into installment(`rollno`,`stud_name`,`total_fees`,`monthly_payment`,"
-					+ "`due_date`,`fees_title`,`paid_amount`,`remain_fees`,`paid_status`,`branch`)"
-					+ "values(?,?,?,?,?,?,0,?,0,?)";
+					+ "`due_date`,`fees_title`,`paid_amount`,`remain_fees`,`paid_status`,`branch`,`receipt_no`,`current_paid_amount`)"
+					+ "values(?,?,?,?,?,?,0,?,0,?,0,0)";
 			ps=con.prepareStatement(query);
 			for(int i=0;i<installment.getDue_date().size();i++){
 			ps.setString(1, installment.getRollno());
@@ -564,6 +564,32 @@ public class AdmissionDAO {
 			ps.setString(36, admission.getBranch());
 			ps.setLong(37, admission.getEnq_no());
 			ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+	}
+
+	public void revertAdmissionPayment(String receiptDetails, String branch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String[] commaSeperatedReceiptDetails=Util.commaSeperatedString(receiptDetails);
+		try {
+			con=Util.getDBConnection();
+			String query="update admission set paid_fees=paid_fees-?,remain_fees=remain_fees+?"
+					+ " where Rollno=? and branch=?";
+			for(int i=0;i<commaSeperatedReceiptDetails.length;i++){
+			String[] collanSeperatedreceiptDetails=Util.colanSeperatedString(commaSeperatedReceiptDetails[i]);
+			ps=con.prepareStatement(query);
+			ps.setString(1, collanSeperatedreceiptDetails[2]);
+			ps.setString(2, collanSeperatedreceiptDetails[2]);
+			ps.setString(3, collanSeperatedreceiptDetails[0]);
+			ps.setString(4, branch);
+			ps.executeUpdate();
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);

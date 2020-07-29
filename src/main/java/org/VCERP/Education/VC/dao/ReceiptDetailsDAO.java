@@ -249,7 +249,6 @@ public class ReceiptDetailsDAO {
 	}
 
 	public ArrayList<ReceiptDetails> getReceiptAdmissionData(String rollno, String receiptno) {
-		logger.warn("in view receipt get address rollno="+rollno+" receiptno="+receiptno);
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -303,7 +302,6 @@ public class ReceiptDetailsDAO {
 	}	
 	
 	private Admission getAdmissionData(String rollno,String branch) {
-		logger.warn("in view receipt get address from admission");
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -346,8 +344,7 @@ public class ReceiptDetailsDAO {
 		return ad;
 	}
 
-	public void updateInstallment(String rollno, String due_date, String branch, long received_amt, long due_amt) {
-		logger.warn("in update installment rollno="+rollno+" duedate="+due_amt+" branch="+branch+" receivedamt="+received_amt+" duwamt"+due_amt);
+	public void updateInstallment(String rollno, String due_date, String branch, long received_amt, long due_amt,String receiptno) {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int status=0;
@@ -361,14 +358,16 @@ public class ReceiptDetailsDAO {
 		paid_amt=paid_amt+received_amt;
 		try {
 			con=Util.getDBConnection();
-			String query="update installment set paid_amount=?,remain_fees=?,paid_status=? where rollno=? and due_date=? and branch=?";
+			String query="update installment set paid_amount=?,remain_fees=?,paid_status=?,current_paid_amount=? "
+					+ "where rollno=? and due_date=? and branch=?";
 			ps=con.prepareStatement(query);
 			ps.setLong(1, paid_amt);
 			ps.setLong(2, remain_fees);
 			ps.setInt(3, status);
-			ps.setString(4, rollno);
-			ps.setString(5, due_date);
-			ps.setString(6, branch);
+			ps.setLong(4, received_amt);
+			ps.setString(5, rollno);
+			ps.setString(6, due_date);
+			ps.setString(7, branch);
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -377,9 +376,31 @@ public class ReceiptDetailsDAO {
 		finally {
 			Util.closeConnection(null, ps, con);
 		}
-
+		updateReceiptNoInInstallment(rollno,due_date,branch,receiptno);
 	}
 	
+	private void updateReceiptNoInInstallment(String rollno, String due_date, String branch, String receiptno) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			con=Util.getDBConnection();
+			String query="update installment set receipt_no=?"
+					+ " where rollno=? and due_date>=? and branch=?";
+			ps=con.prepareStatement(query);
+			ps.setString(1, receiptno);
+			ps.setString(2, rollno);
+			ps.setString(3, due_date);
+			ps.setString(4, branch);
+			ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+	}
+
 	private ArrayList<Long> getInstallmentRemainFees(String rollno, String due_date, String branch) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -624,5 +645,125 @@ public class ReceiptDetailsDAO {
 		}
 		return receipt_no;
 
+	}
+
+	public Installment getInstallmentForViewReceipt(String rno, String receiptno) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		Installment installmentData=null;
+		ArrayList<String> due_date=new ArrayList<>();
+		ArrayList<String> title=new ArrayList<>();
+		ArrayList<Integer> due_amt=new ArrayList<>();
+		ArrayList<Integer> remain_fees=new ArrayList<>();
+		ArrayList<Integer> paid_amt=new ArrayList<>();
+		ArrayList<Integer> current_paid=new ArrayList<>();
+		try{
+			con = Util.getDBConnection();
+			String query;
+			query= "SELECT * FROM `installment` WHERE rollno=? and receipt_no=?";
+
+			ps = con.prepareStatement(query);
+			ps.setString(1, rno);
+			ps.setString(2, receiptno);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				installmentData=new Installment();
+				installmentData.setRollno(rs.getString(2));
+				installmentData.setStud_name(rs.getString(3));
+				installmentData.setTotal_fees(rs.getInt(4));
+				due_amt.add(rs.getInt(5));
+				due_date.add(rs.getString(6));
+				title.add(rs.getString(7));
+				paid_amt.add(rs.getInt(8));
+				remain_fees.add(rs.getInt(9));
+				installmentData.setBranch(rs.getString(11));
+				current_paid.add(rs.getInt(13));
+			}
+			if(due_amt.size()!=0){
+			installmentData.setDue_date(due_date);
+			installmentData.setFees_title(title);
+			installmentData.setMonthly_pay(due_amt);
+			installmentData.setRemain_fees(remain_fees);
+			installmentData.setPaid(paid_amt);
+			installmentData.setCurrent_paid_amount(current_paid);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return installmentData;
+	}
+
+	public void revertInstallment(String receiptDetails) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		String[] commaSeperatedReceiptDetails=Util.commaSeperatedString(receiptDetails);
+		try{
+			con = Util.getDBConnection();
+			String query = "update installment set paid_amount=paid_amount-current_paid_amount , remain_fees=remain_fees+current_paid_amount"
+					+ ",current_paid_amount=paid_amount where rollno=? and receipt_no=?";
+			for(int i=0;i<commaSeperatedReceiptDetails.length;i++){
+				String[] colanSeperatedReceiptDetails=Util.colanSeperatedString(commaSeperatedReceiptDetails[i]);
+				ps = con.prepareStatement(query);
+				ps.setString(1, colanSeperatedReceiptDetails[0]);
+				ps.setString(2, colanSeperatedReceiptDetails[1]);
+				ps.executeUpdate();
+				revertInstallmentStatus(colanSeperatedReceiptDetails[0],colanSeperatedReceiptDetails[1]);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+	}
+
+	private void revertInstallmentStatus(String rno, String receiptno) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try{
+			con = Util.getDBConnection();
+			String query = "update installment set paid_status='0'"
+					+ " where remain_fees <> '0' and rollno=? and receipt_no=?";
+				ps = con.prepareStatement(query);
+				ps.setString(1, rno);
+				ps.setString(2, receiptno);
+				ps.executeUpdate();
+				deleteReceipt(rno,receiptno);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}	
+	}
+
+	private void deleteReceipt(String rno, String receiptno) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try{
+			con = Util.getDBConnection();
+			String query = "delete from receipt_details where RollNO=? and receipt_no=?";
+				ps = con.prepareStatement(query);
+				ps.setString(1, rno);
+				ps.setString(2, receiptno);
+				ps.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}	
 	}
 }
