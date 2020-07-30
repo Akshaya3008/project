@@ -225,8 +225,15 @@ function loadBranch(std) {
 		rowCount = rowCount - 1;
 	}
 	function callback(responseData, textStatus, request) {
+		var branchArray=new Array();
 		for ( var i in responseData) {
-			var Branch = responseData[i];
+			branchArray.push(responseData[i]);
+		}
+		branchArray= branchArray.filter( function( item, index, inputArray ) {
+           		return inputArray.indexOf(item) == index;
+   		});
+		for(var j=0;j<branchArray.length;j++){
+			var Branch = branchArray[j];
 			var rowCount = table.rows.length;
 			var row = table.insertRow(rowCount);
 			if (Branch == branchSession) {
@@ -251,6 +258,7 @@ function loadBranch(std) {
 			errorCallback);
 	return false;
 }
+
 function loadFeesPackage() {
 
 	function callback(responseData, textStatus, request) {
