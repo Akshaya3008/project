@@ -1,6 +1,8 @@
 var mes;
 var attendance;
 var table;
+var today=new Date();
+var currentDate= new Date(today.getTime() - (today.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
 $(document).ready(function() {
 	validateLogin();
 	table=$("#EmpAttendance_table").DataTable();
@@ -20,7 +22,11 @@ $(document).ready(function() {
 	});
 	report_table.buttons().container()
      .appendTo( '#table-style .col-sm-6:eq(1)' );
+	$("#attendance_date").val(currentDate);
 	attendanceList();
+	$("#attendance_date").focusout(function(){
+		attendanceList();
+	});
 	jQuery.validator.addMethod("greaterThan", 
 			function(value, element, params) {
 
@@ -125,8 +131,9 @@ function attendanceList() {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
 	}
+	var selectedDate=document.getElementById("attendance_date").value;
 	var httpMethod = "GET";
-	var relativeUrl = "/Attendance/getEmpAttendaceList?branch="+branchSession;
+	var relativeUrl = "/Attendance/getEmpAttendaceList?date="+selectedDate+"&branch="+branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
@@ -154,10 +161,11 @@ function getAttendance() {
 							+ out + "|" + chk.value;
 				}
 			});
-
-	saveAttendance(attendance);
+	alert(attendance);
+	var selectedDate=document.getElementById("attendance_date").value;
+	saveAttendance(attendance,selectedDate);
 }
-function saveAttendance(attendance) {
+function saveAttendance(attendance,selectedDate) {
 	function callback(responseData, textStatus, request) {
 		  var message=responseData.message;
 		  showNotification("success",message);
@@ -173,6 +181,7 @@ function saveAttendance(attendance) {
 	var httpMethod = "POST";
 	var formData = {
 		Attendance : attendance,
+		attendanceDate : selectedDate,
 		branch : branchSession
 	}
 	var relativeUrl = "/Attendance/employeeAttendance";

@@ -34,12 +34,29 @@ public class EmpAttendanceResource {
 	@JWTTokenNeeded
 	@Path("/getEmpAttendaceList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getEmpAttendanceList(@QueryParam("branch") String branch){
+	public Response getEmpAttendanceList(@QueryParam("date") String date,@QueryParam("branch") String branch){
+		ArrayList<String> empcode=checkForAttendanceMark(date, branch);
 		ArrayList<Employee> em=new ArrayList<>();
+		ArrayList<Employee> finalemplist=new ArrayList<>();
 		EmployeeAttendanceController controller=new EmployeeAttendanceController();
 		try {			
 			em=controller.getEmpAttendanceList(branch);
-			return Response.status(Status.OK).entity(em).build();
+			if(empcode==null){
+				return Response.status(Status.OK).entity(em).build();	
+			}else{
+				for(int i=0;i<em.size();i++){
+				Employee emp=em.get(i);
+				String emp_unq_code=emp.getEmp_unq_code();
+				if(!empcode.contains(emp_unq_code)){
+					finalemplist.add(em.get(i));
+					}
+				}
+				if(finalemplist!=null){
+				return Response.status(Status.OK).entity(finalemplist).build();
+				}else{
+					return Util.generateErrorResponse(Status.NOT_FOUND,"Attendance already mark for selected date.").build();
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);
@@ -54,7 +71,8 @@ public class EmpAttendanceResource {
 	@RolesAllowed("ADD_NEW_EMPLOYEE_ATTENDANCE")
 	@Path("/employeeAttendance")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response employeeAttendance(@FormParam("Attendance") String attendance,@FormParam("branch") String branch )
+	public Response employeeAttendance(@FormParam("Attendance") String attendance,@FormParam("attendanceDate") String attendanceDate,
+			@FormParam("branch") String branch )
 	{		
 		String[] commaSeperatedAttendance=Util.commaSeperatedString(attendance);
 		ArrayList<String> empcode=new ArrayList<>();
@@ -71,7 +89,7 @@ public class EmpAttendanceResource {
 		}
 		try {
 			EmployeeAttendanceController controller=new EmployeeAttendanceController();
-			controller.employeeAttendance(empcode,intime,outtime,attend,branch);
+			controller.employeeAttendance(empcode,intime,outtime,attend,attendanceDate,branch);
 			return Util.generateResponse(Status.ACCEPTED,"Employee Attendance Successfully Submitted.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -141,5 +159,18 @@ public Response getEmpAttendanceReport(@FormParam("id") String id,@FormParam("fr
 		logger.error(e);
 	}
 	return Util.generateErrorResponse(Status.NOT_FOUND,"Data Not Found.").build();
+}
+
+private ArrayList<String> checkForAttendanceMark(String date,String branch){
+	System.out.println(date);
+	EmployeeAttendanceController controller=new EmployeeAttendanceController();
+	ArrayList<String> empcode=new ArrayList<>();
+	try {
+		empcode=controller.checkForAttendanceMark(date,branch);		
+	} catch (Exception e) {
+		e.printStackTrace();
+		logger.error(e);
+	}
+	return empcode;
 }
 }

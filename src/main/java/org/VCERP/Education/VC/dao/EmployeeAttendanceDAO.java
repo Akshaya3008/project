@@ -46,7 +46,7 @@ public class EmployeeAttendanceDAO {
 	}
 
 	public void employeeAttendance(ArrayList<String> empcode, ArrayList<String> intime, ArrayList<String> outtime,
-			ArrayList<String> attend,String branch) {
+			ArrayList<String> attend,String branch, String attendanceDate) {
 		Connection con=null;
 		PreparedStatement ps=null;
 		try {
@@ -59,7 +59,7 @@ public class EmployeeAttendanceDAO {
 			ps.setString(2, attend.get(i));
 			ps.setString(3, intime.get(i));
 			ps.setString(4, outtime.get(i));
-			ps.setString(5, Util.currentDate());
+			ps.setString(5, attendanceDate);
 			ps.setString(6, branch);
 			ps.executeUpdate();
 			}
@@ -147,5 +147,31 @@ public class EmployeeAttendanceDAO {
 		}
 		return employee;
 
+	}
+
+	public ArrayList<String> checkForAttendanceMark(String date, String branch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		ArrayList<String> empcode=new ArrayList<>();
+		try {
+			con=Util.getDBConnection();
+			String query="SELECT `emp_code` FROM `empattendance` where `date`=? AND `branch`=?";
+			ps=con.prepareStatement(query);
+			ps.setString(1, date);
+			ps.setString(2, branch);
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				empcode.add(rs.getString(1));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return empcode;
 	}
 }

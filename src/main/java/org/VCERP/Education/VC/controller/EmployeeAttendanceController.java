@@ -14,9 +14,9 @@ public class EmployeeAttendanceController{
 	}
 
 	public void employeeAttendance(ArrayList<String> empcode, ArrayList<String> intime, ArrayList<String> outtime,
-			ArrayList<String> attend,String branch) {
+			ArrayList<String> attend,String branch, String attendanceDate) {
 		EmployeeAttendanceDAO dao=new EmployeeAttendanceDAO();
-		dao.employeeAttendance(empcode,intime,outtime,attend,branch);
+		dao.employeeAttendance(empcode,intime,outtime,attend,attendanceDate,branch);
 	}
 
 	public Employee getEmpAttendanceStat(Employee emp) {
@@ -27,6 +27,11 @@ public class EmployeeAttendanceController{
 	public ArrayList<Employee> getEmpAttendanceReport(Employee emp) {
 		EmployeeAttendanceDAO dao=new EmployeeAttendanceDAO();
 		return dao.getEmpAttendanceReport(emp);
+	}
+
+	public ArrayList<String> checkForAttendanceMark(String date, String branch) {
+		EmployeeAttendanceDAO dao=new EmployeeAttendanceDAO();
+		return dao.checkForAttendanceMark(date,branch);
 	}
 
 }
