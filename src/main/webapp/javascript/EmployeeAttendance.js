@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 function attendanceList() {
 	var today = new Date();
-	var time = ((today.getHours() % 12 || 12)<10 ? ' 0':'') + ":" + today.getMinutes();
+	var time = today.getHours()  + ":" + today.getMinutes();
 	function callback(responseData, textStatus, request) {
 		table.rows().remove().draw();
 		for ( var i in responseData) {
