@@ -163,13 +163,29 @@ function getAttendance() {
 			});
 	alert(attendance);
 	var selectedDate=document.getElementById("attendance_date").value;
-	saveAttendance(attendance,selectedDate);
+	var status=checkForFutureDate(selectedDate);
+	if(status==false){
+		saveAttendance(attendance,selectedDate);
+	}
 }
+function checkForFutureDate(selectedDate){
+	var status=false;
+	if(selectedDate>currentDate){
+		status=true;
+		showNotification("error","future date not allow.");
+		$("#loadingModal").modal('hide');
+	}else{
+		status=false;
+	}
+	return status;
+}
+
 function saveAttendance(attendance,selectedDate) {
 	function callback(responseData, textStatus, request) {
 		  var message=responseData.message;
 		  showNotification("success",message);
 		  $("#loadingModal").modal('hide');
+		  reloadPage();
 	}
 
 	function errorCallback(responseData, textStatus, request) {
