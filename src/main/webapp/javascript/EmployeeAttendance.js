@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 function attendanceList() {
 	var today = new Date();
-	var time = today.getHours() + ":" + today.getMinutes();
+	var time = ((today.getHours() % 12 || 12)<10 ? ' 0':'') + ":" + today.getMinutes();
 	function callback(responseData, textStatus, request) {
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -163,14 +163,18 @@ function getAttendance() {
 			});
 	alert(attendance);
 	var selectedDate=document.getElementById("attendance_date").value;
+	
 	var status=checkForFutureDate(selectedDate);
 	if(status==false){
 		saveAttendance(attendance,selectedDate);
 	}
 }
 function checkForFutureDate(selectedDate){
+	
 	var status=false;
+	
 	if(selectedDate>currentDate){
+		
 		status=true;
 		showNotification("error","future date not allow.");
 		$("#loadingModal").modal('hide');
