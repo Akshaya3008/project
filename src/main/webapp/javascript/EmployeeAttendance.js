@@ -161,7 +161,6 @@ function getAttendance() {
 							+ out + "|" + chk.value;
 				}
 			});
-	alert(attendance);
 	var selectedDate=document.getElementById("attendance_date").value;
 	
 	var status=checkForFutureDate(selectedDate);

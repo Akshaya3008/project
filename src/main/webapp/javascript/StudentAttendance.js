@@ -3,11 +3,14 @@ var attendance;
 var std;
 var acad_year;
 var division;
+var today=new Date();
+var currentDate= new Date(today.getTime() - (today.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
 $(document).ready(function() {
 	validateLogin();
 	getAllStandard();
 	getAcademicYear();
 	getAllDivision();
+	$("#attendance_date").val(currentDate);
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
 		return this.optional(element) || /^[a-z\s]+$/i.test(value);
 		}, "Only alphabetical characters");
@@ -120,7 +123,11 @@ $(document).ready(function() {
 			  std=document.getElementById("standard").value;
 			  acad_year=document.getElementById("acad_year").value;
 			  division=document.getElementById("division").value;
-			  attendanceList(std,acad_year,division);
+			  var date=document.getElementById("attendance_date").value;
+			  var status=checkForFutureDate(date);
+			  if(status==false){
+			  attendanceList(std,acad_year,division,date);
+			  }
 		  }
 	});
 	
@@ -206,7 +213,7 @@ function attendanceStat(std,acad_year,division,from_date,to_date) {
 	return false;
 }
 
-function attendanceList(std,acad_year,division) {
+function attendanceList(std,acad_year,division,date) {
 	function callback(responseData, textStatus, request) {
 		$("#loadingModal").modal('hide');
 		var table = $("#attendance_table").DataTable(); 
@@ -228,12 +235,26 @@ function attendanceList(std,acad_year,division) {
 		  $("#loadingModal").modal('hide');
 	}
 	var httpMethod = "POST";
-	var formData = {standard : std , acad_year : acad_year, division : division , branch : branchSession};
+	var formData = {standard : std , acad_year : acad_year, division : division ,date : date, branch : branchSession};
 	var relativeUrl = "/Attendance/getAttendaceList";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);
 	return false;
 }
+function checkForFutureDate(selectedDate){
+	
+	var status=false;
+	
+	if(selectedDate>currentDate){		
+		status=true;
+		showNotification("error","future date not allow.");
+		$("#loadingModal").modal('hide');
+	}else{
+		status=false;
+	}
+	return status;
+}
+
 function getAttendance() {
 	var table = $('#attendance_table').DataTable();
 	var myArray = new Array();
@@ -251,14 +272,16 @@ function getAttendance() {
 			// myArray.push(rollno+"|"+"A");
 		}
 	});
+	var date=document.getElementById("attendance_date").value;
 	// myArray=myArray.sort();
-	saveAttendance(std, acad_year,division, attendance);
+	saveAttendance(std, acad_year,division, attendance,date);
 }
-function saveAttendance(standard, acad_year,division, attendance) {
+function saveAttendance(standard, acad_year,division, attendance,date) {
 	function callback(responseData, textStatus, request) {
 		  var message=responseData.message;
 		  showNotification("success",message);
 		  $("#loadingModal").modal('hide');
+		  reloadPage();
 	}
 
 	function errorCallback(responseData, textStatus, request) {
@@ -273,6 +296,7 @@ function saveAttendance(standard, acad_year,division, attendance) {
 		division : division,
 		acad_year : acad_year,
 		Attendance : attendance,
+		date : date,
 		branch : branchSession
 	}
 	var relativeUrl = "/Attendance/studentAttendance";

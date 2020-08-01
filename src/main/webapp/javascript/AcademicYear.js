@@ -58,7 +58,7 @@ $(document).ready(function(){
 			aca_start: {
 		        required: true,
 		        date:true,
-		       minDate: true  
+		        //minDate: true  
 			},
 			aca_end: {
 		        required: true,

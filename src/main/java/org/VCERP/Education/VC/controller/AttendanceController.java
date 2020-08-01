@@ -13,9 +13,9 @@ public class AttendanceController {
 	}
 
 	public void studentAttendance(String standard,String division, String acad_year,  String branch, ArrayList<String> rollno,
-			ArrayList<String> attend) {
+			ArrayList<String> attend, String date) {
 		AttendanceDAO dao=new AttendanceDAO();
-		dao.studentAttendance(standard,division,acad_year,branch,rollno,attend);
+		dao.studentAttendance(standard,division,acad_year,branch,rollno,attend,date);
 		
 	}
 
@@ -33,6 +33,11 @@ public class AttendanceController {
 		AttendanceDAO dao=new AttendanceDAO();
 		dao.checkRollNoColumnExist(rollno);
 		
+	}
+
+	public int checkForAttendanceMark(Attendance at, String rollNo) {
+		AttendanceDAO dao=new AttendanceDAO();
+		return dao.checkForAttendanceMark(at,rollNo);
 	}
 
 }

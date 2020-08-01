@@ -30,18 +30,28 @@ public class AttendanceResource {
 	@PermitAll
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAttendaceList(@FormParam("standard") String standard,@FormParam("acad_year") String acad_year
-			,@FormParam("division") String division,@FormParam("branch") String branch){
+			,@FormParam("division") String division,@FormParam("date") String date,@FormParam("branch") String branch){
 		Attendance at=new Attendance();
 		at.setStandard(standard);
 		at.setAcad_year(acad_year);
 		at.setDivision(division);
+		at.setCurrentDate(date);
 		at.setBranch(branch);
 		ArrayList<Attendance> attendance=new ArrayList<>();
+		ArrayList<Attendance> finalattendance=new ArrayList<>();
 		AttendanceController controller=new AttendanceController();
 		attendance=controller.getAttendanceList(at);
-		if(attendance!=null)
+		for(int i=0;i<attendance.size();i++){
+			Attendance attend=attendance.get(i);
+			int status=controller.checkForAttendanceMark(at,attend.getRollNo());
+			if(status==0){
+				finalattendance.add(attend);
+			}
+		}
+		
+		if(finalattendance!=null)
 		{
-			return Response.status(Status.ACCEPTED).entity(attendance).build();
+			return Response.status(Status.ACCEPTED).entity(finalattendance).build();
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data Not Found").build();
 	}
@@ -53,7 +63,7 @@ public class AttendanceResource {
 	@RolesAllowed("ADD_NEW_STUDENT_ATTENDANCE")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response studentAttendance(@FormParam("standard") String standard,@FormParam("division") String division
-			,@FormParam("acad_year") String acad_year
+			,@FormParam("acad_year") String acad_year,@FormParam("date") String date
 			,@FormParam("Attendance") String attendance,@FormParam("branch") String branch){
 		
 		String[] commaSeperatedAttendance=Util.commaSeperatedString(attendance);
@@ -67,7 +77,7 @@ public class AttendanceResource {
 		}
 		try {
 			AttendanceController controller=new AttendanceController();
-			controller.studentAttendance(standard,division,acad_year,branch,rollno,attend);
+			controller.studentAttendance(standard,division,acad_year,branch,rollno,attend,date);
 			return Util.generateErrorResponse(Status.ACCEPTED, "Student Attendance Successfully Save.").build();
 		} catch (Exception e) {
 			e.printStackTrace();

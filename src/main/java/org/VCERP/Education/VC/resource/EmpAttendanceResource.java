@@ -162,7 +162,6 @@ public Response getEmpAttendanceReport(@FormParam("id") String id,@FormParam("fr
 }
 
 private ArrayList<String> checkForAttendanceMark(String date,String branch){
-	System.out.println(date);
 	EmployeeAttendanceController controller=new EmployeeAttendanceController();
 	ArrayList<String> empcode=new ArrayList<>();
 	try {

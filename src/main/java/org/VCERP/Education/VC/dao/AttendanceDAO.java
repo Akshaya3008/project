@@ -16,6 +16,7 @@ public class AttendanceDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
+		Attendance attend=null;
 		ArrayList<Attendance> attendance=new ArrayList<>();
 		try {
 			con=Util.getDBConnection();
@@ -28,12 +29,12 @@ public class AttendanceDAO {
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
-				at=new Attendance();
-				at.setId(rs.getLong(1));
-				at.setRollNo(rs.getString(2));
-				at.setName(rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5));
-				at.setCurrentDate(Util.currentDate());
-				attendance.add(at);
+				attend=new Attendance();
+				attend.setId(rs.getLong(1));
+				attend.setRollNo(rs.getString(2));
+				attend.setName(rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5));
+				attend.setCurrentDate(Util.currentDate());
+				attendance.add(attend);
 			}
 			
 		}catch (Exception e) {
@@ -46,8 +47,39 @@ public class AttendanceDAO {
 		return attendance;
 	}
 
+	public int checkForAttendanceMark(Attendance at,String Rollno) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String[] Rno=Util.hyphenSeperatedString(Rollno);
+		int count=0;
+		try {
+			con=Util.getDBConnection();
+			String query="SELECT COUNT(`"+Rno[1]+"`) as Count FROM `attendance` where date=? AND acad_year=? and "
+					+ "standard=? and division=? AND branch=? ";
+			ps=con.prepareStatement(query);
+			ps.setString(1, at.getCurrentDate());
+			ps.setString(2, at.getAcad_year());
+			ps.setString(3, at.getStandard());
+			ps.setString(4, at.getDivision());
+			ps.setString(5, at.getBranch());
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				count=rs.getInt("Count");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return count;
+	}
+
 	public void studentAttendance(String standard,String division, String acad_year, String branch, ArrayList<String> rollno,
-			ArrayList<String> attend) {
+			ArrayList<String> attend, String date) {
 		Connection con=null;
 		PreparedStatement ps=null;
 		int index=0;
@@ -62,7 +94,7 @@ public class AttendanceDAO {
 		}
 		String query="insert into attendance(`date`,`acad_year`,`standard`,`division`"+createColumnName+",`branch`) values(?,?,?,"+createParameterList+",?)";
 		ps=con.prepareStatement(query);
-		ps.setString(index+=1, Util.currentDate());
+		ps.setString(index+=1, date);
 		ps.setString(index+=1, acad_year);
 		ps.setString(index+=1, standard);
 		ps.setString(index+=1, division);
