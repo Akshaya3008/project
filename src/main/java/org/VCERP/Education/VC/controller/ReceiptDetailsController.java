@@ -31,15 +31,15 @@ public class ReceiptDetailsController {
 		
 	}
 
-	public ReceiptDetails updateRemainingAmount(String id) {
+	public ReceiptDetails updateRemainingAmount(String id, String branch) {
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
-		return dao.updateRemainingAmount(id);
+		return dao.updateRemainingAmount(id,branch);
 		
 	}
 
-	public long calculateTotalFeesPaid(String rollno, String name) {
+	public long calculateTotalFeesPaid(String rollno, String name, String branch) {
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
-		return dao.calculateTotalFeesPaid(rollno,name);
+		return dao.calculateTotalFeesPaid(rollno,name,branch);
 	}
 
 	public ArrayList<ReceiptDetails> getReceiptAdmissionData(String rollno, String receiptno) {

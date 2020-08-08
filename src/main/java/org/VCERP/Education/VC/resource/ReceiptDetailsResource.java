@@ -129,7 +129,7 @@ public class ReceiptDetailsResource {
 			details.setReceived_amt(received_amt);		
 			details.setBranch(branch);
 			controller=new ReceiptDetailsController();
-			r_amt=controller.updateRemainingAmount(stud_details[0]);
+			r_amt=controller.updateRemainingAmount(stud_details[0].trim(),branch);
 			if(r_amt==null)
 			{
 				remainAmount=Long.parseLong(stud_details[3].trim())-received_amt;
@@ -140,7 +140,7 @@ public class ReceiptDetailsResource {
 				details.setAmount(remainAmount);
 			}
 			controller.ReceiptDetailsForm(details);
-			long fees_paid=controller.calculateTotalFeesPaid(details.getRollno(),details.getStud_name());
+			long fees_paid=controller.calculateTotalFeesPaid(details.getRollno(),details.getStud_name(),branch);
 			long fees_remain=details.getTotal_amt()-fees_paid;
 			
 			adcontroller=new AdmissionController();

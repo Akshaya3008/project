@@ -194,17 +194,17 @@ public class ReceiptDetailsDAO {
 		return receipt;
 	}
 
-	public ReceiptDetails updateRemainingAmount(String id) {
-		logger.warn("In receipt update remain amout "+ id);
+	public ReceiptDetails updateRemainingAmount(String id, String branch) {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		ReceiptDetails remainAmount=null;
 		try {
 			con=Util.getDBConnection();
-			String query="select amount from receipt_details where RollNO=?";
+			String query="select amount from receipt_details where RollNO=? and branch=?";
 			ps=con.prepareStatement(query);
 			ps.setString(1, id);
+			ps.setString(2, branch);
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -222,17 +222,17 @@ public class ReceiptDetailsDAO {
 
 	}
 
-	public long calculateTotalFeesPaid(String rollno, String name) {
-		logger.warn("in calculate total fees paid rollno="+rollno+" name="+name);
+	public long calculateTotalFeesPaid(String rollno, String name, String branch) {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		long paid_amount=0;
 		try {
 			con=Util.getDBConnection();
-			String query="select payment from receipt_details where RollNO=?";
+			String query="select payment from receipt_details where RollNO=? and branch=?";
 			ps=con.prepareStatement(query);
 			ps.setString(1, rollno);
+			ps.setString(2, branch);
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
