@@ -12,7 +12,7 @@ $(document)
 					showStudentList();
 					getAcademicYear();
 					FetchAllEmployee();
-					getAutoIncrementedDetails();
+					getAutoIncrementedDetails("load");
 					getFeesPackage();
 					getAllDivision();
 					getCaste();
@@ -401,6 +401,10 @@ $(document)
 													"Student Already Admitted For This Course.");
 										}
 									});
+					var acad = document.getElementById('acad_year');
+					acad.addEventListener('change',function() {
+						getAutoIncrementedDetails("change");
+					});
 					$("#discount")
 							.focusout(
 									function() {
@@ -569,7 +573,7 @@ function SearchStudent(id) {
 	return false;
 }
 
-function getAutoIncrementedDetails() {
+function getAutoIncrementedDetails(req) {
 	function callback(responseData, textStatus, request) {
 		document.getElementById("ID_no").value = responseData.id_prefix + "-"
 				+ responseData.id_no;
@@ -583,8 +587,16 @@ function getAutoIncrementedDetails() {
 		showNotification("error", mes);
 	}
 	var httpMethod = "GET";
-	var relativeUrl = "/Admission/getAutoIncrementedDetails?branch="
+	var relativeUrl;
+	if(req=="load"){
+	relativeUrl = "/Admission/getAutoIncrementedDetails?branch="
 			+ branchSession;
+	}
+	else{
+		var year=document.getElementById("acad_year").value;
+		relativeUrl = "/AcademicYear/SpecificAcademicData?id="+year+"&branch="
+			+ branchSession;
+	}
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
@@ -623,6 +635,7 @@ function StudentAdmission() {
 		var mes = responseData.message;
 		showNotification("success", mes);
 		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;

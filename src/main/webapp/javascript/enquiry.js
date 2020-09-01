@@ -276,6 +276,7 @@ function EnquiryData() {
 			window.location.href = "EnquiryList.html";
 		}
 		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 
 	function errorCallback(responseData, textStatus, request) {

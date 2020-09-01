@@ -147,10 +147,11 @@ public class AcademicYearDAO {
 		AcademicYear year= null;
 		try{
 			con = Util.getDBConnection();
-			String query = "select * from academic_year_master where id=? and branch=?";
+			String query = "select * from academic_year_master where id=? or aca_year=? and branch=?";
 			st = con.prepareStatement(query);
 			st.setString(1, id);
-			st.setString(2, branch);
+			st.setString(2, id);
+			st.setString(3, branch);
 			rs = st.executeQuery();
 			while(rs.next()){
 				year = new AcademicYear();

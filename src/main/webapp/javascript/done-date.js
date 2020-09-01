@@ -2,50 +2,40 @@ $(document)
 		.ready(
 				function() {
 					var dt;
+					
+					
 					document.getElementById("add_installment")
 							.addEventListener("click", add, false);
 
 					var html1 = '<tr><td><div class="form-group"><div class="input-group"><span class="input-group-addon"> <button type="button" id="remove-row"><i class="glyphicon glyphicon-trash"></i></button></span><input type="date" class="form-control" id="datetimepicker4" style=" width:"30px" "/></div></div></td><td><div class="form-group"><div class="input-group"><select name="feestype" class="form-control" id="feestype">'+htmlCode+'</select><span class="input-group-addon" id="bhvk"></span></div></div></td><td><input type="text" class="form-control" id="amt_installment" name="amt_installment"></td><td><input type="text" class="form-control" id="r_installment" name="r_installment" value="0" disabled></td></tr>';
 
-					var currDate = $(".form_date").datetimepicker("setDate", new Date()); // sets
-																			// current
-																		// date
-					dt = $("#demo").datetimepicker('getDate', currDate);
-					 $(".form_date").change(function(){
-						dt = $("#demo").datetimepicker('getDate', currDate);
-						//console.log(dt);
+					var currDate = $(".form_date").datetimepicker("setDate", new Date()); // sets current date
+					
+					dt = $("#demo").datetimepicker('getDate', currDate); 
+					
+					$(".form_date").change(function(){
+						dt = $("#demo").datetimepicker('getDate', currDate);  // on change of first row get date again
+						
 					})
-					console.log("current"+currDate);
-					// var curr = document.getElementById("dtp_input2").value;
 					
-					//var dt = $("#demo").datetimepicker('getDate', currDate);
 					
-					// var dt = $("#demo").datetimepicker('getDate',new Date());
-
 					function add() {
-						dayValue = document.querySelector('#day');
-						output1 = dayValue.value;
-
+						
+						
 						noiValue = document.querySelector('#numofInstallment');
 						output2 = noiValue.value;
-						
-						var fees;
-						fees=document.getElementById("grand-t").value;
-						console.log(fees);
-						if(fees=="0.00")
-							{
-							fees=document.getElementById("fees").value;
-							fees=fees.split("|");
-							fees=fees[1];
-							}
-
-						amtValue = document.querySelector('#amt_installment');
-						output4 = amtValue.value;
-
-						var res = (fees- output4) / output2;
 
 						
-
+						var total_rows = document.getElementById('i-details');
+						var last_row = total_rows.rows.length - 1;
+						for(i = last_row; i < total_rows.rows.length; i++){
+							
+							//var last_date = document.getElementsByClassName("display-date")[last_row].getAttribute("value");
+							var last_date = $(total_rows.rows.item(i).cells[0]).find('input').val();
+							dt = $("#demo").datetimepicker('getDate', currDate); 
+							
+						}
+						
 						for (i = 0; i < output2; i++) {
 
 							// $("#add_installment").on("click",function(){
@@ -56,7 +46,25 @@ $(document)
 													+ '" name="amt_installment"></td><td><input type="text" class="form-control r_installment" id="r_installment" name="r_installment" value="0" disabled></td></tr>');
 
 						}
+						dayValue = document.querySelector('#day');
+						output1 = dayValue.value;
 
+						//noiValue = document.querySelector('#numofInstallment');
+						noofrow = total_rows.rows.length-1;
+						
+						var fees;
+						fees=document.getElementById("grand-t").value;
+						if(fees=="0.00")
+							{
+							fees=document.getElementById("fees").value;
+							fees=fees.split("|");
+							fees=fees[1];
+							}
+
+						amtValue = document.querySelector('#amt_installment');
+						output4 = amtValue.value;
+
+						var res = (fees- output4) / noofrow;
 						var r = document.getElementById('i-details');
 						var no = r.rows.length - 1;
 						var rest_rows;
@@ -70,6 +78,9 @@ $(document)
 								});
 
 						var day_res = output1.replace(/(\d+)(st|nd|rd|th)/,"$1");
+						
+						
+
 						
 						for (j = 1; j <= no; j++) {
 
