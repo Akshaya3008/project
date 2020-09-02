@@ -66,4 +66,8 @@ public class AdmissionController {
 		AdmissionDAO dao=new AdmissionDAO();
 		dao.revertAdmissionPayment(receiptDetails,branch);
 	}
+	public void EditStudentInstallment(String[] commaSeperatedInstallment, Admission admission) {
+		AdmissionDAO dao=new AdmissionDAO();
+		dao.EditStudentInstallment(commaSeperatedInstallment,admission);
+	}
 }

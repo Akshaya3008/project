@@ -612,7 +612,7 @@ function StudentAdmission() {
 		var fees_title = $(table.rows.item(i).cells[1]).find('select').val();
 		var amt = $(table.rows.item(i).cells[2]).find('input').val();
 		var received = $(table.rows.item(i).cells[3]).find('input').val();
-		installment = installment + "," + date + "|" + fees_title + "|" + amt;
+		installment = installment + "," + date + "|" + fees_title + "|" + amt + "|" + received;
 	}
 	var table = document.getElementById("feestypetable");
 	var rowCount = $('#feestypetable tr').length;
@@ -694,7 +694,6 @@ function checkInstallmentAmount(installment, g_total) {
 		var installmentAmount = installment[i].split("|");
 		total+=parseInt(installmentAmount[2]);
 	}
-	
 	if(total!=g_total) {
 		status=true;
 		showNotification("error",
@@ -993,11 +992,11 @@ function loadAdmissionData() {
 		}
 	}
 	document.getElementById('grand-t').value = admissionData[17];
-	if (admissionData[24] == 0) {
-		document.getElementById('add_installment').disabled = false;
+	//if (admissionData[24] == 0) {
+		//document.getElementById('add_installment').disabled = false;
 		originalInsall = admissionData[24];
-	} else {
-		document.getElementById('add_installment').disabled = true;
+	//} else {
+		//document.getElementById('add_installment').disabled = true;
 		var html_Code = '<tr><td><div class="form-group"><div class="input-group" id="demo" data-date="" data-date-format="yyyy-mm-dd" ><input class="form-control" size="16" id="display" type="date" value="" readonly> <span class="input-group-addon"><span class="fa fa-remove"></span></span> <span class="input-group-addon"><span class="fa fa-calendar"></span></span></div><input type="hidden" id="dtp_input2" name="installlment_date" value="" /><br /></div></td><td><div class="form-group"><div class="input-group"><select name="feestype" class="form-control feestype" id="feestype">'
 				+ htmlCode
 				+ '</select> <span class="input-group-addon" id="bhvk"><button type="button" id="feestype" data-toggle="modal" data-target="#feestypeModal" style="background-color: transparent; border: none; font-size: 18px; color: blue; position: relative;">+</button></span></div></div></td><td><input type="text" class="form-control f-row" id="amt_installment" name="amt_installment"></td><td><input type="text" class="form-control"id="r_installment" name="r_installment" disabled></td></tr>';
@@ -1017,7 +1016,7 @@ function loadAdmissionData() {
 					.val(monthly[i - 1]);
 			$(table.rows.item(i - 1).cells[3]).find('input').val(remain[i - 1]);
 		}
-	}
+	//}
 }
 
 function clearSession() {

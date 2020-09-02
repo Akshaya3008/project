@@ -598,5 +598,57 @@ public class AdmissionDAO {
 			Util.closeConnection(null, ps, con);
 		}
 	}
+
+	public void EditStudentInstallment(String[] commaSeperatedInstallment, Admission admission) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			con=Util.getDBConnection();
+			String query="update installment set monthly_payment=?,fees_title=?,remain_fees=?"
+					+ " where due_date=? and Rollno=? and branch=?";
+			for(int i=1;i<commaSeperatedInstallment.length;i++){
+			String[] pipeSeperatedreceiptDetails=Util.symbolSeperatedString(commaSeperatedInstallment[i]);
+			ps=con.prepareStatement(query);
+			int remain_amt=Integer.parseInt(pipeSeperatedreceiptDetails[2])-Integer.parseInt(pipeSeperatedreceiptDetails[3]);
+			ps.setString(1, pipeSeperatedreceiptDetails[2]);
+			ps.setString(2, pipeSeperatedreceiptDetails[1]);
+			ps.setInt(3, remain_amt);
+			ps.setString(4, pipeSeperatedreceiptDetails[0]);
+			ps.setString(5, admission.getRollno());
+			ps.setString(6, admission.getBranch());
+			ps.executeUpdate();
+			if(remain_amt==0){
+				updateInstallmentStatus(admission,pipeSeperatedreceiptDetails[0]);
+			}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+	}
+
+	private void updateInstallmentStatus(Admission admission, String due_date) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			con=Util.getDBConnection();
+			String query="update installment set paid_status=1"
+					+ " where due_date=? and Rollno=? and branch=?";
+			ps=con.prepareStatement(query);
+			ps.setString(1, due_date);
+			ps.setString(2, admission.getRollno());
+			ps.setString(3, admission.getBranch());
+			ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+	}
 		
 }

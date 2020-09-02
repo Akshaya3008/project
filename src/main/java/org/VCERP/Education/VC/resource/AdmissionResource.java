@@ -454,13 +454,35 @@ public class AdmissionResource {
 			admission.setJoin_date(join_date);
 			admission.setFees(Integer.parseInt(symbolSeperated[1]));
 			admission.setBranch(branch);
+			String[] commaSeperatedInstallment = Util.commaSeperatedString(installment);
+			String[] extraInstallment=null;
+			String[] previousInstallment=null;
+			controller = new AdmissionController();
 			if(Integer.parseInt(originalInstall)==0){
-				String[] commaSeperatedInstallment = Util.commaSeperatedString(installment);
 				if (commaSeperatedInstallment.length > 1) {
 					saveInstallment(commaSeperatedInstallment, branch,admission);
 				}
+			}else{
+				if(commaSeperatedInstallment.length-1>Integer.parseInt(originalInstall)){
+					String newInstallment="new Installment";
+					String oldInstallment="old Installment";
+					for(int i=Integer.parseInt(originalInstall)+1;i<=commaSeperatedInstallment.length-1;i++){
+						newInstallment+=","+commaSeperatedInstallment[i];
+					}
+					extraInstallment=Util.commaSeperatedString(newInstallment);
+					saveInstallment(extraInstallment, branch,admission);
+					
+					for(int i=1;i<=Integer.parseInt(originalInstall);i++){
+						oldInstallment+=","+commaSeperatedInstallment[i];
+					}
+					previousInstallment=Util.commaSeperatedString(oldInstallment);
+					controller.EditStudentInstallment(previousInstallment,admission);
+					
+				}else{
+					controller.EditStudentInstallment(commaSeperatedInstallment,admission);
+				}
 			}
-			controller = new AdmissionController();
+			
 			controller.EditStudentAdmission(admission);
 			return Util.generateResponse(Status.ACCEPTED, "Data Successfully Edited").build();
 		} catch (Exception e) {
