@@ -14,7 +14,17 @@ public class PropertiesCache {
 	public static String userName;
 	public static String password;
 	public static long olderThanDays;
+	public static String secreteKey;
 	public static String DirectoryPath;
+	
+
+	public String getSecreteKey() {
+		return secreteKey;
+	}
+
+	public void setSecreteKey(String secreteKey) {
+		PropertiesCache.secreteKey = secreteKey;
+	}
 
 	public String getParentDBName() {
 		return parentDBName;

@@ -60,7 +60,7 @@ public class UserResource {
 		ThreadContext.put("tag", "LOGIN");
 		User user = new User();
 		UserController controller = new UserController();
-		user = controller.authenticateUser(userid, password);
+		user = controller.authenticateUser(userid, SecureUtil.encryptPassword(password+PropertiesCache.secreteKey));
 		if (user == null) {
 			
 			return Util.generateErrorResponse(Status.NOT_FOUND, "invalid username or password").build();
@@ -93,6 +93,8 @@ public class UserResource {
 			@FormParam("password") String password) {
 		User user = null;
 		UserController controller = null;
+		String encrypedPassword=SecureUtil.encryptPassword(password+PropertiesCache.secreteKey);
+		System.out.println(encrypedPassword);
 		try {
 			user = new User();
 			controller = new UserController();
@@ -101,7 +103,7 @@ public class UserResource {
 			user.setRole(role);
 			user.setName(emp_name);
 			user.setUserid(userid);
-			user.setPassword(password);
+			user.setPassword(encrypedPassword);
 			controller.createEmployeeAccount(user);
 			return Util.generateResponse(Status.ACCEPTED, "User Account Successfully Created.").build();
 		} catch (Exception e) {
@@ -158,7 +160,7 @@ public class UserResource {
 		user.setRole(role);
 		user.setName(emp_name);
 		user.setUserid(userid);
-		user.setPassword(password);
+		user.setPassword(SecureUtil.encryptPassword(password+PropertiesCache.secreteKey));
 		try {
 			controller.EditEmployeeAccount(user);
 			return Util.generateResponse(Status.ACCEPTED, "User Account Successfully Updated.").build();
