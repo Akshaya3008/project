@@ -27,4 +27,9 @@ public class BranchController {
 		dao.editBranch(branch);
 	}
 
+	public void editFromAllTable(String oldBranchName, String newBranchName) {
+		BranchDAO dao=new BranchDAO();
+		dao.editFromAllTable(oldBranchName,newBranchName);		
+	}
+
 }

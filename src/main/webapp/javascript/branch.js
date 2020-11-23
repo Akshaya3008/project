@@ -87,14 +87,18 @@ function addNewBranch(){
 		var mes=responseData.responseJSON.message;
 		showNotification("error",mes);
 		$("#loadingModal").modal('hide');
+		reloadPage();
+		logout();
 		
 	}
-	var formData = $("#branchForm").serialize()+"&createdBy="+user;
+	var formData;
 	var httpMethod = "POST";
 	if(request!="Edit"){
-	var relativeUrl = "/branch/addNewBranch";
+		formData = $("#branchForm").serialize()+"&createdBy="+user;
+		var relativeUrl = "/branch/addNewBranch";
 	}
 	else{
+		formData = $("#branchForm").serialize()+"&createdBy="+user+"&oldBranchName="+branchSession;
 		var relativeUrl = "/branch/editBranch";
 	}
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,

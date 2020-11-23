@@ -6,6 +6,7 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -85,11 +86,12 @@ public class BranchResource {
 	@JWTTokenNeeded
 	@RolesAllowed("EDIT_BRANCH")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response editBranch(@BeanParam Branch branch) {
+	public Response editBranch(@BeanParam Branch branch,@FormParam("oldBranchName") String oldBranchName) {
 		try {
 			BranchController controller = new BranchController();
 			controller.editBranch(branch);
-			return Util.generateResponse(Status.ACCEPTED, "Branch Details Successfully Updated.").build();
+			controller.editFromAllTable(oldBranchName,branch.getBranch());
+			return Util.generateResponse(Status.ACCEPTED, "Branch Details Successfully Updated.Please login again to reflect the changes.").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);

@@ -158,4 +158,51 @@ public class BranchDAO {
 
 	}
 
+	public void editFromAllTable(String oldBranchName, String newBranchName) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ArrayList<String> allTables=getAllTables();
+		try {
+			con=Util.getDBConnection();
+			for(int i=0;i<allTables.size();i++){
+				if(!allTables.get(i).contains("branch") && !allTables.get(i).contains("lead_source") 
+						&& !allTables.get(i).contains("vendor")){
+				String query="update `"+allTables.get(i)+"` set branch=? where branch=?";
+				ps=con.prepareStatement(query);
+				ps.setString(1, newBranchName);
+				ps.setString(2, oldBranchName);
+				ps.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+	}
+
+	private ArrayList<String> getAllTables() {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ArrayList<String> allTables=new ArrayList<>();
+		ResultSet rs=null;
+		String[] types={"TABLE"};
+		try {
+			con=Util.getDBConnection();
+			rs=con.getMetaData().getTables("vc_db", null, "%", types);
+			while(rs.next()){
+				allTables.add(rs.getString(3));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(rs, ps, con);
+		}
+		return allTables;
+	}
+
 }
