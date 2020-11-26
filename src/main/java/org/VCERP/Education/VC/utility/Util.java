@@ -34,7 +34,7 @@ public class Util {
 		 try { 
 			 Class.forName("com.mysql.jdbc.Driver").newInstance();
 			// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vc_db?autoReconnect=true&useSSL=false","root","");
-			 String ConnectionUrl = "jdbc:mysql://localhost:3306/"+PropertiesCache.parentDBName+"?autoReconnect=true&useSSL=false";
+			 String ConnectionUrl = "jdbc:mysql://localhost:4519/"+PropertiesCache.parentDBName+"?autoReconnect=true&useSSL=false";
 			 conn = DriverManager.getConnection(ConnectionUrl,PropertiesCache.userName,PropertiesCache.password);
 			 
 		 } catch (Exception ex) {
