@@ -385,7 +385,7 @@ table.table .avatar {
 					</h2>
 				</div>
 				<div class="col-sm-6">
-						<button class="btn btn-secondary" id="Print_Admission_pdf" onclick="admission_print()"><i class="fa fa-file-print-o"></i> Print Admission</button>
+						<button class="btn btn-secondary" id="Print_Receipt_pdf" onclick="receipt_print()"><i class="fa fa-file-print-o"></i> Print Receipt</button>
 
 					<a class="btn btn-danger" id="cancelB"><i class="fa fa-window-close"></i> <span>Cancel</span></a>
 				</div>
@@ -412,7 +412,7 @@ table.table .avatar {
                              </li> 
                          </ul> -->
                          <div class="tab-content padding-top-20">
-                             <div id="tab1" class="tab-pane active">
+                             <div id="tab1" class="tab-pane active receipt_print">
                                  <div class="form-group">
                                      <div class="col-md-12">
                                          <div class="panel">
@@ -440,7 +440,7 @@ table.table .avatar {
                                                              </h5>
                                                          </div>
                                                      </div>
-                                                     <div class="row" id="receipt-info">
+                                                     <div class="row" class="receipt-section" id="receipt-info">
                                                          <div id="receipt-details" class="col-sm-8">
                                                              <div class="panel panel-alt">
                                                                  <div class="panel-body">
@@ -574,7 +574,14 @@ table.table .avatar {
 	
 	</div>
 	<!-- end of wrpper -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+		<script type="text/javascript" src="assets/js/divjs.js"></script>
 	<script>
+	
 	$(document).ready(function() {
 		$("#datatable-view-2").css("display", "none");
 		$("#cancelB").css("display", "none");
@@ -589,6 +596,16 @@ table.table .avatar {
 			location.reload();
 		});
 	});
+	
+
+	function receipt_print(){
+		alert("inside fn");
+		/* w = window.open();
+		w.document.write($('.receipt_print').innerHTML);
+		w.print();
+		w.close(); */
+		$('.receipt_print').printElement({});
+       }
 	</script>
 </body>
 
