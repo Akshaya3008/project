@@ -100,7 +100,7 @@ $(document).ready(function() {
 		   to_date:{
 			 required:true,
 			// date:true,
-			 greaterThan:"#from_date"
+			 //greaterThan:"#from_date"
    
 		   },
 		   acad_year:{
@@ -135,7 +135,7 @@ $(document).ready(function() {
 				},
 				to_date: {
 					required:'Please select a date',	
-					greaterThan:'Must be greater than from date.'
+					//greaterThan:'Must be greater than from date.'
 				},
 			
 				standard:{				
@@ -238,7 +238,7 @@ function viewAdmissionReport(){
 	}
 		var httpMethod = "POST";
 		var formData = $("#AdmReportForm").serialize()+"&package_array="+fees_packageArray+"&standard_array="+standardArray+
-		"&division_array="+divArray+"&adm_taken_by_array="+adm_takenArray+"&branch="+branch;
+		"&division_array="+divArray+"&adm_taken_by_array="+adm_takenArray+"&branch="+branchSession;
 		var relativeUrl = "/Admission/AdmissionReport";	
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);

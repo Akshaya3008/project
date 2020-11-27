@@ -134,6 +134,12 @@ function loadvendor() {
 
 function getExpenseReport(e) {
 	
+	var vendors=new Array()
+	for (var option of document.getElementById('multi_vendor_select').options) {
+		if (option.selected) {
+			vendors.push(option.value);
+		}
+	}
 	function callback(responseData, textStatus, request) {
 		var table = $("#expense_report").DataTable();
 		table.rows().remove().draw();
@@ -154,7 +160,7 @@ function getExpenseReport(e) {
 		  showNotification("error",message);
 	}
 	var httpMethod = "POST";
-	var formData = $("#getExpenseData").serialize();
+	var formData = $("#getExpenseData").serialize()+"&vendor="+vendors+"&branch="+branchSession;
 	var relativeUrl = "/Expense/ExpenseReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);

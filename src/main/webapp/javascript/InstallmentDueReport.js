@@ -203,7 +203,7 @@ function viewInstallmentReport(){
 	}
 		var httpMethod = "POST";
 		var formData = $("#InstalllmentReportForm").serialize()+"&package_array="+fees_package+"&standard_array="+standard+"&division_array="+div+
-		"&branch="+branch;
+		"&branch="+branchSession;
 		var relativeUrl = "/Receipt/InstallmentDueReport";	
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);

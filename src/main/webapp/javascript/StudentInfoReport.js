@@ -4,7 +4,6 @@ $(document).ready(function() {
 	getFeesPackage();
 	fetchAllBranch();
 	$("#branch").val(branchSession);
-	
 	$('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
 		enableFiltering : true
@@ -145,9 +144,11 @@ function StudentInfoReport(){
 			course.push(option.value);
 		}
 	}
-	document.getElementById("branch").disabled=false;
+	/*document.getElementById("branch").disabled=false;
 	var branch=document.getElementById("branch").value;
+	alert(branch);*/
 	function callback(responseData, textStatus, request){
+		alert(responseData);
 		var table = $("#stud_info_report").DataTable();
 		table.rows().remove().draw();
 		for ( var i in responseData) {
@@ -164,7 +165,7 @@ function StudentInfoReport(){
 			table.row.add(
 					[enq_date,stud_name,gender,dob,stud_cont,address,course,course_amt,enq_taken_by]).draw();
 			}
-		document.getElementById("branch").disabled=true;
+		//document.getElementById("branch").disabled=true;
 		}
 	
 	function errorCallback(responseData, textStatus, request){
@@ -175,7 +176,7 @@ function StudentInfoReport(){
 	
 	var httpMethod = "POST";
 	var formData=$("#StudentInfoForm").serialize()+"&enq_taken_by_array="+enq_taken+"&enq_status_array="+enq_status+
-	"&course_package_array="+course+"&branch="+branch;
+	"&course_package_array="+course+"&branch="+branchSession;
 	var relativeUrl = "/Enquiry/EnquiryReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl,formData, callback,
 			errorCallback);

@@ -61,12 +61,12 @@ $(document).ready(function(){
 				        || (Number(value) < Number($(params).val())); 
 	    },"Must be less than till date.");
 
-		jQuery.validator.addMethod("futureDate", function(value, element) {
+/*		jQuery.validator.addMethod("futureDate", function(value, element) {
 			 var now = new Date();
 			 now.setHours(0,0,0,0);
 			 var myDate = new Date(value);
 			 return this.optional(element) || myDate <= now;
-		},'Future date not allowed');
+		},'Future date not allowed');*/
 		jQuery.validator.addMethod("needsSelection", function(value, element) {
 			
 			 var count = $(element).find('option:selected').length;
@@ -77,12 +77,12 @@ $(document).ready(function(){
 			  rules: {
 				  from_date:{
 						required:true,
-						fututeDate:true,
+						//fututeDate:true,
 						lessThan:"#to_date"
 					},
 				  to_date:{
 						required:true,
-						fututeDate:true,
+						//fututeDate:true,
 						greaterThan:"#from_date"
 					},
 					received_by:{
@@ -129,8 +129,8 @@ $(document).ready(function(){
 
 
 function ReceiptReport(){
-	document.getElementById("branch").disabled=false;
-	var branch=document.getElementById("branch").value;
+	//document.getElementById("branch").disabled=false;
+	//var branch=document.getElementById("branch").value;
 	var pay_mode=new Array()
 	var standard=new Array()
 	var received_by=new Array()
@@ -150,7 +150,8 @@ function ReceiptReport(){
 		}
 	}
 	function callback(responseData,textStatus,request)
-	{	document.getElementById("branch").disabled=true;
+	{
+		//document.getElementById("branch").disabled=true;
 		var total_received_amt=0;
 		 var table = $("#receipts_report").DataTable();
 			table.rows().remove().draw();
@@ -176,7 +177,7 @@ function ReceiptReport(){
 	}	
 	var httpMethod = "POST";
 	var formData=$("#Receipt_Report_Form").serialize()+"&pay_mode_array="+pay_mode+"&standard_array="+standard+
-	"&received_by_array="+received_by+"&branch="+branch;
+	"&received_by_array="+received_by+"&branch="+branchSession;
 	var relativeUrl = "/Receipt/ReceiptReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,errorCallback);
 	return false;	

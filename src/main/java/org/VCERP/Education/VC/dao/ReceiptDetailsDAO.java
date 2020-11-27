@@ -500,9 +500,9 @@ public class ReceiptDetailsDAO {
 				receiptData.setTrans_status(rs.getString(8));
 				receiptData.setTo_date(rs.getString(9));
 				receiptData.setReceived_by(rs.getString(10));
-				receiptData.setTotal_amt(rs.getLong(11));
-				receiptData.setReceived_amt(rs.getLong(12));
-				receiptData.setAmount(rs.getLong(13));
+				receiptData.setTotal_amt(rs.getLong(12));
+				receiptData.setReceived_amt(rs.getLong(13));
+				receiptData.setAmount(rs.getLong(14));
 				if(receiptData!=null){
 					Admission invoice=new Admission();
 					invoice=getAdmissionRelatedData(receiptData.getRollno(),admission.getBranch(),admission);

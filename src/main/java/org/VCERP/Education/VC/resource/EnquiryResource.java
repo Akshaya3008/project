@@ -165,11 +165,14 @@ public class EnquiryResource {
 			if(enq!=null){
 				return Response.status(Status.ACCEPTED).entity(enq).build();
 			}
+			else{
+				return Util.generateErrorResponse(Status.BAD_REQUEST,"Data not found.").build();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);
 		}
-		return Util.generateErrorResponse(Status.BAD_REQUEST,"Admission not done.").build();
+		return Util.generateErrorResponse(Status.BAD_REQUEST,"Data not found.").build();
 	}
 	
 	@GET

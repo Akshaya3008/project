@@ -184,14 +184,12 @@ public class ExpenseDAO{
 			ps.setString(3, exp.getVend());
 			ps.setString(4, exp.getPay_mode());
 			ps.setString(5, exp.getBranch());
-			
 			rs = ps.executeQuery();
 			while(rs.next()){
 				exp_r=new Expense();
 				exp_r.setExp_date(rs.getString(2));;
 				exp_r.setVend(rs.getString(4));
 				exp_r.setAmt(rs.getString(3));
-				
 				expenseReportData.add(exp_r);
 			}
 		}

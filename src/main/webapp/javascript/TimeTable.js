@@ -322,8 +322,8 @@ function load_TT_Title(){
 	return false;
 }
 function tt_report(){
-	document.getElementById("branch").disabled=false;
-	var branch=document.getElementById("branch").value;
+	//document.getElementById("branch").disabled=false;
+	//var branch=document.getElementById("branch").value;
 	var tt_title=new Array()
 	for (var option of document.getElementById('multi_tt_title').options) {
 		if (option.selected) {
@@ -371,8 +371,8 @@ function tt_report(){
 			}
 				table.row.add([ time, mon, tue, wed, thu, fri,sat,sun ])
 				.draw();
-		}document.getElementById("branch").disabled=true;
-
+		}
+			//document.getElementById("branch").disabled=true;
 	}
 
 	function errorCallback(responseData, textStatus, request) {
@@ -383,7 +383,7 @@ function tt_report(){
 	}
 	
 	var httpMethod = "POST";
-	var formData=$("#getTimeTableData").serialize()+"&tt_title="+tt_title+"&branch="+branch;
+	var formData=$("#getTimeTableData").serialize()+"&tt_title="+tt_title+"&branch="+branchSession;
 	var relativeUrl = "/TimeTable/TimeTableReport";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 			errorCallback);

@@ -186,28 +186,31 @@ public class ExpenseResource {
 			@FormParam("vendor") String vendor,@FormParam("branch") String branch,
 			@FormParam("pay_mode") String pay_mode){
 		 String[] commaSeperatedVendor=Util.commaSeperatedString(vendor);
-		 String[] commaSeperatedPayMode=Util.commaSeperatedString(pay_mode);
+		 //String[] commaSeperatedPayMode=Util.commaSeperatedString(pay_mode);
 		
 		 ExpenseController controller=new ExpenseController();
 		 ArrayList<Expense> expenseReportData=new ArrayList<>();
 		 try {
 			 for(int i=0;i<commaSeperatedVendor.length;i++){
-				 for(int j=0;j<commaSeperatedPayMode.length;j++){
+				 //for(int j=0;j<commaSeperatedPayMode.length;j++){
 					
 						 Expense exp=new Expense();
 						 //Admission admission=new Admission();
 							exp.setFrom_date(from_date);
 							exp.setTo_date(to_date);
 							exp.setVend(commaSeperatedVendor[i]);
-							exp.setPay_mode(commaSeperatedPayMode[j]);
+							exp.setPay_mode(pay_mode);
 							exp.setBranch(branch);
 							
 							expenseReportData=controller.ExpenseReport(exp,expenseReportData);
 					 
-				 }
+				// }
 			 }
 			 if(expenseReportData!=null){
 			 return Response.status(Status.ACCEPTED).entity(expenseReportData).build();
+			 }
+			 else{
+				 return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 			 }
 		} catch (Exception e) {
 			e.printStackTrace();
