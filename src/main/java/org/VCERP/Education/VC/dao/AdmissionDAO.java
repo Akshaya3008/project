@@ -484,12 +484,14 @@ public class AdmissionDAO {
 		}
 	}
 
-	public void EditStudentAdmission(Admission admission) {
+	public void EditStudentAdmission(Admission admission, String changeAcadData) {
 		Connection con=null;
 		PreparedStatement ps=null;
+		String[] DollarSeperated=Util.dollarSeperatedString(changeAcadData);
 		try {
 			con=Util.getDBConnection();
-			String query="update admission set enq_taken_by=?,division=?,status=?,date=?,admission_date=?,acad_year=?,join_date=?"
+			String query="update admission set enq_taken_by=?,division=?,status=?,date=?,admission_date=?,acad_year=?,"
+					+ "join_date=?,Rollno=?,regno=?,invoice_no=?"
 					+ " where Rollno=? and regno=? and invoice_no=? and branch=?";
 			ps=con.prepareStatement(query);
 			ps.setString(1, admission.getEnq_taken_by());
@@ -502,7 +504,10 @@ public class AdmissionDAO {
 			ps.setString(8, admission.getRollno());
 			ps.setString(9, admission.getRegno());
 			ps.setString(10, admission.getInvoice_no());
-			ps.setString(11, admission.getBranch());
+			ps.setString(11, DollarSeperated[0]);
+			ps.setString(12, DollarSeperated[1]);
+			ps.setString(13, DollarSeperated[2]);
+			ps.setString(14, admission.getBranch());
 			ps.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -599,12 +604,13 @@ public class AdmissionDAO {
 		}
 	}
 
-	public void EditStudentInstallment(String[] commaSeperatedInstallment, Admission admission) {
+	public void EditStudentInstallment(String[] commaSeperatedInstallment, Admission admission, String changeAcadData) {
 		Connection con=null;
 		PreparedStatement ps=null;
+		String[] dollarSeperated=Util.dollarSeperatedString(changeAcadData);
 		try {
 			con=Util.getDBConnection();
-			String query="update installment set monthly_payment=?,fees_title=?,remain_fees=?"
+			String query="update installment set monthly_payment=?,fees_title=?,remain_fees=?,Rollno=?"
 					+ " where due_date=? and Rollno=? and branch=?";
 			for(int i=1;i<commaSeperatedInstallment.length;i++){
 			String[] pipeSeperatedreceiptDetails=Util.symbolSeperatedString(commaSeperatedInstallment[i]);
@@ -613,9 +619,10 @@ public class AdmissionDAO {
 			ps.setString(1, pipeSeperatedreceiptDetails[2]);
 			ps.setString(2, pipeSeperatedreceiptDetails[1]);
 			ps.setInt(3, remain_amt);
-			ps.setString(4, pipeSeperatedreceiptDetails[0]);
-			ps.setString(5, admission.getRollno());
-			ps.setString(6, admission.getBranch());
+			ps.setString(4, admission.getRollno());
+			ps.setString(5, pipeSeperatedreceiptDetails[0]);
+			ps.setString(6, dollarSeperated[0]);
+			ps.setString(7, admission.getBranch());
 			ps.executeUpdate();
 			if(remain_amt==0){
 				updateInstallmentStatus(admission,pipeSeperatedreceiptDetails[0]);

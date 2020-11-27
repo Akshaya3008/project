@@ -245,6 +245,7 @@ function StudentReceipt(){
 		var mes=responseData.message;
 		showNotification("success",mes);
 		$("#loadingModal").modal('hide');
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes=responseData.responseJSON.message;

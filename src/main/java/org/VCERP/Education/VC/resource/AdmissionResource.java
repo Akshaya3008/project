@@ -433,12 +433,12 @@ public class AdmissionResource {
 			@FormParam("acad_year") String acad_year, @FormParam("join_date") String join_date,
 			@FormParam("branch") String branch,@FormParam("installment") String installment,
 			@FormParam("originalInstallment") String originalInstall,@FormParam("newAmt") String newAmt,
-			@FormParam("stud_details") String student_name) {
+			@FormParam("stud_details") String student_name,@FormParam("changeAcadData") String changeAcadData) {
 		Admission admission = null;
 		AdmissionController controller = null;
 		String[] name = Util.symbolSeperatedString(student_name);
 		String[] symbolSeperated = Util.symbolSeperatedString(newAmt);
-		
+		AcademicYearController acadcontroller = null;
 		try {
 			admission = new Admission();
 			admission.setStudent_name(name[1]);
@@ -458,6 +458,7 @@ public class AdmissionResource {
 			String[] extraInstallment=null;
 			String[] previousInstallment=null;
 			controller = new AdmissionController();
+			String[] dollarSeperated=Util.dollarSeperatedString(changeAcadData);
 			if(Integer.parseInt(originalInstall)==0){
 				if (commaSeperatedInstallment.length > 1) {
 					saveInstallment(commaSeperatedInstallment, branch,admission);
@@ -476,14 +477,20 @@ public class AdmissionResource {
 						oldInstallment+=","+commaSeperatedInstallment[i];
 					}
 					previousInstallment=Util.commaSeperatedString(oldInstallment);
-					controller.EditStudentInstallment(previousInstallment,admission);
+					controller.EditStudentInstallment(previousInstallment,admission,changeAcadData);
 					
 				}else{
-					controller.EditStudentInstallment(commaSeperatedInstallment,admission);
+					controller.EditStudentInstallment(commaSeperatedInstallment,admission,changeAcadData);
 				}
 			}
 			
-			controller.EditStudentAdmission(admission);
+			controller.EditStudentAdmission(admission,changeAcadData);
+			if(!dollarSeperated[0].contains(Rollno) && !dollarSeperated[1].contains(regno)
+					&& !dollarSeperated[2].contains(invoice_no)){
+				acadcontroller=new AcademicYearController();
+				acadcontroller.updateAcademicDetails(Rollno, invoice_no, regno, acad_year, branch);
+			}
+			
 			return Util.generateResponse(Status.ACCEPTED, "Data Successfully Edited").build();
 		} catch (Exception e) {
 			e.printStackTrace();

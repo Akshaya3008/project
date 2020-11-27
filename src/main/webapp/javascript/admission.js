@@ -4,6 +4,7 @@ var standardData;
 var branchData;
 var admitted_fees_pack;
 var originalInsall;
+var changeAcadData;
 var request = "Save";
 $(document)
 		.ready(
@@ -83,12 +84,12 @@ $(document)
 								noSpace : true
 							},
 							admission_date : {
-								futureDate : true,
+								//futureDate : true,
 								date : true,
 								required : true
 							},
 							join_date : {
-								futureDate : true,
+								//futureDate : true,
 								date : true,
 								required : true
 							},
@@ -110,10 +111,10 @@ $(document)
 						},
 						messages : {
 							admission_date : {
-								futureDate : 'future date not allowed'
+								//futureDate : 'future date not allowed'
 							},
 							join_date : {
-								futureDate : 'future date not allowed'
+								//futureDate : 'future date not allowed'
 							},
 						},
 						submitHandler : function(form) {
@@ -403,7 +404,7 @@ $(document)
 									});
 					var acad = document.getElementById('acad_year');
 					acad.addEventListener('change',function() {
-						getAutoIncrementedDetails("change");
+						getAutoIncrementedDetails("reload");
 					});
 					$("#discount")
 							.focusout(
@@ -635,6 +636,7 @@ function StudentAdmission() {
 		var mes = responseData.message;
 		showNotification("success", mes);
 		$("#loadingModal").modal('hide');
+		clearSession();
 		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
@@ -661,7 +663,7 @@ function StudentAdmission() {
 			formData = $('#admission-form').serialize() + "&branch="
 					+ branchSession + "&installment=" + installment
 					+ "&originalInstallment=" + originalInsall + "&newAmt="
-					+ newAmt;
+					+ newAmt+"&changeAcadData="+changeAcadData;
 			relativeUrl = "/Admission/EditStudentAdmission";
 		}
 		// }
@@ -1016,6 +1018,8 @@ function loadAdmissionData() {
 					.val(monthly[i - 1]);
 			$(table.rows.item(i - 1).cells[3]).find('input').val(remain[i - 1]);
 		}
+		changeAcadData=document.getElementById('ID_no').value+"$"+
+		document.getElementById('reg_no').value+"$"+document.getElementById('invoice_no').value;
 	//}
 }
 

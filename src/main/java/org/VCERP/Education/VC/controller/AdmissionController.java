@@ -54,9 +54,9 @@ public class AdmissionController {
 		AdmissionDAO dao=new AdmissionDAO();
 		dao.updateOldAdmissionStatus(id,branch);
 	}
-	public void EditStudentAdmission(Admission admission) {
+	public void EditStudentAdmission(Admission admission, String changeAcadData) {
 		AdmissionDAO dao=new AdmissionDAO();
-		dao.EditStudentAdmission(admission);
+		dao.EditStudentAdmission(admission,changeAcadData);
 	}
 	public void PromoteStudentFromAdmission(Admission admission) {
 		AdmissionDAO dao=new AdmissionDAO();
@@ -66,8 +66,8 @@ public class AdmissionController {
 		AdmissionDAO dao=new AdmissionDAO();
 		dao.revertAdmissionPayment(receiptDetails,branch);
 	}
-	public void EditStudentInstallment(String[] commaSeperatedInstallment, Admission admission) {
+	public void EditStudentInstallment(String[] commaSeperatedInstallment, Admission admission, String changeAcadData) {
 		AdmissionDAO dao=new AdmissionDAO();
-		dao.EditStudentInstallment(commaSeperatedInstallment,admission);
+		dao.EditStudentInstallment(commaSeperatedInstallment,admission,changeAcadData);
 	}
 }
