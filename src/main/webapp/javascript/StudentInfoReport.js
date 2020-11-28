@@ -6,6 +6,7 @@ $(document).ready(function() {
 	$("#branch").val(branchSession);
 	$('#multi_status_select').multiselect({
 		includeSelectAllOption : true,
+		/*buttonWidth: 250,*/
 		enableFiltering : true
 	});
 	$('#multi_status').multiselect({

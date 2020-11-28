@@ -21,6 +21,11 @@ $(document).ready(function() {
 		includeSelectAllOption : true,
 		enableFiltering : true
 	});
+	$('#multi_div').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+	
 	jQuery.validator.addMethod("needsSelection", function(value, element) {
 		
 		 var count = $(element).find('option:selected').length;

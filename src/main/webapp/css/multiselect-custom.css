@@ -1,0 +1,8 @@
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+    margin-left: 0px !important; 
+}
+.multiselect-clear-filter{
+background-color:transparent !important;
+border-color:transparent !important;
+border:1px 1px 1px solid #ccc;
+}

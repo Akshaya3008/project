@@ -4,11 +4,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="jquery/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">                                   
-
+<!-- <script src="jquery/bootstrap.min.js"></script> -->
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->                                   
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/bootstrap-multiselect.css">
 
 <script src="pdf/jquery.dataTables.min.js"></script>
 <script src="pdf/dataTables.buttons.min.js"></script>
@@ -19,7 +20,7 @@
 <script src="pdf/buttons.html5.min.js"></script>
 <script src="pdf/buttons.print.min.js"></script>
 
-<link rel="stylesheet" href="css/bootstrap-multiselect.css">
+
 <link rel="stylesheet" href="css/promote.css" type="text/css">
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
@@ -34,6 +35,8 @@
 <script src="javascript/accordian_view.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
+
+<link rel="stylesheet" href="css/multiselect-custom.css">
 
 <title>Installment Due Fees Report</title>
 <style>
@@ -284,11 +287,11 @@ table.table .avatar {
     margin-top: 0px ! important;
 
 }
-.input-group
+/* .input-group
 {
  width:70% ! important;
  height:80px !important;
-}
+} */
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -420,7 +423,7 @@ table.table .avatar {
 																<span class="titleDiv">Division</span>
 															</label>
 															<div class="input-group">
-																<select id="multi_div" name="division" class="form-control division" multiple="multiple">
+																<select id="multi_div" name="division" class="form-control division valid-test" multiple="multiple">
 																</select>
 															</div>
 														</div>
@@ -493,5 +496,6 @@ table.table .avatar {
 			</section>
 		</div>
 	</div>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
