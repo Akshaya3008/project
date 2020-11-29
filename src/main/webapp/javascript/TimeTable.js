@@ -17,6 +17,27 @@ $(document).ready(function() {
 	load_TT_Title();
 	loadTime();
 	loadLecturer();
+	$('#multi_tt_title').multiselect({
+		includeSelectAllOption : true,
+		enableFiltering : true
+	});
+	 var table= $('#timetable_report').DataTable( {
+	    	dom: 'Bfrtip',
+		    buttons: [
+		    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'print', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    	{extend: 'excel', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
+		    	{extend: 'csv', className: 'btn btn-warning glyphicon glyphicon-print'},
+		    ],
+		    "order": [],
+		    "columnDefs": [ {
+		    "targets"  : 'no-sort',
+		    "orderable": false,
+		    }],
+		   
+	    } );
+	 table.buttons().container() 
+	 .appendTo( '#table-style .col-sm-6:eq(1)' );
 	$("#branch").val(branchSession);
 	 jQuery.validator.addMethod("noSpace", function(value, element) { 
 		  return value.indexOf(" ") < 0 && value != ""; 
@@ -75,10 +96,7 @@ $(document).ready(function() {
 		  }
 	});
 	
-	$('#multi_tt_title').multiselect({
-		includeSelectAllOption : true,
-		enableFiltering : true
-	});
+
 	var html = '<tr><td><div class="form-group"><div class="col-md-6 lesspadding"><div class="input-group"><select class="form-control" name="day" style="width:100%;"><option value="monday">Monday</option><option value="tuesday">Tuesday</option><option value="wednesday">Wednesday</option><option value="thursday">Thursday</option><option value="friday">Friday</option><option value="saturday">Saturday</option><option value="sunday">Sunday</option></select></div></div></div></td><td><div class="form-group"><div class="col-md-4 lesspadding"><div class="input-group" style="width:100%"><select id="multi_time" class="form-control" name="time-slot" style="width:100%;">'
 	+ htmlCode 
 	+ '</select><span class="input-group-btn"><button class="btn btn-primary" id="add-btn" type="button" data-toggle="modal" data-target="#addTimeModal"><span class="glyphicon glyphicon-plus"></span></button></span></div></div></div></td><td><div class="form-group"><div class="col-md-6 lesspadding"><div class="input-group"><select class="form-control" id="lecturer" name="lecturer" style="width:100%;">'

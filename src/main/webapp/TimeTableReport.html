@@ -4,26 +4,44 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="jquery/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <script src="jquery/bootstrap.min.js"></script> -->
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/bootstrap-multiselect.css">
 <script src="jquery/jquery.validate.min.js"></script>
 
-<link rel="stylesheet" href="css/bootstrap-multiselect.css">
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="core/popper.min.js"></script>
+<script src="assets/js/bootstrap-multiselect.js"></script>
+
+<script src="pdf/jquery.dataTables.min.js"></script>
+<script src="pdf/dataTables.buttons.min.js"></script>
+<script src="pdf/buttons.flash.min.js"></script>
+<script src="pdf/jszip.min.js"></script>
+<script src="pdf/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="pdf/buttons.html5.min.js"></script>
+<script src="pdf/buttons.print.min.js"></script>
+
 	
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="css/promote.css" type="text/css">
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 
-<script src="assets/js/bootstrap-multiselect.js"></script>
+<link href="pdf/css/jquery.dataTables.min.css"/>
+<link href="pdf/css/buttons.dataTables.min.css"/>
 
 <script type="text/javascript" src="javascript/ValidateLogin.js"></script>
 <script type="text/javascript" src="javascript/TimeTable.js"></script> 
+<script src="javascript/accordian_view.js"></script>
 <script type="text/javascript" src="javascript/Helper.js"></script>
 <script type="text/javascript" src="core/noty.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/noty.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
+
+<link rel="stylesheet" href="css/multiselect-custom.css">
 
 <title>Time Table Report</title>
 <style>
@@ -282,6 +300,10 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
+#btnDisplay{
+    margin-top: 0px ! important;
+
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -323,7 +345,7 @@ table.table .avatar {
 				<div class="row">
 					<div class="col-sm-6">
 						<h2>
-							<b>Admission Report</b>
+							<b>Time Table Report</b>
 						</h2>
 					</div>
 					<!-- <div class="col-sm-6">
@@ -342,9 +364,7 @@ table.table .avatar {
 					<div class="panel">
 						<div class="accordion-container" id="accordion">
 							<section class="content-entry">
-								<label class="accordian_title"><i id="acc_sign"> <!--
-                                   <i class="fa fa-plus"></i>
-                                   <i class="fa fa-minus"></i>--> Filter
+								<label class="title_promote accordian_title"><i id="acc_sign">Filter
 										Report
 								</i> </label>
 								<div class="accordion-content">
@@ -371,7 +391,7 @@ table.table .avatar {
 																class="titleYear">Time Table Title</span> <span
 																class="text-danger" style="color: red">*</span>
 															</label>
-															<div class="input-group select" style="width: 100%;">
+															<div class="input-group" style="width: 100%;">
 																<select name="title" id="multi_tt_title"
 																	class="form-control tt_title" multiple="multiple">
 
@@ -394,8 +414,16 @@ table.table .avatar {
 															</div>
 														</div>
 													</div>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="pull-right">
+																	<button id="btnDisplay" data-style="zoom-in" class="btn btn-warning margin-right-sm" >Display</button>
+																<button type="reset" id="btnClear" data-style="zoom-in" class="btn btn-light margin-right-sm">Clear</button>
+															</div>
+														</div>
+													</div>
 
-													<div class="col-md-2">
+													<!-- <div class="col-md-2">
 														<div class="pull-right">
 															<button type="button" id="btnDisplay"
 																data-style="zoom-in"
@@ -403,7 +431,7 @@ table.table .avatar {
 																Display</button>
 
 														</div>
-													</div>
+													</div> -->
 												</div>
 											</form>
 										</div>
@@ -481,5 +509,7 @@ table.table .avatar {
 	       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 	<script type="text/javascript" src="javascript/bootstrap.min.js"></script> -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 </body>
 </html>
