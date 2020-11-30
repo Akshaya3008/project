@@ -1,8 +1,8 @@
 /**
  * 
  */
-//var host="http://localhost";
-var host="http://vidyachaitanyaedutech.com/";
+var host="http://localhost";
+//var host="http://vidyachaitanyaedutech.com/";
 var port="8080";
 
 var branchSession=sessionStorage.getItem("branch");
@@ -25,7 +25,7 @@ function ajaxUnauthenticatedRequest(httpMethod,relativeUrl,data
 	
 	var url="";
 	var baseUrl=fetchBaseUrl();
-	url=baseUrl+"/webapi";
+	url=baseUrl+"/VC/webapi";
 	url=url+relativeUrl;
 	
 	if(httpMethod=="GET" || httpMethod=="DELETE")
@@ -75,7 +75,7 @@ function ajaxAuthenticatedRequest(httpMethod, relativeUrl, data,
 		responseFunction, errorResponseFunction) {
 	var url = "";
 	var baseUrl = fetchBaseUrl();
-	url = baseUrl + "/webapi";
+	url = baseUrl + "/VC/webapi";
 	url = url + relativeUrl;
 	var token = sessionStorage.getItem("token");
 	if (httpMethod == "GET" || httpMethod == "DELETE") {
