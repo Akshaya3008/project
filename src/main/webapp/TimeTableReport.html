@@ -9,11 +9,12 @@
 <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/bootstrap-multiselect.css">
-<script src="jquery/jquery.validate.min.js"></script>
+
 
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 <script src="core/popper.min.js"></script>
 <script src="assets/js/bootstrap-multiselect.js"></script>
+<script src="jquery/jquery.validate.min.js"></script>
 
 <script src="pdf/jquery.dataTables.min.js"></script>
 <script src="pdf/dataTables.buttons.min.js"></script>
@@ -304,6 +305,10 @@ table.table .avatar {
     margin-top: 0px ! important;
 
 }
+#accordion{
+	background:#eee;
+	
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -348,6 +353,10 @@ table.table .avatar {
 							<b>Time Table Report</b>
 						</h2>
 					</div>
+					<div class="col-sm-6">
+						
+					</div>
+					
 					<!-- <div class="col-sm-6">
 						<a href="" class="btn btn-success promote-b" id="promote_student"><i
 							class="material-icons">&#xE147;</i> <span>Promote</span> </a>
@@ -356,7 +365,7 @@ table.table .avatar {
 				</div>
 				<!-- row div close -->
 			</div>
-			<!-- table title div close -->
+			<!-- table title div close --> 
 			<section role="main" class="content-body">
 
 
@@ -388,11 +397,11 @@ table.table .avatar {
 													<div class="col-md-3">
 														<div class="form-group">
 															<label class="control-label"> <span
-																class="titleYear">Time Table Title</span> <span
-																class="text-danger" style="color: red">*</span>
+																class="titleYear">Time Table Title</span> 
+																<span class="text-danger" style="color: red">*</span>
 															</label>
 															<div class="input-group" style="width: 100%;">
-																<select name="title" id="multi_tt_title"
+																<select  id="multi_tt_title" name="title"
 																	class="form-control tt_title" multiple="multiple">
 
 																</select>
