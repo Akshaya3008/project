@@ -482,7 +482,7 @@ function getReceivedCard(splitted_start_date, splitted_end_date){
 	return false;
 }
 
-function getReceivableCard(splitted_start_date, splitted_end_date){
+function getReceivableCard(){
 	function callback(responseData, textStatus, request){
 			document.getElementById('receivable_card').innerHTML = responseData;
 		}	
@@ -492,8 +492,8 @@ function getReceivableCard(splitted_start_date, splitted_end_date){
 	}
 	var httpMethod = "POST";
 	var formData = {
-			start_date : splitted_start_date,
-			end_date :	splitted_end_date,
+			//start_date : splitted_start_date,
+			//end_date :	splitted_end_date,
 			branch : branchSession
 	}
 	var relativeUrl = "/chart/getReceivableCard";

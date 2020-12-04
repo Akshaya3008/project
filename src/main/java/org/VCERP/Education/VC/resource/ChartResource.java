@@ -387,14 +387,15 @@ public Response getOverallReceivedCard(@FormParam("start_date") String start_dat
 @Path("/getReceivableCard")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 @Produces(MediaType.APPLICATION_JSON)
-public Response getReceivableCard(@FormParam("start_date") String start_date,@FormParam("end_date") String end_date,@FormParam("branch") String branch){
+/*public Response getReceivableCard(@FormParam("start_date") String start_date,@FormParam("end_date") String end_date,@FormParam("branch") String branch){*/
+public Response getReceivableCard(@FormParam("branch") String branch){
 		Chart ch = null;
 		ChartController controller=new ChartController();
 		try {
 			ch = new Chart(); 
 			
-			ch.setS_date(start_date.trim());
-			ch.setE_date(end_date.trim());
+			//ch.setS_date(start_date.trim());
+			//ch.setE_date(end_date.trim());
 			ch.setBranch(branch.trim());
 			int value = controller.getReceivableCard(ch);
 				return Response.status(Status.ACCEPTED).entity(value).build();
@@ -414,14 +415,15 @@ public Response getReceivableCard(@FormParam("start_date") String start_date,@Fo
 @Path("/getOverallReceivableCard")
 @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 @Produces(MediaType.APPLICATION_JSON)
-public Response getOverallReceivableCard(@FormParam("start_date") String start_date,@FormParam("end_date") String end_date,@FormParam("branch") String branch){
+/*public Response getOverallReceivableCard(@FormParam("start_date") String start_date,@FormParam("end_date") String end_date,@FormParam("branch") String branch){*/
+public Response getOverallReceivableCard(@FormParam("branch") String branch){
 		Chart ch = null;
 		ChartController controller=new ChartController();
 		try {
 			ch = new Chart(); 
 			
-			ch.setS_date(start_date.trim());
-			ch.setE_date(end_date.trim());
+			//ch.setS_date(start_date.trim());
+			//ch.setE_date(end_date.trim());
 			//ch.setBranch(branch.trim());
 			int value = controller.getOverallReceivableCard(ch);
 				return Response.status(Status.ACCEPTED).entity(value).build();

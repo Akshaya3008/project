@@ -384,13 +384,13 @@ public class ChartDAO {
 		int value=0;
 		try {
 			con=Util.getDBConnection();
-			String query="SELECT SUM(amount) FROM `receipt_details` WHERE receipt_date BETWEEN ? AND ? AND branch=?";
+			String query="SELECT SUM(amount) FROM `receipt_details` WHERE branch=?";
 			
 			ps=con.prepareStatement(query);
 			
-			ps.setString(1,ch.getS_date());
-			ps.setString(2,ch.getE_date());
-			ps.setString(3,ch.getBranch());
+			//ps.setString(1,ch.getS_date());
+			//ps.setString(2,ch.getE_date());
+			ps.setString(1,ch.getBranch());
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -413,12 +413,12 @@ public class ChartDAO {
 		int value=0;
 		try {
 			con=Util.getDBConnection();
-			String query="SELECT SUM(amount) FROM `receipt_details` WHERE receipt_date BETWEEN ? AND ?";
+			String query="SELECT SUM(amount) FROM `receipt_details`";
 			
 			ps=con.prepareStatement(query);
 			
-			ps.setString(1,ch.getS_date());
-			ps.setString(2,ch.getE_date());
+			//ps.setString(1,ch.getS_date());
+			//ps.setString(2,ch.getE_date());
 			
 			rs=ps.executeQuery();
 			while(rs.next())
