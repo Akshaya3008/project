@@ -395,11 +395,11 @@
 													data-date="" data-date-format="yyyy-mm-dd"
 													data-link-field="dtp_input2">
 													<input class="form-control" size="16" id="display"
-														type="text" value="" readonly> <span
-														class="input-group-addon"><span
-														class="fa fa-remove remove-ins"></span></span> <span
-														class="input-group-addon"><span
-														class="fa fa-calendar"></span></span>
+														type="text" value="" readonly> 
+														<span class="input-group-addon">
+														<span class="fa fa-remove remove-ins"></span></span>
+														 <span class="input-group-addon">
+														 <span class="fa fa-calendar"></span></span>
 												</div>
 												<input type="hidden" id="dtp_input2"
 													name="installlment_date" value="" /><br />
@@ -1174,9 +1174,9 @@
 			$("#feestypetable .totala").each(function() {
 
 				var val = $(this).val();
-				total += isNaN(val) || $.trim(val) == "" ? 0 : parseFloat(val);
+				total += isNaN(val) || $.trim(val) == "" ? 0 : parseInt(val);
 			});
-			$("#grand-t").val(total.toFixed(2));
+			$("#grand-t").val(total);
 			document.getElementById('amt_installment').value = document
 					.getElementById('grand-t').value;
 			$("#feestypetable2 .totala").each(function() {
