@@ -225,7 +225,7 @@ public class ReceiptDetailsResource {
 			AdmissionController adcontroller=new AdmissionController();
 			adcontroller.revertAdmissionPayment(receiptDetails,branch);
 			ReceiptDetailsController rdcontroller=new ReceiptDetailsController();
-			rdcontroller.revertInstallment(receiptDetails);
+			rdcontroller.revertInstallment(receiptDetails,branch);
 			return Util.generateResponse(Status.ACCEPTED, "Receipt Successfully Deteleted.").build();	
 		} catch (Exception e) {
 			e.printStackTrace();

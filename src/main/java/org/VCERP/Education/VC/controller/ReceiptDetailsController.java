@@ -78,9 +78,9 @@ public class ReceiptDetailsController {
 		return dao.getInstallmentForViewReceipt(rno,receiptno);
 	}
 
-	public void revertInstallment(String receiptDetails) {
+	public void revertInstallment(String receiptDetails,String branch) {
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
-		dao.revertInstallment(receiptDetails);
+		dao.getAllInstallment(receiptDetails,branch);
 	}
 
 }
