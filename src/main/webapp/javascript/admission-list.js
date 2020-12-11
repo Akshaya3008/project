@@ -3,43 +3,40 @@ var table;
 $(document).ready(function() {
 	validateLogin();
 	table = $('#admission_table').DataTable(
-			/*{
-		buttons : [ {
-			extend : 'pdf',
-			className : 'btn btn-info glyphicon glyphicon-file pdf-b'
-		}, {
-			extend : 'print',
-			className : 'btn btn-warning glyphicon glyphicon-print'
-		}, {
-			extend : 'excel',
-			className : 'btn btn-info glyphicon glyphicon-file pdf-b'
-		}, {
-			extend : 'csv',
-			className : 'btn btn-warning glyphicon glyphicon-print'
-		}, ],
-		"order" : [],
-		"columnDefs" : [ {
-			"targets" : 'no-sort',
-			"orderable" : false,
-		} ]
-	}
-	*/);
+	/*
+	 * { buttons : [ { extend : 'pdf', className : 'btn btn-info glyphicon
+	 * glyphicon-file pdf-b' }, { extend : 'print', className : 'btn btn-warning
+	 * glyphicon glyphicon-print' }, { extend : 'excel', className : 'btn
+	 * btn-info glyphicon glyphicon-file pdf-b' }, { extend : 'csv', className :
+	 * 'btn btn-warning glyphicon glyphicon-print' }, ], "order" : [],
+	 * "columnDefs" : [ { "targets" : 'no-sort', "orderable" : false, } ] }
+	 */);
 
-	//table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
+	// table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
 	showAdmissionTable();
-/*	$('#admission_table tbody tr').on('click', '.cbCheck', function() {
-		if (this.checked == true) {
-
-		}
-	});
-*/	$('#editBtn').click(function() {
-	$("#loadingModal").modal('show');
+	/*
+	 * $('#admission_table tbody tr').on('click', '.cbCheck', function() { if
+	 * (this.checked == true) {
+	 *  } });
+	 */$('#editBtn').click(function() {
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked) {
 				var id = $(this).val();
 				getAdmissionDetailsOfSpecificStudent(id);
 			}
 		});
+	});
+	$('#deleteBtn').click(function() {
+		$("#loadingModal").modal('show');
+		var idarray=new Array();
+		$('table .cbCheck').each(function(i, chk) {
+			if (chk.checked) {
+				var id = $(this).val();
+				idarray.push($(this).val());
+			}
+		});
+		deleteRecord(idarray);
 	});
 	$('#addBtn').click(function() {
 		$("#loadingModal").modal('show');
@@ -72,7 +69,8 @@ function showAdmissionTable() {
 					+ responseData[i].id
 					+ '"><label for="checkbox1"></label></span>';
 			var date = responseData[i].date;
-			var student_name = responseData[i].student_name+" "+responseData[i].fname+" "+responseData[i].lname;
+			var student_name = responseData[i].student_name + " "
+					+ responseData[i].fname + " " + responseData[i].lname;
 			var invoice_no = responseData[i].invoice_no;
 			var Rollno = responseData[i].Rollno;
 			var regno = responseData[i].regno;
@@ -93,9 +91,9 @@ function showAdmissionTable() {
 	}
 
 	function errorCallback(responseData, textStatus, request) {
-		
-		 var message=responseData.responseJSON.message;
-		 showNotification("error",message);
+
+		var message = responseData.responseJSON.message;
+		showNotification("error", message);
 	}
 	var httpMethod = "GET";
 	var relativeUrl = "/Admission/FetchAllAdmittedStudent?branch="
@@ -117,13 +115,14 @@ function getStudReceiptList(rno) {
 			var pay_mode = responseData[i].pay_mode;
 			var total = responseData[i].total_amt;
 			var amount = responseData[i].amount;
-			/*var viewbtn = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'
-					+ responseData[i].id
-					+ '"><label for="checkbox1"></label></span>';*/
-			table.row
-					.add(
-							[ rec_date, rec_no, student_name, pay_mode, total,amount
-									/*viewbtn*/ ]).draw();
+			/*
+			 * var viewbtn = '<span class="custom-checkbox"><input
+			 * type="checkbox" id="checkbox" class="cbCheck" name="type"
+			 * value="' + responseData[i].id + '"><label for="checkbox1"></label></span>';
+			 */
+			table.row.add(
+					[ rec_date, rec_no, student_name, pay_mode, total, amount
+					/* viewbtn */]).draw();
 		}
 		$("#loadingModal").modal('hide');
 	}
@@ -133,7 +132,8 @@ function getStudReceiptList(rno) {
 		$("#loadingModal").modal('hide');
 	}
 	var httpMethod = "GET";
-	var relativeUrl = "/Receipt/getStudReceiptList?rno=" + rno +"&branch="+branchSession;
+	var relativeUrl = "/Receipt/getStudReceiptList?rno=" + rno + "&branch="
+			+ branchSession;
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
@@ -141,9 +141,9 @@ function getStudReceiptList(rno) {
 function getAdmissionPromoteData(id) {
 	var admissionPromoteData;
 	function callback(responseData, textStatus, request) {
-		var originalFeesDetails=responseData.feesDetails;
+		var originalFeesDetails = responseData.feesDetails;
 		var feesData = responseData.feesDetails.split(",");
-		
+
 		var feesDetails = "feesDetails";
 		for (var i = 0; i < feesData.length; i++) {
 			feesDetails += "-" + feesData[i];
@@ -166,26 +166,37 @@ function getAdmissionPromoteData(id) {
 		for (var i = 0; i < installment.fees_title.length; i++) {
 			fees_title += "-" + installment.fees_title[i];
 		}
-		
+
 		var paid_fees = "paid_fees";
 		for (var i = 0; i < installment.paid.length; i++) {
 			paid_fees += "-" + installment.paid[i];
 		}
-		
-		/*admissionPromoteData.push(monthlypay);
-		admissionPromoteData.push(due_date);
-		admissionPromoteData.push(fees_title);
-		admissionPromoteData.push(paid_fees);*/
-		admissionPromoteData=responseData.id+":"+responseData.student_name+":"+responseData.lname+":"+
-		responseData.fname+":"+responseData.mname+":"+responseData.uid+":"+responseData.dob+":"+responseData.gender+":"+
-		responseData.caste+":"+responseData.category+":"+responseData.language+":"+responseData.contact+":"+
-		responseData.father_cont+":"+responseData.mother_cont+":"+responseData.address+":"+
-		responseData.pin+":"+responseData.email+":"+responseData.w_app_no+":"+responseData.enq_taken_by+":"+
-		responseData.adm_fees_pack+":"+responseData.status+":"+responseData.date+":"+responseData.standard+":"+
-		responseData.division+":"+responseData.admission_date+":"+responseData.acad_year+":"+responseData.join_date+":"+
-		feesDetails+":"+responseData.fees+":"+responseData.enq_no+":"+responseData.disccount+":"+
-		responseData.paid_fees+":"+responseData.remain_fees+":"+responseData.Branch+":"+monthlypay+":"+due_date+":"+
-		fees_title+":"+paid_fees+":"+originalFeesDetails;
+
+		/*
+		 * admissionPromoteData.push(monthlypay);
+		 * admissionPromoteData.push(due_date);
+		 * admissionPromoteData.push(fees_title);
+		 * admissionPromoteData.push(paid_fees);
+		 */
+		admissionPromoteData = responseData.id + ":"
+				+ responseData.student_name + ":" + responseData.lname + ":"
+				+ responseData.fname + ":" + responseData.mname + ":"
+				+ responseData.uid + ":" + responseData.dob + ":"
+				+ responseData.gender + ":" + responseData.caste + ":"
+				+ responseData.category + ":" + responseData.language + ":"
+				+ responseData.contact + ":" + responseData.father_cont + ":"
+				+ responseData.mother_cont + ":" + responseData.address + ":"
+				+ responseData.pin + ":" + responseData.email + ":"
+				+ responseData.w_app_no + ":" + responseData.enq_taken_by + ":"
+				+ responseData.adm_fees_pack + ":" + responseData.status + ":"
+				+ responseData.date + ":" + responseData.standard + ":"
+				+ responseData.division + ":" + responseData.admission_date
+				+ ":" + responseData.acad_year + ":" + responseData.join_date
+				+ ":" + feesDetails + ":" + responseData.fees + ":"
+				+ responseData.enq_no + ":" + responseData.disccount + ":"
+				+ responseData.paid_fees + ":" + responseData.remain_fees + ":"
+				+ responseData.Branch + ":" + monthlypay + ":" + due_date + ":"
+				+ fees_title + ":" + paid_fees + ":" + originalFeesDetails;
 
 		sessionStorage.setItem("admissionPromoteData", admissionPromoteData);
 		$("#loadingModal").modal('hide');
@@ -224,7 +235,7 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 		admissionData.push(responseData.acad_year);
 		admissionData.push(responseData.join_date);
 		var feesData = responseData.feesDetails.split(",");
-		
+
 		var feesDetails = "feesDetails";
 		for (var i = 0; i < feesData.length; i++) {
 			feesDetails += "-" + feesData[i];
@@ -232,7 +243,7 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 		admissionData.push(feesDetails);
 		admissionData.push(responseData.fees);
 		var installment = responseData.installment;
-		var checkInstallmentAvail=installment.monthly_pay.length;
+		var checkInstallmentAvail = installment.monthly_pay.length;
 		// var monthly=installment.monthly_pay.split(",");
 		var monthlypay = "monthlypay";
 		for (var i = 0; i < installment.monthly_pay.length; i++) {
@@ -250,12 +261,12 @@ function getAdmissionDetailsOfSpecificStudent(id) {
 		for (var i = 0; i < installment.fees_title.length; i++) {
 			fees_title += "-" + installment.fees_title[i];
 		}
-		
+
 		var paid_fees = "paid_fees";
 		for (var i = 0; i < installment.paid.length; i++) {
 			paid_fees += "-" + installment.paid[i];
 		}
-		
+
 		admissionData.push(monthlypay);
 		admissionData.push(due_date);
 		admissionData.push(fees_title);
@@ -285,21 +296,21 @@ function getInvoiceOfSpecificStudent(id, e) {
 	var rowCount = table.rows.length;
 	var i = 1;
 	while (rowCount > i) {
-		document.getElementById("invoice_table").deleteRow(rowCount-1);
+		document.getElementById("invoice_table").deleteRow(rowCount - 1);
 		rowCount = rowCount - 1;
 	}
 	var table = document.getElementById("install-table");
 	var rowCount = table.rows.length;
 	var i = 3;
 	while (rowCount > i) {
-		document.getElementById("install-table").deleteRow(rowCount-2);
+		document.getElementById("install-table").deleteRow(rowCount - 2);
 		rowCount = rowCount - 1;
 	}
 	var table = document.getElementById("std-table");
 	var rowCount = table.rows.length;
 	var i = 2;
 	while (rowCount > i) {
-		document.getElementById("std-table").deleteRow(rowCount-1);
+		document.getElementById("std-table").deleteRow(rowCount - 1);
 		rowCount = rowCount - 1;
 	}
 
@@ -329,7 +340,7 @@ function getInvoiceOfSpecificStudent(id, e) {
 				+ '</td></tr><tr><td colspan="2"></td><td colspan="2">Balance Due</td><td>'
 				+ responseData.remain_fees + '</td></tr>';
 		$("#invoice_table tfoot").append(tableFooterRow);
-		
+
 		var branchDetails = getInvoiceBranchDetails();
 		document.getElementById("company_name").innerHTML = branchDetails[0];
 		document.getElementById("company_address").innerHTML = branchDetails[1];
@@ -372,7 +383,15 @@ function getInvoiceOfSpecificStudent(id, e) {
 		var remain_total = 0;
 		for (var i = 0; i < monthly_pay.length; i++) {
 			srno += 1;
-			var installmentRow='<tr><td><strong> <span id="srno">'+srno+'</span></strong></td><td><strong> <span id="due_date"></span>'+due_date[i]+'</strong></td><td><strong> <span id="amount">'+monthly_pay[i]+'</span></strong></td><td><strong> <span id="paid">'+paid[i]+'</span></strong></td><td><span id="balance">'+remain[i]+'</span></td></tr>';
+			var installmentRow = '<tr><td><strong> <span id="srno">'
+					+ srno
+					+ '</span></strong></td><td><strong> <span id="due_date"></span>'
+					+ due_date[i]
+					+ '</strong></td><td><strong> <span id="amount">'
+					+ monthly_pay[i]
+					+ '</span></strong></td><td><strong> <span id="paid">'
+					+ paid[i] + '</span></strong></td><td><span id="balance">'
+					+ remain[i] + '</span></td></tr>';
 			$("#install-table tbody").append(installmentRow);
 			due_total += monthly_pay[i];
 			paid_total += paid[i];
@@ -382,18 +401,20 @@ function getInvoiceOfSpecificStudent(id, e) {
 		document.getElementById("paid_total").innerHTML = paid_total;
 		document.getElementById("bal_total").innerHTML = remain_total;
 
-		/*var standard = responseData.standard;*/
-		var standard=getStandard(responseData.adm_fees_pack);
+		/* var standard = responseData.standard; */
+		var standard = getStandard(responseData.adm_fees_pack);
 		var srno = 1;
 		var std = standard.split("-");
 		for (var k = 0; k < std.length; k++) {
-			var stdname='<tr class="bg-default"><td colspan="2" id="std">'+std[k]+'</td></tr>';
+			var stdname = '<tr class="bg-default"><td colspan="2" id="std">'
+					+ std[k] + '</td></tr>';
 			$("#std-table tbody").append(stdname);
 			var subject = getStandardSubject(std[k]);
 			var hyphenSeperetedSub = subject.split("|");
-			for (var j = 1; j < hyphenSeperetedSub.length; j++)
-			{
-				var subject_row='<tr><td><span id="srno">'+srno+'</span></td><td><span id="subject">'+hyphenSeperetedSub[j]+'</span></td></tr>';
+			for (var j = 1; j < hyphenSeperetedSub.length; j++) {
+				var subject_row = '<tr><td><span id="srno">' + srno
+						+ '</span></td><td><span id="subject">'
+						+ hyphenSeperetedSub[j] + '</span></td></tr>';
 				$("#std-table tbody").append(subject_row);
 				srno += 1;
 			}
@@ -451,19 +472,38 @@ function getStandardSubject(standard) {
 function getStandard(fees_pack) {
 	var standard;
 	function callback(responseData, textStatus, request) {
-		standard=responseData.standard;
+		standard = responseData.standard;
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
 		showNotification("error", mes);
 	}
 	var httpMethod = "POST";
-	var formData={
-			pack : fees_pack,
-			branch : branchSession
+	var formData = {
+		pack : fees_pack,
+		branch : branchSession
 	}
 	var relativeUrl = "/FeesPackage/getFeesPackageData";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+			errorCallback);
+	return standard;
+}
+
+function deleteRecord(ids){
+	function callback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
+		var mes = responseData.message;
+		showNotification("success", mes);
+		reloadPage();
+	}
+	function errorCallback(responseData, textStatus, request) {
+		$("#loadingModal").modal('hide');
+		var mes = responseData.responseJSON.message;
+		showNotification("error", mes);
+	}
+	var httpMethod = "DELETE";
+	var relativeUrl = "/Admission/deleteRecord?ids="+ids+"&branch="+branchSession;
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return standard;
 }

@@ -657,5 +657,71 @@ public class AdmissionDAO {
 			Util.closeConnection(null, ps, con);
 		}
 	}
+
+	public boolean deleteRecord(String ids, String branch) {
+		Connection con=null;
+		PreparedStatement ps=null,ps1=null,ps2=null;
+		String[] commaSeperatedIds=Util.commaSeperatedString(ids);
+		boolean isDelete=false;
+		try {
+			con=Util.getDBConnection();
+			String admissionQuery="delete from admission"
+					+ " where id=? and branch=?";
+			String receiptQuery="delete from receipt_details"
+					+ " where RollNO=? and branch=?";
+			String installmentQuery="delete from installment"
+					+ " where rollno=? and branch=?";
+			
+			for(int i=0;i<commaSeperatedIds.length;i++){
+				long enq_no=searchStudentFromAdmission(commaSeperatedIds[i], branch).getEnq_no();
+				String rollno=searchStudentFromAdmission(commaSeperatedIds[i], branch).getRollno();
+				updateAdmitStatus(enq_no,branch);
+				ps=con.prepareStatement(admissionQuery);
+				ps.setString(1, commaSeperatedIds[i]);
+				ps.setString(2, branch);
+				ps.executeUpdate();
+				
+				ps1=con.prepareStatement(installmentQuery);
+				ps1.setString(1, rollno);
+				ps1.setString(2, branch);
+				ps1.executeUpdate();
+				
+				ps2=con.prepareStatement(receiptQuery);
+				ps2.setString(1, rollno);
+				ps2.setString(2, branch);
+				ps2.executeUpdate();
+				
+				isDelete=true;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+		return isDelete;
+	}
+
+	private void updateAdmitStatus(long enq_no, String branch) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			con=Util.getDBConnection();
+			String query="update enquiry set status='Non Admitted'"
+					+ " where enq_no=? and branch=?";
+				ps=con.prepareStatement(query);
+				ps.setLong(1, enq_no);
+				ps.setString(2, branch);
+				ps.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+	}
 		
 }

@@ -5,6 +5,7 @@ var branchData;
 var admitted_fees_pack;
 var originalInsall;
 var changeAcadData;
+var oldFeesPack;
 var request = "Save";
 $(document)
 		.ready(
@@ -385,21 +386,22 @@ $(document)
 					 * event.preventDefault(); addFeesType(); });
 					 */
 					var select = document.getElementById('fees');
-					select
-							.addEventListener(
-									'change',
-									function() {
+					select.addEventListener('change',function() {
+										if (request != "Edit") {
 										var feespack = select.value.split("|");
 										getFeesPackageDetails(feespack[0]);
 
 										if (admitted_fees_pack != select.value) {
-											document
-													.getElementById("admission").disabled = false;
+											document.getElementById("admission").disabled = false;
 										} else {
-											document
-													.getElementById("admission").disabled = true;
+											document.getElementById("admission").disabled = true;
 											showNotification("error",
 													"Student Already Admitted For This Course.");
+										}
+										}else{
+											$('.fees_package').val(oldFeesPack);
+											showNotification("error",
+											"Enable to Edit Record.Please try by deleting record.");
 										}
 									});
 					var acad = document.getElementById('acad_year');
@@ -645,7 +647,7 @@ function StudentAdmission() {
 		clearSession();
 		$("#loadingModal").modal('hide');
 	}
-
+	//var newFeesPack=document.getElementById(fees).value;
 	var installmentDateStatus = checkInstallmentDate(installment, document
 			.getElementById("admission_date").value);
 	var installmentAmtStatus = checkInstallmentAmount(installment, g_total);
@@ -965,6 +967,7 @@ function loadAdmissionData() {
 					+ "Admitted");
 	$("#enq_taken").val(admissionData[5]);
 	$(".fees_package").val(admissionData[6] + "|" + admissionData[17]);
+	oldFeesPack=admissionData[6] + "|" + admissionData[17];
 	$("#status").val(admissionData[7]);
 	$("#current_date").val(admissionData[8]);
 	document.getElementById("ID_no").value = admissionData[9];

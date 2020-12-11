@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -591,6 +592,28 @@ public class AdmissionResource {
 			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to completed the process.").build();
+	}
+	
+	@RolesAllowed("DELETE_ADMISSION")
+	@DELETE
+	@JWTTokenNeeded
+	@Path("/deleteRecord")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteRecord(@QueryParam("ids") String ids,
+			@QueryParam("branch") String branch) {
+		AdmissionController controller = new AdmissionController();
+		try {
+			boolean isDelete = controller.deleteRecord(ids, branch);
+			if(isDelete){
+				return Util.generateResponse(Status.ACCEPTED, "Student Successfully Deleted.").build();
+			}else{
+				return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to delete admission data.").build();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
 
 }

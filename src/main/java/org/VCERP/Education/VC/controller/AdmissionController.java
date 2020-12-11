@@ -70,4 +70,8 @@ public class AdmissionController {
 		AdmissionDAO dao=new AdmissionDAO();
 		dao.EditStudentInstallment(commaSeperatedInstallment,admission,changeAcadData);
 	}
+	public boolean deleteRecord(String ids, String branch) {
+		AdmissionDAO dao=new AdmissionDAO();
+		return dao.deleteRecord(ids,branch);
+	}
 }
