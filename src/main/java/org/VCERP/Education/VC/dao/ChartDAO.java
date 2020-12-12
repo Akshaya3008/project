@@ -384,7 +384,7 @@ public class ChartDAO {
 		int value=0;
 		try {
 			con=Util.getDBConnection();
-			String query="SELECT SUM(amount) FROM `receipt_details` WHERE branch=?";
+			String query="SELECT SUM(remain_fees) FROM `admission` WHERE branch=?";
 			
 			ps=con.prepareStatement(query);
 			
@@ -413,7 +413,7 @@ public class ChartDAO {
 		int value=0;
 		try {
 			con=Util.getDBConnection();
-			String query="SELECT SUM(amount) FROM `receipt_details`";
+			String query="SELECT SUM(remain_fees) FROM `admission`";
 			
 			ps=con.prepareStatement(query);
 			
