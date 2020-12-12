@@ -120,6 +120,11 @@ table.table tr th:last-child {
 		background: #fff url('img/ring.gif') no-repeat center center;
 		z-index: 99999;
 		}
+		
+#narration{
+ outline:none;
+ resize:none;
+}
 </style>
 	<script>
 	$(function() {
@@ -141,8 +146,7 @@ table.table tr th:last-child {
 						<div class="panel-body">
 							<div class="row">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Search Student ID<span
-									class="text-red">*</span>
+								<label class="col-sm-3 control-label">Search Student ID<font color=red>*</font>
 								</label>
 								<div class="col-sm-6">
 										<input type="text" id="stud_id" class="form-control" list="stud_list" placeholder="e.g. search student" style="width">
@@ -156,7 +160,7 @@ table.table tr th:last-child {
 							</div>
 							<div class="row">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Student Details<span class="text-red">*</span>
+								<label class="col-sm-3 control-label">Student Details<font color=red>*</font>
 								</label>
 								<div class="col-sm-6">
 									<input type="text" id="stud_details" name="stud_details" class="form-control" readonly>
@@ -165,7 +169,7 @@ table.table tr th:last-child {
 							</div>
 							<div class="row">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Net Receivable<span class="text-red">*</span>
+								<label class="col-sm-3 control-label">Net Receivable<font color=red>*</font>
 								</label>
 								<div class="col-sm-6">
 									<input type="number" name="net_receive" id="net_receive" class="form-control" readonly>
@@ -174,7 +178,7 @@ table.table tr th:last-child {
 							</div>
 							<div class="row">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Receipt Date<span class="text-red">*</span>
+								<label class="col-sm-3 control-label">Receipt Date<font color=red>*</font>
 								</label>
 								<div class="col-sm-6">
 									<input type="date" name="receipt_date" id="receipt_date" class="form-control">
@@ -183,7 +187,7 @@ table.table tr th:last-child {
 							</div>
 							<div class="row">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Receipt No.<span class="text-red">*</span></label>
+								<label class="col-sm-3 control-label">Receipt No.<font color=red>*</font></label>
 								<div class="col-sm-6">
 									<div class="input-group" style="width: 100%;">
 										<input type="text" name="receipt_no" id="receipt_no" class="form-control" readonly>
@@ -219,7 +223,8 @@ table.table tr th:last-child {
 							
 							<div class="row">
 							<div class="form-group" style="width: 100%;">
-								<label class="col-sm-3 control-label">Transaction/Cheque Status<font color=red>*</font>
+								<label class="col-sm-3 control-label">Transaction/Cheque Status
+								<!-- <font color=red>*</font> -->
 								</label>
 								<div class="col-sm-6">
 									<div class="input-group" style="width: 100%;">
@@ -234,7 +239,9 @@ table.table tr th:last-child {
 							</div>
 							<div class="row">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">Transaction/Cheque Number<font color=red>*</font></label>
+								<label class="col-sm-3 control-label">Transaction/Cheque Number
+								<!-- <font color=red>*</font> -->
+								</label>
 								<div class="col-sm-6">
 									<div class="input-group" style="width: 100%;">
 										<input type="text" id="cheque_no" name="cheque_no" class="form-control">
@@ -262,6 +269,16 @@ table.table tr th:last-child {
 									<div class="input-group" style="width: 100%;">
 										<select name="received_by" class="form-control" id="enq_taken" required>
 										</select>
+									</div>
+								</div>
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Narration<font color=red>*</font></label>
+								<div class="col-sm-6">
+									<div class="input-group" style="width: 100%;">
+										<textarea name="narration" class="form-control" id="narration" cols="30" rows="6" required> </textarea>
 									</div>
 								</div>
 							</div>

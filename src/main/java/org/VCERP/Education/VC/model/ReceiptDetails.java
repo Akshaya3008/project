@@ -15,6 +15,7 @@ public class ReceiptDetails {
 	private String trans_date;
 	private String cheque_no;
 	private String received_by;
+	private String narration;
 	private long total_amt;
 	private long received_amt;
 	private long amount;
@@ -25,6 +26,13 @@ public class ReceiptDetails {
 	private Admission admission;
 	
 	
+	
+	public String getNarration() {
+		return narration;
+	}
+	public void setNarration(String narration) {
+		this.narration = narration;
+	}
 	public String getInvoice() {
 		return invoice;
 	}

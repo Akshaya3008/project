@@ -103,7 +103,7 @@ public class ReceiptDetailsResource {
 			@FormParam("receipt_date") String receipt_date,@FormParam("receipt_no") String receipt_no,
 			@FormParam("received_amt") long received_amt,@FormParam("pay_mode") String pay_mode
 			,@FormParam("trans_status") String trans_status,@FormParam("trans_date") String trans_date
-			,@FormParam("received_by") String received_by,@FormParam("cheque_no") String cheque_no,
+			,@FormParam("received_by") String received_by,@FormParam("narration") String narration,@FormParam("cheque_no") String cheque_no,
 			@FormParam("installmentDetails") String installDetails,@FormParam("branch") String branch)
 	{
 		String[] stud_details=Util.symbolSeperatedString(stud_name);
@@ -124,6 +124,7 @@ public class ReceiptDetailsResource {
 			details.setTrans_status(trans_status);
 			details.setTrans_date(trans_date);
 			details.setReceived_by(received_by);
+			details.setNarration(narration);
 			details.setCheque_no(cheque_no);
 			details.setTotal_amt(Long.parseLong(stud_details[3].trim()));
 			details.setReceived_amt(received_amt);		
@@ -160,6 +161,7 @@ public class ReceiptDetailsResource {
 		}
 		return Util.generateErrorResponse(Status.BAD_REQUEST, "Unable to insert data.Please try again or contact with administrator").build();
 	}
+	
 	
 	@Path("/getReceiptAdmissionData")
 	@GET

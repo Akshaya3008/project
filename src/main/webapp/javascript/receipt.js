@@ -2,6 +2,8 @@ var mes;
 var today=new Date();
 var date= new Date(today.getTime() - (today.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];
 $(document).ready(function(){
+	/*$('textarea').autoResize();*/
+	
 	validateLogin();
 	getIncrementedReceiptNumber();
 	FetchAllEmployee();

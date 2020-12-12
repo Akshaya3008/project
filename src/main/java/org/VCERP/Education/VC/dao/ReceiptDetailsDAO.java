@@ -34,16 +34,16 @@ public class ReceiptDetailsDAO {
 		return receipt;
 	}
 
-	public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
+public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		logger.warn("in add receipt");
-		Connection con = null;
-		PreparedStatement ps = null;
+		Connection con=null;
+		PreparedStatement ps=null;
 		try {
-			con = Util.getDBConnection();
-			String query = "insert into receipt_details(`stud_name`,`RollNO`,`contact`,`receipt_date`,`receipt_no`,"
-					+ "`pay_mode`,`trans_status`,`trans_date`,`cheque_no`,`received_by`,`total_fees`,`payment`,`amount`,`branch`)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			ps = con.prepareStatement(query);
+			con=Util.getDBConnection();
+			String query="insert into receipt_details(`stud_name`,`RollNO`,`contact`,`receipt_date`,`receipt_no`,"
+					+ "`pay_mode`,`trans_status`,`trans_date`,`cheque_no`,`received_by`,`narration`,`total_fees`,`payment`,`amount`,`branch`)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			ps=con.prepareStatement(query);
 			ps.setString(1, details.getStud_name());
 			ps.setString(2, details.getRollno());
 			ps.setString(3, details.getContact());
@@ -54,15 +54,17 @@ public class ReceiptDetailsDAO {
 			ps.setString(8, details.getTrans_date());
 			ps.setString(9, details.getCheque_no());
 			ps.setString(10, details.getReceived_by());
-			ps.setLong(11, details.getTotal_amt());
-			ps.setLong(12, details.getReceived_amt());
-			ps.setLong(13, details.getAmount());
-			ps.setString(14, details.getBranch());
+			ps.setString(11, details.getNarration());
+			ps.setLong(12, details.getTotal_amt());
+			ps.setLong(13, details.getReceived_amt());
+			ps.setLong(14, details.getAmount());
+			ps.setString(15,details.getBranch());
 			ps.executeUpdate();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);
-		} finally {
+		}
+		finally {
 			Util.closeConnection(null, ps, con);
 		}
 		return details;
@@ -149,19 +151,20 @@ public class ReceiptDetailsDAO {
 	}
 
 	public ArrayList<ReceiptDetails> FetchAllReceiptDetails(String branch) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		ReceiptDetails rec = null;
-		ArrayList<ReceiptDetails> receipt = new ArrayList<>();
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		ReceiptDetails rec=null;
+		ArrayList<ReceiptDetails> receipt=new ArrayList<>();
 		try {
-			con = Util.getDBConnection();
-			String query = "select * from receipt_details where branch=?";
-			ps = con.prepareStatement(query);
+			con=Util.getDBConnection();
+			String query="select * from receipt_details where branch=?";
+			ps=con.prepareStatement(query);
 			ps.setString(1, branch);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				rec = new ReceiptDetails();
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				rec=new ReceiptDetails();
 				rec.setId(rs.getLong(1));
 				rec.setStud_name(rs.getString(2));
 				rec.setRollno(rs.getString(3));
@@ -173,21 +176,24 @@ public class ReceiptDetailsDAO {
 				rec.setTrans_date(rs.getString(9));
 				rec.setCheque_no(rs.getString(10));
 				rec.setReceived_by(rs.getString(11));
-				rec.setTotal_amt(rs.getLong(12));
-				rec.setReceived_amt(rs.getLong(13));
-				rec.setAmount(rs.getLong(14));
+				rec.setNarration(rs.getString(12));
+				rec.setTotal_amt(rs.getLong(13));
+				rec.setReceived_amt(rs.getLong(14));
+				rec.setAmount(rs.getLong(15));
 				receipt.add(rec);
 			}
-
-		} catch (Exception e) {
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);
-		} finally {
+		}
+		finally {
 			Util.closeConnection(rs, ps, con);
 		}
 		return receipt;
 	}
-
+	
+	
 	public ReceiptDetails updateRemainingAmount(String id, String branch) {
 		Connection con = null;
 		PreparedStatement ps = null;

@@ -79,12 +79,13 @@ function showReceiptTable() {
 			var pay_mode = responseData[i].pay_mode;
 			var received_amt = responseData[i].received_amt;
 			var received_by = responseData[i].received_by;
+			var narration = responseData[i].narration;
 			var trans_date = responseData[i].trans_date;
 			var trans_status = responseData[i].trans_status;
 			table.row.add(
 					[ srno, receipt_date, receipt_no, stud_name, contact,
 							Rollno, pay_mode, received_amt, received_by,
-							trans_date, trans_status ]).draw();
+							trans_date,narration, trans_status ]).draw();
 
 		}
 	}
