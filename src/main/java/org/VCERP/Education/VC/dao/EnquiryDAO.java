@@ -129,7 +129,7 @@ public class EnquiryDAO {
 		PreparedStatement st=null;
 		try {
 			con=Util.getDBConnection();
-			String query="delete from enquiry where id=? and branch=?";
+			String query="delete from enquiry where enq_no=? and branch=?";
 			st=con.prepareStatement(query);
 			st.setLong(1, id);
 			st.setString(2, branch);

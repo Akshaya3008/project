@@ -31,7 +31,8 @@ $(document).ready(function() {
 		var enq_no;
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked == true) {
-				enq_no = table.rows({selected : true}).column(2).data()[i];
+				enq_no=chk.value;
+				//enq_no = table.rows({selected : true}).column(2);
 			}
 		});
 		Admission(enq_no, request);
@@ -43,7 +44,7 @@ function showDashboard() {
 		table.rows().remove().draw();
 		for ( var i in responseData) {
 			var srno = '<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type" value="'
-					+ responseData[i].id
+					+ responseData[i].enq_no
 					+ '"><label for="checkbox1"></label></span>';
 			var enq_date = responseData[i].enq_date;
 			var enq_no = responseData[i].enq_no;
