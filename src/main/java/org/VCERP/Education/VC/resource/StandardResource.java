@@ -120,9 +120,7 @@ public class StandardResource {
 				std.setBranch(colanSeperated[0]);
 				controller.EditStandard(std);
 			}
-			if(i==commaSeperated.length){
 			return Util.generateResponse(Status.ACCEPTED, "Standard Successfully Updated.").build();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);

@@ -28,7 +28,7 @@ $(document).ready(function() {
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
-			feestype = table.rows({selected : true}).column(1).data()[i];
+			feestype = table.row(this.closest('tr')).data()[i];
 			loadFeesType(feestype,e);
 			}
 		});

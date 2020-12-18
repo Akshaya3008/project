@@ -273,16 +273,9 @@ function createEmployeeAccount() {
 }
 
 function loadUserAccount(i, e) {
-	var table = $("#UserMgmt_table").DataTable();
-	empname = table.rows({
-		selected : true
-	}).column(2).data()[i];
-	username = table.rows({
-		selected : true
-	}).column(3).data()[i];
-	role = table.rows({
-		selected : true
-	}).column(4).data()[i];
+	empname = table.row(this.closest('tr')).data()[2];
+	username = table.row(this.closest('tr')).data()[3];
+	role = table.row(this.closest('tr')).data()[4];
 	$("#enq_taken").val(empname);
 	$("#role").val(role);
 	document.getElementById("userid").value = username;

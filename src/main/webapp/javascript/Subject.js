@@ -51,8 +51,8 @@ $(document).ready(function(){
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
-			subject = table.rows({selected : true}).column(1).data()[i];
-			timeline = table.rows({selected : true}).column(2).data()[i];
+			subject = table.row(this.closest('tr')).data()[1];
+			timeline = table.row(this.closest('tr')).data()[2];
 			loadSubject(subject,timeline,e);
 			}
 		});	

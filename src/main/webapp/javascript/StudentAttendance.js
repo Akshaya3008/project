@@ -165,7 +165,7 @@ $(document).ready(function() {
 			$("#loadingModal").modal('show');
 			if (chk.checked==true) {
 			e.preventDefault();
-			var rno=table.rows({selected : true}).column(1).data()[i];
+			var rno=table.row(this.closest('tr')).data()[1];
 			StudentAttendanceReport(rno);
 			}
 		});	
@@ -261,12 +261,12 @@ function getAttendance() {
 	var attendance = "0|0";
 	$('table .cbCheck').each(function(i, chk) {
 		if (chk.checked) {
-			var rollno = table.rows({selected : true}).column(1).data()[i];
+			var rollno = table.row(this.closest('tr')).data()[1];
 			// var rollno=i+1;
 			attendance = attendance + "," + rollno + "|" + chk.value;
 		}
 		if (!chk.checked) {
-			var rollno = table.rows({selected : false}).column(1).data()[i];
+			var rollno = table.row(this.closest('tr')).data()[1];
 			// var rollno=i+1;
 			attendance = attendance + "," + rollno + "|A";
 			// myArray.push(rollno+"|"+"A");

@@ -61,11 +61,12 @@ $(document).ready(function(){
 	var table=$('#branchtable').DataTable();
 	$("#editBtn").click(function(e){
 		request="Edit";
-		var code;
+		var code,val;
 		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked == true) {
-				code = table.rows({selected : true}).column(2).data()[i];	
+				val=table.row(this.closest('tr')).data();
+				code = val[2];	
 			}
 		});
 		loadBranch(code,e,request);
@@ -131,7 +132,7 @@ function getBranch(){
 
 function loadBranch(code,e,req){
 	function callback(responseData, textStatus, request){
-		document.getElementById("branch_name").value=responseData.Branch;
+		$(".branch").val(responseData.Branch);
 		$("#instituteType").val(responseData.InstituteType);
 		document.getElementById("title").value=responseData.Title;
 		document.getElementById("subTitle").value=responseData.SubTitle;

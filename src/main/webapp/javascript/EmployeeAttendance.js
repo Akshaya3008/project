@@ -96,7 +96,7 @@ $(document).ready(function() {
 		$("table .cbCheckAbs").each(function(i,chk){
 			if (chk.checked==true) {
 				
-			var rno=table.rows({selected : true}).column(2).data()[i];
+			var rno=table.row(this.closest('tr')).data()[2];
 			getEmployeeAttendanceReport(rno,e);
 			}
 		});
@@ -144,7 +144,7 @@ function getAttendance() {
 	var attendance = "0|0";
 	$('table .cbCheckPrs').each(function(i, chk) {
 				if (chk.checked) {
-					var code = table.rows({selected : true}).column(1).data()[i];
+					var code = table.row(this.closest('tr')).data()[1];
 					var intime = table.cell(i, 4).nodes().to$().find('input').val();
 					var out = table.cell(i, 5).nodes().to$().find('input').val();
 					attendance = attendance + "," + code + "|" + intime + "|"
@@ -153,7 +153,7 @@ function getAttendance() {
 			});
 	$('table .cbCheckAbs').each(function(i, chk) {
 				if (chk.checked) {
-					var code = table.rows({selected : true}).column(1).data()[i];
+					var code = table.row(this.closest('tr')).data()[1];
 					var intime = "null";
 					var out = "null";/*table.cell(i, 5).nodes().to$().find('input')
 							.val();*/

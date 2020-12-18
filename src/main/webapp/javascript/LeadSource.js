@@ -31,7 +31,7 @@ $(document).ready(function(){
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
-			source = table.rows({selected : true}).column(1).data()[i];
+			source = table.row(this.closest('tr')).data()[1];
 			loadSource(source,e);
 			}
 		});

@@ -106,12 +106,8 @@ $(document)
 						$('table .cbCheck').each(function(i, chk) {
 							if (chk.checked) {
 								requestid = $(this).val();
-								var pack = table.rows({
-									selected : true
-								}).column(1).data()[i];
-								var branch = table.rows({
-									selected : true
-								}).column(2).data()[i];
+								var pack = table.row(this.closest('tr')).data()[1];
+								var branch = table.row(this.closest('tr')).data()[2];
 								loadFeesPackageData(pack, branch);
 							}
 						});

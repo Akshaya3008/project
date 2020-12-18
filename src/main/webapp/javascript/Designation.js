@@ -29,7 +29,7 @@ $(document).ready(function() {
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
-			designation = table.rows({selected : true}).column(1).data()[i];
+			designation = table.row(this.closest('tr')).data()[1];
 			loadDesignation(designation,e);
 			}
 		});	

@@ -129,11 +129,11 @@ $(document).ready(function() {
 		  $('table .cbCheck').each(function(i, chk) { 
 			  if (chk.checked==true) {
 				  requestid=1; 
-				  created_date=table.rows({selected :true}).column(0).data()[i]; 
-				  title=table.rows({selected :true}).column(1).data()[i]; 
+				  created_date=table.row(this.closest('tr')).data()[0]; 
+				  title=table.row(this.closest('tr')).data()[1]; 
 			  }
 		  });
-		 // e.preventDefault();
+		  e.preventDefault();
 		  loadTimeTable(created_date,title);
 	});
 	$('#deleteBtn').click(function(e) {
@@ -142,8 +142,8 @@ $(document).ready(function() {
 		var table = $("#timetable_table").DataTable();
 		  $('table .cbCheck').each(function(i, chk) { 
 			  if (chk.checked==true) {
-				  created_date=table.rows({selected :true}).column(0).data()[i]; 
-				  title=table.rows({selected :true}).column(1).data()[i]; 
+				  created_date=table.row(this.closest('tr')).data()[0]; 
+				  title=table.row(this.closest('tr')).data()[1]; 
 				  e.preventDefault();
 				  deleteTimeTable(created_date,title);
 			  }

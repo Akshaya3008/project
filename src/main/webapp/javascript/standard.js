@@ -69,14 +69,14 @@ $("#deleteBtn").click(function() {
 	  $('table .cbCheck').each(function(i, chk) {
 		  if (chk.checked==true) {
 			  requestid=$(this).val(); 
-			  var branch=table.rows({selected :true}).column(2).data()[i];
-			  var standard=table.rows({selected :true}).column(1).data()[i]; 
-			  var stdamt=table.rows({selected :true}).column(3).data()[i]; 
-			  var subject=table.rows({selected : true}).column(4).data()[i]; 
+			  var branch=table.row(this.closest('tr')).data()[2];
+			  var standard=table.row(this.closest('tr')).data()[1]; 
+			  var stdamt=table.row(this.closest('tr')).data()[3]; 
+			  var subject=table.row(this.closest('tr')).data()[4]; 
 			  loadStandard(branch,standard,stdamt,subject,e); 
-  }
-  }); });
- 
+		  	}
+	  	}); 
+	  });
 });
 function getAllStandardData() {
 	function callback(responseData, textStatus, request) {
@@ -213,11 +213,9 @@ function getStandardData(){
 
 function addStandard(branchData,subject){
 	function callback(responseData, textStatus, request){
-		for ( var i in responseData) {
 			var mes=responseData.message;
 			showNotification("success",mes);
 			$("#loadingModal").modal('hide');
-		}
 	}
 	function errorCallback(responseData, textStatus, request){
 		var mes=responseData.responseJSON.message;

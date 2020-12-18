@@ -75,10 +75,10 @@ $(document).ready(function(){
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
-			var date = table.rows({selected : true}).column(0).data()[i];
-			var expenses=table.rows({selected : true}).column(1).data()[i];
-			var vendor=table.rows({selected : true}).column(2).data()[i];
-			var pay_mode=table.rows({selected : true}).column(3).data()[i];
+			var date = table.row(this.closest('tr')).data()[0];
+			var expenses=table.row(this.closest('tr')).data()[1];
+			var vendor=table.row(this.closest('tr')).data()[2];
+			var pay_mode=table.row(this.closest('tr')).data()[3];
 			loadExpenses(date,expenses,vendor,pay_mode,e);
 			}
 		});

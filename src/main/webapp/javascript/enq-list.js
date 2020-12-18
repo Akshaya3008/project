@@ -20,7 +20,7 @@ $(document).ready(function() {
 		var enq_no;
 		$('table .cbCheck').each(function(i, chk) {
 			if (chk.checked == true) {
-				enq_no = table.rows({selected : true}).column(2).data()[i];
+				enq_no = table.row(this.closest('tr')).data()[2];
 			}
 		});
 		Admission(enq_no, request);

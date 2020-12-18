@@ -188,7 +188,8 @@ function getSepecificEmployeeDetails(requestid,e){
 		$("#contact").val(responseData.contact);
 		$("#dob").val(responseData.dob);
 		$("#join_date").val(responseData.join_date);
-		$("#design").val(responseData.design);
+		alert(responseData.design);
+		$(".designation").val(responseData.design);
 		$("#loadingModal").modal('hide');
 		e.preventDefault();
 		$('#addEmployeeModal').modal({

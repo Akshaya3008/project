@@ -35,7 +35,7 @@ $(document).ready(function() {
 		$('table .cbCheck').each(function(i, chk) {
 			if(chk.checked){
 			requestid=$(this).val();
-			caste = table.rows({selected : true}).column(1).data()[i];
+			caste=table.row(this.closest('tr')).data()[1];
 			loadCaste(caste,e);
 			}
 		});
