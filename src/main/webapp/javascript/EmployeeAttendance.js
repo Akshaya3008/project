@@ -196,7 +196,7 @@ function saveAttendance(attendance,selectedDate) {
 		  showNotification("error",message);
 		  $("#loadingModal").modal('hide');
 	}
-
+	alert(attendance+"  "+selectedDate);
 	var httpMethod = "POST";
 	var formData = {
 		Attendance : attendance,

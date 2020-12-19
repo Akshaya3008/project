@@ -180,7 +180,7 @@ function FetchAllEmployee(){
 function getSepecificEmployeeDetails(requestid,e){
 	function callback(responseData, textStatus, request) {
 		$("#emp_type").val(responseData.emp_type);
-		$("#branch").val(responseData.branch);
+		$(".branch").val(responseData.branch);
 		$("#emp_name").val(responseData.emp_name);
 		$("#emp_unq_code").val(responseData.emp_unq_code);
 		$("#email").val(responseData.email);
@@ -188,7 +188,6 @@ function getSepecificEmployeeDetails(requestid,e){
 		$("#contact").val(responseData.contact);
 		$("#dob").val(responseData.dob);
 		$("#join_date").val(responseData.join_date);
-		alert(responseData.design);
 		$(".designation").val(responseData.design);
 		$("#loadingModal").modal('hide');
 		e.preventDefault();

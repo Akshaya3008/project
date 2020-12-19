@@ -118,7 +118,8 @@ public class AttendanceDAO {
 		ResultSet rs1=null;
 		try {
 			con=Util.getDBConnection();
-			String query="SELECT COUNT(`"+attendance.getRollNo()+"`) as totalCount FROM `attendance` where date BETWEEN ? AND ? AND acad_year=? and "
+			String query="SELECT COUNT(`date`) as totalCount FROM `attendance` where "
+					+ "date BETWEEN ? AND ? AND acad_year=? and "
 					+ "standard=? and division=? AND branch=? ";
 			ps=con.prepareStatement(query);
 			ps.setString(1, attendance.getFrom_date());

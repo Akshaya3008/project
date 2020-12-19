@@ -162,7 +162,6 @@ $(document).ready(function() {
 	$("#btn-view").click(function(e) {
 		var table = $("#attendance_stat_table").DataTable();
 		$("table .cbCheck").each(function(i,chk){
-			$("#loadingModal").modal('show');
 			if (chk.checked==true) {
 			e.preventDefault();
 			var rno=table.row(this.closest('tr')).data()[1];
@@ -187,8 +186,10 @@ function attendanceStat(std,acad_year,division,from_date,to_date) {
 			var percentage = responseData[i].percentageCount;
 			var Rollno = responseData[i].RollNo;
 			var student_name = responseData[i].Name;
+			var totalDays = responseData[i].totalDays;
+			var totalPresent = responseData[i].totalPresent;
 			var view='<span class="custom-checkbox"><input type="checkbox" id="checkbox" class="cbCheck" name="type"><label for="checkbox1"></label></span>';
-			table.row.add([srno, Rollno, student_name, percentage, view ]).draw();
+			table.row.add([srno, Rollno, student_name, totalDays, totalPresent, percentage, view ]).draw();
 		}
 		
 	}
@@ -307,7 +308,6 @@ function saveAttendance(standard, acad_year,division, attendance,date) {
 function StudentAttendanceReport(rno){
 	var srno=0;
 	function callback(responseData, textStatus, request) {
-		$("#loadingModal").modal('hide');
 		var table = $("#attendance_report_table").DataTable(); 
 		var value = 0;
 		table.rows().remove().draw();
