@@ -22,6 +22,7 @@ $(document).ready(function() {
 		enableFiltering : true
 	});
 	 var table= $('#timetable_report').DataTable( {
+		 
 	    	dom: 'Bfrtip',
 		    buttons: [
 		    	{extend: 'pdf', className: 'btn btn-info glyphicon glyphicon-file pdf-b'},
@@ -34,10 +35,9 @@ $(document).ready(function() {
 		    "targets"  : 'no-sort',
 		    "orderable": false,
 		    }],
-		   
+		  
 	    } );
-	 table.buttons().container() 
-	 .appendTo( '#table-style .col-sm-6:eq(1)' );
+	 table.buttons().container().appendTo('#table-style .col-sm-6:eq(1)');
 	$("#branch").val(branchSession);
 	 jQuery.validator.addMethod("noSpace", function(value, element) { 
 		  return value.indexOf(" ") < 0 && value != ""; 
@@ -122,7 +122,7 @@ $(document).ready(function() {
 		document.getElementById('time_slot').value = slot;
 	});
 
-	$('#editBtn').click(function() {
+	$('#editBtn').click(function(e) {
 		 $("#loadingModal").modal('show');
 		removeTableRow();
 		var table = $("#timetable_table").DataTable();
