@@ -6,12 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roles and Permissions</title>
 <script src="jquery/jquery-3.3.1.min.js"></script>
-<script src="jquery/bootstrap.min.js"></script>  
-<link rel="stylesheet" href="css/bootstrap.min.css">                  
+<script src="jquery/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="assets/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" />
 <link rel="stylesheet" href="css/um.css">
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
@@ -292,25 +294,25 @@ table.table .avatar {
 	font-weight: normal;
 }
 
-.btn-dark{
-	border-color:#435d7d !important;
-	background:   #435d7d !important;
+.btn-dark {
+	border-color: #435d7d !important;
+	background: #435d7d !important;
 	color: white ! important
 }
-.panel
-{
- border:0px !important;
-}
-#loading {
-		position: fixed;
-		padding:0;
-		margin:0;
-		width: 100%;
-		height: 100vh;
-		background: #fff url('img/ring.gif') no-repeat center center;
-		z-index: 99999;
-	}
 
+.panel {
+	border: 0px !important;
+}
+
+#loading {
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100vh;
+	background: #fff url('img/ring.gif') no-repeat center center;
+	z-index: 99999;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -358,10 +360,12 @@ table.table .avatar {
 									</h2>
 								</div>
 								<div class="col-sm-6">
-									<a id="addBtn" class="btn btn-success"><i class="fa fa-plus"></i> <span>Add New</span></a>
-									<!-- <a href="" id="editBtn" class="btn btn-warning" id="edit"><i class="fa fa-plus"></i> <span>Edit </span></a> 
-									<a href="" class="btn btn-danger" id="deleteBtn"  data-toggle="modal"><i class="fa fa-minus"></i> <span>Delete</span></a> -->
-									<a href="" class="btn btn-info" id="btn-view"> <i class="fa fa-eye"></i> <span>View</span></a>
+									<a id="addBtn" class="btn btn-success"><i
+										class="fa fa-plus"></i> <span>Add New</span></a> <a href=""
+										class="btn btn-warning" id="editBtn" data-toggle="modal">
+										<i class="fa fa-plus"></i><span>Edit</span>
+									</a> <a href="" class="btn btn-danger" id="deleteBtn"> <i
+										class="fa fa-minus"></i> <span>Delete</span></a>
 								</div>
 							</div>
 						</div>
@@ -372,15 +376,17 @@ table.table .avatar {
 									<!-- <div class="panel-heading">Advanced Tables</div> -->
 									<div class="panel-body">
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover TableClass"
+											<table
+												class="table table-striped table-bordered table-hover TableClass"
 												id="RoleandPermission_table">
 												<thead>
 													<tr>
 														<th>Created Date</th>
 														<th>Role Name</th>
-														<!-- <th class="no-sort"><span class="custom-checkbox">
-														<input type="checkbox" id="selectAll" name="options[]" value="0"> <label for="checkbox1"></label></span>
-														</th> -->
+														<th class="no-sort"><span class="custom-checkbox">
+																<input type="checkbox" id="selectAll" name="options[]"
+																value="0"> <label for="checkbox1"></label>
+														</span></th>
 													</tr>
 												</thead>
 											</table>
@@ -411,7 +417,8 @@ table.table .avatar {
 								<div class="tabs">
 									<ul class="nav nav-tabs tabs-primary">
 										<div class="nav nav-tabs tabs-primary">
-											<li class="active"><a data-toggle="tab" onclick="showEdit();">Role Details</a></li>
+											<li class="active"><a data-toggle="tab"
+												onclick="showEdit();">Role Details</a></li>
 										</div>
 									</ul>
 								</div>
@@ -420,9 +427,11 @@ table.table .avatar {
 										<fieldset id="new-user-info">
 											<div class="form-group">
 												<div class="col-md-4">
-													<label class="control-label">Role Name <span style="color: red">*</span></label>
+													<label class="control-label">Role Name <span
+														style="color: red">*</span></label>
 													<div class="input-group">
-														<input type="text" class="form-control" id="rolename" name="rolename" required>
+														<input type="text" class="form-control" id="rolename"
+															name="rolename" required>
 													</div>
 												</div>
 											</div>
@@ -431,9 +440,8 @@ table.table .avatar {
 								</div>
 							</div>
 						</div>
-						<br>
-						<br>
-						
+						<br> <br>
+
 						<div id="Permission_table" class="tab-pane">
 							<div id="table-wrapper">
 								<div class="row">
@@ -449,67 +457,76 @@ table.table .avatar {
 															<td colspan="2"><label class="panel-title">Edit</label></td>
 															<td colspan="2"><label class="panel-title">Delete</label></td>
 															<td colspan="2"><label class="panel-title">View
-																	</label></td>
+															</label></td>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
 															<td colspan="4">Enquiry</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_ENQUIRY" name="permission"
 																	value="ADD_NEW_ENQUIRY"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_ENQUIRY" name="permission"
 																	value="EDIT_ENQUIRY"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_ENQUIRY" name="permission"
 																	value="DELETE_ENQUIRY"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
-																	value="VIEW_ENQUIRY"> --> <label
-																	for="checkbox1"></label>
-															</span></th>
+																	value="VIEW_ENQUIRY"> --> <label for="checkbox1"></label>
+																</span></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Admission</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_ADMISSION"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_ADMISSION" name="permission"
+																	value="ADD_NEW_ADMISSION"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_ADMISSION" name="permission"
 																	value="EDIT_ADMISSION"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_ADMISSION"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_ADMISSION" name="permission"
+																	value="DELETE_ADMISSION"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_ADMISSION"> <label
 																	for="checkbox1"> </label>
 															</span>--></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Receipt</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_RECEIPT" name="permission"
 																	value="ADD_NEW_RECEIPT"> <label for="checkbox1"></label>
 															</span></th>
 															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="EDIT_RECEIPT"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_RECEIPT" name="permission"
 																	value="DELETE_RECEIPT"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_RECEIPT"> <label
 																	for="checkbox1"></label>
@@ -517,333 +534,412 @@ table.table .avatar {
 														</tr>
 														<tr>
 															<td colspan="4">Student Attendance</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_STUDENT_ATTENDANCE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_STUDENT_ATTENDANCE"
+																	name="permission"
+																	value="ADD_NEW_STUDENT_ATTENDANCE"> <label
+																	for="checkbox1"></label>
 															</span></th>
 															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="EDIT_STUDENT_ATTENDANCE"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="DELETE_STUDENT_ATTENDANCE"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_STUDENT_ATTENDANCE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Employee Attendance</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_EMPLOYEE_ATTENDANCE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_EMPLOYEE_ATTENDANCE"
+																	name="permission"
+																	value="ADD_NEW_EMPLOYEE_ATTENDANCE"> <label
+																	for="checkbox1"></label>
 															</span></th>
 															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="EDIT_EMPLOYEE_ATTENDANCE"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="DELETE_EMPLOYEE_ATTENDANCE"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_EMPLOYEE_ATTENDANCE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Timetable</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_TIMETABLE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_TIMETABLE" name="permission"
+																	value="ADD_NEW_TIMETABLE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_TIMETABLE" name="EDIT_TIMETABLE"
 																	value="EDIT_TIMETABLE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_TIMETABLE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_TIMETABLE" name="permission"
+																	value="DELETE_TIMETABLE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_TIMETABLE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Fees Type</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_FEES_TYPE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_FEES_TYPE" name="permission"
+																	value="ADD_NEW_FEES_TYPE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_FEES_TYPE" name="permission"
 																	value="EDIT_FEES_TYPE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_FEES_TYPE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_FEES_TYPE" name="permission"
+																	value="DELETE_FEES_TYPE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_FEES_TYPE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Subject</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_SUBJECT" name="permission"
 																	value="ADD_NEW_SUBJECT"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_SUBJECT" name="permission"
 																	value="EDIT_SUBJECT"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_SUBJECT" name="permission"
 																	value="DELETE_SUBJECT"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_SUBJECT"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
-														
-														
+
+
+
 														<tr>
 															<td colspan="4">Standard</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_STANDARD"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_STANDARD" name="permission"
+																	value="ADD_NEW_STANDARD"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_STANDARD" name="permission"
 																	value="EDIT_STANDARD"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_STANDARD" name="permission"
 																	value="DELETE_STANDARD"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_STANDARD"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Fees Package</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_FEES_PACKAGE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_FEES_PACKAGE" name="permission"
+																	value="ADD_NEW_FEES_PACKAGE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="EDIT_FEES_PACKAGE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_FEES_PACKAGE" name="permission"
+																	value="EDIT_FEES_PACKAGE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_FEES_PACKAGE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_FEES_PACKAGE" name="permission"
+																	value="DELETE_FEES_PACKAGE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_FEES_PACKAGE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Caste</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_CASTE" name="permission"
 																	value="ADD_NEW_CASTE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="EDIT_CASTE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_CASTE" name="EDIT_CASTE" value="permission">
+																	<label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_CASTE" name="permission"
 																	value="DELETE_CASTE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_CASTE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Lead Source</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_LEAD_SOURCE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_LEAD_SOURCE" name="permission"
+																	value="ADD_NEW_LEAD_SOURCE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="EDIT_LEAD_SOURCE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_LEAD_SOURCE" name="permission"
+																	value="EDIT_LEAD_SOURCE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_LEAD_SOURCE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_LEAD_SOURCE" name="permission"
+																	value="DELETE_LEAD_SOURCE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_LEAD_SOURCE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Designation</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_DESIGNATION"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_DESIGNATION" name="permission"
+																	value="ADD_NEW_DESIGNATION"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="EDIT_DESIGNATION"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_DESIGNATION" name="permission"
+																	value="EDIT_DESIGNATION"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_DESIGNATION"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_DESIGNATION" name="permission"
+																	value="DELETE_DESIGNATION"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_DESIGNATION"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Academic Year</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_ACADEMIC_YEAR"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_ACADEMIC_YEAR" name="permission"
+																	value="ADD_NEW_ACADEMIC_YEAR"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="EDIT_ACADEMIC_YEAR"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_ACADEMIC_YEAR" name="permission"
+																	value="EDIT_ACADEMIC_YEAR"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_ACADEMIC_YEAR"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_ACADEMIC_YEAR" name="permission"
+																	value="DELETE_ACADEMIC_YEAR"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_ACADEMIC_YEAR"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Employee</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_EMPLOYEE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_EMPLOYEE" name="permission"
+																	value="ADD_NEW_EMPLOYEE"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_EMPLOYEE" name="permission"
 																	value="EDIT_EMPLOYEE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_EMPLOYEE" name="permission"
 																	value="DELETE_EMPLOYEE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_EMPLOYEE"> <label
 																	for="checkbox1"> </label>
 															</span>--></th>
 														</tr>
-														
+
 														<tr>
-															<td colspan="4"> Division </td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_DIVISION"> <label for="checkbox1"></label>
+															<td colspan="4">Division</td>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_DIVISION" name="permission"
+																	value="ADD_NEW_DIVISION"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_DIVISION" name="permission"
 																	value="EDIT_DIVISION"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_DIVISION" name="permission"
 																	value="DELETE_DIVISION"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_DIVISION"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Roles and Permissions</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_ROLES_AND_PERMISSION"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_ROLES_AND_PERMISSION"
+																	name="permission"
+																	value="ADD_NEW_ROLES_AND_PERMISSION"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort">NA</th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_ROLES_AND_PERMISSION"> <label for="checkbox1"></label>
-															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_ROLES_AND_PERMISSION"
+																	name="permission"
+																	value="EDIT_ROLES_AND_PERMISSION"> <label
+																	for="checkbox1"></label>
+															</span></th>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_ROLES_AND_PERMISSION"
+																	name="permission"
+																	value="DELETE_ROLES_AND_PERMISSION"> <label
+																	for="checkbox1"></label>
+															</span></th>
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_ROLES_AND_PERMISSION"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Branch Profile</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_BRANCH" name="permission"
 																	value="ADD_NEW_BRANCH"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="EDIT_BRANCH"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_BRANCH" name="permission" value="EDIT_BRANCH">
+																	<label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="DELETE_BRANCH"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_BRANCH"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
-															<tr>
+
+														<tr>
 															<td colspan="4">User Management</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="CREATE_NEW_USER_ACCOUNT"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="CREATE_NEW_USER_ACCOUNT"
+																	name="permission"
+																	value="CREATE_NEW_USER_ACCOUNT"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="EDIT_USER_ACCOUNT"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_USER_ACCOUNT" name="permission"
+																	value="EDIT_USER_ACCOUNT"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="DELETE_USER_ACCOUNT"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_USER_ACCOUNT" name="permission"
+																	value="DELETE_USER_ACCOUNT"> <label
+																	for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_USER_ACCOUNT"> <label
 																	for="checkbox1"></label>
@@ -851,19 +947,22 @@ table.table .avatar {
 														</tr>
 														<tr>
 															<td colspan="4">Expenses</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_EXPENSE" name="permission"
 																	value="ADD_NEW_EXPENSE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="EDIT_EXPENSE" name="permission"
 																	value="EDIT_EXPENSE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="DELETE_EXPENSE" name="permission"
 																	value="DELETE_EXPENSE"> <label for="checkbox1"></label>
 															</span></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_EXPENSE"> <label
 																	for="checkbox1"></label>
@@ -871,78 +970,86 @@ table.table .avatar {
 														</tr>
 														<tr>
 															<td colspan="4">Organization Profile</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_ORGANIZATION_PROFILE"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_ORGANIZATION_PROFILE"
+																	name="permission"
+																	value="ADD_NEW_ORGANIZATION_PROFILE"> <label
+																	for="checkbox1"></label>
 															</span></th>
 															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="EDIT_ORGANIZATION_PROFILE"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="DELETE_ORGANIZATION_PROFILE"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_ORGANIZATION_PROFILE"> <label
 																	for="checkbox1"></label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Promotion</td>
-															<th colspan="2" class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="ADD_NEW_PROMOTION"> <label for="checkbox1"></label>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="ADD_NEW_PROMOTION" name="permission"
+																	value="ADD_NEW_PROMOTION"> <label
+																	for="checkbox1"></label>
 															</span></th>
 															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="EDIT_PROMOTION"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="DELETE_PROMOTION"> <label for="checkbox1"></label>
 															</span> --></th>
-															<th colspan="2"class="no-sort">NA<!-- <span class="custom-checkbox">
+															<th colspan="2" class="no-sort">NA<!-- <span class="custom-checkbox">
 																	<input type="checkbox" id="permission" name="permission"
 																	value="VIEW_REPORT_PROMOTION"> <label
 																	for="checkbox1"> </label>
 															</span> --></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Student Info Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_STUDENT_INFO_REPORT"
+																	name="permission"
 																	value="VIEW_STUDENT_INFO_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														
-														
-															<tr>
+
+
+														<tr>
 															<td colspan="4">Admission Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_ADMISSION_REPORT" name="permission"
 																	value="VIEW_ADMISSION_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
@@ -950,88 +1057,95 @@ table.table .avatar {
 														<tr>
 															<td colspan="4">Expense Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_EXPENSE_REPORT" name="permission"
 																	value="VIEW_EXPENSE_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Employee Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_EMPLOYEE_REPORT" name="permission"
 																	value="VIEW_EMPLOYEE_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														
+
 														<tr>
 															<td colspan="4">Receipt Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_RECEIPT_REPORT" name="permission"
 																	value="VIEW_RECEIPT_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														
-														 <tr>
+
+														<tr>
 															<td colspan="4">Student Attendance Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_STUDENT_ATTENDANCE_REPORT"
+																	name="permission"
 																	value="VIEW_STUDENT_ATTENDANCE_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														 
-															 <tr>
+
+														<tr>
 															<td colspan="4">Employee Attendance Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_EMPLOYEE_ATTENDANCE_REPORT"
+																	name="permission"
 																	value="VIEW_EMPLOYEE_ATTENDANCE_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
@@ -1039,72 +1153,77 @@ table.table .avatar {
 														<tr>
 															<td colspan="4">Time Table Report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_TIME_TABLE_REPORT"
+																	name="permission"
 																	value="VIEW_TIME_TABLE_REPORT"> <label
 																	for="checkbox1"></label>
 															</span></th>
 														</tr>
-														 
+
 														<tr>
-															<td colspan="4">Installment due fees report </td>
+															<td colspan="4">Installment due fees report</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"> <span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_INSTALLMENT_DUE_FEES_REPORT"
+																	name="permission"
 																	value="VIEW_INSTALLMENT_DUE_FEES_REPORT"> <label
 																	for="checkbox1"></label>
-															</span> </th>
+															</span></th>
 														</tr>
 														<tr>
-															<td colspan="4">Dashboard </td>
+															<td colspan="4">Dashboard</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"> <span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
-																	value="VIEW_DASHBOARD"> <label
-																	for="checkbox1"></label>
-															</span> </th>
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="VIEW_DASHBOARD" name="permission"
+																	value="VIEW_DASHBOARD"> <label for="checkbox1"></label>
+															</span></th>
 														</tr>
 														<tr>
-															<td colspan="4">Overall Dashboard </td>
+															<td colspan="4">Overall Dashboard</td>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
 															<th colspan="2" class="no-sort"><span class="Label">
-																	 <label >NA</label>
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"><span class="Label">
-																	 <label >NA</label>
+															<th colspan="2" class="no-sort"><span class="Label">
+																	<label>NA</label>
 															</span></th>
-															<th colspan="2"class="no-sort"> <span class="custom-checkbox">
-																	<input type="checkbox" id="permission" name="permission"
+															<th colspan="2" class="no-sort"><span
+																class="custom-checkbox"> <input type="checkbox"
+																	id="OVERALL_DASHBOARD" name="permission"
 																	value="OVERALL_DASHBOARD"> <label
 																	for="checkbox1"></label>
-															</span> </th>
-														</tr>		
+															</span></th>
+														</tr>
 													</tbody>
 												</table>
 											</div>
@@ -1117,17 +1236,17 @@ table.table .avatar {
 				</section>
 			</section>
 		</section>
-<div class="modal fade" id="loadingModal">
+		<div class="modal fade" id="loadingModal">
 			<div class="modal-dialog">
-			
-			<!-- Modal content-->
-			<div class="modal-content">
-			
-			<div class="modal-body">
-			<div id="loading"></div>
-			</div>
-			</div>
-			
+
+				<!-- Modal content-->
+				<div class="modal-content">
+
+					<div class="modal-body">
+						<div id="loading"></div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
