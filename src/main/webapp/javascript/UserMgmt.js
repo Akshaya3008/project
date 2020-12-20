@@ -149,7 +149,17 @@ $(document).ready(function() {
 		$("table .cbCheck").each(function(i, chk) {
 			if (chk.checked) {
 				requestid = $(this).val();
-				loadUserAccount(i, e);
+				empname = table.row(this.closest('tr')).data()[2];
+				username = table.row(this.closest('tr')).data()[3];
+				role = table.row(this.closest('tr')).data()[4];
+				$("#enq_taken").val(empname);
+				$("#role").val(role);
+				document.getElementById("userid").value = username;
+				$("#loadingModal").modal('hide');
+				e.preventDefault();
+				$("#datatable-view").hide();
+				$("#datatable-view-2").show();
+				//loadUserAccount(i, e);
 			}
 		});
 	});
@@ -273,6 +283,11 @@ function createEmployeeAccount() {
 }
 
 function loadUserAccount(i, e) {
+	//empname = $("#UserMgmt_table").row(this.closest('tr')).data()[2];
+	/*var table = $("#UserMgmt_table").DataTable();
+	var r = table.row(this);
+	var dat = $(r).closest('tr').data();
+	alert("data is"+ dat );*/
 	empname = table.row(this.closest('tr')).data()[2];
 	username = table.row(this.closest('tr')).data()[3];
 	role = table.row(this.closest('tr')).data()[4];
