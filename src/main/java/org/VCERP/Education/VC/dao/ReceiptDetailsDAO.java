@@ -271,10 +271,11 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 				receipt.setTrans_date(rs.getString(9));
 				receipt.setCheque_no(rs.getString(10));
 				receipt.setReceived_by(rs.getString(11));
-				receipt.setTotal_amt(rs.getLong(12));
-				receipt.setReceived_amt(rs.getLong(13));
-				receipt.setAmount(rs.getLong(14));
-				receipt.setBranch(rs.getString(15));
+				receipt.setNarration(rs.getString(12));
+				receipt.setTotal_amt(rs.getLong(13));
+				receipt.setReceived_amt(rs.getLong(14));
+				receipt.setAmount(rs.getLong(15));
+				receipt.setBranch(rs.getString(16));
 				if (receipt != null) {
 					ad = getAdmissionData(rollno, receipt.getBranch());
 					if (ad != null) {
