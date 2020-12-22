@@ -124,6 +124,7 @@ function getVeiwReceiptData(rno, receiptno) {
 			  document.getElementById('StudentAddress').innerHTML = admission.address;
 			  document.getElementById('chequeNumber1').innerHTML = responseData[i].cheque_no;
 			  document.getElementById('receivedAmount1').innerHTML = responseData[i].received_amt;
+			  displayInstallment(rno,receiptno);
 			  $("#tab1").clone().appendTo("#tab2");
 			  //clone data
 			  /*document.getElementById('receivedAmount2').innerHTML = responseData[i].received_amt ;
@@ -139,7 +140,7 @@ function getVeiwReceiptData(rno, receiptno) {
 			  document.getElementById('StudentAddress2').innerHTML = admission.address;
 			  document.getElementById('chequeNumber2').innerHTML = responseData[i].cheque_no;
 			  document.getElementById('receivedAmount3').innerHTML = responseData[i].received_amt;*/
-			  //displayInstallment(rno,receiptno);
+			  
 			 
 			$(this).css("display", "none");
 			$("#datatable-view").css("display", "none");
