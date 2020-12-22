@@ -124,9 +124,9 @@ function getVeiwReceiptData(rno, receiptno) {
 			  document.getElementById('StudentAddress').innerHTML = admission.address;
 			  document.getElementById('chequeNumber1').innerHTML = responseData[i].cheque_no;
 			  document.getElementById('receivedAmount1').innerHTML = responseData[i].received_amt;
-			  
+			  $("#tab1").clone().appendTo("#tab2");
 			  //clone data
-			  document.getElementById('receivedAmount2').innerHTML = responseData[i].received_amt ;
+			  /*document.getElementById('receivedAmount2').innerHTML = responseData[i].received_amt ;
 			  document.getElementById('receiptno2').innerHTML = 'Receipt #'+ responseData[i].receipt_no;
 			  document.getElementById('receipt3').innerHTML = responseData[i].receipt_no;  
 			  document.getElementById('stud2').innerHTML = responseData[i].stud_name ;
@@ -138,11 +138,10 @@ function getVeiwReceiptData(rno, receiptno) {
 			  document.getElementById('companyaddress2').innerHTML = branchDetails[1];
 			  document.getElementById('StudentAddress2').innerHTML = admission.address;
 			  document.getElementById('chequeNumber2').innerHTML = responseData[i].cheque_no;
-			  document.getElementById('receivedAmount3').innerHTML = responseData[i].received_amt;
-			  displayInstallment(rno,receiptno);
+			  document.getElementById('receivedAmount3').innerHTML = responseData[i].received_amt;*/
+			  //displayInstallment(rno,receiptno);
 			 
 			$(this).css("display", "none");
-			alert("Hey");
 			$("#datatable-view").css("display", "none");
 			$("#datatable-view-3").css("display", "block");
 			$("#datatable-view-2").css("display", "block");
