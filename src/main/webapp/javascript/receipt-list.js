@@ -124,31 +124,13 @@ function getVeiwReceiptData(rno, receiptno) {
 			  document.getElementById('StudentAddress').innerHTML = admission.address;
 			  document.getElementById('chequeNumber1').innerHTML = responseData[i].cheque_no;
 			  document.getElementById('receivedAmount1').innerHTML = responseData[i].received_amt;
-			  displayInstallment(rno,receiptno);
+			  //displayInstallment(rno,receiptno);
 			  $("#tab1").clone().appendTo(".cloned");
 			  var border = document.createElement('hr');
-			  //$(".cloned").prepend("border");
-			  //clone data
-			  /*document.getElementById('receivedAmount2').innerHTML = responseData[i].received_amt ;
-			  document.getElementById('receiptno2').innerHTML = 'Receipt #'+ responseData[i].receipt_no;
-			  document.getElementById('receipt3').innerHTML = responseData[i].receipt_no;  
-			  document.getElementById('stud2').innerHTML = responseData[i].stud_name ;
-			  document.getElementById('creatddate2').innerHTML = responseData[i].receipt_date;
-			  document.getElementById('ReceiptDate2').innerHTML = responseData[i].receipt_date;
-			  document.getElementById('receivedIn2').innerHTML = responseData[i].pay_mode;
-			  document.getElementById('StudentName2').innerHTML = responseData[i].stud_name;
-			  document.getElementById('companyname2').innerHTML = branchDetails[0];
-			  document.getElementById('companyaddress2').innerHTML = branchDetails[1];
-			  document.getElementById('StudentAddress2').innerHTML = admission.address;
-			  document.getElementById('chequeNumber2').innerHTML = responseData[i].cheque_no;
-			  document.getElementById('receivedAmount3').innerHTML = responseData[i].received_amt;*/
-			  
 			 
 			$(this).css("display", "none");
 			$("#datatable-view").css("display", "none");
-			//$("#datatable-view-3").css("display", "block");
 			$("#datatable-view-2").css("display", "block");
-			//$("#datatable-view-3").css("display", "block");
 			$("#cancelB").css("display", "block");
 			
 		}
