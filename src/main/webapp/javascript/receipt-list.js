@@ -26,7 +26,26 @@ $(document).ready(function() {
 	});
 	showReceiptTable();
 
-	
+	$('form[id="NarrationForm"]').validate({
+		  rules: {
+			    
+			  narration: {
+		        required: true,
+		        
+		   },
+		  },
+		  messages: {
+				 narration: {
+					required:'Narration is required',	
+					
+				},
+			  },
+		 submitHandler:function(form){
+				  event.preventDefault();
+				  $("#loadingModal").modal('show');
+				  EditNarration();
+			  }
+	});
 	var myArray = new Array();
 	$('#btn-view').click(function() {
 		$('table .cbCheck').each(function(i, chk) {
@@ -52,17 +71,23 @@ $(document).ready(function() {
 	});
 	deleteReceiptDetails(deleteReceipt);
 });
-/*	$('#editBtn').click(function() {
+$("#editBtn").click(function(e){
+		var table = $('#receipt_table').DataTable();
+		$("#loadingModal").modal('show');
 		$('table .cbCheck').each(function(i, chk) {
-			if (chk.checked) {
-				val = table.row(this.closest('tr')).data();
-				var rno = val[5];
-				var receiptno = val[2];
-				sessionStorage.setItem("EditDetails",rno+":"+receiptno);
-				window.location.href="Receipt.html";
+			if(chk.checked){
+			requestid=$(this).val();
+			narration = table.row(this.closest('tr')).data()[10];
+			rollno = table.row(this.closest('tr')).data()[5];
+			receiptno = table.row(this.closest('tr')).data()[2];
+			loadNarration_Roll(narration,rollno,receiptno,e);
 			}
-		});
-	});*/
+		});	
+	});
+$("#cancelBtn").click(function(){
+	clearModal();
+});
+
 });
 
 function showReceiptTable() {
@@ -232,3 +257,49 @@ ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 		errorCallback);
 return false;
 }
+
+
+function EditNarration(){
+	function callback(responseData,textStatus,request)
+	{
+		var mes=responseData.message;
+		showNotification("success",mes);
+		$("#loadingModal").modal('hide');
+		reloadPage();
+	}
+
+function errorCallback(responseData, textStatus, request) {
+	var mes=responseData.responseJSON.message;
+	showNotification("error",mes);
+	$("#loadingModal").modal('hide');
+}
+var httpMethod = "POST";
+var formData = $("#NarrationForm").serialize()+"&branch="+branchSession;
+var relativeUrl = "/Receipt/EditNarration";
+ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+		errorCallback);
+return false;
+}
+
+function loadNarration_Roll(narration,rollno,receiptno,e){
+	document.getElementById("edited_narration").value=narration;
+	document.getElementById("rollno").value=rollno;
+	document.getElementById("receiptno").value=receiptno;
+	$("#loadingModal").modal('hide');
+	e.preventDefault();
+	$('#NarrationEditModal').modal({
+        show: true, 
+        backdrop: 'static',
+        keyboard: true
+     });
+}
+
+function clearModal()
+{
+	document.getElementById("edited_narration").value="";
+	document.getElementById("rollno" +
+			"").value="";
+	requestid=0;
+}
+
+

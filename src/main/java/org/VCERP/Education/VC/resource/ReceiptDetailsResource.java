@@ -17,11 +17,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.VCERP.Education.VC.controller.AdmissionController;
 import org.VCERP.Education.VC.controller.ReceiptDetailsController;
+import org.VCERP.Education.VC.controller.SubjectController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Admission;
 import org.VCERP.Education.VC.model.Enquiry;
 import org.VCERP.Education.VC.model.Installment;
 import org.VCERP.Education.VC.model.ReceiptDetails;
+import org.VCERP.Education.VC.model.Subject;
 import org.VCERP.Education.VC.utility.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -321,5 +323,32 @@ public class ReceiptDetailsResource {
 			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
+	}
+	
+	@POST
+	//@RolesAllowed("EDIT_RECEIPT")
+	@JWTTokenNeeded
+	@Path("/EditNarration")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response EditSubject(@FormParam("narration") String narration,@FormParam("rollno") String rollno,
+			@FormParam("receiptno") String receiptno,@FormParam("branch") String branch)
+	{
+		ReceiptDetails rd = null;
+		ReceiptDetailsController controller = null;
+	try{
+		rd = new ReceiptDetails();
+		controller = new ReceiptDetailsController();
+		rd.setNarration(narration);
+		rd.setRollno(rollno);
+		rd.setReceipt_no(receiptno);
+		rd.setBranch(branch);
+		controller.EditNarration(rd);
+		return Util.generateResponse(Status.ACCEPTED, "Data Successfully Updated").build();
+	}
+	catch(Exception e){
+		e.printStackTrace();
+		logger.error(e);
+	}
+	return Util.generateErrorResponse(Status.BAD_REQUEST, "Unabled to complete this task.").build();
 	}
 }

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.VCERP.Education.VC.model.Admission;
+import org.VCERP.Education.VC.model.Division;
 import org.VCERP.Education.VC.model.Installment;
 import org.VCERP.Education.VC.model.ReceiptDetails;
 import org.VCERP.Education.VC.utility.Util;
@@ -875,5 +876,30 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public void EditNarration(ReceiptDetails rd) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try{
+			con = Util.getDBConnection();
+			
+			String query = "update receipt_details set narration=? where RollNO=? and receipt_no=? and branch=?";
+			ps = con.prepareStatement(query);
+			ps.setString(1, rd.getNarration());
+			ps.setString(2, rd.getRollno());
+			ps.setString(3, rd.getReceipt_no());
+			ps.setString(4, rd.getBranch());
+			ps.executeUpdate();
+			
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
 	}
 }

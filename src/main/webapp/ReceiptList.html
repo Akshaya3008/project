@@ -11,6 +11,7 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/ButtonStyle.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="jquery/jquery.validate.min.js"></script>
 <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
@@ -73,7 +74,7 @@
 				</div>
 				<div class="col-sm-6">
 					<a href="Receipt.html" class="btn btn-success"><i class="fa fa-plus"></i> <span>Add New</span></a>
-						 <!-- <a class="btn btn-warning" id="editBtn" ><i class="fa fa-plus"></i> <span>Edit</span></a>  -->
+					 <a class="btn btn-warning" id="editBtn" ><i class="fa fa-plus" data-toggle="modal"></i> <span>Edit</span></a>
 						 <a id="deleteBtn" class="btn btn-danger" id="btn-danger" data-toggle="modal"><i class="fa fa-minus" ></i> 
 						 <span>Delete</span></a>
 					<a class="btn btn-info" id="btn-view" ><i class="fa fa-eye" ></i> <span>View</span></a>
@@ -313,6 +314,57 @@
         </div>
     </div>
 </section>
+
+<div id="NarrationEditModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="NarrationForm" method="post">
+					<div class="modal-header headerClass"
+						style="color: aliceblue">
+						<h4 class="modal-title">Edit Narration</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Roll No</label> <input
+								type="text" class="form-control" id="rollno"
+								name="rollno" disabled required>
+						</div>
+						<div class="form-group">
+							<label>Receipt No</label> <input
+								type="text" class="form-control" id="receiptno"
+								name="receiptno" disabled required>
+						</div>
+						
+						<div class="form-group">
+							<label>Narration<font color="red">*</font></label> <input type="text"
+								class="form-control" id="edited_narration" name="narration" required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							 id="cancelBtn" value="Cancel" onclick="location.reload()"> <input type="submit"
+							class="btn btn-success" value="Save"
+							style="color: aliceblue">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="loadingModal">
+			<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content">
+			
+			<div class="modal-body">
+			<div id="loading"></div>
+			</div>
+			</div>
+			
+			</div>
+		</div>
 	
 	<!-- end of wrpper -->
 <!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
@@ -359,7 +411,6 @@
     }  */
 
  	function receipt_print(){
-		alert("inside fn");
 		$('.receipt_print').printElement({
 			title:'Receipt',
 			//ecss:'background:red'

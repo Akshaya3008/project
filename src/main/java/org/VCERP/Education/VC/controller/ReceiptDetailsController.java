@@ -3,8 +3,10 @@ package org.VCERP.Education.VC.controller;
 import java.util.ArrayList;
 
 import org.VCERP.Education.VC.dao.AdmissionDAO;
+import org.VCERP.Education.VC.dao.DivisionDAO;
 import org.VCERP.Education.VC.dao.ReceiptDetailsDAO;
 import org.VCERP.Education.VC.model.Admission;
+import org.VCERP.Education.VC.model.Division;
 import org.VCERP.Education.VC.model.Installment;
 import org.VCERP.Education.VC.model.ReceiptDetails;
 
@@ -81,6 +83,11 @@ public class ReceiptDetailsController {
 	public void revertInstallment(String receiptDetails,String branch) {
 		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
 		dao.getAllInstallment(receiptDetails,branch);
+	}
+	public void EditNarration(ReceiptDetails rd) {
+		ReceiptDetailsDAO dao=new ReceiptDetailsDAO();
+		dao.EditNarration(rd);
+		
 	}
 
 }
