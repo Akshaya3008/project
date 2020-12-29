@@ -201,20 +201,20 @@ public class AttendanceDAO {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		int count=0;
+		boolean isAvailable=false;
 		String[] hyphenSeperated=Util.hyphenSeperatedString(rollno);
 		try {
 			con=Util.getDBConnection();
-			String query="SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'attendance'";
+			String query="SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'vc_db' AND "
+					+ "TABLE_NAME = 'attendance' AND COLUMN_NAME = '"+Integer.parseInt(hyphenSeperated[1])+"'";
 			ps=con.prepareStatement(query);
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
-				count=rs.getInt(1);
+				isAvailable=true;
+				
 			}
-			
-			count=count-6;
-			if(Integer.parseInt(hyphenSeperated[1])>count){
+			if(!isAvailable){
 				createAttendanceColumn(Integer.parseInt(hyphenSeperated[1]));
 			}
 		}catch (Exception e) {

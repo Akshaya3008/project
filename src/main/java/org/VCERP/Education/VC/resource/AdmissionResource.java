@@ -93,8 +93,8 @@ public class AdmissionResource {
 			admission.setBranch(branch);
 			String standard=getStandard(f_pack[0], branch);
 			String[] hyphenSeperatedStd=Util.hyphenSeperatedString(standard);
-			int i=hyphenSeperatedStd.length-1;
-			admission.setStandard(hyphenSeperatedStd[i]);
+			//int i=hyphenSeperatedStd.length-1;
+			admission.setStandard(hyphenSeperatedStd[0]);
 			admission.setFeesDetails(feestypeDetails);
 
 			String[] symbolSeperated = Util.symbolSeperatedString(newAmt);
@@ -170,14 +170,18 @@ public class AdmissionResource {
 	private void savePromoteInstallment(String[] commaSeperated, String branch,Admission admission) {
 		ArrayList<String> installDate = new ArrayList<>();
 		ArrayList<String> fees_title = new ArrayList<>();
-		ArrayList<Integer> amt = new ArrayList<>();
+		ArrayList<Integer> monthly_amt = new ArrayList<>();
+		ArrayList<Integer> monthly_paid = new ArrayList<>();
+		ArrayList<Integer> monthly_remain = new ArrayList<>();
 		for (int i = 1; i < commaSeperated.length; i++) {
 			String a = commaSeperated[i];
 			String[] symbolSeperated = Util.symbolSeperatedString(a);
 			installDate.add(symbolSeperated[0]);
 			fees_title.add(symbolSeperated[1]);
-			int newamt=Integer.parseInt(symbolSeperated[2])-Integer.parseInt(symbolSeperated[3]);
-			amt.add(newamt);
+			monthly_amt.add(Integer.parseInt(symbolSeperated[2]));
+			monthly_paid.add(Integer.parseInt(symbolSeperated[3]));
+			monthly_remain.add(Integer.parseInt(symbolSeperated[2])-Integer.parseInt(symbolSeperated[3]));
+			
 		}
 		AdmissionController controller = null;
 		Installment installment = null;
@@ -187,11 +191,13 @@ public class AdmissionResource {
 			installment.setRollno(admission.getRollno());
 			installment.setStud_name(stud_name);
 			installment.setTotal_fees(admission.getFees());
-			installment.setMonthly_pay(amt);
+			installment.setMonthly_pay(monthly_amt);
+			installment.setPaid(monthly_paid);
+			installment.setRemain_fees(monthly_remain);
 			installment.setDue_date(installDate);
 			installment.setFees_title(fees_title);
 			controller = new AdmissionController();
-			controller.saveInstallment(installment, branch);
+			controller.savePromoteInstallment(installment,admission);
 		} catch (Exception e) {
 			logger.error(e);
 			e.printStackTrace();
@@ -511,14 +517,15 @@ public class AdmissionResource {
 			@FormParam("Rollno") String Rollno, @FormParam("regno") String regno,
 			@FormParam("invoice_no") String invoice_no, @FormParam("admission_date") String admission_date,
 			@FormParam("acad_year") String acad_year, @FormParam("join_date") String join_date,
-			@FormParam("personalDetails") String personalDetails, 
-			@FormParam("installment") String installment) {
+			@FormParam("personalDetails") String personalDetails,@FormParam("installment") String installment, 
+			@FormParam("feestypeDetails") String feestypeDetails,@FormParam("newAmt") String newAmt) {
 		String[] colanSeperatedPersonalDetails=Util.colanSeperatedString(personalDetails);
 		String[] pipeSeperatedFeesPack=Util.symbolSeperatedString(adm_fees_pack);
 		Admission admission = null;
 		AdmissionController controller = null;
 		AcademicYearController acadcontroller = null;
 		AttendanceController studcontroller = null;
+		String standard="" , currentStandard="";
 		try {
 			admission = new Admission();
 			 admission.setStudent_name(colanSeperatedPersonalDetails[1]);
@@ -549,22 +556,31 @@ public class AdmissionResource {
 			admission.setAdmission_date(admission_date);
 			admission.setAcad_year(acad_year);
 			admission.setJoin_date(join_date);
-			admission.setFees(Integer.parseInt(colanSeperatedPersonalDetails[28].trim()));
+			String[] pipeSeperatedNewAmt=Util.symbolSeperatedString(newAmt);
+			admission.setFees(Integer.parseInt(pipeSeperatedNewAmt[1].trim()));
+			admission.setFeesDetails(feestypeDetails);
+			admission.setDisccount(Integer.parseInt(pipeSeperatedNewAmt[0].trim()));
+			admission.setPaid_fees(Integer.parseInt(pipeSeperatedNewAmt[2].trim()));
+			admission.setRemain_fees(Integer.parseInt(pipeSeperatedNewAmt[3].trim()));
+			//admission.setFees(Integer.parseInt(colanSeperatedPersonalDetails[28].trim()));
 			/*String[] hyphenSeperatedFeesDetails=Util.hyphenSeperatedString(colanSeperatedPersonalDetails[27]);*/
-			admission.setFeesDetails(colanSeperatedPersonalDetails[38]);
+			/*admission.setFeesDetails(colanSeperatedPersonalDetails[38]);
 			admission.setDisccount(Integer.parseInt(colanSeperatedPersonalDetails[30].trim()));
 			admission.setPaid_fees(Integer.parseInt(colanSeperatedPersonalDetails[31].trim()));
-			admission.setRemain_fees(Integer.parseInt(colanSeperatedPersonalDetails[32].trim()));
+			admission.setRemain_fees(Integer.parseInt(colanSeperatedPersonalDetails[32].trim()));*/
 			admission.setBranch(colanSeperatedPersonalDetails[33]);
 			admission.setEnq_no(Integer.parseInt(colanSeperatedPersonalDetails[29].trim()));
-			
-			String standard=getStandard(pipeSeperatedFeesPack[0], colanSeperatedPersonalDetails[33]);
-			String currentStandard=colanSeperatedPersonalDetails[22];
+			standard=getStandard(pipeSeperatedFeesPack[0], colanSeperatedPersonalDetails[33]);
+			currentStandard=colanSeperatedPersonalDetails[22];
+			//System.out.println(pipeSeperatedFeesPack[0]+"\n"+colanSeperatedPersonalDetails[33]+"\n"+standard+"\n"+currentStandard);
 			String[] hyphenSepereatedStandard=Util.hyphenSeperatedString(standard);
 			if(hyphenSepereatedStandard.length>1){
-			for(int i=0;i<hyphenSepereatedStandard.length;i++){
+			for(int i=0;i<hyphenSepereatedStandard.length-1;i++){
 				if(hyphenSepereatedStandard[i].matches(currentStandard)){
-					admission.setStandard(hyphenSepereatedStandard[i-1]);
+					admission.setStandard(hyphenSepereatedStandard[i+1]);
+					break;
+					}else{
+						admission.setStandard(hyphenSepereatedStandard[0]);
 					}
 				}
 			}else{

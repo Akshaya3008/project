@@ -124,7 +124,7 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		try {
 			con = Util.getDBConnection();
 			String query = "select id,fees_title,monthly_payment,due_date,remain_fees from "
-					+ "installment where rollno=? and paid_status='0' and branch=?";
+					+ "installment where rollno=? and paid_status='0' and branch=? ORDER BY id";
 			ps = con.prepareStatement(query);
 			ps.setString(1, enq_stud);
 			ps.setString(2, branch);
@@ -228,7 +228,7 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		long paid_amount = 0;
 		try {
 			con = Util.getDBConnection();
-			String query = "select payment from receipt_details where RollNO=? and branch=?";
+			String query = "select remain_fees from admission where Rollno=? and branch=?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, rollno);
 			ps.setString(2, branch);
@@ -400,7 +400,7 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		long paid_amount = 0;
 		try {
 			con = Util.getDBConnection();
-			String query = "select remain_fees,paid_amount from installment where rollno=? and due_date=? and branch=?";
+			String query = "select remain_fees,paid_amount from installment where rollno=? and due_date=? and branch=? ORDER BY id";
 			ps = con.prepareStatement(query);
 			ps.setString(1, rollno);
 			ps.setString(2, due_date);
@@ -429,7 +429,8 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		ArrayList<ReceiptDetails> receiptList = new ArrayList<>();
 		try {
 			con = Util.getDBConnection();
-			String query = "select receipt_date,receipt_no,stud_name,pay_mode,total_fees,payment from receipt_details where RollNO=? and branch=?";
+			String query = "select receipt_date,receipt_no,stud_name,pay_mode,total_fees,payment from "
+					+ "receipt_details where RollNO=? and branch=?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, rno);
 			ps.setString(2, branch);
@@ -463,7 +464,8 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 			con = Util.getDBConnection();
 			String query;
 			// if(receipt.getStud_name().isEmpty()){
-			query = "select * from receipt_details WHERE receipt_date BETWEEN ? AND ? AND received_by=? AND pay_mode=? AND RollNO IN (SELECT Rollno from admission WHERE acad_year=? AND standard=? AND branch=?)";
+			query = "select * from receipt_details WHERE receipt_date BETWEEN ? AND ? AND received_by=?"
+					+ " AND pay_mode=? AND RollNO IN (SELECT Rollno from admission WHERE acad_year=? AND standard=? AND branch=?)";
 			// }else{*/
 			// query= "select * from receipt_details WHERE receipt_date BETWEEN
 			// ? AND ? AND received_by=? AND pay_mode=? AND
@@ -528,7 +530,8 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 			con = Util.getDBConnection();
 			String query;
 			// if(installment.getStud_name().isEmpty()){
-			query = "SELECT * FROM `installment` WHERE due_date BETWEEN ? AND ? AND rollno IN (SELECT Rollno from admission WHERE acad_year=? AND adm_fees_pack=? AND standard=? AND division=? AND branch=?) AND paid_status='0'";
+			query = "SELECT * FROM `installment` WHERE due_date BETWEEN ? AND ? AND rollno IN (SELECT Rollno from admission WHERE "
+					+ "acad_year=? AND adm_fees_pack=? AND standard=? AND division=? AND branch=?) AND paid_status='0' ORDER BY id";
 			/*
 			 * }else{ query=
 			 * "SELECT * FROM `installment` WHERE due_date BETWEEN ? AND ? AND stud_name='"
@@ -589,7 +592,8 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		Admission AdmissionData = null;
 		try {
 			con = Util.getDBConnection();
-			String query = "select invoice_no,adm_fees_pack,remain_fees from admission where Rollno=? and acad_year=? and standard=? and branch=?";
+			String query = "select invoice_no,adm_fees_pack,remain_fees from admission where Rollno=? and acad_year=? "
+					+ "and standard=? and branch=?";
 			ps = con.prepareStatement(query);
 
 			ps.setString(1, Rollno);
@@ -649,7 +653,7 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		try {
 			con = Util.getDBConnection();
 			String query;
-			query = "SELECT * FROM `installment` WHERE rollno=? and receipt_no=?";
+			query = "SELECT * FROM `installment` WHERE rollno=? and receipt_no=? ORDER BY id";
 
 			ps = con.prepareStatement(query);
 			ps.setString(1, rno);

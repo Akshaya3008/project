@@ -1,7 +1,8 @@
 var standardData;
 var branchData;
+var index;
 var requestid = 0;
-var db_std=new Array();
+var db_std = new Array();
 $(document)
 		.ready(
 				function() {
@@ -18,53 +19,73 @@ $(document)
 							element) {
 						return value.indexOf(" ") < 0 && value != "";
 					}, "No space please and don't leave it empty");
-					
-					$('form[id="feespackage-form"]').validate({
-						rules : {
-							fees_pack : {
-								required : true
 
-							},
-							inputDisabledAmt:
-								{
-								 required:true,
-								 number:true
-								},
-							feestype : {
-								required : true
-							},
-							amount : {
-								required : true,
-								number : true,
-								noSpace : true
-							},
-							discount : {
-								//required : true,
-								number : true,
-								noSpace : true
-							},
-							tax : {
-								//noSpace : true,
-								digits:true
-							},
+					$('form[id="feespackage-form"]')
+							.validate(
+									{
+										rules : {
+											fees_pack : {
+												required : true
 
-						},
-						submitHandler : function(form) {
-							event.preventDefault();
-							$("#loadingModal").modal('show');
-							standardData = new Array();
-							branchData = new Array();
-							$('#standard input:checked').each(function() {
-								var std = $(this).closest('tr').find('td:nth-child(2)').text();
-								standardData.push(std);
-								});
-							$('#branchTable input:checked').each(function() {
-								var branch = $(this).closest('tr').find('td:nth-child(2)').text();
-								branchData.push(branch);
-								});
-							addNewFeesPackage(standardData,branchData);
-						}
-					});
+											},
+											inputDisabledAmt : {
+												required : true,
+												number : true
+											},
+											feestype : {
+												required : true
+											},
+											amount : {
+												required : true,
+												number : true,
+												noSpace : true
+											},
+											discount : {
+												// required : true,
+												number : true,
+												noSpace : true
+											},
+											tax : {
+												// noSpace : true,
+												digits : true
+											},
+
+										},
+										submitHandler : function(form) {
+											event.preventDefault();
+											$("#loadingModal").modal('show');
+											standardData = new Array();
+											branchData = new Array();
+											$('#standard input:checked')
+													.each(
+															function() {
+																var std = $(
+																		this)
+																		.closest(
+																				'tr')
+																		.find(
+																				'td:nth-child(2)')
+																		.text();
+																standardData
+																		.push(std);
+															});
+											$('#branchTable input:checked')
+													.each(
+															function() {
+																var branch = $(
+																		this)
+																		.closest(
+																				'tr')
+																		.find(
+																				'td:nth-child(2)')
+																		.text();
+																branchData
+																		.push(branch);
+															});
+											addNewFeesPackage(standardData,
+													branchData);
+										}
+									});
 
 					jQuery.validator.addMethod("letterswithspace", function(
 							value, element) {
@@ -77,7 +98,7 @@ $(document)
 							feesType : {
 								required : true,
 								letterswithspace : true,
-								//noSpace : true
+							// noSpace : true
 							},
 						},
 						submitHandler : function(form) {
@@ -87,37 +108,73 @@ $(document)
 						}
 					});
 
-					$("#loadBranch").click(function() {
-							var stdarray = new Array();
-							var stdamt = 0;
-							$('input:checked').each(function() {
-									var std = $(this).closest('tr').find('td:nth-child(2)').text();
-									stdamt = stdamt+ Number($(this).closest('tr').find('td:nth-child(3)').text());
-									document.getElementById("amount").value = stdamt;
-									document.getElementById("total-amt").value = stdamt;
-									document.getElementById("grand-t").value = stdamt;
-									document.getElementById("inputDisabledAmt").value = stdamt;
-									loadBranch(std);
+					$("#loadBranch")
+							.click(
+									function() {
+										var stdarray = new Array();
+										var stdamt = 0;
+										$('input:checked')
+												.each(
+														function() {
+															var std = $(this)
+																	.closest(
+																			'tr')
+																	.find(
+																			'td:nth-child(2)')
+																	.text();
+															stdamt = stdamt
+																	+ Number($(
+																			this)
+																			.closest(
+																					'tr')
+																			.find(
+																					'td:nth-child(3)')
+																			.text());
+															document
+																	.getElementById("amount").value = stdamt;
+															document
+																	.getElementById("total-amt").value = stdamt;
+															document
+																	.getElementById("grand-t").value = stdamt;
+															document
+																	.getElementById("inputDisabledAmt").value = stdamt;
+															loadBranch(std);
+														});
+									});
+					$("#editBtn").click(
+							function(e) {
+								var table = $("#feespackage").DataTable();
+								$("#loadingModal").modal('show');
+								$('table .cbCheck').each(
+										function(i, chk) {
+											if (chk.checked) {
+												requestid = $(this).val();
+												var pack = table.row(
+														this.closest('tr'))
+														.data()[1];
+												var branch = table.row(
+														this.closest('tr'))
+														.data()[2];
+												loadFeesPackageData(pack,
+														branch);
+											}
+										});
 							});
-					});
-					$("#editBtn").click(function(e) {
-						var table = $("#feespackage").DataTable();
-						$("#loadingModal").modal('show');
-						$('table .cbCheck').each(function(i, chk) {
-							if (chk.checked) {
-								requestid = $(this).val();
-								var pack = table.row(this.closest('tr')).data()[1];
-								var branch = table.row(this.closest('tr')).data()[2];
-								loadFeesPackageData(pack, branch);
-							}
-						});
-					});
-					$('#feestypetable').on('click','.remove-row',function(e) {
-							var val = $(this).closest('tr').find('#total-amt').val();
-							document.getElementById("grand-t").value = document.getElementById("grand-t").value- val;
-							document.getElementById("inputDisabledAmt").value = document.getElementById("grand-t").value;
-							$(this).closest('tr').remove();
-					})
+					$('#feestypetable')
+							.on(
+									'click',
+									'.remove-row',
+									function(e) {
+										var val = $(this).closest('tr').find(
+												'#total-amt').val();
+										document.getElementById("grand-t").value = document
+												.getElementById("grand-t").value
+												- val;
+										document
+												.getElementById("inputDisabledAmt").value = document
+												.getElementById("grand-t").value;
+										$(this).closest('tr').remove();
+									})
 					$("#deleteBtn").click(function() {
 						var idarray = new Array();
 						$("#loadingModal").modal('show');
@@ -131,7 +188,39 @@ $(document)
 					$("#cancelBtn").click(function(e) {
 						clearModal();
 					});
+					getSelectedRow();
 				});
+
+function getSelectedRow() {
+	var table = document.getElementById("standard");
+	for (var i = 1; i < table.rows.length; i++) {
+		table.rows[i].onclick = function() {
+			// clear the selected from the previous selected row
+			// the first time index is undefined
+			if (typeof index !== "undefined") {
+				table.rows[index].classList.toggle("selected");
+			}
+			index = this.rowIndex;
+			this.classList.toggle("selected");
+		}
+	}
+}
+
+function upNdown(direction) {
+	var rows = document.getElementById("standard").rows, parent = rows[index].parentNode;
+	if (direction === "up") {
+		if (index > 1) {
+			parent.insertBefore(rows[index], rows[index - 1]);
+			index--;
+		}
+	}
+	if (direction === "down") {
+		if (index < rows.length - 1) {
+			parent.insertBefore(rows[index + 1], rows[index]);
+			index++;
+		}
+	}
+}
 
 function addNewFeesPackage(standardData, branchData) {
 	var table = document.getElementById("feestypetable");
@@ -190,13 +279,13 @@ function loadBranchSpecificStandard() {
 			var rowCount = table.rows.length;
 			var row = table.insertRow(rowCount);
 			var cell1 = row.insertCell(0);
-			cell1.innerHTML = '<input type="checkbox" class="form-check-input stdcheck" id="stdcheck">';			
+			cell1.innerHTML = '<input type="checkbox" class="form-check-input stdcheck" id="stdcheck">';
 			var cell2 = row.insertCell(1);
 			cell2.innerHTML = standard;
 
 			var cell3 = row.insertCell(2);
 			cell3.innerHTML = stdamt;
-			db_std.push(standard+"|"+stdamt);
+			db_std.push(standard + "|" + stdamt);
 		}
 
 	}
@@ -221,14 +310,14 @@ function loadBranch(std) {
 		rowCount = rowCount - 1;
 	}
 	function callback(responseData, textStatus, request) {
-		var branchArray=new Array();
+		var branchArray = new Array();
 		for ( var i in responseData) {
 			branchArray.push(responseData[i]);
 		}
-		branchArray= branchArray.filter( function( item, index, inputArray ) {
-           		return inputArray.indexOf(item) == index;
-   		});
-		for(var j=0;j<branchArray.length;j++){
+		branchArray = branchArray.filter(function(item, index, inputArray) {
+			return inputArray.indexOf(item) == index;
+		});
+		for (var j = 0; j < branchArray.length; j++) {
 			var Branch = branchArray[j];
 			var rowCount = table.rows.length;
 			var row = table.insertRow(rowCount);
@@ -297,7 +386,7 @@ function loadFeesPackageData(pack, branch) {
 				rowCount = rowCount - 1;
 			}
 		}
-		markStandard(std,db_std);
+		markStandard(std, db_std);
 		var table = document.getElementById("feestypetable");
 		var html = '<tr><td><div class="form-group"><div class="input-group"><select name="feestype" class="form-control feestype" id="feestype">'
 				+ htmlCode
@@ -321,6 +410,7 @@ function loadFeesPackageData(pack, branch) {
 			}
 		}
 		document.getElementById('grand-t').value = responseData.total_amt;
+		getSelectedRow();
 		$("#loadingModal").modal('hide');
 		$("#datatable-view").hide();
 		$("#datatable-view-2").show();
@@ -341,57 +431,64 @@ function loadFeesPackageData(pack, branch) {
 	return false;
 }
 
-function markStandard(std,db_std){
-	var pack_std=new Array();
-	std=std.split("-");
-	
-	for(var i=0;i<std.length;i++){
-		pack_std.push(std[i]);	
+function markStandard(std, db_std) {
+	var pack_std = new Array();
+	std = std.split("-");
+
+	for (var i = 0; i < std.length; i++) {
+		pack_std.push(std[i]);
 	}
-	    var a = [], diff = [],comm=[];
+	var a = [], b = [], diff = [], comm = [];
 
-	    for (var i = 0; i < pack_std.length; i++) {
-	        a[pack_std[i]] = true;
-	    }
-	    for(var j=0;j<db_std.length;j++){
-	    	var stdname=db_std[j].split("|");
-	        if (a[stdname[0]]) {
-	            comm.push(stdname[0]+"|"+stdname[1]);
-	            delete a[stdname[0]]; 
-	        } else {
-	            a[stdname[0]+"|"+stdname[1]] = true;
-	        }
-	    }
-	    for (var k in a) {
-	        diff.push(k);
-	    }
-	    var table = document.getElementById("standard");
-	    for(var i=0;i<comm.length;i++){
-	    	var standard=comm[i].split("|");
-	    	
-			var rowCount = table.rows.length;
-			var row = table.insertRow(rowCount);
-			var cell1 = row.insertCell(0);
-			cell1.innerHTML = '<input type="checkbox" class="form-check-input stdcheck" id="stdcheck" checked>';			
-			var cell2 = row.insertCell(1);
-			cell2.innerHTML = standard[0];
+	for (var i = 0; i < pack_std.length; i++) {
+		a[pack_std[i]] = true;
+	}
+	for (var j = 0; j < pack_std.length; j++) {
+		for (var i = 0; i < db_std.length; i++) {
+			if (db_std[i] != undefined) {
+				var stdname = db_std[i].split("|");
+				if (a[stdname[0]]) {
+					if (stdname[0] == pack_std[j]) {
+						comm.push(stdname[0] + "|" + stdname[1]);
+						delete a[stdname[0]];
+						delete db_std[i];
+					}
+				} else {
+					b[stdname[0] + "|" + stdname[1]] = true;
+				}
+			}
+		}
+	}
+	for ( var k in b) {
+		diff.push(k);
+	}
+	var table = document.getElementById("standard");
+	for (var i = 0; i < comm.length; i++) {
+		var standard = comm[i].split("|");
 
-			var cell3 = row.insertCell(2);
-			cell3.innerHTML = standard[1];
-			loadBranch(standard[0]);
-	    }
-	    for(var i=0;i<diff.length;i++){
-	    	var standard=diff[i].split("|");
-			var rowCount = table.rows.length;
-			var row = table.insertRow(rowCount);
-			var cell1 = row.insertCell(0);
-			cell1.innerHTML = '<input type="checkbox" class="form-check-input stdcheck" id="stdcheck">';			
-			var cell2 = row.insertCell(1);
-			cell2.innerHTML = standard[0];
+		var rowCount = table.rows.length;
+		var row = table.insertRow(rowCount);
+		var cell1 = row.insertCell(0);
+		cell1.innerHTML = '<input type="checkbox" class="form-check-input stdcheck" id="stdcheck" checked>';
+		var cell2 = row.insertCell(1);
+		cell2.innerHTML = standard[0];
 
-			var cell3 = row.insertCell(2);
-			cell3.innerHTML = standard[1];	
-	 }
+		var cell3 = row.insertCell(2);
+		cell3.innerHTML = standard[1];
+		loadBranch(standard[0]);
+	}
+	for (var i = 0; i < diff.length; i++) {
+		var standard = diff[i].split("|");
+		var rowCount = table.rows.length;
+		var row = table.insertRow(rowCount);
+		var cell1 = row.insertCell(0);
+		cell1.innerHTML = '<input type="checkbox" class="form-check-input stdcheck" id="stdcheck">';
+		var cell2 = row.insertCell(1);
+		cell2.innerHTML = standard[0];
+
+		var cell3 = row.insertCell(2);
+		cell3.innerHTML = standard[1];
+	}
 }
 function addFeesType() {
 	function callback(responseData, textStatus, request) {
@@ -455,7 +552,7 @@ function clearModal() {
 	var table = document.getElementById("feestypetable");
 	var rowCount = table.rows.length;
 	for (var j = 1; j < rowCount; j++) {
-		document.getElementById("feestypetable").deleteRow(rowCount - 1 );
+		document.getElementById("feestypetable").deleteRow(rowCount - 1);
 		rowCount = rowCount - 1;
 	}
 	$(table.rows.item(1).cells[1]).find('input').val("");

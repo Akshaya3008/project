@@ -1,7 +1,7 @@
 /**
  * 
  */
-var host="http://localhost";
+var host="http://www.localhost";
 //var host="http://vidyachaitanyaedutech.com/";
 var port="8080";
 

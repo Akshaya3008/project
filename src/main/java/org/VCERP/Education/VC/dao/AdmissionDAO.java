@@ -257,7 +257,7 @@ public class AdmissionDAO {
 		PreparedStatement ps=null;
 		try {
 			con=Util.getDBConnection();
-			String query="update admission set paid_fees=? , remain_fees=? where Rollno=? and branch=?";
+			String query="update admission set paid_fees=paid_fees + ? , remain_fees=? where Rollno=? and branch=?";
 			ps=con.prepareStatement(query);
 			ps.setLong(1, fees_paid);
 			ps.setLong(2, fees_remain);
@@ -303,6 +303,39 @@ public class AdmissionDAO {
 		return installment;
 	}
 
+	public Installment savePromoteInstallment(Installment installment, Admission admission) {
+		Connection con=null;
+		PreparedStatement ps=null;
+		try {
+			con=Util.getDBConnection();
+			String query="insert into installment(`rollno`,`stud_name`,`total_fees`,`monthly_payment`,"
+					+ "`due_date`,`fees_title`,`paid_amount`,`remain_fees`,`paid_status`,`branch`,`receipt_no`,`current_paid_amount`)"
+					+ "values(?,?,?,?,?,?,?,?,0,?,0,0)";
+			ps=con.prepareStatement(query);
+			for(int i=0;i<installment.getDue_date().size();i++){
+			ps.setString(1, installment.getRollno());
+			ps.setString(2, installment.getStud_name());
+			ps.setLong(3, installment.getTotal_fees());
+			ps.setLong(4, installment.getMonthly_pay().get(i));
+			ps.setString(5, installment.getDue_date().get(i));
+			ps.setString(6, installment.getFees_title().get(i));
+			ps.setLong(7, installment.getPaid().get(i));
+			ps.setLong(8, installment.getRemain_fees().get(i));
+			ps.setString(9, admission.getBranch());
+			ps.executeUpdate();
+			if(installment.getRemain_fees().get(i)==0){
+				updateInstallmentStatus(admission,installment.getDue_date().get(i));
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		finally {
+			Util.closeConnection(null, ps, con);
+		}
+		return installment;
+	}
 	public ArrayList<Admission> getPromotionData(Admission admission) {
 		Connection con=null;
 		PreparedStatement ps=null;
@@ -358,7 +391,7 @@ public class AdmissionDAO {
 		
 		try {
 			con=Util.getDBConnection();
-			String query="select * from installment where rollno=? and paid_status='0' and branch=?";
+			String query="select * from installment where rollno=? and paid_status='0' and branch=? ORDER BY id";
 			ps=con.prepareStatement(query);
 			ps.setString(1,rollno);
 			ps.setString(2,branch);
@@ -391,7 +424,7 @@ public class AdmissionDAO {
 		
 		try {
 			con=Util.getDBConnection();
-			String query="select * from installment where rollno=? and branch=?";
+			String query="select * from installment where rollno=? and branch=? ORDER BY id";
 			ps=con.prepareStatement(query);
 			ps.setString(1,rollno);
 			ps.setString(2,branch);

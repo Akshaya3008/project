@@ -132,7 +132,7 @@ public class ReceiptDetailsResource {
 			details.setReceived_amt(received_amt);		
 			details.setBranch(branch);
 			controller=new ReceiptDetailsController();
-			r_amt=controller.updateRemainingAmount(stud_details[0].trim(),branch);
+/*			r_amt=controller.updateRemainingAmount(stud_details[0].trim(),branch);
 			if(r_amt==null)
 			{
 				remainAmount=Long.parseLong(stud_details[3].trim())-received_amt;
@@ -141,13 +141,13 @@ public class ReceiptDetailsResource {
 			else{
 				remainAmount=r_amt.getAmount()-received_amt;
 				details.setAmount(remainAmount);
-			}
-			controller.ReceiptDetailsForm(details);
+			}*/
 			long fees_paid=controller.calculateTotalFeesPaid(details.getRollno(),details.getStud_name(),branch);
-			long fees_remain=details.getTotal_amt()-fees_paid;
-			
+			long fees_remain=fees_paid-received_amt;
+			details.setAmount(fees_remain);
+			controller.ReceiptDetailsForm(details);
 			adcontroller=new AdmissionController();
-			adcontroller.updateTotalFeesPaid(details.getRollno(),fees_paid,fees_remain,branch);
+			adcontroller.updateTotalFeesPaid(details.getRollno(),received_amt,fees_remain,branch);
 			for(int i=0;i<commaSeperatedInstallDetails.length;i++){
 				String[] pipeSeperatedInstallDetails=Util.symbolSeperatedString(commaSeperatedInstallDetails[i]);
 				long due_amt=Long.parseLong(pipeSeperatedInstallDetails[0]);

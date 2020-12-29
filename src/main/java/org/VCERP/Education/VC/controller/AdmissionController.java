@@ -74,4 +74,8 @@ public class AdmissionController {
 		AdmissionDAO dao=new AdmissionDAO();
 		return dao.deleteRecord(ids,branch);
 	}
+	public void savePromoteInstallment(Installment installment, Admission admission) {
+		AdmissionDAO dao=new AdmissionDAO();
+		dao.savePromoteInstallment(installment,admission);
+	}
 }

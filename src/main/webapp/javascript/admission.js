@@ -425,14 +425,9 @@ $(document)
 									'click',
 									'.remove-row',
 									function(e) {
-										var val = $(this).closest('tr').find(
-												'#total-amt').val();
-										document.getElementById("grand-t").value = document
-												.getElementById("grand-t").value
-												- val;
-										document
-												.getElementById('amt_installment').value = document
-												.getElementById('grand-t').value;
+										var val = $(this).closest('tr').find('#total-amt').val();
+										document.getElementById("grand-t").value = document.getElementById("grand-t").value- val;
+										document.getElementById('amt_installment').value = document.getElementById('grand-t').value;
 										$(this).closest('tr').remove();
 									});
 					$('#feestypetable2')
@@ -816,6 +811,7 @@ function createFeesTypeRow(feesdetails, packagename) {
 	document.getElementById('grand-t').value = feespackamt;
 	document.getElementById('amt_installment').value = document
 			.getElementById('grand-t').value;
+	document.getElementById('r_installment').value = 0;
 
 }
 function deletefeesTypeTableRow() {
@@ -1110,21 +1106,42 @@ function promoteStudent() {
 	var table = document.getElementById("installment_table");
 	var rowCount = $('#installment_table tr').length;
 	var installment = "installment details";
+	var paid=0,reamin=0;
 	for (var i = 1; i < rowCount - 1; i++) {
 		var date = $(table.rows.item(i).cells[0]).find('input').val();
 		var fees_title = $(table.rows.item(i).cells[1]).find('select').val();
 		var amt = $(table.rows.item(i).cells[2]).find('input').val();
 		var received = $(table.rows.item(i).cells[3]).find('input').val();
-		if (parseInt(received) < parseInt(amt)) {
+		//if (parseInt(received) < parseInt(amt)) {
 			installment = installment + "," + date + "|" + fees_title + "|"
 					+ amt + "|" + received;
-		}
+		//}
+		paid+=parseInt(received);
 	}
+	var table = document.getElementById("feestypetable");
+	var rowCount = $('#feestypetable tr').length;
+	var feestypeDetails = new Array();
+	var disc = 0;
+	var g_total = 0;
+	var newAmt;
+	for (var i = 1; i < rowCount; i++) {
+		var fees_title = $(table.rows.item(i).cells[0]).find('select').val();
+		var amt = $(table.rows.item(i).cells[1]).find('input').val();
+		var discount = $(table.rows.item(i).cells[2]).find('input').val();
+		var total = $(table.rows.item(i).cells[5]).find('input').val();
+		feestypeDetails.push(fees_title + "|" + amt + "|" + discount + "|"
+				+ total);
+		disc = disc + parseInt(discount);
+		g_total = g_total + parseInt(total);
+	}
+	remain=g_total-parseInt(paid);
+	newAmt = disc + "|" + g_total+ "|" + paid + "|" + remain;
 	function callback(responseData, textStatus, request) {
 		var mes = responseData.message;
 		showNotification("success", mes);
-		clearSession();
 		$("#loadingModal").modal('hide');
+		clearSession();
+		reloadPage();
 	}
 	function errorCallback(responseData, textStatus, request) {
 		var mes = responseData.responseJSON.message;
@@ -1134,16 +1151,17 @@ function promoteStudent() {
 	}
 	var personalDetails = sessionStorage.getItem("admissionPromoteData");
 
-	var status = checkInstallmentDate(installment, document
-			.getElementById("admission_date").value);
-	if (status == false) {
+//	var status = checkInstallmentDate(installment, document
+//			.getElementById("admission_date").value);
+//	if (status == false) {
 		var httpMethod = "POST";
 		var formData = $('#admission-form').serialize() + "&personalDetails="
-				+ personalDetails + "&installment=" + installment;
+				+ personalDetails + "&installment=" + installment + "&feestypeDetails=" + feestypeDetails+ 
+				"&newAmt=" + newAmt;
 		var relativeUrl = "/Admission/PromoteStudent";
 		ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
 				errorCallback);
-	}
+//	}
 	return false;
 }
 function loadLeadSource() {
