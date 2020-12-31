@@ -297,8 +297,7 @@ function loadNarration_Roll(narration,rollno,receiptno,e){
 function clearModal()
 {
 	document.getElementById("edited_narration").value="";
-	document.getElementById("rollno" +
-			"").value="";
+	document.getElementById("rollno" + "").value="";
 	requestid=0;
 }
 

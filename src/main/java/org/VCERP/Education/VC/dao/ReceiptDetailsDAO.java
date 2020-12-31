@@ -887,7 +887,7 @@ public ReceiptDetails ReceiptDetailsForm(ReceiptDetails details) {
 		PreparedStatement ps = null;
 		try{
 			con = Util.getDBConnection();
-			
+			System.out.print("Dattaaa = "+rd);
 			String query = "update receipt_details set narration=? where RollNO=? and receipt_no=? and branch=?";
 			ps = con.prepareStatement(query);
 			ps.setString(1, rd.getNarration());

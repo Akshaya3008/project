@@ -330,7 +330,7 @@ public class ReceiptDetailsResource {
 	@JWTTokenNeeded
 	@Path("/EditNarration")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response EditSubject(@FormParam("narration") String narration,@FormParam("rollno") String rollno,
+	public Response EditNarration(@FormParam("narration") String narration,@FormParam("rollno") String rollno,
 			@FormParam("receiptno") String receiptno,@FormParam("branch") String branch)
 	{
 		ReceiptDetails rd = null;
