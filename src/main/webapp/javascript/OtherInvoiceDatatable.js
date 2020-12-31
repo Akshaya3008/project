@@ -2,6 +2,19 @@ var mes;
 $(document).ready(function(){
 	table=$('#OtherInvoiceTable').DataTable();
 	showInvoiceTable();
+	
+	$('#deleteBtn').click(function(){
+		var deleteInv=new Array();
+		$('table .cbCheck').each(function(i, chk) {
+			if (chk.checked) {
+				val = table.row(this.closest('tr')).data();
+				var rno = val[2];
+				var invoiceno = val[3];
+				deleteInv.push(rno+","+invoiceno);
+			}
+		});
+		deleteInvoice(deleteInv);
+	});
 });
 
 function showInvoiceTable() {
@@ -41,4 +54,24 @@ function showInvoiceTable() {
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
 			errorCallback);
 	return false;
+}
+
+function deleteInvoice(deleteInv){
+	function callback(responseData,textStatus,request)
+	{
+		var mes=responseData.message;
+		showNotification("success",mes);
+		reloadPage();
+	}
+
+function errorCallback(responseData, textStatus, request) {
+	var mes=responseData.responseJSON.message;
+	showNotification("error",mes);
+}
+var httpMethod = "POST";
+var formData = "&invoiceDetails="+deleteInv+"&branch="+branchSession;
+var relativeUrl = "/OtherInvoice/deleteInvoice";
+ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,
+		errorCallback);
+return false;
 }

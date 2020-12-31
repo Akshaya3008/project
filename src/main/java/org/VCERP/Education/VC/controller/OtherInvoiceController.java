@@ -25,6 +25,9 @@ public class OtherInvoiceController {
 	public ArrayList<OtherInvoice> FetchAllInvoiceDetails(String branch) {
 		OtherInvoiceDao dao=new OtherInvoiceDao();
 		return dao.FetchAllInvoiceDetails(branch);
-		
+	}
+	public void deleteInv(String invoiceDetails,String branch) {
+		OtherInvoiceDao dao=new OtherInvoiceDao();
+		dao.deleteInv(invoiceDetails,branch);
 	}
 }

@@ -84,7 +84,6 @@ public class OtherInvoiceDao{
 			ps=con.prepareStatement(query);
 			ps.setString(1, details.getStud_name());
 			ps.setString(2, details.getRollno());
-			//ps.setString(3, details.getContact());
 			ps.setString(3, details.getInvoice_date());
 			ps.setString(4, details.getInvoice_no());
 			ps.setString(5, details.getPay_mode());
@@ -93,9 +92,7 @@ public class OtherInvoiceDao{
 			ps.setString(8, details.getCheque_no());
 			ps.setString(9, details.getReceived_by());
 			ps.setString(10, details.getNarration());
-			//ps.setLong(12, details.getTotal_amt());
 			ps.setLong(11, details.getReceive_amount());
-			//ps.setLong(14, details.getAmount());
 			ps.setString(12,details.getBranch());
 			ps.executeUpdate();
 		}catch (Exception e) {
@@ -149,4 +146,27 @@ public class OtherInvoiceDao{
 		}
 		return invoice;
 	}
+	
+	public void deleteInv(String invoiceDetails, String branch) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String[] commaSeperated=Util.commaSeperatedString(invoiceDetails);
+				
+		try {
+			con = Util.getDBConnection();
+			String rno = commaSeperated[0];
+			String inv_no = commaSeperated[1];
+			String query = "delete from other_invoice where RollNO=? and invoice_no=? and branch=?";
+			ps = con.prepareStatement(query);
+			ps.setString(1, rno);
+			ps.setString(2, inv_no);
+			ps.setString(3, branch);
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+	}
+	
 	}

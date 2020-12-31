@@ -141,4 +141,23 @@ public class OtherInvoiceResource{
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
+	
+	@Path("/deleteInvoice")
+	@POST
+	@JWTTokenNeeded
+	//@RolesAllowed("DELETE_OTHER_INVOICE")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteInvoice(@FormParam("invoiceDetails") String invoiceDetails,@FormParam("branch") String branch){
+		try {
+			OtherInvoiceController invcontroller=new OtherInvoiceController();
+			invcontroller.deleteInv(invoiceDetails,branch);
+			return Util.generateResponse(Status.ACCEPTED, "Invoice Successfully Deteleted.").build();	
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to complete task.Please try again or contact with administrator").build();
+	}
+	
 	}
