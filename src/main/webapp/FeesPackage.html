@@ -7,7 +7,7 @@
 <title>Fees Package</title>
 <script src="jquery/jquery-3.3.1.min.js"></script>
 <script src="jquery/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap.css">
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -292,6 +292,15 @@ table.table .avatar {
 		background: #fff url('img/ring.gif') no-repeat center center;
 		z-index: 99999;
 }
+.headings{
+	padding:10px;
+	font-size:16px;
+}
+#remove-row i{
+	margin: 5px 5px;
+	font-size:16px;
+}
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -421,7 +430,8 @@ table.table .avatar {
 									style="border: 0; height: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.3);">
 
 								<div class="form-group" style="background-color: #f5f2eb;">
-									<br> STANDARD DETAILS <br> &nbsp;&nbsp;&nbsp;&nbsp;
+									<h3 class="headings">STANDARD DETAILS</h3>
+									<!-- <br> STANDARD DETAILS <br> &nbsp;&nbsp;&nbsp;&nbsp; -->
 								</div>
 								<div class="form-group">
 									<table class="table table-bordered TableClass" id="standard">
@@ -453,7 +463,8 @@ table.table .avatar {
 									</button>
 								</div>
 								<div class="form-group" style="background-color: #f5f2eb;">
-									<br> BRANCH DETAILS <br> &nbsp;&nbsp;&nbsp;&nbsp;
+									<h3 class="headings">BRANCH DETAILS</h3>
+									<!-- <br> BRANCH DETAILS <br> &nbsp;&nbsp;&nbsp;&nbsp; -->
 								</div>
 								<div class="form-group has-search">
 									<br>
@@ -467,7 +478,8 @@ table.table .avatar {
 									</table>
 								</div>
 								<div class="form-group" style="background-color: #f5f2eb;">
-									<br> FEES DETAILS <br> &nbsp;&nbsp;&nbsp;&nbsp;
+									<h3 class="headings">FEES DETAILS</h3>
+									<!-- <br> FEES DETAILS <br> &nbsp;&nbsp;&nbsp;&nbsp; -->
 								</div>
 								<div class="form-group has-search">
 
@@ -475,11 +487,11 @@ table.table .avatar {
 									<table class="table" id="feestypetable">
 										<thead>
 											<tr style="font-size: small;">
-												<th scope="col">FEES TYPE<font color="red"> * </font></th>
-												<th scope="col">AMOUNT <font color="red"> * </font></th>
+												<th scope="col">FEES TYPE</th>
+												<th scope="col">AMOUNT</th>
 												<th scope="col">DISCOUNT</th>
 												<th scope="col">DISCOUNT TYPE</th>
-												<th scope="col">Tax</th>
+												<th scope="col">TAX</th>
 												<th scope="col">TOTAL</th>
 												<th scope="col">REMOVE</th>
 											</tr>
@@ -487,11 +499,10 @@ table.table .avatar {
 										<tbody id="fee-details">
 											<tr>
 												<td>
-													<div class="form-group">
+													<div class="form-group" style="margin-top:12px">
 														<div class="input-group">
-															<select name="feestype" class="form-control"
-																id="feestype">
-															</select> <span class="input-group-addon" id="bhvk">
+															<select name="feestype" class="form-control" id="feestype">	</select> 
+															<span class="input-group-addon" id="bhvk">
 																<button type="button" id="add-btn" data-toggle="modal"
 																	data-target="#feestypeModal"
 																	style="background-color: transparent; border: none; font-size: 18px; color: blue; position: relative;">
@@ -512,7 +523,7 @@ table.table .avatar {
 													value="0">
 												</td>
 												<td>
-													<div class="form-group">
+													<div class="form-group" style="margin-top:12px">
 														<select name="distype" class="form-control">
 															<option value="INR">INR</option>
 														</select>
@@ -526,7 +537,7 @@ table.table .avatar {
 													value="" disabled>
 												</td>
 												<td>
-													<div class="w3-padding w3-xlarge w3-teal">
+													<div class="w3-padding w3-small w3-teal">
 														<button type="button" id="remove-row">
 															<i class="glyphicon glyphicon-trash"></i>
 														</button>
@@ -539,7 +550,7 @@ table.table .avatar {
 									<div class="form-group">
 										<div class="input-group" id="total-row">
 											<div class="col-xs-6 col-sm-2">
-												<label for="grant-t" id="total"> Total: </label>
+												<label for="grant-t" id="total">Total:</label>
 											</div>
 											<div class="col-xs-5">
 												<input type="number" class="form-control" id="grand-t"
@@ -547,7 +558,7 @@ table.table .avatar {
 											</div>
 										</div>
 									</div>
-									<button type="button" id="addrow">Add new line</button>
+									<button type="button" id="addrow" style="margin-left:15px;">Add new line</button>
 									<!--<button type="button" id="copy" onclick="getandset();">Copy</button>-->
 								</div>
 							</div>

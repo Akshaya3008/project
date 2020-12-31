@@ -5,4 +5,5 @@ $(document).ready(function(){
 function profile(){
 	var val = user;
 	document.getElementById('profile').innerHTML  = val;
+	
 }
