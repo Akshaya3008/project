@@ -212,10 +212,10 @@ i.fa.fa-bars:hover {
 	background:#fff;
 }
 .board .number{
-	float:left;
+	float:right;
 }
 .board .icon{
-	float:right;
+	float:left;
 }
 .number h3 {
     font-size: 32px;
@@ -230,12 +230,12 @@ i.fa.fa-bars:hover {
     display: inline-block;
 }
 .board .panel .icon .fa {
-    font-size: 30px;
-    color: #FFFFFF;
-    background: #30A5FF;
-    padding: 19px;
+    font-size: 60px;
+    color: #1D9E74;
+    background: white;
+    padding:5px 10px 0;
 }
-.blue{
+/* .blue{
 	background:#30A5FF !important;
 }
 .green{
@@ -246,7 +246,7 @@ i.fa.fa-bars:hover {
 }
 .red {
     background: #f36a5a !important;
-}
+} */
 .jumbotron{
 padding:20px;
 }
