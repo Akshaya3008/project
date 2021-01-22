@@ -15,13 +15,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.VCERP.Education.VC.controller.AdmissionController;
+
 import org.VCERP.Education.VC.controller.OtherInvoiceController;
-import org.VCERP.Education.VC.controller.ReceiptDetailsController;
 import org.VCERP.Education.VC.interfaces.JWTTokenNeeded;
 import org.VCERP.Education.VC.model.Admission;
 import org.VCERP.Education.VC.model.OtherInvoice;
-import org.VCERP.Education.VC.model.ReceiptDetails;
 import org.VCERP.Education.VC.utility.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -73,9 +71,10 @@ public class OtherInvoiceResource{
 	
 	@POST
 	@JWTTokenNeeded
-	@Path("/CreateInvoice")
+	@Path("/CreateOtherInvoice")
 	//@RolesAllowed("ADD_NEW_OTHER_INVOICE")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response OtherInvoiceForm(@FormParam("stud_details") String stud_name,
 			@FormParam("invoice_date") String invoice_date,@FormParam("invoice_no") String invoice_no,
 			@FormParam("receive_amount") long receive_amount,@FormParam("pay_mode") String pay_mode
@@ -158,6 +157,28 @@ public class OtherInvoiceResource{
 			logger.error(e);
 		}
 		return Util.generateErrorResponse(Status.NOT_FOUND, "Unable to complete task.Please try again or contact with administrator").build();
+	}
+	
+
+	@GET
+	@JWTTokenNeeded
+	@Path("/FetchAllAdmittedStudent")
+	@PermitAll
+	//@RolesAllowed("VIEW_ADMISSION")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response fetchAllStudent(@QueryParam("branch") String branch) {
+		ArrayList<Admission> admission = null;
+		OtherInvoiceController controller=null;
+		try {
+			admission = new ArrayList<>();
+			controller = new OtherInvoiceController();
+			controller.fetchAllAdmittedStudent(admission, branch);
+			return Response.status(Status.ACCEPTED).entity(admission).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		return Util.generateErrorResponse(Status.NOT_FOUND, "Data not found").build();
 	}
 	
 	}

@@ -4,8 +4,12 @@ var date= new Date(today.getTime() - (today.getTimezoneOffset() * 60000 )).toISO
 $(document).ready(function(){
 	getIncrementedInvoiceNumber();
 	FetchAllEmployee();
+	showStudentList();
 	document.getElementById('invoice_date').value=date;
 	document.getElementById('trans_date').value=date;
+	 jQuery.validator.addMethod("noSpace", function(value, element) { 
+		  return value.indexOf(" ") < 0 && value != ""; 
+		}, "No space please and don't leave it empty");
 	$('form[id="OtherInvoice_form"]').validate({
 		  rules: {
 				stud_id: {
@@ -42,7 +46,7 @@ $(document).ready(function(){
 		  submitHandler:function(form){
 			  event.preventDefault();
 			  $("#loadingModal").modal('show');
-			  CreateInvoice();
+			  CreateOtherInvoice();
 		  }
 		  
 	});
@@ -105,7 +109,7 @@ function getIncrementedInvoiceNumber(){
 	return false;
 }
 
-function CreateInvoice(){
+function CreateOtherInvoice(){
 	function callback(responseData,textStatus,request)
 	{
 		var mes=responseData.message;
@@ -119,12 +123,11 @@ function CreateInvoice(){
 		$("#loadingModal").modal('hide');
 	}
 	
-	var receive_amount=document.getElementById("receive_amount").value;
-	
-	if(parseInt(receive_amount)!=0 || parseInt(receive_amount)<0){
+	var receive_amount=$("#receive_amount").val();
+	if(parseInt(receive_amount)!=0 || parseInt(receive_amount)>0){
 	var httpMethod = "POST";
 	var formData=$("#OtherInvoice_form").serialize()+"&branch="+branchSession;
-	var relativeUrl = "/OtherInvoice/CreateInvoice";
+	var relativeUrl = "/OtherInvoice/CreateOtherInvoice";
 	ajaxAuthenticatedRequest(httpMethod, relativeUrl, formData, callback,errorCallback);
 	}else{
 		var message="Receive amount should not be zero or less";
@@ -133,7 +136,52 @@ function CreateInvoice(){
 	return false;
 }
 
+function showStudentList() {
+	function callback(responseData, textStatus, request) {
+		for ( var i in responseData) {
+			var student_name = responseData[i].student_name+" "+responseData[i].fname+" "+responseData[i].lname;
+			var Rollno = responseData[i].Rollno;
+		    $("#stud_list").append('<option value="'+Rollno+"|"+student_name+'">');
+			  
+		}
+	}
 
+	function errorCallback(responseData, textStatus, request) {
+		
+		 var message=responseData.responseJSON.message;
+		 showNotification("error",message);
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/OtherInvoice/FetchAllAdmittedStudent?branch="
+			+ branchSession;
+
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+			errorCallback);
+	return false;
+}
+/*function showStudentList() {
+	function callback(responseData, textStatus, request) {
+		for ( var i in responseData) {
+			var student_name = responseData[i].student_name+" "+responseData[i].fname+" "+responseData[i].lname;
+			var Rollno = responseData[i].Rollno;
+		    $("#stud_list").append('<option value="'+Rollno+"|"+student_name+'">');
+			  //document.getElementById('select_stud').innerHTML = options;
+		}
+	}
+
+	function errorCallback(responseData, textStatus, request) {
+		
+		 var message=responseData.responseJSON.message;
+		 showNotification("error",message);
+	}
+	var httpMethod = "GET";
+	var relativeUrl = "/OtherInvoice/FetchAllStudent?branch="
+			+ branchSession;
+
+	ajaxAuthenticatedRequest(httpMethod, relativeUrl, null, callback,
+			errorCallback);
+	return false;
+}*/
 
 function clearModal(){
 	$("#stud_details").val("");
